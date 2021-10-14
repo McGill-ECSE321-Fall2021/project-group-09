@@ -16,11 +16,13 @@ This system is designed to allow local and non-local users to browse, view and c
 # Deliverable 1: 
 [Project Wiki](https://github.com/McGill-ECSE321-Fall2021/project-group-09/wiki)
 
-| Member            | Effort (Hours) |
-|-------------------|----------------|
-|Abdullah Arafat    |                |
-|Christos Cunning   |                |
-|Omar Abdelaziz     |                | 
-|Rajaa Boukhelif    |                |
-|Sneha Singh        |                | 
-|Zarif Ashraf Zidane|                |
+| Member            | Tasks                                         | Effort (Hours) |
+|-------------------|-----------------------------------------------|----------------|
+|Abdullah Arafat    | Set up Spring, Use Case Diagrams              |                |
+|Christos Cunning   | Set up GitHub actions and Wiki                |                |
+|Omar Abdelaziz     | Recorded meeting minutes                      |                |
+|Rajaa Boukhelif    | Set up UML diagram                            |                |
+|Sneha Singh        | Set up GitHub project, automation, and READ.me|                |
+|Zarif Ashraf Zidane| Set up Heroku, additional UML edits           |                |
+
+All members also contributed to the detailed Use Case specifications, Persistence layer, and the test suite. 
