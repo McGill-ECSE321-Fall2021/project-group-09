@@ -12,30 +12,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ca.mcgill.ecse321.projectgroup09.models.Account;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 @SpringBootTest
 public class TestAccountPersistence {
 
 	@Autowired
-	private AccountRepository accountRepository;
+	private MemberRepository memberRepository;
 	
 	@AfterEach
 	public void clearDatabase() {
-		accountRepository.deleteAll();
+		memberRepository.deleteAll();
 	}
 	
 	@Test
 	void testPersistAndLoadUser() {
 		String name = "Test User";
-		Account account = new Account();
+		Member account = new Member();
 		account.setName(name);
 		
-		accountRepository.save(account);
+		memberRepository.save(account);
 		// Set user to null so we can test loading it again
 		account = null;
 		
 		// try to load user from repository
-		account = accountRepository.findUserByName(name);
+		account = memberRepository.findUserByName(name);
 		
 		assertNotNull(account);
 		assertEquals(name, account.getName());
@@ -45,12 +46,12 @@ public class TestAccountPersistence {
 	void testPersistUsersWithSameName() {
 		String name1 = "Test Name";
 		String name2 = "Test Name";
-		Account account1 = new Account();
-		Account account2 = new Account();
+		Member account1 = new Member();
+		Member account2 = new Member();
 		account1.setName(name1);
 		account2.setName(name2);
 		
-		accountRepository.saveAll(List.of(account1, account2));
+		memberRepository.saveAll(List.of(account1, account2));
 		
 		//System.out.println(accountRepository.findUserByName(name1));
 		// findByUserName returns first instance of account with name = name1
