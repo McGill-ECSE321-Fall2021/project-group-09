@@ -1,6 +1,14 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+import javax.persistence.Id;
+
 public class Newspaper extends LibraryItem{
+
 
 
 	  //------------------------
