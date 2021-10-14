@@ -44,4 +44,4 @@ jobs:
         working-directory: LibManSys-Backend
 
       - name: Stop Gradle Daemon
-        run: gradlew --stop
+        run: ./gradlew --stop
