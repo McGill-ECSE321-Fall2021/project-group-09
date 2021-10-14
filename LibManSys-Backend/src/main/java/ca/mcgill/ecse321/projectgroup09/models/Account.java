@@ -5,6 +5,6 @@ import javax.persistence.Id;
 import java.sql.Date;
 import java.sql.Time;
 
-public class User {
+public class Account {
 
 }
