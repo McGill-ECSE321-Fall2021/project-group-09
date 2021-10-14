@@ -40,5 +40,8 @@ jobs:
         working-directory: LibManSys-Backend
         
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon
         working-directory: LibManSys-Backend
+
+      - name: Stop Gradle Daemon
+        run: gradlew --stop
