@@ -21,8 +21,8 @@ This system is designed to allow local and non-local users to browse, view and c
 |Abdullah Arafat    | Set up Spring, Use Case Diagrams              |                |
 |Christos Cunning   | Set up GitHub actions and Wiki                |                |
 |Omar Abdelaziz     | Recorded meeting minutes                      |                |
-|Rajaa Boukhelif    | UML diagram                                   |                |
+|Rajaa Boukhelif    | Set up UML diagram                            |                |
 |Sneha Singh        | Set up GitHub project, automation, and READ.me|                |
-|Zarif Ashraf Zidane|    Set up Heroku                              |                |
+|Zarif Ashraf Zidane| Set up Heroku, additional UML edits           |                |
 
 All members also contributed to the detailed Use Case specifications, Persistence layer, and the test suite. 
