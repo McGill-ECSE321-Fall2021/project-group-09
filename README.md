@@ -14,7 +14,7 @@ This system is designed to allow local and non-local users to browse, view and c
 
 
 # Deliverable 1: 
-[Project Wiki] (https://github.com/McGill-ECSE321-Fall2021/project-group-09/wiki)
+[Project Wiki](https://github.com/McGill-ECSE321-Fall2021/project-group-09/wiki)
 
 | Member        | Effort (Hours) |
 |---------------|------|
