@@ -2,6 +2,9 @@ package ca.mcgill.ecse321.projectgroup09.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +21,7 @@ public class TestAccountPersistence {
 	
 	@AfterEach
 	public void clearDatabase() {
-		// userRepository.deleteAll();
+		accountRepository.deleteAll();
 	}
 	
 	@Test
@@ -36,5 +39,21 @@ public class TestAccountPersistence {
 		
 		assertNotNull(account);
 		assertEquals(name, account.getName());
+	}
+	
+	@Test
+	void testPersistUsersWithSameName() {
+		String name1 = "Test Name";
+		String name2 = "Test Name";
+		Account account1 = new Account();
+		Account account2 = new Account();
+		account1.setName(name1);
+		account2.setName(name2);
+		
+		accountRepository.saveAll(List.of(account1, account2));
+		
+		//System.out.println(accountRepository.findUserByName(name1));
+		// findByUserName returns first instance of account with name = name1
+		
 	}
 }
