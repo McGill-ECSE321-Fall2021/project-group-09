@@ -2,9 +2,11 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Id;
 import java.sql.Time;
 import java.util.*;
@@ -91,11 +93,13 @@ public class Booking {
 	}
 
 	/* Code from template association_GetOne */
+	@ManyToOne(optional=false)
 	public Member getMember() {
 		return member;
 	}
 
 	/* Code from template association_GetOne */
+	@ManyToOne(optional=false)
 	public Librarian getLibrarian() {
 		return librarian;
 	}

@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
@@ -95,6 +97,7 @@ public class Schedule {
 	}
 
 	/* Code from template association_GetOne */
+	@ManyToOne(optional=false)
 	public Librarian getLibrarian() {
 		return librarian;
 	}

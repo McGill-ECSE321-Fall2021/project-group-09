@@ -38,7 +38,8 @@ public class LibraryManagement {
 		Library aLibrary = libraries.get(index);
 		return aLibrary;
 	}
-
+	
+	@OneToMany(cascade={CascadeType.ALL})
 	public List<Library> getLibraries() {
 		List<Library> newLibraries = Collections.unmodifiableList(libraries);
 		return newLibraries;
@@ -64,7 +65,7 @@ public class LibraryManagement {
 		Account aAccount = accounts.get(index);
 		return aAccount;
 	}
-
+	@OneToMany(cascade={CascadeType.ALL})
 	public List<Account> getAccounts() {
 		List<Account> newAccounts = Collections.unmodifiableList(accounts);
 		return newAccounts;
@@ -90,7 +91,7 @@ public class LibraryManagement {
 		LibraryItem aLibraryItem = libraryItems.get(index);
 		return aLibraryItem;
 	}
-
+	@OneToMany(cascade={CascadeType.ALL})
 	public List<LibraryItem> getLibraryItems() {
 		List<LibraryItem> newLibraryItems = Collections.unmodifiableList(libraryItems);
 		return newLibraryItems;
