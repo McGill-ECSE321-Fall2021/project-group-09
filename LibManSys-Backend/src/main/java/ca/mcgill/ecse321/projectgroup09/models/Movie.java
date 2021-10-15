@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Id;
 
+@Entity
 public class Movie extends LibraryItem{
 
 	  //------------------------
