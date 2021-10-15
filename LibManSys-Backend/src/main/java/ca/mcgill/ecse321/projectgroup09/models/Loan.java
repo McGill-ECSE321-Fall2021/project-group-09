@@ -1,12 +1,15 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import java.util.Date;
+// Omar
 
 @Entity
 public class Loan {
@@ -123,16 +126,19 @@ public class Loan {
 	}
 
 	/* Code from template association_GetOne */
+	@ManyToOne(optional=false) 
 	public LibraryItem getLibraryItem() {
 		return libraryItem;
 	}
 
 	/* Code from template association_GetOne */
+	@ManyToOne(optional=false) 
 	public Member getMember() {
 		return member;
 	}
 
 	/* Code from template association_GetOne */
+	@ManyToOne(optional=false)  
 	public Librarian getLibrarian() {
 		return librarian;
 	}

@@ -1,10 +1,13 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Id;
 
 @Entity
@@ -65,6 +68,7 @@ public class HeadLibrarian extends Librarian {
 	}
 
 	/* Code from template association_GetOne */
+	@OneToOne(optional=false) 
 	public Library getLibrary() {
 		return library;
 	}
