@@ -1,12 +1,15 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-import javax.persistence.Entity;
+//Sneha
+
+import javax.persistence.*;
 import javax.persistence.Id;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Id;
 
+@Table (name = "account")
 @Entity
 public abstract class Account {
 	// ------------------------
@@ -42,7 +45,9 @@ public abstract class Account {
 		wasSet = true;
 		return wasSet;
 	}
-
+	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
 	public String getFullName() {
 		return fullName;
 	}

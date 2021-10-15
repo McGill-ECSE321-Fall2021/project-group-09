@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
+//Sneha 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Set;
