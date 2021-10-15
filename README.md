@@ -12,6 +12,7 @@ This system is designed to allow local and non-local users to browse, view and c
 |Sneha Singh         |   [snehas99](https://github.com/snehas99)   | Civil |
 |Zarif Ashraf Zidane |    [zarifashraf](https://github.com/zarifashraf) | Computer |
 
+For future references, 'Zarif Ashraf Zidane' & 'Zarif Ashraf' refer to the same team member.
 
 # Deliverable 1: 
 [Project Wiki](https://github.com/McGill-ECSE321-Fall2021/project-group-09/wiki)
