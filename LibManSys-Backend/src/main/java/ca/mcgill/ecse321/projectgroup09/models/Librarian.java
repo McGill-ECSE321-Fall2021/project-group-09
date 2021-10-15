@@ -29,7 +29,6 @@ public class Librarian extends Account {
 	private String librarianEmail;
 	private String librarianPassword;
 	private String librarianUsername;
-	@Id
 	private int employeeIdNum;
 
 	// Librarian Associations
@@ -96,7 +95,8 @@ public class Librarian extends Account {
 	public String getLibrarianUsername() {
 		return librarianUsername;
 	}
-
+	
+	@Id
 	public int getEmployeeIdNum() {
 		return employeeIdNum;
 	}

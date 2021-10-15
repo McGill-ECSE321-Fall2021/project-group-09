@@ -36,7 +36,7 @@ public class Member extends Account {
 	// ------------------------
 
 	// Member Attributes
-	@Id
+	
 	private int libCardNumber;
 	private String address;
 	private boolean isResident;
@@ -119,7 +119,8 @@ public class Member extends Account {
 		wasSet = true;
 		return wasSet;
 	}
-
+	
+	@Id
 	public int getLibCardNumber() {
 		return libCardNumber;
 	}

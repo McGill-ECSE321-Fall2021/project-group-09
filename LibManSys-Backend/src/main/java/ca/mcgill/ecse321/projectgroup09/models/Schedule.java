@@ -19,7 +19,7 @@ public class Schedule {
 	}
 
 	// Schedule Attributes
-	@Id
+
 	private int scheduledId;
 	private Time openingTime;
 	private Time closingTime;
@@ -76,7 +76,8 @@ public class Schedule {
 		wasSet = true;
 		return wasSet;
 	}
-
+	
+	@Id
 	public int getScheduledId() {
 		return scheduledId;
 	}

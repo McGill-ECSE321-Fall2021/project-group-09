@@ -23,7 +23,7 @@ public abstract class LibraryItem {
 	// ------------------------
 
 	// LibraryItem Attributes
-	@Id
+	
 	private int libraryItemId;
 	private String title;
 	private int publishedYear;
@@ -99,7 +99,8 @@ public abstract class LibraryItem {
 		wasSet = true;
 		return wasSet;
 	}
-
+	
+	@Id
 	public int getLibraryItemId() {
 		return libraryItemId;
 	}

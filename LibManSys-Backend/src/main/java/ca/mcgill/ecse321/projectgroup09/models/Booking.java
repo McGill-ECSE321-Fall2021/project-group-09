@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
@@ -20,7 +19,6 @@ public class Booking {
 	// Booking Attributes
 	private Time bookingStartTime;
 	private Time bookingEndTime;
-	@Id
 	private int bookingID;
 	private Date bookingDate;
 
@@ -83,7 +81,7 @@ public class Booking {
 	public Time getBookingEndTime() {
 		return bookingEndTime;
 	}
-
+	@Id
 	public int getBookingID() {
 		return bookingID;
 	}
@@ -93,7 +91,6 @@ public class Booking {
 	}
 
 	/* Code from template association_GetOne */
-	@ManyToOne(optional=false)
 	public Member getMember() {
 		return member;
 	}

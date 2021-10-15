@@ -15,7 +15,7 @@ public class HeadLibrarian extends Librarian {
 	// ------------------------
 
 	// HeadLibrarian Attributes
-	@Id
+
 	private int managerIdNum;
 
 	// HeadLibrarian Associations
@@ -58,7 +58,8 @@ public class HeadLibrarian extends Librarian {
 		wasSet = true;
 		return wasSet;
 	}
-
+	
+	@Id
 	public int getManagerIdNum() {
 		return managerIdNum;
 	}
