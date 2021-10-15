@@ -2,11 +2,7 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 //Sneha 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +11,7 @@ import java.util.List;
  * @author Omar :) :)
  */
 
+@Table(name = "library")
 @Entity
 public class Library
 {
@@ -116,6 +113,7 @@ public class Library
 	    return wasSet;
 	  }
 
+	  @Id
 	  public String getLibraryName()
 	  {
 	    return libraryName;
@@ -135,7 +133,8 @@ public class Library
 	  {
 	    return librarymail;
 	  }
-	  /* Code from template association_GetOne */
+	 
+	  @OneToOne
 	  public LibraryManagement getLibraryManagement()
 	  {
 	    return libraryManagement;
@@ -147,6 +146,7 @@ public class Library
 	    return aBooking;
 	  }
 
+	  @OneToMany
 	  public List<Booking> getBookings()
 	  {
 	    List<Booking> newBookings = Collections.unmodifiableList(bookings);
@@ -170,12 +170,14 @@ public class Library
 	    int index = bookings.indexOf(aBooking);
 	    return index;
 	  }
-	  /* Code from template association_GetMany */
+	  
+	  @OneToOne
 	  public Schedule getSchedule(int index)
 	  {
 	    Schedule aSchedule = schedules.get(index);
 	    return aSchedule;
 	  }
+
 
 	  public List<Schedule> getSchedules()
 	  {
@@ -200,7 +202,8 @@ public class Library
 	    int index = schedules.indexOf(aSchedule);
 	    return index;
 	  }
-	  /* Code from template association_GetOne */
+	  
+	  @OneToOne
 	  public HeadLibrarian getHeadLibrarian()
 	  {
 	    return headLibrarian;
