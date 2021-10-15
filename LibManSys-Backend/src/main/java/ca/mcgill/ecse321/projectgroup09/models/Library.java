@@ -5,11 +5,13 @@ import javax.persistence.Id;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/*
+ * @author Omar :) :)
+ */
 @Entity
 public class Library
 {
@@ -130,13 +132,12 @@ public class Library
 	  {
 	    return librarymail;
 	  }
-	  @OneToOne
+	  /* Code from template association_GetOne */
 	  public LibraryManagement getLibraryManagement()
 	  {
 	    return libraryManagement;
 	  }
-	  
-	  @OneToMany
+	  /* Code from template association_GetMany */
 	  public Booking getBooking(int index)
 	  {
 	    Booking aBooking = bookings.get(index);
@@ -166,8 +167,7 @@ public class Library
 	    int index = bookings.indexOf(aBooking);
 	    return index;
 	  }
-	  
-	  @OneToMany
+	  /* Code from template association_GetMany */
 	  public Schedule getSchedule(int index)
 	  {
 	    Schedule aSchedule = schedules.get(index);
