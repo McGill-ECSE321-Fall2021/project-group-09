@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -129,12 +130,13 @@ public class Library
 	  {
 	    return librarymail;
 	  }
-	  /* Code from template association_GetOne */
+	  @OneToOne
 	  public LibraryManagement getLibraryManagement()
 	  {
 	    return libraryManagement;
 	  }
-	  /* Code from template association_GetMany */
+	  
+	  @OneToMany
 	  public Booking getBooking(int index)
 	  {
 	    Booking aBooking = bookings.get(index);
@@ -164,7 +166,8 @@ public class Library
 	    int index = bookings.indexOf(aBooking);
 	    return index;
 	  }
-	  /* Code from template association_GetMany */
+	  
+	  @OneToMany
 	  public Schedule getSchedule(int index)
 	  {
 	    Schedule aSchedule = schedules.get(index);
