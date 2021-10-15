@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import java.sql.Time;
 import java.util.*;
 
+@Entity
 public class Booking {
 
 	// ------------------------
@@ -19,6 +20,7 @@ public class Booking {
 	// Booking Attributes
 	private Time bookingStartTime;
 	private Time bookingEndTime;
+	@Id
 	private int bookingID;
 	private Date bookingDate;
 

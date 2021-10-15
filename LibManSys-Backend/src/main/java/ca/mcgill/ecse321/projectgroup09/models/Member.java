@@ -13,6 +13,7 @@ import javax.persistence.Id;
 
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
 
+@Entity
 public class Member extends Account {
 
 	// Christos code for testing removed and changed for Umple
@@ -35,6 +36,7 @@ public class Member extends Account {
 	// ------------------------
 
 	// Member Attributes
+	@Id
 	private int libCardNumber;
 	private String address;
 	private boolean isResident;

@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Id;
 
+@Entity
 public class HeadLibrarian extends Librarian {
 
 	// ------------------------
@@ -14,6 +15,7 @@ public class HeadLibrarian extends Librarian {
 	// ------------------------
 
 	// HeadLibrarian Attributes
+	@Id
 	private int managerIdNum;
 
 	// HeadLibrarian Associations

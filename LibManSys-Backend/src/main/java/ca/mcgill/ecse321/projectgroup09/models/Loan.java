@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import java.util.Date;
 
+@Entity
 public class Loan {
 
 	// ------------------------
@@ -27,6 +28,8 @@ public class Loan {
 	private Date returnDate;
 	private double lateFees;
 	private LoanStatus loanStatus;
+	@Id
+	private int loanId;
 
 	// Loan Associations
 	private LibraryItem libraryItem;

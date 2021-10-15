@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import java.sql.*;
 
+@Entity
 public class Schedule {
 
 	// ------------------------
@@ -18,6 +19,7 @@ public class Schedule {
 	}
 
 	// Schedule Attributes
+	@Id
 	private int scheduledId;
 	private Time openingTime;
 	private Time closingTime;

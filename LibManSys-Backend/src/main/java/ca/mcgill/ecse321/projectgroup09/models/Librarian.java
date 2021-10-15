@@ -12,6 +12,7 @@ import java.util.*;
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 
+@Entity
 public class Librarian extends Account {
 
 	// ------------------------
@@ -28,6 +29,7 @@ public class Librarian extends Account {
 	private String librarianEmail;
 	private String librarianPassword;
 	private String librarianUsername;
+	@Id
 	private int employeeIdNum;
 
 	// Librarian Associations

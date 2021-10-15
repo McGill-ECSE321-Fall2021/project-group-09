@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Id;
 
+@Entity
 public abstract class LibraryItem {
 
 	// ------------------------
@@ -22,6 +23,7 @@ public abstract class LibraryItem {
 	// ------------------------
 
 	// LibraryItem Attributes
+	@Id
 	private int libraryItemId;
 	private String title;
 	private int publishedYear;

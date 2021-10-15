@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Id;
 import java.util.*;
 
+@Entity
 public class LibraryManagement {
 
 	// ------------------------
