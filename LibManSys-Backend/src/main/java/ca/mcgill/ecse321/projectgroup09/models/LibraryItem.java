@@ -1,6 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-//Sneha 
+//JPA tags added
 
 import javax.persistence.*;
 import java.util.Set;
@@ -124,12 +124,12 @@ public abstract class LibraryItem {
 		return itemStatus;
 	}
 
-	/* Code from template association_GetOne */
+	@OneToMany
 	public LibraryManagement getLibraryManagement() {
 		return libraryManagement;
 	}
 
-	/* Code from template association_GetOne */
+	@ManyToOne
 	public Loan getLoan() {
 		return loan;
 	}

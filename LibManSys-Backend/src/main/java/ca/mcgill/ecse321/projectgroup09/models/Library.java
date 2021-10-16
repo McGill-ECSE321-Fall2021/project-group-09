@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-//Sneha 
+//JPA tags added
+ 
 
 import javax.persistence.*;
 import java.util.ArrayList;
