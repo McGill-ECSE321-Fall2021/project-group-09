@@ -20,7 +20,7 @@ import org.assertj.core.util.Arrays;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class TestAccountPersistence {
+public class TestLibManSysPersistence {
 
 	@Autowired
 	private AccountRepository accountRepository; 
