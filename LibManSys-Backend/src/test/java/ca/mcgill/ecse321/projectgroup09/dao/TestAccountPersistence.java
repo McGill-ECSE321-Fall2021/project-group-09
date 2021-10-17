@@ -1,24 +1,69 @@
 package ca.mcgill.ecse321.projectgroup09.dao;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
+
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
-
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import ca.mcgill.ecse321.projectgroup09.models.Account;
-import ca.mcgill.ecse321.projectgroup09.models.Member;
 
+import java.util.List;
+import org.assertj.core.util.Arrays;
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class TestAccountPersistence {
 
 	@Autowired
+	private AccountRepository accountRepository; 
+	
+	@Autowired
+	private ArchiveRepository  archiveRepository;
+	
+	@Autowired
+	private BookingRepository bookingrepository; 
+	
+	@Autowired
+	private BookRepository bookrepository;
+	
+	@Autowired
+	private HeadLibrarianRepository headLibrarianRepository; 
+	
+	@Autowired
+	private LibrarianRepository librarianRepository; 
+	
+	@Autowired
+	private LibraryItemRepository libraryItemRepository; 
+	
+	@Autowired
+	private LoanRepository loanRepository;  
+	
+	@Autowired
 	private MemberRepository memberRepository;
+	
+	@Autowired
+	private MovieRepository moveRepository; 
+	
+	@Autowired
+	private MusicAlbumRepository musicAlbumRepository; 
+	
+	@Autowired
+	private NewspaperRepository newspaperRepository; 
+	
+	@Autowired
+	private OnlineMemberRepository onlineMemberRepository; 
+	
+	@Autowired
+	private ScheduleRepository scheduleRepository; 
+	
 	
 	@AfterEach
 	public void clearDatabase() {
