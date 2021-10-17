@@ -33,13 +33,13 @@ public class LibraryManagement {
 	// ------------------------
 	// INTERFACE
 	// ------------------------
-	/* Code from template association_GetMany */
+	@OneToMany(cascade={CascadeType.ALL})
 	public Library getLibrary(int index) {
 		Library aLibrary = libraries.get(index);
 		return aLibrary;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL})
+	
 	public List<Library> getLibraries() {
 		List<Library> newLibraries = Collections.unmodifiableList(libraries);
 		return newLibraries;
@@ -60,12 +60,12 @@ public class LibraryManagement {
 		return index;
 	}
 
-	/* Code from template association_GetMany */
+	@OneToMany(cascade={CascadeType.ALL})
 	public Account getAccount(int index) {
 		Account aAccount = accounts.get(index);
 		return aAccount;
 	}
-	@OneToMany(cascade={CascadeType.ALL})
+	
 	public List<Account> getAccounts() {
 		List<Account> newAccounts = Collections.unmodifiableList(accounts);
 		return newAccounts;
@@ -86,12 +86,12 @@ public class LibraryManagement {
 		return index;
 	}
 
-	/* Code from template association_GetMany */
+	@OneToMany(cascade={CascadeType.ALL})
 	public LibraryItem getLibraryItem(int index) {
 		LibraryItem aLibraryItem = libraryItems.get(index);
 		return aLibraryItem;
 	}
-	@OneToMany(cascade={CascadeType.ALL})
+
 	public List<LibraryItem> getLibraryItems() {
 		List<LibraryItem> newLibraryItems = Collections.unmodifiableList(libraryItems);
 		return newLibraryItems;

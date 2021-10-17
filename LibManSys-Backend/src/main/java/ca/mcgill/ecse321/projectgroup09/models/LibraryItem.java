@@ -3,10 +3,13 @@ package ca.mcgill.ecse321.projectgroup09.models;
 //JPA tags added
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.*;
 
 @Table (name = "libraryItem")
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "ItemType")
+
 public abstract class LibraryItem {
 
 	// ------------------------
@@ -124,7 +127,7 @@ public abstract class LibraryItem {
 		return itemStatus;
 	}
 
-	@OneToMany
+	@ManyToOne
 	public LibraryManagement getLibraryManagement() {
 		return libraryManagement;
 	}
@@ -139,7 +142,7 @@ public abstract class LibraryItem {
 		return has;
 	}
 
-	/* Code from template association_SetOneToMany */
+	
 	public boolean setLibraryManagement(LibraryManagement aLibraryManagement) {
 		boolean wasSet = false;
 		if (aLibraryManagement == null) {
