@@ -5,10 +5,12 @@ package ca.mcgill.ecse321.projectgroup09.models;
 import javax.persistence.*;
 
 
-@Table (name = "account")
+//@Table (name = "account")
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "AccountType")
+
+//Tags added for generalization purposes, since Member and Librarian both extend Account 
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "AccountType")
 public abstract class Account {
 	// ------------------------
 	// MEMBER VARIABLES
