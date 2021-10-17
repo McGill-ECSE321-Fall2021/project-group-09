@@ -7,11 +7,13 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Id;
 import java.sql.Time;
 import java.util.*;
 
 @Entity
+@Table(name = "Booking")
 public class Booking {
 
 	// ------------------------
