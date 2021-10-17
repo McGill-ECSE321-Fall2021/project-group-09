@@ -78,7 +78,7 @@ public class Book extends LibraryItem{
 	  {
 	    return publisher;
 	  }
-
+	  @Id
 	  public int getIsbn()
 	  {
 	    return isbn;

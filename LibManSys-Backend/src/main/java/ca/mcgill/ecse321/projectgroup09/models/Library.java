@@ -172,14 +172,14 @@ public class Library
 	    return index;
 	  }
 	  
-	  @OneToOne
+	  @OneToMany
 	  public Schedule getSchedule(int index)
 	  {
 	    Schedule aSchedule = schedules.get(index);
 	    return aSchedule;
 	  }
 
-
+	  @OneToMany
 	  public List<Schedule> getSchedules()
 	  {
 	    List<Schedule> newSchedules = Collections.unmodifiableList(schedules);

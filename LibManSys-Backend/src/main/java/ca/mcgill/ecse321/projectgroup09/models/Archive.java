@@ -38,7 +38,7 @@ public class Archive extends LibraryItem{
 	    wasSet = true;
 	    return wasSet;
 	  }
-
+	  @Id
 	  public String getInstitution()
 	  {
 	    return institution;

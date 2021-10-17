@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 
 //@Table (name = "account")
-@Entity
-
+// @AbstractEntity
+//@MappedSuperclass
 //Tags added for generalization purposes, since Member and Librarian both extend Account 
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "AccountType")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "AccountType")
 public abstract class Account {
 	// ------------------------
 	// MEMBER VARIABLES

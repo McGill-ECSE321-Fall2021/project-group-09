@@ -59,6 +59,7 @@ public class Movie extends LibraryItem{
 	    return wasSet;
 	  }
 
+	  @Id
 	  public String getDirector()
 	  {
 	    return director;
