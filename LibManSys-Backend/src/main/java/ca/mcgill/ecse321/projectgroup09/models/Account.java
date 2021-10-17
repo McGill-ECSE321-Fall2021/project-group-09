@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 @Table (name = "account")
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "AccountType")
 public abstract class Account {
 	// ------------------------
 	// MEMBER VARIABLES

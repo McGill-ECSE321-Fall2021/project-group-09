@@ -12,8 +12,8 @@ import javax.persistence.Id;
 import java.sql.Time;
 import java.util.*;
 
-@Entity
 @Table(name = "Booking")
+@Entity
 public class Booking {
 
 	// ------------------------
