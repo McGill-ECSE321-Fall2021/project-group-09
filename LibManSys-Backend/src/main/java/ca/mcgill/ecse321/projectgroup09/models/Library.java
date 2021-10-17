@@ -62,7 +62,7 @@ public class Library
 	    headLibrarian = aHeadLibrarian;
 	  }
 
-	  public Library(String aLibraryName, String aLibraryAddress, String aLibraryPhone, String aLibrarymail, LibraryManagement aLibraryManagement, String aFullNameForHeadLibrarian, LibraryManagement aLibraryManagementForHeadLibrarian, String aLibrarianEmailForHeadLibrarian, String aLibrarianPasswordForHeadLibrarian, String aLibrarianUsernameForHeadLibrarian, int aEmployeeIdNumForHeadLibrarian, int aManagerIdNumForHeadLibrarian, Schedule... allSchedules)
+	  public Library(String aLibraryName, String aLibraryAddress, String aLibraryPhone, String aLibrarymail, LibraryManagement aLibraryManagement, String aFullNameForHeadLibrarian, LibraryManagement aLibraryManagementForHeadLibrarian, String aLibrarianEmailForHeadLibrarian, String aLibrarianPasswordForHeadLibrarian, String aLibrarianUsernameForHeadLibrarian, Long aEmployeeIdNumForHeadLibrarian, Long aManagerIdNumForHeadLibrarian, Schedule... allSchedules)
 	  {
 	    libraryName = aLibraryName;
 	    libraryAddress = aLibraryAddress;

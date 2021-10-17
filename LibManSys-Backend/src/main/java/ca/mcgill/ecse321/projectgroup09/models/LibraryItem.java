@@ -23,7 +23,7 @@ public abstract class LibraryItem {
 
 	// LibraryItem Attributes
 	
-	private int libraryItemId;
+	private Long libraryItemID;
 	private String title;
 	private int publishedYear;
 	private int loanablePeriod;
@@ -38,9 +38,9 @@ public abstract class LibraryItem {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public LibraryItem(int aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod,
+	public LibraryItem(Long alibraryItemID, String aTitle, int aPublishedYear, int aLoanablePeriod,
 			double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement) {
-		libraryItemId = aLibraryItemId;
+		libraryItemID = alibraryItemID;
 		title = aTitle;
 		publishedYear = aPublishedYear;
 		loanablePeriod = aLoanablePeriod;
@@ -57,9 +57,9 @@ public abstract class LibraryItem {
 	// INTERFACE
 	// ------------------------
 
-	public boolean setLibraryItemId(int aLibraryItemId) {
+	public boolean setlibraryItemID(Long alibraryItemID) {
 		boolean wasSet = false;
-		libraryItemId = aLibraryItemId;
+		libraryItemID = alibraryItemID;
 		wasSet = true;
 		return wasSet;
 	}
@@ -100,8 +100,8 @@ public abstract class LibraryItem {
 	}
 	
 	@Id
-	public int getLibraryItemId() {
-		return libraryItemId;
+	public Long getlibraryItemID() {
+		return libraryItemID;
 	}
 
 	public String getTitle() {
@@ -193,7 +193,7 @@ public abstract class LibraryItem {
 	}
 
 	public String toString() {
-		return super.toString() + "[" + "libraryItemId" + ":" + getLibraryItemId() + "," + "title" + ":" + getTitle()
+		return super.toString() + "[" + "libraryItemID" + ":" + getlibraryItemID() + "," + "title" + ":" + getTitle()
 				+ "," + "publishedYear" + ":" + getPublishedYear() + "," + "loanablePeriod" + ":" + getLoanablePeriod()
 				+ "," + "dailyOverdueFee" + ":" + getDailyOverdueFee() + "]"
 				+ System.getProperties().getProperty("line.separator") + "  " + "itemStatus" + "="

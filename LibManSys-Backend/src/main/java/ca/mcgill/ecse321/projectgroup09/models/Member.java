@@ -37,7 +37,7 @@ public class Member extends Account {
 
 	// Member Attributes
 	
-	private int libCardNumber;
+	private Long libCardNumber;
 	private String address;
 	private boolean isResident;
 	private String phoneNumber;
@@ -53,7 +53,7 @@ public class Member extends Account {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Member(String aFullName, LibraryManagement aLibraryManagement, int aLibCardNumber, String aAddress,
+	public Member(String aFullName, LibraryManagement aLibraryManagement, Long aLibCardNumber, String aAddress,
 			boolean aIsResident, String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerified) {
 		super(aFullName, aLibraryManagement);
 		libCardNumber = aLibCardNumber;
@@ -71,7 +71,7 @@ public class Member extends Account {
 	// INTERFACE
 	// ------------------------
 
-	public boolean setLibCardNumber(int aLibCardNumber) {
+	public boolean setLibCardNumber(Long aLibCardNumber) {
 		boolean wasSet = false;
 		libCardNumber = aLibCardNumber;
 		wasSet = true;
@@ -121,7 +121,7 @@ public class Member extends Account {
 	}
 	
 	@Id
-	public int getLibCardNumber() {
+	public Long getLibCardNumber() {
 		return libCardNumber;
 	}
 
@@ -302,7 +302,7 @@ public class Member extends Account {
 	}
 
 	/* Code from template association_AddManyToOne */
-	public Booking addBooking(Time aBookingStartTime, Time aBookingEndTime, int aBookingID, Date aBookingDate) {
+	public Booking addBooking(Time aBookingStartTime, Time aBookingEndTime, Long aBookingID, Date aBookingDate) {
 		return new Booking(aBookingStartTime, aBookingEndTime, aBookingID, aBookingDate, this);
 	}
 

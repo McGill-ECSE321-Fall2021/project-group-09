@@ -23,7 +23,7 @@ public class Booking {
 	// Booking Attributes
 	private Time bookingStartTime;
 	private Time bookingEndTime;
-	private int bookingID;
+	private Long bookingID;
 	private Date bookingDate;
 
 	// Booking Associations
@@ -34,7 +34,7 @@ public class Booking {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Booking(Time aBookingStartTime, Time aBookingEndTime, int aBookingID, Date aBookingDate, Member aMember) {
+	public Booking(Time aBookingStartTime, Time aBookingEndTime, Long aBookingID, Date aBookingDate, Member aMember) {
 		bookingStartTime = aBookingStartTime;
 		bookingEndTime = aBookingEndTime;
 		bookingID = aBookingID;
@@ -64,7 +64,7 @@ public class Booking {
 		return wasSet;
 	}
 
-	public boolean setBookingID(int aBookingID) {
+	public boolean setBookingID(Long aBookingID) {
 		boolean wasSet = false;
 		bookingID = aBookingID;
 		wasSet = true;
@@ -86,7 +86,7 @@ public class Booking {
 		return bookingEndTime;
 	}
 	@Id
-	public int getBookingID() {
+	public Long getBookingID() {
 		return bookingID;
 	}
 

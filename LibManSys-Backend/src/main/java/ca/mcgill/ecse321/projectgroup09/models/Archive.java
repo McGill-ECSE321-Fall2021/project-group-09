@@ -21,7 +21,7 @@ public class Archive extends LibraryItem{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Archive(int aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aInstitution)
+	  public Archive(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aInstitution)
 	  {
 	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    institution = aInstitution;

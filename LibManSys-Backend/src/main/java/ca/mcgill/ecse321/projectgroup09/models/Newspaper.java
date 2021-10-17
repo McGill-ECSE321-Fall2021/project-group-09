@@ -25,7 +25,7 @@ public class Newspaper extends LibraryItem{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Newspaper(int aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aJournalName, String aEdition, String aChiefEditor)
+	  public Newspaper(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aJournalName, String aEdition, String aChiefEditor)
 	  {
 	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    journalName = aJournalName;

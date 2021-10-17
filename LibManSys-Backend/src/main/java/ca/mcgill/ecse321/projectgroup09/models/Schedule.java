@@ -22,7 +22,7 @@ public class Schedule {
 
 	// Schedule Attributes
 
-	private int scheduledId;
+	private Long scheduleID;
 	private Time openingTime;
 	private Time closingTime;
 	private DayofWeek dayofWeek;
@@ -34,9 +34,9 @@ public class Schedule {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Schedule(int aScheduledId, Time aOpeningTime, Time aClosingTime, DayofWeek aDayofWeek,
+	public Schedule(Long ascheduleID, Time aOpeningTime, Time aClosingTime, DayofWeek aDayofWeek,
 			Librarian aLibrarian) {
-		scheduledId = aScheduledId;
+		scheduleID = ascheduleID;
 		openingTime = aOpeningTime;
 		closingTime = aClosingTime;
 		dayofWeek = aDayofWeek;
@@ -51,9 +51,9 @@ public class Schedule {
 	// INTERFACE
 	// ------------------------
 
-	public boolean setScheduledId(int aScheduledId) {
+	public boolean setscheduleID(Long ascheduleID) {
 		boolean wasSet = false;
-		scheduledId = aScheduledId;
+		scheduleID = ascheduleID;
 		wasSet = true;
 		return wasSet;
 	}
@@ -80,8 +80,8 @@ public class Schedule {
 	}
 	
 	@Id
-	public int getScheduledId() {
-		return scheduledId;
+	public long getscheduleID() {
+		return scheduleID;
 	}
 
 	public Time getOpeningTime() {
@@ -138,7 +138,7 @@ public class Schedule {
 	}
 
 	public String toString() {
-		return super.toString() + "[" + "scheduledId" + ":" + getScheduledId() + "]"
+		return super.toString() + "[" + "scheduleID" + ":" + getscheduleID() + "]"
 				+ System.getProperties().getProperty("line.separator") + "  " + "openingTime" + "="
 				+ (getOpeningTime() != null
 						? !getOpeningTime().equals(this) ? getOpeningTime().toString().replaceAll("  ", "    ") : "this"

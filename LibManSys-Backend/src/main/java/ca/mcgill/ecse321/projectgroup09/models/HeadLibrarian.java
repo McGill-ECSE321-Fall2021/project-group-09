@@ -19,7 +19,7 @@ public class HeadLibrarian extends Librarian {
 
 	// HeadLibrarian Attributes
 
-	private int managerIdNum;
+	private Long managerIdNum;
 
 	// HeadLibrarian Associations
 	private Library library;
@@ -29,7 +29,7 @@ public class HeadLibrarian extends Librarian {
 	// ------------------------
 
 	public HeadLibrarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
-			String aLibrarianPassword, String aLibrarianUsername, int aEmployeeIdNum, int aManagerIdNum,
+			String aLibrarianPassword, String aLibrarianUsername, Long aEmployeeIdNum, Long aManagerIdNum,
 			Library aLibrary) {
 		super(aFullName, aLibraryManagement, aLibrarianEmail, aLibrarianPassword, aLibrarianUsername, aEmployeeIdNum);
 		managerIdNum = aManagerIdNum;
@@ -41,7 +41,7 @@ public class HeadLibrarian extends Librarian {
 	}
 
 	public HeadLibrarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
-			String aLibrarianPassword, String aLibrarianUsername, int aEmployeeIdNum, int aManagerIdNum,
+			String aLibrarianPassword, String aLibrarianUsername, Long aEmployeeIdNum, Long aManagerIdNum,
 			String aLibraryNameForLibrary, String aLibraryAddressForLibrary, String aLibraryPhoneForLibrary,
 			String aLibrarymailForLibrary, LibraryManagement aLibraryManagementForLibrary,
 			Schedule... allSchedulesForLibrary) {
@@ -55,7 +55,7 @@ public class HeadLibrarian extends Librarian {
 	// INTERFACE
 	// ------------------------
 
-	public boolean setManagerIdNum(int aManagerIdNum) {
+	public boolean setManagerIdNum(Long aManagerIdNum) {
 		boolean wasSet = false;
 		managerIdNum = aManagerIdNum;
 		wasSet = true;
@@ -63,7 +63,7 @@ public class HeadLibrarian extends Librarian {
 	}
 	
 	@Id
-	public int getManagerIdNum() {
+	public Long getManagerIdNum() {
 		return managerIdNum;
 	}
 

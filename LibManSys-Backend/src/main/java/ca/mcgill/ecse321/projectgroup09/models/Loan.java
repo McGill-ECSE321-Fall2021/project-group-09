@@ -31,7 +31,7 @@ public class Loan {
 	private Date returnDate;
 	private double lateFees;
 	private LoanStatus loanStatus;
-	private int loanID;
+	private Long loanID;
 
 	// Loan Associations
 	private LibraryItem libraryItem;
@@ -97,7 +97,7 @@ public class Loan {
 		return wasSet;
 	}
 	
-	public boolean setloanID(int aloanID) {
+	public boolean setloanID(Long aloanID) {
 		boolean wasSet = false;
 		loanID = aloanID;
 		wasSet = true;
@@ -105,7 +105,7 @@ public class Loan {
 	}
 
 	@Id
-	public int getLoanID() {
+	public Long getLoanID() {
 		return loanID;
 	}
 	

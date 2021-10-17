@@ -24,7 +24,7 @@ public class MusicAlbum extends LibraryItem {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public MusicAlbum(int aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod,
+	public MusicAlbum(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod,
 			double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aGenre,
 			String aArtist, int aAlbumLengthInMinutes, int aNumSongs) {
 		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus,

@@ -23,7 +23,7 @@ public class OnlineMember extends Member{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public OnlineMember(String aFullName, LibraryManagement aLibraryManagement, int aLibCardNumber, String aAddress, boolean aIsResident, String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerified, String aMemberEmail, String aMemberPassword, String aMemberUsername)
+	  public OnlineMember(String aFullName, LibraryManagement aLibraryManagement, Long aLibCardNumber, String aAddress, boolean aIsResident, String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerified, String aMemberEmail, String aMemberPassword, String aMemberUsername)
 	  {
 	    super(aFullName, aLibraryManagement, aLibCardNumber, aAddress, aIsResident, aPhoneNumber, aAmountOwed, aActiveLoans, aIsVerified);
 	    memberEmail = aMemberEmail;

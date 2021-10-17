@@ -23,7 +23,7 @@ public class Movie extends LibraryItem{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Movie(int aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aDirector, int aRuntime, String aGenre)
+	  public Movie(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aDirector, int aRuntime, String aGenre)
 	  {
 	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    director = aDirector;

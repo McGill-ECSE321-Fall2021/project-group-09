@@ -24,7 +24,7 @@ public class Book extends LibraryItem{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Book(int aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aAuthor, String aPublisher, int aIsbn, int aNumPages)
+	  public Book(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aAuthor, String aPublisher, int aIsbn, int aNumPages)
 	  {
 	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    author = aAuthor;

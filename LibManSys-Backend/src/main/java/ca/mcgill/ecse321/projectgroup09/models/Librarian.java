@@ -29,7 +29,7 @@ public class Librarian extends Account {
 	private String librarianEmail;
 	private String librarianPassword;
 	private String librarianUsername;
-	private int employeeIdNum;
+	private Long employeeIDNum;
 
 	// Librarian Associations
 	private List<Schedule> schedules;
@@ -41,12 +41,12 @@ public class Librarian extends Account {
 	// ------------------------
 
 	public Librarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
-			String aLibrarianPassword, String aLibrarianUsername, int aEmployeeIdNum) {
+			String aLibrarianPassword, String aLibrarianUsername, Long aemployeeIDNum) {
 		super(aFullName, aLibraryManagement);
 		librarianEmail = aLibrarianEmail;
 		librarianPassword = aLibrarianPassword;
 		librarianUsername = aLibrarianUsername;
-		employeeIdNum = aEmployeeIdNum;
+		employeeIDNum = aemployeeIDNum;
 		schedules = new ArrayList<Schedule>();
 		loans = new ArrayList<Loan>();
 		bookings = new ArrayList<Booking>();
@@ -77,9 +77,9 @@ public class Librarian extends Account {
 		return wasSet;
 	}
 
-	public boolean setEmployeeIdNum(int aEmployeeIdNum) {
+	public boolean setemployeeIDNum(Long aemployeeIDNum) {
 		boolean wasSet = false;
-		employeeIdNum = aEmployeeIdNum;
+		employeeIDNum = aemployeeIDNum;
 		wasSet = true;
 		return wasSet;
 	}
@@ -97,8 +97,8 @@ public class Librarian extends Account {
 	}
 	
 	@Id
-	public int getEmployeeIdNum() {
-		return employeeIdNum;
+	public Long getemployeeIDNum() {
+		return employeeIDNum;
 	}
 
 	/* Code from template association_GetMany */
@@ -190,7 +190,7 @@ public class Librarian extends Account {
 	}
 
 	/* Code from template association_AddOptionalNToOne */
-	public Schedule addSchedule(int aScheduledId, Time aOpeningTime, Time aClosingTime, DayofWeek aDayofWeek) {
+	public Schedule addSchedule(Long aScheduledId, Time aOpeningTime, Time aClosingTime, DayofWeek aDayofWeek) {
 		if (numberOfSchedules() >= maximumNumberOfSchedules()) {
 			return null;
 		} else {
@@ -422,6 +422,6 @@ public class Librarian extends Account {
 	public String toString() {
 		return super.toString() + "[" + "librarianEmail" + ":" + getLibrarianEmail() + "," + "librarianPassword" + ":"
 				+ getLibrarianPassword() + "," + "librarianUsername" + ":" + getLibrarianUsername() + ","
-				+ "employeeIdNum" + ":" + getEmployeeIdNum() + "]";
+				+ "employeeIDNum" + ":" + getemployeeIDNum() + "]";
 	}
 }
