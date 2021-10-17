@@ -19,6 +19,7 @@ public class LibraryManagement {
 	private List<Library> libraries;
 	private List<Account> accounts;
 	private List<LibraryItem> libraryItems;
+	private int id; 
 
 	// ------------------------
 	// CONSTRUCTOR
@@ -339,5 +340,10 @@ public class LibraryManagement {
 		}
 
 	}
+	
+	@Id
+	public int getId() {
+	return this.id;
+	       }
 
 }
