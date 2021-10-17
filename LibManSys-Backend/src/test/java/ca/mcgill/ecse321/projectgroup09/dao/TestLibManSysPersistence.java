@@ -29,16 +29,19 @@ public class TestLibManSysPersistence {
 	private ArchiveRepository  archiveRepository;
 	
 	@Autowired
-	private BookingRepository bookingrepository; 
+	private BookingRepository bookingRepository; 
 	
 	@Autowired
-	private BookRepository bookrepository;
+	private BookRepository bookRepository;
 	
 	@Autowired
 	private HeadLibrarianRepository headLibrarianRepository; 
 	
 	@Autowired
 	private LibrarianRepository librarianRepository; 
+	
+	@Autowired
+	private LibraryRepository libraryRepository; 
 	
 	@Autowired
 	private LibraryItemRepository libraryItemRepository; 
@@ -50,7 +53,7 @@ public class TestLibManSysPersistence {
 	private MemberRepository memberRepository;
 	
 	@Autowired
-	private MovieRepository moveRepository; 
+	private MovieRepository movieRepository; 
 	
 	@Autowired
 	private MusicAlbumRepository musicAlbumRepository; 
@@ -67,7 +70,76 @@ public class TestLibManSysPersistence {
 	
 	@AfterEach
 	public void clearDatabase() {
+		accountRepository.deleteAll();
+		archiveRepository.deleteAll();
+		bookRepository.deleteAll();
+		bookingRepository.deleteAll();
+		headLibrarianRepository.deleteAll();
+		librarianRepository.deleteAll();
+		libraryRepository.deleteAll();
+		libraryItemRepository.deleteAll();
+		loanRepository.deleteAll();
 		memberRepository.deleteAll();
+		movieRepository.deleteAll();
+		musicAlbumRepository.deleteAll();
+		newspaperRepository.deleteAll();
+		onlineMemberRepository.deleteAll();
+		scheduleRepository.deleteAll();
+	}
+	
+	@Test 
+	void testPersistAndLoadAccount() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadArchive() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadBook() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadBooking() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadHeadLibrarian() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadLibrarian() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadLibrary() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadLibraryItem() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadLibraryManagement() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadLoan() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadMove() {
+		
 	}
 	//Christos tests commented out since the member class has been changed
 	/*
@@ -103,4 +175,29 @@ public class TestLibManSysPersistence {
 		// findByUserName returns first instance of account with name = name1
 		
 	}*/
+	
+	@Test
+	void testPersistAndLoadMovie() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadMusicAlbum() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadNewspaper() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadOnlineMember() {
+		
+	}
+	
+	@Test
+	void testPersistAndLoadSchedule() {
+		
+	}
 }
