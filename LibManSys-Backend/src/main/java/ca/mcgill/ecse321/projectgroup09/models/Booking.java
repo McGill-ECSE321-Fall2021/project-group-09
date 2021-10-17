@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import java.sql.Time;
 import java.util.*;
 
-//@Table(name = "Booking")
+@Table(name = "Booking")
 @Entity
 public class Booking {
 

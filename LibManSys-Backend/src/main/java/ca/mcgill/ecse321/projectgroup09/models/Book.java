@@ -17,14 +17,14 @@ public class Book extends LibraryItem{
 	  //Book Attributes
 	  private String author;
 	  private String publisher;
-	  private int isbn;
+	  private String isbn;
 	  private int numPages;
 
 	  //------------------------
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Book(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aAuthor, String aPublisher, int aIsbn, int aNumPages)
+	  public Book(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aAuthor, String aPublisher, String aIsbn, int aNumPages)
 	  {
 	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    author = aAuthor;
@@ -53,7 +53,7 @@ public class Book extends LibraryItem{
 	    return wasSet;
 	  }
 
-	  public boolean setIsbn(int aIsbn)
+	  public boolean setIsbn(String aIsbn)
 	  {
 	    boolean wasSet = false;
 	    isbn = aIsbn;
@@ -78,8 +78,9 @@ public class Book extends LibraryItem{
 	  {
 	    return publisher;
 	  }
-	  @Id
-	  public int getIsbn()
+
+
+	  public String getIsbn()
 	  {
 	    return isbn;
 	  }
