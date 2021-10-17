@@ -7,8 +7,8 @@ import java.util.*;
 
 @Table (name = "libraryItem")
 @Entity
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "ItemType")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "ItemType")
 
 public abstract class LibraryItem {
 

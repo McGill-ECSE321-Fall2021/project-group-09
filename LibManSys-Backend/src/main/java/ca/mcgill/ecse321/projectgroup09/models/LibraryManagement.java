@@ -18,8 +18,7 @@ public class LibraryManagement {
 	// LibraryManagement Associations
 	private List<Library> libraries;
 	private List<Account> accounts;
-	private List<LibraryItem> libraryItems;
-	private int id; 
+	private List<LibraryItem> libraryItems; 
 
 	// ------------------------
 	// CONSTRUCTOR
@@ -340,10 +339,5 @@ public class LibraryManagement {
 		}
 
 	}
-	
-	@Id
-	public int getId() {
-	return this.id;
-	       }
 
 }
