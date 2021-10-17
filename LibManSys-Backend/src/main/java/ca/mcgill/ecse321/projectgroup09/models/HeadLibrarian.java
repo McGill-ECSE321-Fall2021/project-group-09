@@ -19,7 +19,7 @@ public class HeadLibrarian extends Librarian {
 
 	// HeadLibrarian Attributes
 
-	private Long managerIdNum;
+	private Long managerIDNum;
 
 	// HeadLibrarian Associations
 	private Library library;
@@ -29,10 +29,10 @@ public class HeadLibrarian extends Librarian {
 	// ------------------------
 
 	public HeadLibrarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
-			String aLibrarianPassword, String aLibrarianUsername, Long aEmployeeIdNum, Long aManagerIdNum,
+			String aLibrarianPassword, String aLibrarianUsername, Long aEmployeeIdNum, Long amanagerIDNum,
 			Library aLibrary) {
 		super(aFullName, aLibraryManagement, aLibrarianEmail, aLibrarianPassword, aLibrarianUsername, aEmployeeIdNum);
-		managerIdNum = aManagerIdNum;
+		managerIDNum = amanagerIDNum;
 		if (aLibrary == null || aLibrary.getHeadLibrarian() != null) {
 			throw new RuntimeException(
 					"Unable to create HeadLibrarian due to aLibrary. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
@@ -41,12 +41,12 @@ public class HeadLibrarian extends Librarian {
 	}
 
 	public HeadLibrarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
-			String aLibrarianPassword, String aLibrarianUsername, Long aEmployeeIdNum, Long aManagerIdNum,
+			String aLibrarianPassword, String aLibrarianUsername, Long aEmployeeIdNum, Long amanagerIDNum,
 			String aLibraryNameForLibrary, String aLibraryAddressForLibrary, String aLibraryPhoneForLibrary,
 			String aLibrarymailForLibrary, LibraryManagement aLibraryManagementForLibrary,
 			Schedule... allSchedulesForLibrary) {
 		super(aFullName, aLibraryManagement, aLibrarianEmail, aLibrarianPassword, aLibrarianUsername, aEmployeeIdNum);
-		managerIdNum = aManagerIdNum;
+		managerIDNum = amanagerIDNum;
 		library = new Library(aLibraryNameForLibrary, aLibraryAddressForLibrary, aLibraryPhoneForLibrary,
 				aLibrarymailForLibrary, aLibraryManagementForLibrary, this, allSchedulesForLibrary);
 	}
@@ -55,16 +55,16 @@ public class HeadLibrarian extends Librarian {
 	// INTERFACE
 	// ------------------------
 
-	public boolean setManagerIdNum(Long aManagerIdNum) {
+	public boolean setmanagerIDNum(Long amanagerIDNum) {
 		boolean wasSet = false;
-		managerIdNum = aManagerIdNum;
+		managerIDNum = amanagerIDNum;
 		wasSet = true;
 		return wasSet;
 	}
 	
 	@Id
-	public Long getManagerIdNum() {
-		return managerIdNum;
+	public Long getmanagerIDNum() {
+		return managerIDNum;
 	}
 
 	/* Code from template association_GetOne */
@@ -83,7 +83,7 @@ public class HeadLibrarian extends Librarian {
 	}
 
 	public String toString() {
-		return super.toString() + "[" + "managerIdNum" + ":" + getManagerIdNum() + "]"
+		return super.toString() + "[" + "managerIDNum" + ":" + getmanagerIDNum() + "]"
 				+ System.getProperties().getProperty("line.separator") + "  " + "library = "
 				+ (getLibrary() != null ? Integer.toHexString(System.identityHashCode(getLibrary())) : "null");
 	}
