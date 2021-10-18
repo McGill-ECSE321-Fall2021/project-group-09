@@ -103,7 +103,7 @@ public class TestPersistAndLoadAccounts {
 		headLibrarianRepository.save(hl);
 		
 		// load HL
-		HeadLibrarian loadedHL = headLibrarianRepository.findById(hlManagerId);
+		HeadLibrarian loadedHL = headLibrarianRepository.findHeadLibrarianByManagerIDNum(hlManagerId);
 		
 		assertNotNull(loadedHL);
 		assertEquals(hlName, loadedHL.getFullName());
