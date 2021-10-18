@@ -1,15 +1,17 @@
 package ca.mcgill.ecse321.projectgroup09.dao;
 import java.sql.Date;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
+
 import ca.mcgill.ecse321.projectgroup09.models.*;
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
 
@@ -17,7 +19,8 @@ import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
  * Author: Rajaa
  * 
  * */
- 
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class TestPersistAndLoadLoan {
 	@Autowired
 	private LoanRepository loanRepository;  
@@ -36,6 +39,7 @@ public class TestPersistAndLoadLoan {
 		libraryItemRepository.deleteAll();
 	}
 	@Test
+	@Transactional
 	public void testPersistAndLoadLoan() {
 		
 		Long LibCardNumber =  2L;
@@ -46,6 +50,7 @@ public class TestPersistAndLoadLoan {
 		Double amountOwed = 0.10;
 		Integer activeLoans = 0;
 		Boolean verified = true;
+		String membFullName = "RBK";
 		
 		member.setLibCardNumber(LibCardNumber);
 		member.setAddress(address);
@@ -54,9 +59,25 @@ public class TestPersistAndLoadLoan {
 		member.setAmountOwed(amountOwed);
 		member.setActiveLoans(activeLoans);
 		member.setIsVerified(verified);
+		member.setFullName(membFullName);
+		memberRepository.save(member);
+
 		
+		String fullName = "FullName";
+		String librarianUsername = "TestLibrarianUsername";
+		Long employeeIDNum = 9L;
+		String librarianPassword = "TestLibrarianPassword";
+		String librarianEmail = "TestLibraryEmail";
 		
-		//librarianRepository.save(librarian);
+		Librarian librarian = new Librarian();
+		librarian.setLibrarianUsername(librarianUsername);
+		librarian.setemployeeIDNum(employeeIDNum);
+		librarian.setLibrarianPassword(librarianPassword);
+		librarian.setLibrarianEmail(librarianEmail);
+		librarian.setFullName(fullName);
+		
+		librarianRepository.save(librarian);
+		
 		
 		Long loanID = 1L;
 		Date borrowdDate = java.sql.Date.valueOf("2021-02-01");
@@ -87,7 +108,8 @@ public class TestPersistAndLoadLoan {
 		libraryItem.setPublisher(publisher);
 		libraryItem.setTitle(title);
 	//	loan.setLibrarian(librarian);
-		
+		libraryItemRepository.save(libraryItem);
+
 		Loan loan = new Loan();
 		loan.setLateFees(lateFees);
 		loan.setloanID(loanID);
