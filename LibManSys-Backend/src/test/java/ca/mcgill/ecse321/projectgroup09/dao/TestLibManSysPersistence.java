@@ -6,9 +6,13 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,31 +25,31 @@ import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 @SpringBootTest
 public class TestLibManSysPersistence {
 
-	@Autowired
+	/*@Autowired
 	private AccountRepository accountRepository; 
 	
 	@Autowired
-	private ArchiveRepository  archiveRepository;
+	private ArchiveRepository  archiveRepository;*/
 	
 	@Autowired
 	private BookingRepository bookingRepository; 
 	
-	@Autowired
+	/*@Autowired
 	private BookRepository bookRepository;
 	
 	@Autowired
-	private HeadLibrarianRepository headLibrarianRepository; 
+	private HeadLibrarianRepository headLibrarianRepository;*/
 	
 	@Autowired
 	private LibrarianRepository librarianRepository; 
 	
-	@Autowired
-	private LibraryItemRepository libraryItemRepository; 
+	/*@Autowired
+	private LibraryItemRepository libraryItemRepository;*/
 	
 	@Autowired
 	private LibraryRepository libraryRepository; 
 	
-	@Autowired
+	/*@Autowired
 	private LoanRepository loanRepository;  
 	
 	@Autowired
@@ -61,28 +65,39 @@ public class TestLibManSysPersistence {
 	private NewspaperRepository newspaperRepository; 
 	
 	@Autowired
-	private OnlineMemberRepository onlineMemberRepository; 
+	private OnlineMemberRepository onlineMemberRepository;*/
 	
 	@Autowired
 	private ScheduleRepository scheduleRepository; 
 	
+	private LibraryManagement lm;
+	
+	
+	@BeforeEach
+	public void setupLibraryManagement() {
+		lm = new LibraryManagement();
+		lm.setID(1L);
+		lm.setAccounts(new ArrayList<Account>());
+		lm.setLibraries(new ArrayList<Library>());
+		lm.setLibraryItems(new ArrayList<LibraryItem>());
+	}
 	
 	@AfterEach
 	public void clearDatabase() {
-		accountRepository.deleteAll();
-		archiveRepository.deleteAll();
+		//accountRepository.deleteAll();
+		//archiveRepository.deleteAll();
 		bookingRepository.deleteAll();
-		bookRepository.deleteAll();
-		headLibrarianRepository.deleteAll();
+		//bookRepository.deleteAll();
+		//headLibrarianRepository.deleteAll();
 		librarianRepository.deleteAll();
-		libraryItemRepository.deleteAll();
+		//libraryItemRepository.deleteAll();
 		libraryRepository.deleteAll();
-		loanRepository.deleteAll();
-		memberRepository.deleteAll();
-		movieRepository.deleteAll();
-		musicAlbumRepository.deleteAll();
-		newspaperRepository.deleteAll();
-		onlineMemberRepository.deleteAll();
+		//loanRepository.deleteAll();
+		//memberRepository.deleteAll();
+		//movieRepository.deleteAll();
+		//musicAlbumRepository.deleteAll();
+		//newspaperRepository.deleteAll();
+		//onlineMemberRepository.deleteAll();
 		scheduleRepository.deleteAll();
 		
 	}	
@@ -103,7 +118,21 @@ public class TestLibManSysPersistence {
 		booking.setBookingEndTime(bookingEndTime);
 		booking.setBookingID(bookingID);
 		
-		bookingRepository.save(booking);
+		// Dummy head librarian for library schedule
+		HeadLibrarian hl = new HeadLibrarian();
+		hl.setmanagerIDNum(999L);
+		
+		ArrayList<Schedule> librarySchedule = new ArrayList<Schedule>();
+		for (long i = 0; i < 7; i++) {
+			Schedule s = new Schedule();
+			s.setscheduleID(1000L + i);
+			s.setDayofWeek(DayofWeek.values()[(int) i]);
+			s.setOpeningTime(java.sql.Time.valueOf(LocalTime.of(9, 30)));
+			s.setClosingTime(java.sql.Time.valueOf(LocalTime.of(17, 00)));
+			s.setLibrarian(hl);
+		}
+		
+		//bookingRepository.save(booking);
 		
 		String libraryName = "TestLibraryName";
 		String libraryAddress = "TestLibraryAddress";
@@ -116,6 +145,10 @@ public class TestLibManSysPersistence {
 		library.setLibraryPhone(libraryPhone);
 		library.setLibraryEmail(libraryEmail);
 		//library.addBooking(booking);
+		
+		library.setHeadLibrarian(hl);
+		library.setBookings(List.of(booking));
+		library.setLibraryManagement(lm);
 		
 		libraryRepository.save(library);
 
