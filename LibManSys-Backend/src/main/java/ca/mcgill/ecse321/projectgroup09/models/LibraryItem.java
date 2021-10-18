@@ -82,7 +82,7 @@ public abstract class LibraryItem {
 		return this.itemStatus;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Loan> getLoans() {
 		return this.loans;
 	}

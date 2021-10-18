@@ -70,7 +70,7 @@ public class Loan {
 	}
 
 	
-	@ManyToOne
+	@ManyToOne 
 	public LibraryItem getLibraryItem() {
 		return libraryItem;
 	}

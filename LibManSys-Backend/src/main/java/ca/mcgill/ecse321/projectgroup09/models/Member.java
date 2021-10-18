@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -137,7 +138,7 @@ public class Member extends Account {
 		return this.isVerified;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Loan> getLoans() {
 		return this.loans;
 	}
@@ -146,7 +147,7 @@ public class Member extends Account {
 		this.loans = aLoan;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Booking> getBookings() {
 		return this.bookings;
 	}
