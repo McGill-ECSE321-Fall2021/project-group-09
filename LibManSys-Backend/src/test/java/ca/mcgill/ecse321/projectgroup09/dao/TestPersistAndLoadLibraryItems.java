@@ -43,6 +43,14 @@ public class TestPersistAndLoadLibraryItems {
 	@Autowired
 	private NewspaperRepository newspaperRepository; 
 	
+	@AfterEach
+	public void clearDatabase() {
+		bookRepository.deleteAll();
+		movieRepository.deleteAll();
+		musicAlbumRepository.deleteAll();
+		newspaperRepository.deleteAll();
+		archiveRepository.deleteAll();
+	}
 	
 	@Test
 	public void testPersistAndLoadBook() {
@@ -88,6 +96,43 @@ public class TestPersistAndLoadLibraryItems {
 	@Test
 	public void testPersistAndLoadMovie() {
 		
+		Long libraryItemID = (long) 3; 
+		String Title = "TestMovie";
+		int publishedYear = 2021;
+		int loanablePeriod = 21; 
+		double dailyOverdueFee = 100;
+		ItemStatus itemStatus = ItemStatus.Available;
+		
+		String director = "Test Director";
+		int runtime = 120;
+		String genre = "Horror";
+				
+		Movie movie = new Movie();
+		movie.setlibraryItemID(libraryItemID);
+		movie.setTitle(Title);
+		movie.setPublishedYear(2021);
+		movie.setLoanablePeriod(21);
+		movie.setDailyOverdueFee(50);
+		movie.setItemStatus(itemStatus);
+		
+		movie.setDirector(director);
+		movie.setRuntime(runtime);
+		movie.setGenre(genre);
+		
+		movieRepository.save(movie);
+		
+		movie = null; 
+		movie = movieRepository.findMovieBylibraryItemID(libraryItemID);
+		assertNotNull(movie);
+
+		assertEquals(Title, movie.getTitle());
+		assertEquals(libraryItemID, movie.getlibraryItemID());
+	
+	}
+	
+	@Test
+	public void testPersistAndLoadArchive() {
+		
 		Long libraryItemID = (long) 1; 
 		String Title = "TestMovie";
 		int publishedYear = 2021;
@@ -95,35 +140,27 @@ public class TestPersistAndLoadLibraryItems {
 		double dailyOverdueFee = 100;
 		ItemStatus itemStatus = ItemStatus.Available;
 		
-		String author = "Test Author";
-		String publisher = "Test Publisher"; 
-		String ISBN = "1234-5678-9101";
-		int numPages = 200;
+		String insitution = "Academic";
+				
+		Archive archive = new Archive();
+		archive.setlibraryItemID(libraryItemID);
+		archive.setTitle(Title);
+		archive.setPublishedYear(2021);
+		archive.setLoanablePeriod(21);
+		archive.setDailyOverdueFee(50);
+		archive.setItemStatus(itemStatus);
 		
-		Book book = new Book();
-		book.setlibraryItemID(libraryItemID);
-		book.setTitle(Title);
-		book.setPublishedYear(2021);
-		book.setLoanablePeriod(21);
-		book.setDailyOverdueFee(50);
-		book.setItemStatus(itemStatus);
+		archive.setInstitution(insitution);
 		
-		book.setAuthor(author);
-		book.setPublisher(publisher);
-		book.setISBN(ISBN);
-		book.setNumPages(numPages);
+		archiveRepository.save(archive);
 		
-		bookRepository.save(book);
-		
-		book = null; 
-		book = bookRepository.findBookByISBN(ISBN);
-		assertNotNull(book);
-		
-		book = bookRepository.findBookBylibraryItemID(libraryItemID);
-		assertEquals(ISBN, book.getISBN());
-		assertEquals(libraryItemID, book.getlibraryItemID());
-		
-	}
+		archive = null; 
+		archive = archiveRepository.findArchiveBylibraryItemID(libraryItemID);
+		assertNotNull(archive);
+
+		assertEquals(Title, archive.getTitle());
+		assertEquals(libraryItemID, archive.getlibraryItemID());
 	
+	}
 	
 }
