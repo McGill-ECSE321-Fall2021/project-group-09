@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-LibManSysApplication<LibManSys-Backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ca.mcgill.ecse321.projectgroup09.LibManSysApplication",
+            "projectName": "LibManSys-Backend",
+            "args": ""
+        }
+    ]
+}
