@@ -109,5 +109,37 @@ public class TestPersistAndLoadAccounts {
 		assertEquals(hlName, loadedHL.getFullName());
 		assertTrue(loadedHL.getSchedules().contains(sampleSchedule));
 	}
+	@Test
+	public void testPersistAndLoadMember() {
+		Member m = new Member();
+		m.setActiveLoans(1);
+		m.setAddress("address");
+		m.setAmountOwed(100);
+		m.setBookings(new ArrayList<Booking>());
+		m.setFullName("name name");
+		m.setIsResident(true);
+		m.setIsVerified(true);
+		m.setLibCardNumber(1000101001L);
+		m.setLibraryManagement(lm);
+		Loan loan = new Loan();
+		loan.setMember(m);
+		loan.setLateFees(10);
+		loan.setLibrarian(new Librarian());
+		loan.setLibraryItem(new Book());
+		loan.setloanID(12312L);
+		loan.setLoanStatus(LoanStatus.Active);
+		loan.setBorrowedDate(Date.valueOf(LocalDate.of(2021, 10, 11)));
+		loan.setReturnDate(Date.valueOf(LocalDate.of(2021, 10, 11)));
+		m.setLoans(List.of(loan));
+		m.setPhoneNumber("5141234567");
+		
+		memberRepository.save(m);
+		m = null;
+		m = memberRepository.findMemberByLibCardNumber(1000101001L);
+		
+		assertNotNull(m);
+		assertEquals("name name", m.getFullName());
+		assertTrue(m.getLoans().contains(loan));
+	}
 
 }
