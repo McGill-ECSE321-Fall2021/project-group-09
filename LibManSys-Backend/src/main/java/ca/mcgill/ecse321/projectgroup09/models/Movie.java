@@ -5,6 +5,9 @@ import javax.persistence.Id;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+
+import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
+
 import javax.persistence.Id;
 
 @Entity
@@ -19,73 +22,101 @@ public class Movie extends LibraryItem{
 	  private int runtime;
 	  private String genre;
 
-	  //------------------------
-	  // CONSTRUCTOR
-	  //------------------------
+	  @Override
+		public void setlibraryItemID(Long alibraryItemID) {
+			super.setlibraryItemID(alibraryItemID);
+		}
 
-	  public Movie(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aDirector, int aRuntime, String aGenre)
+		@Override
+		public void setTitle(String aTitle) {
+			super.setTitle(aTitle);
+		}
+
+		@Override
+		public void setPublishedYear(int aPublishedYear) {
+			super.setPublishedYear(aPublishedYear);
+		}
+
+		
+		@Override
+		public void setLoanablePeriod(int aLoanablePeriod) {
+			super.setLoanablePeriod(aLoanablePeriod);
+		}
+
+		
+		@Override
+		public void setDailyOverdueFee(double aDailyOverdueFee) {
+			super.setDailyOverdueFee(aDailyOverdueFee);
+		}
+
+		
+		@Override
+		public void setItemStatus(ItemStatus anItemStatus) {
+			super.setItemStatus(anItemStatus);
+		}
+		
+		@Override
+		public Long getlibraryItemID() {
+			return super.getlibraryItemID();
+		}
+
+		
+		@Override
+		public String getTitle() {
+			return super.getTitle();
+		}
+
+		@Override
+		public int getPublishedYear() {
+			return super.getPublishedYear();
+		}
+
+		
+		@Override
+		public int getLoanablePeriod() {
+			return super.getLoanablePeriod();
+		}
+
+		@Override
+		public double getDailyOverdueFee() {
+			return super.getDailyOverdueFee();
+		}
+
+		@Override
+		public ItemStatus getItemStatus() {
+			return super.getItemStatus();
+		}
+		
+	  public void setDirector(String aDirector)
 	  {
-	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
-	    director = aDirector;
-	    runtime = aRuntime;
-	    genre = aGenre;
+	    this.director = aDirector;
 	  }
 
-	  //------------------------
-	  // INTERFACE
-	  //------------------------
-
-	  public boolean setDirector(String aDirector)
+	  public void setRuntime(int aRuntime)
 	  {
-	    boolean wasSet = false;
-	    director = aDirector;
-	    wasSet = true;
-	    return wasSet;
+		 this.runtime = aRuntime;
 	  }
 
-	  public boolean setRuntime(int aRuntime)
+	  public void setGenre(String aGenre)
 	  {
-	    boolean wasSet = false;
-	    runtime = aRuntime;
-	    wasSet = true;
-	    return wasSet;
+	    this.genre = aGenre;
 	  }
 
-	  public boolean setGenre(String aGenre)
-	  {
-	    boolean wasSet = false;
-	    genre = aGenre;
-	    wasSet = true;
-	    return wasSet;
-	  }
-
-	  @Id
+//	  @Id
 	  public String getDirector()
 	  {
-	    return director;
+	    return this.director;
 	  }
 
 	  public int getRuntime()
 	  {
-	    return runtime;
+	    return this.runtime;
 	  }
 
 	  public String getGenre()
 	  {
-	    return genre;
+	    return this.genre;
 	  }
 
-	  public void delete()
-	  {
-	    super.delete();
-	  }
-
-
-	  public String toString()
-	  {
-	    return super.toString() + "["+
-	            "director" + ":" + getDirector()+ "," +
-	            "runtime" + ":" + getRuntime()+ "," +
-	            "genre" + ":" + getGenre()+ "]";
-	  }
+	 
 }
