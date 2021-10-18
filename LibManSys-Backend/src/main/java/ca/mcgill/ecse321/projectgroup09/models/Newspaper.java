@@ -61,6 +61,7 @@ public class Newspaper extends LibraryItem{
 	    return wasSet;
 	  }
 
+	  @Id
 	  public String getJournalName()
 	  {
 	    return journalName;

@@ -105,7 +105,7 @@ public class Librarian extends Account {
 		return employeeIDNum;
 	}
 
-	/* Code from template association_GetMany */
+	@OneToMany
 	public Schedule getSchedule(int index) {
 		Schedule aSchedule = schedules.get(index);
 		return aSchedule;
@@ -131,7 +131,7 @@ public class Librarian extends Account {
 		return index;
 	}
 
-	/* Code from template association_GetMany */
+	@OneToMany
 	public Loan getLoan(int index) {
 		Loan aLoan = loans.get(index);
 		return aLoan;
@@ -157,7 +157,7 @@ public class Librarian extends Account {
 		return index;
 	}
 
-	/* Code from template association_GetMany */
+	@OneToMany
 	public Booking getBooking(int index) {
 		Booking aBooking = bookings.get(index);
 		return aBooking;

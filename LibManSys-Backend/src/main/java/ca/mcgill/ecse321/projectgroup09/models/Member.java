@@ -1,18 +1,9 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.Id;
 import java.sql.Time;
 import java.util.*;
-
-import javax.persistence.Id;
 
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
 
@@ -124,6 +115,7 @@ public class Member extends Account {
 	}
 	
 	@Id
+	//@Transient
 	public Long getLibCardNumber() {
 		return libCardNumber;
 	}
@@ -153,11 +145,13 @@ public class Member extends Account {
 	}
 
 	/* Code from template attribute_IsBoolean */
+	@Transient
 	public boolean isIsResident() {
 		return isResident;
 	}
 
 	/* Code from template attribute_IsBoolean */
+	@Transient
 	public boolean isIsVerified() {
 		return isVerified;
 	}

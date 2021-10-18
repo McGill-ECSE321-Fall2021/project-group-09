@@ -5,8 +5,10 @@ package ca.mcgill.ecse321.projectgroup09.models;
 import javax.persistence.*;
 import java.util.*;
 
+
 @Table (name = "libraryItem")
 @Entity
+
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "ItemType")
 
@@ -132,7 +134,7 @@ public abstract class LibraryItem {
 		return libraryManagement;
 	}
 
-	@ManyToOne
+	@OneToMany
 	public Loan getLoan() {
 		return loan;
 	}

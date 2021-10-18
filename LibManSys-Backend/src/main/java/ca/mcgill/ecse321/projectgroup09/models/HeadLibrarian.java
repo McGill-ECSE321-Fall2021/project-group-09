@@ -62,7 +62,7 @@ public class HeadLibrarian extends Librarian {
 		return wasSet;
 	}
 	
-	@Id
+	//@Id
 	public Long getmanagerIDNum() {
 		return managerIDNum;
 	}

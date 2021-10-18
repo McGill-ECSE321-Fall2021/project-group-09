@@ -70,7 +70,8 @@ public class MusicAlbum extends LibraryItem {
 	public String getGenre() {
 		return genre;
 	}
-
+	
+	@Id
 	public String getArtist() {
 		return artist;
 	}
