@@ -18,14 +18,14 @@ import ca.mcgill.ecse321.projectgroup09.models.*;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
 /**
  * 
  * @author snehas
  *
  */
 
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class TestPersistAndLoadLibraryItems {
 
 	@Autowired
