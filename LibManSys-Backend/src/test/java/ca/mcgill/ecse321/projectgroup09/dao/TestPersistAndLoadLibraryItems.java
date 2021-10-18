@@ -163,4 +163,41 @@ public class TestPersistAndLoadLibraryItems {
 	
 	}
 	
+	@Test
+	public void testPersistAndLoadNewspaper() {
+		
+		Long libraryItemID = (long) 1; 
+		String Title = "TestMovie";
+		int publishedYear = 2021;
+		int loanablePeriod = 21; 
+		double dailyOverdueFee = 100;
+		ItemStatus itemStatus = ItemStatus.Available;
+		
+		String journalName = "Test Journal";
+		String edition = "First";
+		String chiefEditor = "Test Editor";
+				
+		Newspaper newspaper = new Newspaper();
+		newspaper.setlibraryItemID(libraryItemID);
+		newspaper.setTitle(Title);
+		newspaper.setPublishedYear(2021);
+		newspaper.setLoanablePeriod(21);
+		newspaper.setDailyOverdueFee(50);
+		newspaper.setItemStatus(itemStatus);
+		
+		newspaper.setJournalName(journalName);
+		newspaper.setEdition(edition);
+		newspaper.setChiefEditor(chiefEditor);
+		
+		newspaperRepository.save(newspaper);
+		
+		newspaper = null;
+		newspaper = newspaperRepository.findNewspaperBylibraryItemID(libraryItemID);
+		assertNotNull(newspaper);
+
+		assertEquals(edition, newspaper.getEdition());
+		assertEquals(libraryItemID, newspaper.getlibraryItemID());
+	
+	}
+	
 }
