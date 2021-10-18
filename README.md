@@ -19,11 +19,11 @@ For future references, 'Zarif Ashraf Zidane' & 'Zarif Ashraf' refer to the same 
 
 | Member            | Tasks                                         | Effort (Hours) |
 |-------------------|-----------------------------------------------|----------------|
-|Abdullah Arafat    | Set up Spring, Use Case Diagrams              |         30     |
-|Christos Cunning   | Set up GitHub actions and Wiki                |         30     |
-|Omar Abdelaziz     | Recorded meeting minutes, automation          |         30     |
-|Rajaa Boukhelif    | Set up UML diagram                            |         30     |
-|Sneha Singh        | Set up GitHub project, automation, and READ.me|         30     |
-|Zarif Ashraf Zidane| Set up Heroku, additional UML edits           |         30     |
+|Abdullah Arafat    | Set up Spring, Use Case Diagrams, JUnit tests |         40     |
+|Christos Cunning   | Set up GitHub actions and Wiki                |         40     |
+|Omar Abdelaziz     | Recorded meeting minutes, automation          |         45     |
+|Rajaa Boukhelif    | Set up UML diagram                            |         45     |
+|Sneha Singh        | Set up GitHub project, automation, and READ.me|         45     |
+|Zarif Ashraf Zidane| Set up Heroku, additional UML edits           |         50     |
 
 All members also contributed to the detailed Use Case specifications, Persistence layer, and the test suite. 

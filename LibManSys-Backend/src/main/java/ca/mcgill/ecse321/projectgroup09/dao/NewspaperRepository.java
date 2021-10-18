@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface NewspaperRepository extends CrudRepository<Newspaper, Integer> {
 	
-	Newspaper findNewspaperBylibraryItemID(Integer libraryItemID);
+	Newspaper findNewspaperBylibraryItemID(Long libraryItemID);
 	List<Newspaper> findNewspapersByJournalName(String journalName);
 	List<Newspaper> findNewspapersByChiefEditor(String chiefEditor);
 }

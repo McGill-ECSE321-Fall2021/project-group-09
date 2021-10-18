@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface MovieRepository extends CrudRepository<Movie, Integer> {
 	
-	Movie findMovieBylibraryItemID(Integer libraryItemID);
+	Movie findMovieBylibraryItemID(Long libraryItemID);
 	List<Movie> findMoviesByPublishedYear(int publishedYear);
 	List<Movie> findMoviesByGenre(String genre);
 	List<Movie> findMoviesByDirector(String director);

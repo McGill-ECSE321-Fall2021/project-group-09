@@ -60,6 +60,8 @@ public class TestPersistAndLoadLoan {
 		member.setActiveLoans(activeLoans);
 		member.setIsVerified(verified);
 		member.setFullName(membFullName);
+		member.setLoans(null);
+		member.setBookings(null);
 		memberRepository.save(member);
 
 		
@@ -107,7 +109,7 @@ public class TestPersistAndLoadLoan {
 		libraryItem.setPublishedYear(year);
 		libraryItem.setPublisher(publisher);
 		libraryItem.setTitle(title);
-	//	loan.setLibrarian(librarian);
+		
 		libraryItemRepository.save(libraryItem);
 
 		Loan loan = new Loan();
@@ -116,11 +118,12 @@ public class TestPersistAndLoadLoan {
 		loan.setBorrowedDate(borrowdDate);
 		loan.setReturnDate(returnDate);
 		loan.setLoanStatus(loanStatus);
-	//	loan.setLibrarian(librarian);
+	loan.setLibrarian(librarian);
 		loan.setMember(member);
 		loan.setLibraryItem(libraryItem);
 		
 		loanRepository.save(loan);
+		
 		
 		loan = null;
 		
