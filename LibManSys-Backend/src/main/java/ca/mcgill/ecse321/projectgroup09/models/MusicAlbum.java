@@ -2,10 +2,6 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.Id;
 
 @Entity
 public class MusicAlbum extends LibraryItem {
@@ -24,7 +20,7 @@ public class MusicAlbum extends LibraryItem {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public MusicAlbum(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod,
+	/*public MusicAlbum(Integer aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod,
 			double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aGenre,
 			String aArtist, int aAlbumLengthInMinutes, int aNumSongs) {
 		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus,
@@ -33,7 +29,7 @@ public class MusicAlbum extends LibraryItem {
 		artist = aArtist;
 		albumLengthInMinutes = aAlbumLengthInMinutes;
 		numSongs = aNumSongs;
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE

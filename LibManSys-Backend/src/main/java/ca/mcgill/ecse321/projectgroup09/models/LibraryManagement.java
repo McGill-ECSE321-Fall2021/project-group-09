@@ -1,11 +1,9 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
-import javax.persistence.Id;
+
 import java.util.*;
 
 @Entity
@@ -24,11 +22,11 @@ public class LibraryManagement {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public LibraryManagement() {
+	/*public LibraryManagement() {
 		libraries = new ArrayList<Library>();
 		accounts = new ArrayList<Account>();
 		libraryItems = new ArrayList<LibraryItem>();
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE
@@ -118,11 +116,11 @@ public class LibraryManagement {
 	}
 
 	/* Code from template association_AddManyToOne */
-	public Library addLibrary(String aLibraryName, String aLibraryAddress, String aLibraryPhone, String aLibrarymail,
+	/*public Library addLibrary(String aLibraryName, String aLibraryAddress, String aLibraryPhone, String aLibrarymail,
 			HeadLibrarian aHeadLibrarian, Schedule... allSchedules) {
 		return new Library(aLibraryName, aLibraryAddress, aLibraryPhone, aLibrarymail, this, aHeadLibrarian,
 				allSchedules);
-	}
+	}*/
 
 	public boolean addLibrary(Library aLibrary) {
 		boolean wasAdded = false;

@@ -3,16 +3,10 @@ package ca.mcgill.ecse321.projectgroup09.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Id;
 import java.sql.Time;
 import java.util.*;
 
-@Table(name = "Booking")
+
 @Entity
 public class Booking {
 
@@ -23,7 +17,7 @@ public class Booking {
 	// Booking Attributes
 	private Time bookingStartTime;
 	private Time bookingEndTime;
-	private Long bookingID;
+	private Integer bookingID;
 	private Date bookingDate;
 
 	// Booking Associations
@@ -34,7 +28,7 @@ public class Booking {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Booking(Time aBookingStartTime, Time aBookingEndTime, Long aBookingID, Date aBookingDate, Member aMember) {
+	/*public Booking(Time aBookingStartTime, Time aBookingEndTime, Integer aBookingID, Date aBookingDate, Member aMember) {
 		bookingStartTime = aBookingStartTime;
 		bookingEndTime = aBookingEndTime;
 		bookingID = aBookingID;
@@ -44,7 +38,7 @@ public class Booking {
 			throw new RuntimeException(
 					"Unable to create booking due to member. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
 		}
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE
@@ -64,7 +58,7 @@ public class Booking {
 		return wasSet;
 	}
 
-	public boolean setBookingID(Long aBookingID) {
+	public boolean setBookingID(Integer aBookingID) {
 		boolean wasSet = false;
 		bookingID = aBookingID;
 		wasSet = true;
@@ -86,7 +80,7 @@ public class Booking {
 		return bookingEndTime;
 	}
 	@Id
-	public Long getBookingID() {
+	public Integer getBookingID() {
 		return bookingID;
 	}
 

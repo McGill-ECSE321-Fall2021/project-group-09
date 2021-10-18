@@ -1,14 +1,8 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-import javax.persistence.*;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.persistence.Id;
+
 
 @Entity
 public class HeadLibrarian extends Librarian {
@@ -19,7 +13,7 @@ public class HeadLibrarian extends Librarian {
 
 	// HeadLibrarian Attributes
 
-	private Long managerIDNum;
+	private Integer managerIDNum;
 
 	// HeadLibrarian Associations
 	private Library library;
@@ -28,8 +22,8 @@ public class HeadLibrarian extends Librarian {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public HeadLibrarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
-			String aLibrarianPassword, String aLibrarianUsername, Long aEmployeeIdNum, Long amanagerIDNum,
+	/*public HeadLibrarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
+			String aLibrarianPassword, String aLibrarianUsername, Integer aEmployeeIdNum, Integer amanagerIDNum,
 			Library aLibrary) {
 		super(aFullName, aLibraryManagement, aLibrarianEmail, aLibrarianPassword, aLibrarianUsername, aEmployeeIdNum);
 		managerIDNum = amanagerIDNum;
@@ -41,7 +35,7 @@ public class HeadLibrarian extends Librarian {
 	}
 
 	public HeadLibrarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
-			String aLibrarianPassword, String aLibrarianUsername, Long aEmployeeIdNum, Long amanagerIDNum,
+			String aLibrarianPassword, String aLibrarianUsername, Integer aEmployeeIdNum, Integer amanagerIDNum,
 			String aLibraryNameForLibrary, String aLibraryAddressForLibrary, String aLibraryPhoneForLibrary,
 			String aLibrarymailForLibrary, LibraryManagement aLibraryManagementForLibrary,
 			Schedule... allSchedulesForLibrary) {
@@ -49,13 +43,13 @@ public class HeadLibrarian extends Librarian {
 		managerIDNum = amanagerIDNum;
 		library = new Library(aLibraryNameForLibrary, aLibraryAddressForLibrary, aLibraryPhoneForLibrary,
 				aLibrarymailForLibrary, aLibraryManagementForLibrary, this, allSchedulesForLibrary);
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE
 	// ------------------------
 
-	public boolean setmanagerIDNum(Long amanagerIDNum) {
+	public boolean setmanagerIDNum(Integer amanagerIDNum) {
 		boolean wasSet = false;
 		managerIDNum = amanagerIDNum;
 		wasSet = true;
@@ -63,7 +57,7 @@ public class HeadLibrarian extends Librarian {
 	}
 	
 	//@Id
-	public Long getmanagerIDNum() {
+	public Integer getmanagerIDNum() {
 		return managerIDNum;
 	}
 

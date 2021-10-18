@@ -3,15 +3,12 @@ package ca.mcgill.ecse321.projectgroup09.models;
 //JPA tags added
 
 import javax.persistence.*;
-import java.util.*;
 
 
 @Table (name = "libraryItem")
-@Entity
-
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "ItemType")
-
+@Entity
 public abstract class LibraryItem {
 
 	// ------------------------
@@ -28,7 +25,7 @@ public abstract class LibraryItem {
 
 	// LibraryItem Attributes
 	
-	private Long libraryItemID;
+	private Integer libraryItemID;
 	private String title;
 	private int publishedYear;
 	private int loanablePeriod;
@@ -43,7 +40,7 @@ public abstract class LibraryItem {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public LibraryItem(Long alibraryItemID, String aTitle, int aPublishedYear, int aLoanablePeriod,
+	/*public LibraryItem(Integer alibraryItemID, String aTitle, int aPublishedYear, int aLoanablePeriod,
 			double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement) {
 		libraryItemID = alibraryItemID;
 		title = aTitle;
@@ -56,13 +53,13 @@ public abstract class LibraryItem {
 			throw new RuntimeException(
 					"Unable to create libraryItem due to libraryManagement. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
 		}
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE
 	// ------------------------
 
-	public boolean setlibraryItemID(Long alibraryItemID) {
+	public boolean setlibraryItemID(Integer alibraryItemID) {
 		boolean wasSet = false;
 		libraryItemID = alibraryItemID;
 		wasSet = true;
@@ -105,7 +102,7 @@ public abstract class LibraryItem {
 	}
 	
 	@Id
-	public Long getlibraryItemID() {
+	public Integer getlibraryItemID() {
 		return libraryItemID;
 	}
 

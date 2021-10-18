@@ -2,10 +2,6 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.Id;
 
 @Entity
 public class Newspaper extends LibraryItem{
@@ -25,13 +21,13 @@ public class Newspaper extends LibraryItem{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Newspaper(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aJournalName, String aEdition, String aChiefEditor)
+	  /*public Newspaper(Integer aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aJournalName, String aEdition, String aChiefEditor)
 	  {
 	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    journalName = aJournalName;
 	    edition = aEdition;
 	    chiefEditor = aChiefEditor;
-	  }
+	  }*/
 
 	  //------------------------
 	  // INTERFACE

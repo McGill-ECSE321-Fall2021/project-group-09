@@ -1,12 +1,18 @@
 package ca.mcgill.ecse321.projectgroup09.dao;
 
 import org.springframework.data.repository.CrudRepository;
-import ca.mcgill.ecse321.projectgroup09.models.*;
+import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
+import ca.mcgill.ecse321.projectgroup09.models.Library;
+import ca.mcgill.ecse321.projectgroup09.models.Schedule;
 import java.util.List;
-
-public interface HeadLibrarianRepository extends CrudRepository<HeadLibrarian, Long> {
+/**
+ * 
+ * @author Zarif Ashraf
+ *
+ */
+public interface HeadLibrarianRepository extends CrudRepository<HeadLibrarian, Integer> {
 	
 	List<HeadLibrarian> findHeadLibrarianByLibrary(Library library);
-	HeadLibrarian findHeadLibrarianbyManagerIDNum(Long managerIDNum);
+	HeadLibrarian findHeadLibrarianbyManagerIDNum(Integer managerIDNum);
 	HeadLibrarian findHeadLibrarianBySchedule(Schedule schedule);
 }

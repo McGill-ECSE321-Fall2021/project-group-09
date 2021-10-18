@@ -2,19 +2,10 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Id;
-import java.sql.Time;
 import java.util.*;
-
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
-import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
+
 
 @Entity
 public class Librarian extends Account {
@@ -33,7 +24,7 @@ public class Librarian extends Account {
 	private String librarianEmail;
 	private String librarianPassword;
 	private String librarianUsername;
-	private Long employeeIDNum;
+	private Integer employeeIDNum;
 
 	// Librarian Associations
 	private List<Schedule> schedules;
@@ -44,8 +35,8 @@ public class Librarian extends Account {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Librarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
-			String aLibrarianPassword, String aLibrarianUsername, Long aemployeeIDNum) {
+	/*public Librarian(String aFullName, LibraryManagement aLibraryManagement, String aLibrarianEmail,
+			String aLibrarianPassword, String aLibrarianUsername, Integer aemployeeIDNum) {
 		super(aFullName, aLibraryManagement);
 		librarianEmail = aLibrarianEmail;
 		librarianPassword = aLibrarianPassword;
@@ -54,7 +45,7 @@ public class Librarian extends Account {
 		schedules = new ArrayList<Schedule>();
 		loans = new ArrayList<Loan>();
 		bookings = new ArrayList<Booking>();
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE
@@ -81,7 +72,7 @@ public class Librarian extends Account {
 		return wasSet;
 	}
 
-	public boolean setemployeeIDNum(Long aemployeeIDNum) {
+	public boolean setemployeeIDNum(Integer aemployeeIDNum) {
 		boolean wasSet = false;
 		employeeIDNum = aemployeeIDNum;
 		wasSet = true;
@@ -101,7 +92,7 @@ public class Librarian extends Account {
 	}
 	
 	@Id
-	public Long getemployeeIDNum() {
+	public Integer getemployeeIDNum() {
 		return employeeIDNum;
 	}
 
@@ -193,14 +184,14 @@ public class Librarian extends Account {
 		return 7;
 	}
 
-	/* Code from template association_AddOptionalNToOne */
-	public Schedule addSchedule(Long aScheduledId, Time aOpeningTime, Time aClosingTime, DayofWeek aDayofWeek) {
+	/* Code from template association_AddOptionalNToOne 
+	public Schedule addSchedule(Integer aScheduledId, Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek) {
 		if (numberOfSchedules() >= maximumNumberOfSchedules()) {
 			return null;
 		} else {
-			return new Schedule(aScheduledId, aOpeningTime, aClosingTime, aDayofWeek, this);
+			return new Schedule(aScheduledId, aOpeningTime, aClosingTime, aDayOfWeek, this);
 		}
-	}
+	}*/
 
 	public boolean addSchedule(Schedule aSchedule) {
 		boolean wasAdded = false;

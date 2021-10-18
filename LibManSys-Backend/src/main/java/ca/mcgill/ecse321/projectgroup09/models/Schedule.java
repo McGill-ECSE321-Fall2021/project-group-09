@@ -3,11 +3,6 @@ package ca.mcgill.ecse321.projectgroup09.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.Id;
 import java.sql.*;
 
 @Entity
@@ -16,16 +11,16 @@ public class Schedule {
 	// ------------------------
 	// MEMBER VARIABLES
 	// ------------------------
-	public enum DayofWeek {
+	public enum DayOfWeek {
 		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 	}
 
 	// Schedule Attributes
 
-	private Long scheduleID;
+	private Integer scheduleID;
 	private Time openingTime;
 	private Time closingTime;
-	private DayofWeek dayofWeek;
+	private DayOfWeek dayOfWeek;
 
 	// Schedule Associations
 	private Librarian librarian;
@@ -34,24 +29,24 @@ public class Schedule {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Schedule(Long ascheduleID, Time aOpeningTime, Time aClosingTime, DayofWeek aDayofWeek,
+	/**public Schedule(Integer ascheduleID, Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek,
 			Librarian aLibrarian) {
 		scheduleID = ascheduleID;
 		openingTime = aOpeningTime;
 		closingTime = aClosingTime;
-		dayofWeek = aDayofWeek;
+		dayOfWeek = aDayOfWeek;
 		boolean didAddLibrarian = setLibrarian(aLibrarian);
 		if (!didAddLibrarian) {
 			throw new RuntimeException(
 					"Unable to create schedule due to librarian. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
 		}
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE
 	// ------------------------
 
-	public boolean setscheduleID(Long ascheduleID) {
+	public boolean setscheduleID(Integer ascheduleID) {
 		boolean wasSet = false;
 		scheduleID = ascheduleID;
 		wasSet = true;
@@ -72,15 +67,15 @@ public class Schedule {
 		return wasSet;
 	}
 
-	public boolean setDayofWeek(DayofWeek aDayofWeek) {
+	public boolean setDayofWeek(DayOfWeek aDayOfWeek) {
 		boolean wasSet = false;
-		dayofWeek = aDayofWeek;
+		dayOfWeek = aDayOfWeek;
 		wasSet = true;
 		return wasSet;
 	}
 	
 	@Id
-	public long getscheduleID() {
+	public Integer getscheduleID() {
 		return scheduleID;
 	}
 
@@ -92,8 +87,8 @@ public class Schedule {
 		return closingTime;
 	}
 
-	public DayofWeek getDayofWeek() {
-		return dayofWeek;
+	public DayOfWeek getDayOfWeek() {
+		return dayOfWeek;
 	}
 
 	/* Code from template association_GetOne */
@@ -148,8 +143,8 @@ public class Schedule {
 						? !getClosingTime().equals(this) ? getClosingTime().toString().replaceAll("  ", "    ") : "this"
 						: "null")
 				+ System.getProperties().getProperty("line.separator") + "  " + "dayofWeek" + "="
-				+ (getDayofWeek() != null
-						? !getDayofWeek().equals(this) ? getDayofWeek().toString().replaceAll("  ", "    ") : "this"
+				+ (getDayOfWeek() != null
+						? !getDayOfWeek().equals(this) ? getDayOfWeek().toString().replaceAll("  ", "    ") : "this"
 						: "null")
 				+ System.getProperties().getProperty("line.separator") + "  " + "librarian = "
 				+ (getLibrarian() != null ? Integer.toHexString(System.identityHashCode(getLibrarian())) : "null");

@@ -6,10 +6,14 @@ import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import java.util.List;
-
-public interface LoanRepository extends CrudRepository<Loan, Long> {
+/**
+ * 
+ * @author Zarif Ashraf
+ *
+ */
+public interface LoanRepository extends CrudRepository<Loan, Integer> {
 	
-	Loan findLoanByLoanID(Long loanID);
+	Loan findLoanByLoanID(Integer loanID);
 	List<Loan> findLoanByMember(Member member);
 	List<Loan> findLoanByLibrarian(Librarian librarian);
 	List<Loan> findLoanByLibraryItem(LibraryItem libraryItem);

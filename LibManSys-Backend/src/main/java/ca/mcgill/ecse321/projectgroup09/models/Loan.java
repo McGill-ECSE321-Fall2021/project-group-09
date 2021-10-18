@@ -3,7 +3,7 @@ package ca.mcgill.ecse321.projectgroup09.models;
 import javax.persistence.*;
 
 import java.util.Date;
-// Omar
+
 
 @Entity
 public class Loan {
@@ -25,7 +25,7 @@ public class Loan {
 	private Date returnDate;
 	private double lateFees;
 	private LoanStatus loanStatus;
-	private Long loanID;
+	private Integer loanID;
 
 	// Loan Associations
 	private LibraryItem libraryItem;
@@ -91,7 +91,7 @@ public class Loan {
 		return wasSet;
 	}
 	
-	public boolean setloanID(Long aloanID) {
+	public boolean setloanID(Integer aloanID) {
 		boolean wasSet = false;
 		loanID = aloanID;
 		wasSet = true;
@@ -99,7 +99,7 @@ public class Loan {
 	}
 
 	@Id
-	public Long getLoanID() {
+	public Integer getLoanID() {
 		return loanID;
 	}
 	

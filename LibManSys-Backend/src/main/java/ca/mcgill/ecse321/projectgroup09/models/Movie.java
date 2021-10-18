@@ -2,10 +2,6 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.Id;
 
 @Entity
 public class Movie extends LibraryItem{
@@ -23,13 +19,13 @@ public class Movie extends LibraryItem{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Movie(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aDirector, int aRuntime, String aGenre)
+	  /*public Movie(Integer aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aDirector, int aRuntime, String aGenre)
 	  {
 	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    director = aDirector;
 	    runtime = aRuntime;
 	    genre = aGenre;
-	  }
+	  }*/
 
 	  //------------------------
 	  // INTERFACE

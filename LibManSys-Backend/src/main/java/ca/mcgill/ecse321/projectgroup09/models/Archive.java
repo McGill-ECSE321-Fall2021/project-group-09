@@ -2,10 +2,7 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.Id;
+
 
 @Entity
 public class Archive extends LibraryItem{
@@ -21,11 +18,11 @@ public class Archive extends LibraryItem{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Archive(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aInstitution)
+	  /*public Archive(Integer aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aInstitution)
 	  {
 	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    institution = aInstitution;
-	  }
+	  }*/
 
 	  //------------------------
 	  // INTERFACE

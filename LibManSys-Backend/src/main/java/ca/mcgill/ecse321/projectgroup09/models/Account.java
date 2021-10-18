@@ -27,14 +27,14 @@ public abstract class Account {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Account(String aFullName, LibraryManagement aLibraryManagement) {
+	/*public Account(String aFullName, LibraryManagement aLibraryManagement) {
 		fullName = aFullName;
 		boolean didAddLibraryManagement = setLibraryManagement(aLibraryManagement);
 		if (!didAddLibraryManagement) {
 			throw new RuntimeException(
 					"Unable to create account due to libraryManagement. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
 		}
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE

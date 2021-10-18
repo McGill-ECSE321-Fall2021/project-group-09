@@ -3,16 +3,15 @@ package ca.mcgill.ecse321.projectgroup09.models;
 //JPA tags added
  
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/*
- * @author Omar :) :)
- */
-
-@Table(name = "library")
 @Entity
 public class Library
 {
@@ -25,7 +24,7 @@ public class Library
 	  private String libraryName;
 	  private String libraryAddress;
 	  private String libraryPhone;
-	  private String librarymail;
+	  private String libraryEmail;
 
 	  //Library Associations
 	  private LibraryManagement libraryManagement;
@@ -37,12 +36,12 @@ public class Library
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Library(String aLibraryName, String aLibraryAddress, String aLibraryPhone, String aLibrarymail, LibraryManagement aLibraryManagement, HeadLibrarian aHeadLibrarian, Schedule... allSchedules)
+	  /*public Library(String aLibraryName, String aLibraryAddress, String aLibraryPhone, String aLibraryEmail, LibraryManagement aLibraryManagement, HeadLibrarian aHeadLibrarian, Schedule... allSchedules)
 	  {
 	    libraryName = aLibraryName;
 	    libraryAddress = aLibraryAddress;
 	    libraryPhone = aLibraryPhone;
-	    librarymail = aLibrarymail;
+	    libraryEmail = aLibraryEmail;
 	    boolean didAddLibraryManagement = setLibraryManagement(aLibraryManagement);
 	    if (!didAddLibraryManagement)
 	    {
@@ -62,12 +61,12 @@ public class Library
 	    headLibrarian = aHeadLibrarian;
 	  }
 
-	  public Library(String aLibraryName, String aLibraryAddress, String aLibraryPhone, String aLibrarymail, LibraryManagement aLibraryManagement, String aFullNameForHeadLibrarian, LibraryManagement aLibraryManagementForHeadLibrarian, String aLibrarianEmailForHeadLibrarian, String aLibrarianPasswordForHeadLibrarian, String aLibrarianUsernameForHeadLibrarian, Long aEmployeeIdNumForHeadLibrarian, Long aManagerIdNumForHeadLibrarian, Schedule... allSchedules)
+	  public Library(String aLibraryName, String aLibraryAddress, String aLibraryPhone, String aLibraryEmail, LibraryManagement aLibraryManagement, String aFullNameForHeadLibrarian, LibraryManagement aLibraryManagementForHeadLibrarian, String aLibrarianEmailForHeadLibrarian, String aLibrarianPasswordForHeadLibrarian, String aLibrarianUsernameForHeadLibrarian, Integer aEmployeeIdNumForHeadLibrarian, Integer aManagerIdNumForHeadLibrarian, Schedule... allSchedules)
 	  {
 	    libraryName = aLibraryName;
 	    libraryAddress = aLibraryAddress;
 	    libraryPhone = aLibraryPhone;
-	    librarymail = aLibrarymail;
+	    libraryEmail = aLibraryEmail;
 	    boolean didAddLibraryManagement = setLibraryManagement(aLibraryManagement);
 	    if (!didAddLibraryManagement)
 	    {
@@ -76,7 +75,7 @@ public class Library
 	    bookings = new ArrayList<Booking>();
 	    schedules = new ArrayList<Schedule>();
 	    headLibrarian = new HeadLibrarian(aFullNameForHeadLibrarian, aLibraryManagementForHeadLibrarian, aLibrarianEmailForHeadLibrarian, aLibrarianPasswordForHeadLibrarian, aLibrarianUsernameForHeadLibrarian, aEmployeeIdNumForHeadLibrarian, aManagerIdNumForHeadLibrarian, this);
-	  }
+	  }*/
 
 	  //------------------------
 	  // INTERFACE
@@ -106,10 +105,10 @@ public class Library
 	    return wasSet;
 	  }
 
-	  public boolean setLibrarymail(String aLibrarymail)
+	  public boolean setLibraryEmail(String aLibraryEmail)
 	  {
 	    boolean wasSet = false;
-	    librarymail = aLibrarymail;
+	    libraryEmail = aLibraryEmail;
 	    wasSet = true;
 	    return wasSet;
 	  }
@@ -130,9 +129,9 @@ public class Library
 	    return libraryPhone;
 	  }
 
-	  public String getLibrarymail()
+	  public String getLibraryEmail()
 	  {
-	    return librarymail;
+	    return libraryEmail;
 	  }
 	 
 	  @OneToOne
@@ -350,7 +349,7 @@ public class Library
 	            "libraryName" + ":" + getLibraryName()+ "," +
 	            "libraryAddress" + ":" + getLibraryAddress()+ "," +
 	            "libraryPhone" + ":" + getLibraryPhone()+ "," +
-	            "librarymail" + ":" + getLibrarymail()+ "]" + System.getProperties().getProperty("line.separator") +
+	            "libraryEmail" + ":" + getLibraryEmail()+ "]" + System.getProperties().getProperty("line.separator") +
 	            "  " + "libraryManagement = "+(getLibraryManagement()!=null?Integer.toHexString(System.identityHashCode(getLibraryManagement())):"null") + System.getProperties().getProperty("line.separator") +
 	            "  " + "headLibrarian = "+(getHeadLibrarian()!=null?Integer.toHexString(System.identityHashCode(getHeadLibrarian())):"null");
 	  }

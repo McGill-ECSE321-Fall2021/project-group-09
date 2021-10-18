@@ -1,11 +1,7 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.Id;
+
 
 @Entity
 public class Book extends LibraryItem{
@@ -24,14 +20,14 @@ public class Book extends LibraryItem{
 	  // CONSTRUCTOR
 	  //------------------------
 
-	  public Book(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aAuthor, String aPublisher, String aIsbn, int aNumPages)
+	  /*public Book(Integer aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aAuthor, String aPublisher, String aIsbn, int aNumPages)
 	  {
-	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
+	    //super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
 	    author = aAuthor;
 	    publisher = aPublisher;
 	    isbn = aIsbn;
 	    numPages = aNumPages;
-	  }
+	  }*/
 
 	  //------------------------
 	  // INTERFACE

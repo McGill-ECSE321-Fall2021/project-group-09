@@ -1,11 +1,17 @@
 package ca.mcgill.ecse321.projectgroup09.dao;
 
 import org.springframework.data.repository.CrudRepository;
-import ca.mcgill.ecse321.projectgroup09.models.*;
-
-public interface LibrarianRepository extends CrudRepository<Librarian, Long> {
+import ca.mcgill.ecse321.projectgroup09.models.Loan;
+import ca.mcgill.ecse321.projectgroup09.models.Librarian;
+import ca.mcgill.ecse321.projectgroup09.models.Schedule;
+/**
+ * 
+ * @author Zarif Ashraf
+ *
+ */
+public interface LibrarianRepository extends CrudRepository<Librarian, Integer> {
 	
 	Librarian findLibrarianByLoan(Loan loan);
 	Librarian findLibrarianBySchedule(Schedule schedule);
-	Librarian findLibrarianbyEmployeeIdNum(Long employeeIDNum);
+	Librarian findLibrarianbyEmployeeIdNum(Integer employeeIDNum);
 }

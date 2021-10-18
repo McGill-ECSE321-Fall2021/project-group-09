@@ -1,8 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.*;
-
-import java.sql.Time;
 import java.util.*;
 
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
@@ -31,7 +29,7 @@ public class Member extends Account {
 
 	// Member Attributes
 	
-	private Long libCardNumber;
+	private Integer libCardNumber;
 	private String address;
 	private boolean isResident;
 	private String phoneNumber;
@@ -47,7 +45,7 @@ public class Member extends Account {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public Member(String aFullName, LibraryManagement aLibraryManagement, Long aLibCardNumber, String aAddress,
+	/*public Member(String aFullName, LibraryManagement aLibraryManagement, Integer aLibCardNumber, String aAddress,
 			boolean aIsResident, String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerified) {
 		super(aFullName, aLibraryManagement);
 		libCardNumber = aLibCardNumber;
@@ -59,13 +57,13 @@ public class Member extends Account {
 		isVerified = aIsVerified;
 		loans = new ArrayList<Loan>();
 		bookings = new ArrayList<Booking>();
-	}
+	}*/
 
 	// ------------------------
 	// INTERFACE
 	// ------------------------
 
-	public boolean setLibCardNumber(Long aLibCardNumber) {
+	public boolean setLibCardNumber(Integer aLibCardNumber) {
 		boolean wasSet = false;
 		libCardNumber = aLibCardNumber;
 		wasSet = true;
@@ -116,7 +114,7 @@ public class Member extends Account {
 	
 	@Id
 	//@Transient
-	public Long getLibCardNumber() {
+	public Integer getLibCardNumber() {
 		return libCardNumber;
 	}
 
@@ -299,9 +297,9 @@ public class Member extends Account {
 	}
 
 	/* Code from template association_AddManyToOne */
-	public Booking addBooking(Time aBookingStartTime, Time aBookingEndTime, Long aBookingID, Date aBookingDate) {
+	/*public Booking addBooking(Time aBookingStartTime, Time aBookingEndTime, Integer aBookingID, Date aBookingDate) {
 		return new Booking(aBookingStartTime, aBookingEndTime, aBookingID, aBookingDate, this);
-	}
+	}*/
 
 	public boolean addBooking(Booking aBooking) {
 		boolean wasAdded = false;

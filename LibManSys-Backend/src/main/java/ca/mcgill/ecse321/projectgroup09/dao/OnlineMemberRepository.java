@@ -2,9 +2,13 @@ package ca.mcgill.ecse321.projectgroup09.dao;
 
 import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
-
-public interface OnlineMemberRepository extends CrudRepository<OnlineMember, Long> {
+/**
+ * 
+ * @author Zarif Ashraf
+ *
+ */
+public interface OnlineMemberRepository extends CrudRepository<OnlineMember, Integer> {
 	
-	OnlineMember findOnlineMemberByLibCardNumber(Long libCardNumber);
+	OnlineMember findOnlineMemberByLibCardNumber(Integer libCardNumber);
 	OnlineMember findOnlineMemberByUserName(String memberUsername);
 }

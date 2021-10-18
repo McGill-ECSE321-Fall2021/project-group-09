@@ -3,10 +3,14 @@ package ca.mcgill.ecse321.projectgroup09.dao;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import ca.mcgill.ecse321.projectgroup09.models.Archive;
-
-public interface ArchiveRepository extends CrudRepository<Archive, Long> {
+/**
+ * 
+ * @author Zarif Ashraf
+ *
+ */
+public interface ArchiveRepository extends CrudRepository<Archive, Integer> {
 	
-	Archive findArchiveBylibraryItemID(Long libraryItemID);
+	Archive findArchiveBylibraryItemID(Integer libraryItemID);
 	List<Archive> findArchivesByInstitution(String institution);
 	
 }
