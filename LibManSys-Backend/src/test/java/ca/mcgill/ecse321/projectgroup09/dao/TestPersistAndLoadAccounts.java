@@ -141,5 +141,43 @@ public class TestPersistAndLoadAccounts {
 		assertEquals("name name", m.getFullName());
 		assertTrue(m.getLoans().contains(loan));
 	}
+	@Test
+	public void testPersistAndLoadOnlineMember() {
+		OnlineMember om = new OnlineMember();
+		om.setActiveLoans(1);
+		om.setAddress("address");
+		om.setAmountOwed(100);
+		om.setBookings(new ArrayList<Booking>());
+		om.setFullName("name name");
+		om.setIsResident(true);
+		om.setIsVerified(true);
+		om.setLibCardNumber(1000101002L);
+		om.setLibraryManagement(lm);
+		
+		om.setMemberEmail("member email");
+		om.setMemberPassword("member password");
+		om.setMemberUsername("member username");
+		
+		Loan loan = new Loan();
+		loan.setMember(om);
+		loan.setLateFees(10);
+		loan.setLibrarian(new Librarian());
+		loan.setLibraryItem(new Book());
+		loan.setloanID(12312L);
+		loan.setLoanStatus(LoanStatus.Active);
+		loan.setBorrowedDate(Date.valueOf(LocalDate.of(2021, 10, 11)));
+		loan.setReturnDate(Date.valueOf(LocalDate.of(2021, 10, 11)));
+		om.setLoans(List.of(loan));
+		om.setPhoneNumber("5141234567");
+		
+		memberRepository.save(om);
+		om = null;
+		om = onlineMemberRepository.findOnlineMemberByLibCardNumber(1000101002L);
+		
+		assertNotNull(om);
+		assertEquals("name name", om.getFullName());
+		assertTrue(om.getLoans().contains(loan));
+	}
+
 
 }
