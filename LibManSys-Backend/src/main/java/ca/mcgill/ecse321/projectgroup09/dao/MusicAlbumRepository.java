@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface MusicAlbumRepository extends CrudRepository<MusicAlbum, Integer> {
 	
-	MusicAlbum findMusicAlbumBylibraryItemID(Integer libraryItemID);
+	MusicAlbum findMusicAlbumBylibraryItemID(Long libraryItemID);
 	List<MusicAlbum> findMusicAlbumByGenre(String genre);
 	List<MusicAlbum> findMusicAlbumByArtist(String artist);
 }

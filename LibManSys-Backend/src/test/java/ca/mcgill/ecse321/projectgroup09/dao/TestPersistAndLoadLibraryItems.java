@@ -70,9 +70,9 @@ public class TestPersistAndLoadLibraryItems {
 		Book book = new Book();
 		book.setlibraryItemID(libraryItemID);
 		book.setTitle(Title);
-		book.setPublishedYear(2021);
-		book.setLoanablePeriod(21);
-		book.setDailyOverdueFee(50);
+		book.setPublishedYear(publishedYear);
+		book.setLoanablePeriod(loanablePeriod);
+		book.setDailyOverdueFee(dailyOverdueFee);
 		book.setItemStatus(itemStatus);
 		
 		book.setAuthor(author);
@@ -110,9 +110,9 @@ public class TestPersistAndLoadLibraryItems {
 		Movie movie = new Movie();
 		movie.setlibraryItemID(libraryItemID);
 		movie.setTitle(Title);
-		movie.setPublishedYear(2021);
-		movie.setLoanablePeriod(21);
-		movie.setDailyOverdueFee(50);
+		movie.setPublishedYear(publishedYear);
+		movie.setLoanablePeriod(loanablePeriod);
+		movie.setDailyOverdueFee(dailyOverdueFee);
 		movie.setItemStatus(itemStatus);
 		
 		movie.setDirector(director);
@@ -145,9 +145,9 @@ public class TestPersistAndLoadLibraryItems {
 		Archive archive = new Archive();
 		archive.setlibraryItemID(libraryItemID);
 		archive.setTitle(Title);
-		archive.setPublishedYear(2021);
-		archive.setLoanablePeriod(21);
-		archive.setDailyOverdueFee(50);
+		archive.setPublishedYear(publishedYear);
+		archive.setLoanablePeriod(loanablePeriod);
+		archive.setDailyOverdueFee(dailyOverdueFee);
 		archive.setItemStatus(itemStatus);
 		
 		archive.setInstitution(insitution);
@@ -180,9 +180,9 @@ public class TestPersistAndLoadLibraryItems {
 		Newspaper newspaper = new Newspaper();
 		newspaper.setlibraryItemID(libraryItemID);
 		newspaper.setTitle(Title);
-		newspaper.setPublishedYear(2021);
-		newspaper.setLoanablePeriod(21);
-		newspaper.setDailyOverdueFee(50);
+		newspaper.setPublishedYear(publishedYear);
+		newspaper.setLoanablePeriod(loanablePeriod);
+		newspaper.setDailyOverdueFee(dailyOverdueFee);
 		newspaper.setItemStatus(itemStatus);
 		
 		newspaper.setJournalName(journalName);
@@ -197,6 +197,46 @@ public class TestPersistAndLoadLibraryItems {
 
 		assertEquals(edition, newspaper.getEdition());
 		assertEquals(libraryItemID, newspaper.getlibraryItemID());
+	
+	}
+	
+	@Test
+	public void testPersistAndLoadMusicAlbum() {
+		
+		Long libraryItemID = (long) 30; 
+		String Title = "TestMovie";
+		int publishedYear = 2021;
+		int loanablePeriod = 21; 
+		double dailyOverdueFee = 100;
+		ItemStatus itemStatus = ItemStatus.Available;
+		
+		String genre = "Rock";
+		String artist = "Test Band";
+		int albumLenghtInMinutes = 45;
+		int numSongs = 10;
+				
+		MusicAlbum musicAlbum = new MusicAlbum();
+		musicAlbum.setlibraryItemID(libraryItemID);
+		musicAlbum.setTitle(Title);
+		musicAlbum.setPublishedYear(publishedYear);
+		musicAlbum.setLoanablePeriod(loanablePeriod);
+		musicAlbum.setDailyOverdueFee(dailyOverdueFee);
+		musicAlbum.setItemStatus(itemStatus);
+		
+		musicAlbum.setGenre(genre);
+		musicAlbum.setArtist(artist);
+		musicAlbum.setAlbumLengthInMinutes(albumLenghtInMinutes);
+		musicAlbum.setNumSongs(numSongs);
+		
+		
+		musicAlbumRepository.save(musicAlbum);
+		musicAlbum = null;
+		
+		musicAlbum = musicAlbumRepository.findMusicAlbumBylibraryItemID(libraryItemID);
+		assertNotNull(musicAlbum);
+
+		assertEquals(artist, musicAlbum.getArtist());
+		assertEquals(dailyOverdueFee, musicAlbum.getDailyOverdueFee());
 	
 	}
 	
