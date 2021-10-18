@@ -85,42 +85,7 @@ public class TestLibManSysPersistence {
 		onlineMemberRepository.deleteAll();
 		scheduleRepository.deleteAll();
 		
-	}
-	//Christos tests commented out since the member class has been changed
-	/*
-	@Test
-	void testPersistAndLoadUser() {
-		String name = "Test User";
-		Member account = new Member();
-		account.setName(name);
-		
-		memberRepository.save(account);
-		// Set user to null so we can test loading it again
-		account = null;
-		
-		// try to load user from repository
-		account = memberRepository.findUserByName(name);
-		
-		assertNotNull(account);
-		assertEquals(name, account.getName());
-	}
-	
-	@Test
-	void testPersistUsersWithSameName() {
-		String name1 = "Test Name";
-		String name2 = "Test Name";
-		Member account1 = new Member();
-		Member account2 = new Member();
-		account1.setName(name1);
-		account2.setName(name2);
-		
-		memberRepository.saveAll(List.of(account1, account2));
-		
-		//System.out.println(accountRepository.findUserByName(name1));
-		// findByUserName returns first instance of account with name = name1
-		
-	}*/
-	
+	}	
 	
 	/**
 	 * @author Zarif Ashraf
