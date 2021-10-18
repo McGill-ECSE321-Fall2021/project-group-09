@@ -15,5 +15,5 @@ public interface HeadLibrarianRepository extends CrudRepository<HeadLibrarian, I
 	List<HeadLibrarian> findHeadLibrarianByLibrary(Library library);
 	HeadLibrarian findHeadLibrarianByManagerIDNum(Long managerIDNum);
 	HeadLibrarian findHeadLibrarianBySchedules(Schedule schedule);
-	//HeadLibrarian findByManagerId(Long hlManagerId);
+//	HeadLibrarian findByAccountID(Long hlManagerId);
 }
