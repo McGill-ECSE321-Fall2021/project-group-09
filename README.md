@@ -19,7 +19,7 @@ For future references, 'Zarif Ashraf Zidane' & 'Zarif Ashraf' refer to the same 
 
 | Member            | Tasks                                         | Effort (Hours) |
 |-------------------|-----------------------------------------------|----------------|
-|Abdullah Arafat    | Set up Spring, Use Case Diagrams              |         40     |
+|Abdullah Arafat    | Set up Spring, Use Case Diagrams, JUnit tests |         40     |
 |Christos Cunning   | Set up GitHub actions and Wiki                |         40     |
 |Omar Abdelaziz     | Recorded meeting minutes, automation          |         45     |
 |Rajaa Boukhelif    | Set up UML diagram                            |         45     |
