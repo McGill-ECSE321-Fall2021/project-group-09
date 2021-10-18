@@ -15,7 +15,7 @@ public class Book extends LibraryItem{
 	  //Book Attributes
 	  private String author;
 	  private String publisher;
-	  private String isbn;
+	  private String ISBN;
 	  private int numPages;
 
 	  @Override
@@ -95,7 +95,7 @@ public class Book extends LibraryItem{
 
 	  public void setISBN(String aISBN)
 	  {
-	   this.isbn = aISBN;
+	   this.ISBN = aISBN;
 	  }
 
 	  public void setNumPages(int aNumPages)
@@ -116,7 +116,7 @@ public class Book extends LibraryItem{
 
 	  public String getISBN()
 	  {
-	    return this.isbn;
+	    return this.ISBN;
 	  }
 
 	  public int getNumPages()
