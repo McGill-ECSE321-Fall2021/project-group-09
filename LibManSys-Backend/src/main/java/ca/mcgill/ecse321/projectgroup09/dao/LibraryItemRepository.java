@@ -11,9 +11,9 @@ import java.util.List;
  *
  */
 public interface LibraryItemRepository extends CrudRepository<LibraryItem, Integer> {
-	
-	LibraryItem findLibraryItemByLibraryItemID(Integer libraryItemID);
-	LibraryItem findLibraryItemByLoan(Loan loan);
+
+	LibraryItem findLibraryItemByLibraryItemID(Long libraryItemID);
+	LibraryItem findLibraryItemByLoans(Loan loan);
 	List<LibraryItem> findLibraryItemByItemStatus(ItemStatus itemstatus);
 	List<LibraryItem> findLibraryItemByTitle(String title);
 	

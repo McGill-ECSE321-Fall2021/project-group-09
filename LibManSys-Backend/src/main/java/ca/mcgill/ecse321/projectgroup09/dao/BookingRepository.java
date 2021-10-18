@@ -14,6 +14,6 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
 	
 	List<Booking> findByMember(Member member);
 	List<Booking> findByLibrarian(Librarian librarian);
-	Booking findBookingByBookingID(Integer bookingID);
+	Booking findBookingByBookingID(Long bookingID);
 	
 }

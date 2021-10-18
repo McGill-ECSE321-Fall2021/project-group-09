@@ -10,8 +10,8 @@ import ca.mcgill.ecse321.projectgroup09.models.Schedule;
  *
  */
 public interface LibrarianRepository extends CrudRepository<Librarian, Integer> {
-	
-	Librarian findLibrarianByLoan(Loan loan);
-	Librarian findLibrarianBySchedule(Schedule schedule);
-	Librarian findLibrarianbyEmployeeIdNum(Integer employeeIDNum);
+
+	Librarian findLibrarianByLoans(Loan loan);
+	Librarian findLibrarianBySchedules(Schedule schedule);
+	Librarian findLibrarianByEmployeeIDNum(Long employeeIDNum);
 }

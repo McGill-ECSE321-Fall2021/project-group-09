@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface LoanRepository extends CrudRepository<Loan, Integer> {
 	
-	Loan findLoanByLoanID(Integer loanID);
+	Loan findLoanByLoanID(Long loanID);
 	List<Loan> findLoanByMember(Member member);
 	List<Loan> findLoanByLibrarian(Librarian librarian);
 	List<Loan> findLoanByLibraryItem(LibraryItem libraryItem);

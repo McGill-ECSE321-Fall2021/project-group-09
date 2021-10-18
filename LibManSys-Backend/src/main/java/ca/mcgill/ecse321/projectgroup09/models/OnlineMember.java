@@ -25,61 +25,83 @@ public class OnlineMember extends Member{
 	    memberPassword = aMemberPassword;
 	    memberUsername = aMemberUsername;
 	  }*/
+	  
+	  @Override
+		public void setFullName(String aFullName) {
+			super.setFullName(aFullName); 
+		}
+		
+		@Override
+		public String getFullName() {
+			return super.getFullName();
+		}
 
-	  //------------------------
-	  // INTERFACE
-	  //------------------------
+		@Override
+		public void setLibCardNumber(Long aLibCardNumber) {
+			super.setLibCardNumber(aLibCardNumber);
+		}
 
-	  public boolean setMemberEmail(String aMemberEmail)
+		@Override
+		public void setAddress(String anAddress) {
+			super.setAddress(anAddress);
+		}
+
+		@Override
+		public void setIsResident(boolean aIsResident) {
+			super.setIsResident(aIsResident);
+		}
+
+		@Override
+		public void setPhoneNumber(String aPhoneNumber) {
+			super.setPhoneNumber(aPhoneNumber);
+		}
+
+		@Override
+		public void setAmountOwed(double anAmountOwed) {
+			super.setAmountOwed(anAmountOwed);
+		}
+
+		@Override
+		public void setActiveLoans(int anActiveLoans) {
+			this.setActiveLoans(anActiveLoans);
+		}
+
+		@Override
+		public void setIsVerified(boolean aIsVerified) {
+			this.setIsVerified(aIsVerified);
+		}
+		
+	  
+	  public void setMemberEmail(String aMemberEmail)
 	  {
-	    boolean wasSet = false;
-	    memberEmail = aMemberEmail;
-	    wasSet = true;
-	    return wasSet;
+	    this.memberEmail = aMemberEmail; 
 	  }
 
-	  public boolean setMemberPassword(String aMemberPassword)
+	  public void setMemberPassword(String aMemberPassword)
 	  {
-	    boolean wasSet = false;
-	    memberPassword = aMemberPassword;
-	    wasSet = true;
-	    return wasSet;
+	    this.memberPassword = aMemberPassword;
 	  }
 
-	  public boolean setMemberUsername(String aMemberUsername)
+	  public void setMemberUsername(String aMemberUsername)
 	  {
-	    boolean wasSet = false;
-	    memberUsername = aMemberUsername;
-	    wasSet = true;
-	    return wasSet;
+		this.memberUsername = aMemberUsername;
 	  }
 
 	  public String getMemberEmail()
 	  {
-	    return memberEmail;
+	    return this.memberEmail;
 	  }
 
 	  public String getMemberPassword()
 	  {
-	    return memberPassword;
+	    return this.memberPassword;
 	  }
 
 	  public String getMemberUsername()
 	  {
-	    return memberUsername;
+	    return this.memberUsername;
 	  }
 
-	  public void delete()
-	  {
-	    super.delete();
-	  }
-
-
-	  public String toString()
-	  {
-	    return super.toString() + "["+
-	            "memberEmail" + ":" + getMemberEmail()+ "," +
-	            "memberPassword" + ":" + getMemberPassword()+ "," +
-	            "memberUsername" + ":" + getMemberUsername()+ "]";
-	  }
+	  
+	
 }

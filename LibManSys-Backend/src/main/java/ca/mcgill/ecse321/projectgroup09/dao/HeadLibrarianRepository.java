@@ -13,6 +13,6 @@ import java.util.List;
 public interface HeadLibrarianRepository extends CrudRepository<HeadLibrarian, Integer> {
 	
 	List<HeadLibrarian> findHeadLibrarianByLibrary(Library library);
-	HeadLibrarian findHeadLibrarianbyManagerIDNum(Integer managerIDNum);
-	HeadLibrarian findHeadLibrarianBySchedule(Schedule schedule);
+	HeadLibrarian findHeadLibrarianByManagerIDNum(Long managerIDNum);
+	HeadLibrarian findHeadLibrarianBySchedules(Schedule schedule);
 }

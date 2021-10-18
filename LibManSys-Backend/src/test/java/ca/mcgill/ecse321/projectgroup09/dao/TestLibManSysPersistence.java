@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ca.mcgill.ecse321.projectgroup09.models.*;
-import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayOfWeek;
+import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -92,7 +92,7 @@ public class TestLibManSysPersistence {
 	 */
 	@Test
 	public void testPersistAndLoadLibrary() {
-		Integer bookingID = 9;
+		Long bookingID = 9L;
 		Date bookingDate = java.sql.Date.valueOf(LocalDate.of(2021, Month.OCTOBER, 18));
 		Time bookingStartTime = java.sql.Time.valueOf(LocalTime.of(11, 35));
 		Time bookingEndTime = java.sql.Time.valueOf(LocalTime.of(13, 25));
@@ -115,7 +115,7 @@ public class TestLibManSysPersistence {
 		library.setLibraryAddress(libraryAddress);
 		library.setLibraryPhone(libraryPhone);
 		library.setLibraryEmail(libraryEmail);
-		library.addBooking(booking);
+		//library.addBooking(booking);
 		
 		libraryRepository.save(library);
 
@@ -135,7 +135,7 @@ public class TestLibManSysPersistence {
 	public void testPersistAndLoadSchedule() {
 		String fullName = "FullName";
 		String librarianUsername = "TestLibrarianUsername";
-		Integer employeeIDNum = 9;
+		Long employeeIDNum = 9L;
 		String librarianPassword = "TestLibrarianPassword";
 		String librarianEmail = "TestLibraryEmail";
 		
@@ -148,8 +148,8 @@ public class TestLibManSysPersistence {
 		
 		librarianRepository.save(librarian);
 		
-		Integer scheduleID = 9;
-		DayOfWeek dayOfWeek = DayOfWeek.Monday;
+		Long scheduleID = 9L;
+		DayofWeek dayOfWeek = DayofWeek.Monday;
 		Time openingTime = java.sql.Time.valueOf(LocalTime.of(11, 35));
 		Time closingTime = java.sql.Time.valueOf(LocalTime.of(13, 25));
 		
@@ -178,7 +178,7 @@ public class TestLibManSysPersistence {
 	public void testPersistAndLoadBooking() {
 		String fullName = "FullName";
 		String librarianUsername = "TestLibrarianUsername";
-		Integer employeeIDNum = 9;
+		Long employeeIDNum = 9L;
 		String librarianPassword = "TestLibrarianPassword";
 		String librarianEmail = "TestLibraryEmail";
 		
@@ -191,7 +191,7 @@ public class TestLibManSysPersistence {
 		
 		librarianRepository.save(librarian);
 		
-		Integer bookingID = 9;
+		Long bookingID = 9L;
 		Date bookingDate = java.sql.Date.valueOf(LocalDate.of(2021, Month.OCTOBER, 18));
 		Time bookingStartTime = java.sql.Time.valueOf(LocalTime.of(11, 35));
 		Time bookingEndTime = java.sql.Time.valueOf(LocalTime.of(13, 25));

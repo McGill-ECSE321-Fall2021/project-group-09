@@ -1,26 +1,24 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
+import java.sql.Time;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.sql.*;
 
 @Entity
 public class Schedule {
-
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
-	public enum DayOfWeek {
+	
+	public enum DayofWeek {
 		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 	}
 
 	// Schedule Attributes
 
-	private Integer scheduleID;
+	private Long scheduleID;
 	private Time openingTime;
 	private Time closingTime;
-	private DayOfWeek dayOfWeek;
+	private DayofWeek dayofWeek;
 
 	// Schedule Associations
 	private Librarian librarian;
@@ -45,108 +43,205 @@ public class Schedule {
 	// ------------------------
 	// INTERFACE
 	// ------------------------
-
-	public boolean setscheduleID(Integer ascheduleID) {
-		boolean wasSet = false;
-		scheduleID = ascheduleID;
-		wasSet = true;
-		return wasSet;
+	
+	public void setscheduleID(Long aScheduleID) {
+		this.scheduleID = aScheduleID; 
 	}
 
-	public boolean setOpeningTime(Time aOpeningTime) {
-		boolean wasSet = false;
-		openingTime = aOpeningTime;
-		wasSet = true;
-		return wasSet;
+	public void setOpeningTime(Time anOpeningTime) {
+		this.openingTime = anOpeningTime;
 	}
 
-	public boolean setClosingTime(Time aClosingTime) {
-		boolean wasSet = false;
-		closingTime = aClosingTime;
-		wasSet = true;
-		return wasSet;
+	public void setClosingTime(Time aClosingTime) {
+		this.closingTime = aClosingTime;
 	}
 
-	public boolean setDayofWeek(DayOfWeek aDayOfWeek) {
-		boolean wasSet = false;
-		dayOfWeek = aDayOfWeek;
-		wasSet = true;
-		return wasSet;
+	public void setDayofWeek(DayofWeek aDayOfWeek) {
+		this.dayofWeek = aDayOfWeek; 
 	}
 	
 	@Id
-	public Integer getscheduleID() {
-		return scheduleID;
+	public long getscheduleID() {
+		return this.scheduleID;
 	}
 
 	public Time getOpeningTime() {
-		return openingTime;
+		return this.openingTime;
 	}
 
 	public Time getClosingTime() {
-		return closingTime;
+		return this.closingTime;
 	}
 
-	public DayOfWeek getDayOfWeek() {
-		return dayOfWeek;
+	public DayofWeek getDayofWeek() {
+		return this.dayofWeek;
 	}
 
-	/* Code from template association_GetOne */
-	@ManyToOne(optional=false)
+	@ManyToOne
 	public Librarian getLibrarian() {
-		return librarian;
+		return this.librarian;
 	}
 
-	/* Code from template association_SetOneToAtMostN */
-	public boolean setLibrarian(Librarian aLibrarian) {
-		boolean wasSet = false;
-		// Must provide librarian to schedule
-		if (aLibrarian == null) {
-			return wasSet;
+	public void setLibrarian(Librarian aLibrarian) {
+		this.librarian = aLibrarian;
 		}
 
-		// librarian already at maximum (7)
-		if (aLibrarian.numberOfSchedules() >= Librarian.maximumNumberOfSchedules()) {
-			return wasSet;
-		}
-
-		Librarian existingLibrarian = librarian;
-		librarian = aLibrarian;
-		if (existingLibrarian != null && !existingLibrarian.equals(aLibrarian)) {
-			boolean didRemove = existingLibrarian.removeSchedule(this);
-			if (!didRemove) {
-				librarian = existingLibrarian;
-				return wasSet;
-			}
-		}
-		librarian.addSchedule(this);
-		wasSet = true;
-		return wasSet;
-	}
-
-	public void delete() {
-		Librarian placeholderLibrarian = librarian;
-		this.librarian = null;
-		if (placeholderLibrarian != null) {
-			placeholderLibrarian.removeSchedule(this);
-		}
-	}
-
-	public String toString() {
-		return super.toString() + "[" + "scheduleID" + ":" + getscheduleID() + "]"
-				+ System.getProperties().getProperty("line.separator") + "  " + "openingTime" + "="
-				+ (getOpeningTime() != null
-						? !getOpeningTime().equals(this) ? getOpeningTime().toString().replaceAll("  ", "    ") : "this"
-						: "null")
-				+ System.getProperties().getProperty("line.separator") + "  " + "closingTime" + "="
-				+ (getClosingTime() != null
-						? !getClosingTime().equals(this) ? getClosingTime().toString().replaceAll("  ", "    ") : "this"
-						: "null")
-				+ System.getProperties().getProperty("line.separator") + "  " + "dayofWeek" + "="
-				+ (getDayOfWeek() != null
-						? !getDayOfWeek().equals(this) ? getDayOfWeek().toString().replaceAll("  ", "    ") : "this"
-						: "null")
-				+ System.getProperties().getProperty("line.separator") + "  " + "librarian = "
-				+ (getLibrarian() != null ? Integer.toHexString(System.identityHashCode(getLibrarian())) : "null");
-	}
 }
+
+//package ca.mcgill.ecse321.projectgroup09.models;
+//
+//import javax.persistence.Entity;
+//import javax.persistence.Id;
+//import javax.persistence.ManyToOne;
+//
+//import java.util.Set;
+//import javax.persistence.CascadeType;
+//import javax.persistence.OneToMany;
+//import javax.persistence.Id;
+//import java.sql.*;
+//
+//@Entity
+//public class Schedule {
+//
+//	// ------------------------
+//	// MEMBER VARIABLES
+//	// ------------------------
+//	public enum DayofWeek {
+//		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+//	}
+//
+//	// Schedule Attributes
+//
+//	private Long scheduleID;
+//	private Time openingTime;
+//	private Time closingTime;
+//	private DayofWeek dayofWeek;
+//
+//	// Schedule Associations
+//	private Librarian librarian;
+//
+//	// ------------------------
+//	// CONSTRUCTOR
+//	// ------------------------
+//
+//	public Schedule(Long ascheduleID, Time aOpeningTime, Time aClosingTime, DayofWeek aDayofWeek,
+//			Librarian aLibrarian) {
+//		scheduleID = ascheduleID;
+//		openingTime = aOpeningTime;
+//		closingTime = aClosingTime;
+//		dayofWeek = aDayofWeek;
+//		boolean didAddLibrarian = setLibrarian(aLibrarian);
+//		if (!didAddLibrarian) {
+//			throw new RuntimeException(
+//					"Unable to create schedule due to librarian. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+//		}
+//	}
+//
+//	// ------------------------
+//	// INTERFACE
+//	// ------------------------
+//
+//	public boolean setscheduleID(Long ascheduleID) {
+//		boolean wasSet = false;
+//		scheduleID = ascheduleID;
+//		wasSet = true;
+//		return wasSet;
+//	}
+//
+//	public boolean setOpeningTime(Time aOpeningTime) {
+//		boolean wasSet = false;
+//		openingTime = aOpeningTime;
+//		wasSet = true;
+//		return wasSet;
+//	}
+//
+//	public boolean setClosingTime(Time aClosingTime) {
+//		boolean wasSet = false;
+//		closingTime = aClosingTime;
+//		wasSet = true;
+//		return wasSet;
+//	}
+//
+//	public boolean setDayofWeek(DayofWeek aDayofWeek) {
+//		boolean wasSet = false;
+//		dayofWeek = aDayofWeek;
+//		wasSet = true;
+//		return wasSet;
+//	}
+//	
+//	@Id
+//	public long getscheduleID() {
+//		return scheduleID;
+//	}
+//
+//	public Time getOpeningTime() {
+//		return openingTime;
+//	}
+//
+//	public Time getClosingTime() {
+//		return closingTime;
+//	}
+//
+//	public DayofWeek getDayofWeek() {
+//		return dayofWeek;
+//	}
+//
+//	/* Code from template association_GetOne */
+//	@ManyToOne(optional=false)
+//	public Librarian getLibrarian() {
+//		return librarian;
+//	}
+//
+//	/* Code from template association_SetOneToAtMostN */
+//	public boolean setLibrarian(Librarian aLibrarian) {
+//		boolean wasSet = false;
+//		// Must provide librarian to schedule
+//		if (aLibrarian == null) {
+//			return wasSet;
+//		}
+//
+//		// librarian already at maximum (7)
+//		if (aLibrarian.numberOfSchedules() >= Librarian.maximumNumberOfSchedules()) {
+//			return wasSet;
+//		}
+//
+//		Librarian existingLibrarian = librarian;
+//		librarian = aLibrarian;
+//		if (existingLibrarian != null && !existingLibrarian.equals(aLibrarian)) {
+//			boolean didRemove = existingLibrarian.removeSchedule(this);
+//			if (!didRemove) {
+//				librarian = existingLibrarian;
+//				return wasSet;
+//			}
+//		}
+//		librarian.addSchedule(this);
+//		wasSet = true;
+//		return wasSet;
+//	}
+//
+//	public void delete() {
+//		Librarian placeholderLibrarian = librarian;
+//		this.librarian = null;
+//		if (placeholderLibrarian != null) {
+//			placeholderLibrarian.removeSchedule(this);
+//		}
+//	}
+//
+//	public String toString() {
+//		return super.toString() + "[" + "scheduleID" + ":" + getscheduleID() + "]"
+//				+ System.getProperties().getProperty("line.separator") + "  " + "openingTime" + "="
+//				+ (getOpeningTime() != null
+//						? !getOpeningTime().equals(this) ? getOpeningTime().toString().replaceAll("  ", "    ") : "this"
+//						: "null")
+//				+ System.getProperties().getProperty("line.separator") + "  " + "closingTime" + "="
+//				+ (getClosingTime() != null
+//						? !getClosingTime().equals(this) ? getClosingTime().toString().replaceAll("  ", "    ") : "this"
+//						: "null")
+//				+ System.getProperties().getProperty("line.separator") + "  " + "dayofWeek" + "="
+//				+ (getDayofWeek() != null
+//						? !getDayofWeek().equals(this) ? getDayofWeek().toString().replaceAll("  ", "    ") : "this"
+//						: "null")
+//				+ System.getProperties().getProperty("line.separator") + "  " + "librarian = "
+//				+ (getLibrarian() != null ? Integer.toHexString(System.identityHashCode(getLibrarian())) : "null");
+//	}
+//}

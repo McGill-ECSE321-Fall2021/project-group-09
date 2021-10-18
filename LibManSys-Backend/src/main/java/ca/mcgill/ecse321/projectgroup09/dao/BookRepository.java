@@ -9,6 +9,6 @@ import ca.mcgill.ecse321.projectgroup09.models.Book;
  */
 public interface BookRepository extends CrudRepository<Book, Integer> {
 	
-	Book findBookBylibraryItemID(Integer libraryItemID);
-	Book findBookByisbn(String isbn);
+	Book findBookBylibraryItemID(Long libraryItemID);
+	Book findBookByISBN(String ISBN);
 }

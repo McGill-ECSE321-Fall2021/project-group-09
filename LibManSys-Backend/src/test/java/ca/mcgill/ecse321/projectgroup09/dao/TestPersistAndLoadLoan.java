@@ -38,7 +38,7 @@ public class TestPersistAndLoadLoan {
 	@Test
 	public void testPersistAndLoadLoan() {
 		
-		Integer LibCardNumber =  2;
+		Long LibCardNumber =  2L;
 		Member member = new Member();
 		String address = "12 B";
 		Boolean isResident = true;
@@ -58,7 +58,7 @@ public class TestPersistAndLoadLoan {
 		
 		//librarianRepository.save(librarian);
 		
-		Integer loanID = 1;
+		Long loanID = 1L;
 		Date borrowdDate = java.sql.Date.valueOf("2021-02-01");
 		Date returnDate = java.sql.Date.valueOf("2021-02-08");
 		Double lateFees= 0.10;
@@ -70,7 +70,7 @@ public class TestPersistAndLoadLoan {
 		String publisher = "Boukhelif";
 		String isbn = "111";
 		Integer numPages = 2;
-		Integer libraryItemID = 5;
+		Long libraryItemID = 5L;
 		String title = "myBook";
 		Integer year = 2000;
 		Integer period = 2;
@@ -78,7 +78,7 @@ public class TestPersistAndLoadLoan {
 		
 		libraryItem.setAuthor(author);
 		libraryItem.setPublisher(publisher);
-		libraryItem.setIsbn(isbn);
+		libraryItem.setISBN(isbn);
 		libraryItem.setNumPages(numPages);
 		libraryItem.setlibraryItemID(libraryItemID);
 		libraryItem.setDailyOverdueFee(overdue);

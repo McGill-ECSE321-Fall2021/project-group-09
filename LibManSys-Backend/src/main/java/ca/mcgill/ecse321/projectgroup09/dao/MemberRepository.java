@@ -11,10 +11,10 @@ import java.util.List;
  *
  */
 public interface MemberRepository extends CrudRepository<Member, Integer> {
-	
-	Member findMemberByLibCardNumber(Integer libCardNumber);
-	Member findMemberByBooking(Booking booking);
-	Member findMemberByLoan(Loan loan);
-	List<Member> findMemberByVerificationStatus(boolean isVerified);
-	List<Member> findMemberByResidencyStatus(boolean isResident);
+
+	Member findMemberByLibCardNumber(Long libCardNumber);
+	Member findMemberByBookings(Booking booking);
+	Member findMemberByLoans(Loan loan);
+	List<Member> findMemberByisVerified(boolean isVerified);
+	List<Member> findMemberByisResident(boolean isResident);
 }

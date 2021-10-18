@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 public class Movie extends LibraryItem{
@@ -26,62 +25,102 @@ public class Movie extends LibraryItem{
 	    runtime = aRuntime;
 	    genre = aGenre;
 	  }*/
+	  
+	  @Override
+		public void setlibraryItemID(Long alibraryItemID) {
+			super.setlibraryItemID(alibraryItemID);
+		}
 
-	  //------------------------
-	  // INTERFACE
-	  //------------------------
+		@Override
+		public void setTitle(String aTitle) {
+			super.setTitle(aTitle);
+		}
 
-	  public boolean setDirector(String aDirector)
+		@Override
+		public void setPublishedYear(int aPublishedYear) {
+			super.setPublishedYear(aPublishedYear);
+		}
+
+		
+		@Override
+		public void setLoanablePeriod(int aLoanablePeriod) {
+			super.setLoanablePeriod(aLoanablePeriod);
+		}
+
+		
+		@Override
+		public void setDailyOverdueFee(double aDailyOverdueFee) {
+			super.setDailyOverdueFee(aDailyOverdueFee);
+		}
+
+		
+		@Override
+		public void setItemStatus(ItemStatus anItemStatus) {
+			super.setItemStatus(anItemStatus);
+		}
+		
+		@Override
+		public Long getlibraryItemID() {
+			return super.getlibraryItemID();
+		}
+
+		
+		@Override
+		public String getTitle() {
+			return super.getTitle();
+		}
+
+		@Override
+		public int getPublishedYear() {
+			return super.getPublishedYear();
+		}
+
+		
+		@Override
+		public int getLoanablePeriod() {
+			return super.getLoanablePeriod();
+		}
+
+		@Override
+		public double getDailyOverdueFee() {
+			return super.getDailyOverdueFee();
+		}
+
+		@Override
+		public ItemStatus getItemStatus() {
+			return super.getItemStatus();
+		}
+		
+	  public void setDirector(String aDirector)
 	  {
-	    boolean wasSet = false;
-	    director = aDirector;
-	    wasSet = true;
-	    return wasSet;
+	    this.director = aDirector;
 	  }
 
-	  public boolean setRuntime(int aRuntime)
+	  public void setRuntime(int aRuntime)
 	  {
-	    boolean wasSet = false;
-	    runtime = aRuntime;
-	    wasSet = true;
-	    return wasSet;
+		 this.runtime = aRuntime;
 	  }
 
-	  public boolean setGenre(String aGenre)
+	  public void setGenre(String aGenre)
 	  {
-	    boolean wasSet = false;
-	    genre = aGenre;
-	    wasSet = true;
-	    return wasSet;
+	    this.genre = aGenre;
 	  }
 
-	  @Id
+//	  @Id
 	  public String getDirector()
 	  {
-	    return director;
+	    return this.director;
 	  }
 
 	  public int getRuntime()
 	  {
-	    return runtime;
+	    return this.runtime;
 	  }
 
 	  public String getGenre()
 	  {
-	    return genre;
+	    return this.genre;
 	  }
 
-	  public void delete()
-	  {
-	    super.delete();
-	  }
-
-
-	  public String toString()
-	  {
-	    return super.toString() + "["+
-	            "director" + ":" + getDirector()+ "," +
-	            "runtime" + ":" + getRuntime()+ "," +
-	            "genre" + ":" + getGenre()+ "]";
-	  }
+	 
 }
