@@ -1,6 +1,8 @@
 package ca.mcgill.ecse321.projectgroup09.dao;
 
+import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.Library;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryManagement;
+import ca.mcgill.ecse321.projectgroup09.models.Loan;
+import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
+import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 
@@ -44,7 +51,10 @@ public class TestPersistAndLoadAccounts {
 	
 	@AfterEach
 	public void clearAccountsDatabase() {
-		
+		headLibrarianRepository.deleteAll();
+		librarianRepository.deleteAll();
+		memberRepository.deleteAll();
+		onlineMemberRepository.deleteAll();
 	}
 	
 	@Test
