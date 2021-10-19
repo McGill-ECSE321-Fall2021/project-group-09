@@ -5,26 +5,11 @@ import javax.persistence.Entity;
 @Entity
 public class OnlineMember extends Member{
 
-	  //------------------------
-	  // MEMBER VARIABLES
-	  //------------------------
-
 	  //OnlineMember Attributes
 	  private String memberEmail;
 	  private String memberPassword;
 	  private String memberUsername;
 
-	  //------------------------
-	  // CONSTRUCTOR
-	  //------------------------
-
-	  /*public OnlineMember(String aFullName, LibraryManagement aLibraryManagement, Integer aLibCardNumber, String aAddress, boolean aIsResident, String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerified, String aMemberEmail, String aMemberPassword, String aMemberUsername)
-	  {
-	    super(aFullName, aLibraryManagement, aLibCardNumber, aAddress, aIsResident, aPhoneNumber, aAmountOwed, aActiveLoans, aIsVerified);
-	    memberEmail = aMemberEmail;
-	    memberPassword = aMemberPassword;
-	    memberUsername = aMemberUsername;
-	  }*/
 	  
 	  @Override
 		public void setFullName(String aFullName) {
@@ -35,30 +20,56 @@ public class OnlineMember extends Member{
 		public String getFullName() {
 			return super.getFullName();
 		}
+		
 
 		@Override
 		public void setLibCardNumber(Long aLibCardNumber) {
 			super.setLibCardNumber(aLibCardNumber);
+		}
+		
+		@Override
+		public Long getLibCardNumber() {
+			return super.getLibCardNumber();
 		}
 
 		@Override
 		public void setAddress(String anAddress) {
 			super.setAddress(anAddress);
 		}
+		
+		@Override
+		public String getAddress() {
+			return super.getAddress();
+		}
 
 		@Override
 		public void setIsResident(boolean aIsResident) {
 			super.setIsResident(aIsResident);
+		}
+		
+		@Override
+		public boolean getIsResident() {
+			return super.getIsResident();
 		}
 
 		@Override
 		public void setPhoneNumber(String aPhoneNumber) {
 			super.setPhoneNumber(aPhoneNumber);
 		}
+		
+		@Override
+		public String getPhoneNumber() {
+			return super.getPhoneNumber();
+		}
 
 		@Override
 		public void setAmountOwed(double anAmountOwed) {
 			super.setAmountOwed(anAmountOwed);
+		}
+		
+		@Override
+		public double getAmountOwed() {
+			return super.getAmountOwed();
 		}
 
 		@Override
@@ -67,8 +78,18 @@ public class OnlineMember extends Member{
 		}
 
 		@Override
+		public int getActiveLoans() {
+			return super.getActiveLoans();
+		}
+		
+		@Override
 		public void setIsVerified(boolean aIsVerified) {
 			this.setIsVerified(aIsVerified);
+		}
+		
+		@Override
+		public boolean getIsVerified() {
+			return super.getIsVerified();
 		}
 		
 	  

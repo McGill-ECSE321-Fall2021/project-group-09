@@ -12,24 +12,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class Member extends Account {
 
-	// Christos code for testing removed and changed for Umple
-	/*
-	 * private String name;
-	 * 
-	 * public void setName(String value) { this.name = value; }
-	 * 
-	 * @Id public String getName() { return this.name; }
-	 */
 
-	// ------------------------
-	// ENUMERATIONS
-	// ------------------------
+	public enum LoanStatus { Active, Renewed, Overdue, Closed }
 
-	// public enum LoanStatus { Active, Renewed, Overdue, Closed }
-
-	// ------------------------
-	// MEMBER VARIABLES
-	// ------------------------
 
 	// Member Attributes
 	
@@ -48,28 +33,7 @@ public class Member extends Account {
 	@ElementCollection
 	private List<Booking> bookings;
 
-	// ------------------------
-	// CONSTRUCTOR
-	// ------------------------
 
-	/*public Member(String aFullName, LibraryManagement aLibraryManagement, Integer aLibCardNumber, String aAddress,
-			boolean aIsResident, String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerified) {
-		super(aFullName, aLibraryManagement);
-		libCardNumber = aLibCardNumber;
-		address = aAddress;
-		isResident = aIsResident;
-		phoneNumber = aPhoneNumber;
-		amountOwed = aAmountOwed;
-		activeLoans = aActiveLoans;
-		isVerified = aIsVerified;
-		loans = new ArrayList<Loan>();
-		bookings = new ArrayList<Booking>();
-	}*/
-
-	// ------------------------
-	// INTERFACE
-	// ------------------------
-	
 	@Override
 	public void setFullName(String aFullName) {
 		super.setFullName(aFullName); 

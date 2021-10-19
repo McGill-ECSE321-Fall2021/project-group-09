@@ -5,27 +5,12 @@ import javax.persistence.Entity;
 @Entity
 public class Movie extends LibraryItem{
 
-	  //------------------------
-	  // MEMBER VARIABLES
-	  //------------------------
-
 	  //Movie Attributes
 	  private String director;
 	  private int runtime;
 	  private String genre;
 
-	  //------------------------
-	  // CONSTRUCTOR
-	  //------------------------
-
-	  /*public Movie(Integer aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus, LibraryManagement aLibraryManagement, String aDirector, int aRuntime, String aGenre)
-	  {
-	    super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod, aDailyOverdueFee, aItemStatus, aLibraryManagement);
-	    director = aDirector;
-	    runtime = aRuntime;
-	    genre = aGenre;
-	  }*/
-	  
+	
 	  @Override
 		public void setlibraryItemID(Long alibraryItemID) {
 			super.setlibraryItemID(alibraryItemID);
@@ -106,7 +91,6 @@ public class Movie extends LibraryItem{
 	    this.genre = aGenre;
 	  }
 
-//	  @Id
 	  public String getDirector()
 	  {
 	    return this.director;

@@ -11,7 +11,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,47 +24,16 @@ import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 @SpringBootTest
 public class TestLibManSysPersistence {
 
-	/*@Autowired
-	private AccountRepository accountRepository; 
-	
-	@Autowired
-	private ArchiveRepository  archiveRepository;*/
-	
+
 	@Autowired
 	private BookingRepository bookingRepository; 
-	
-	/*@Autowired
-	private BookRepository bookRepository;
-	
-	@Autowired
-	private HeadLibrarianRepository headLibrarianRepository;*/
 	
 	@Autowired
 	private LibrarianRepository librarianRepository; 
 	
-	/*@Autowired
-	private LibraryItemRepository libraryItemRepository;*/
-	
 	@Autowired
 	private LibraryRepository libraryRepository; 
 	
-	/*@Autowired
-	private LoanRepository loanRepository;  
-	
-	@Autowired
-	private MemberRepository memberRepository;
-	
-	@Autowired
-	private MovieRepository movieRepository; 
-	
-	@Autowired
-	private MusicAlbumRepository musicAlbumRepository; 
-	
-	@Autowired
-	private NewspaperRepository newspaperRepository; 
-	
-	@Autowired
-	private OnlineMemberRepository onlineMemberRepository;*/
 	
 	@Autowired
 	private ScheduleRepository scheduleRepository; 
@@ -84,20 +52,10 @@ public class TestLibManSysPersistence {
 	
 	@AfterEach
 	public void clearDatabase() {
-		//accountRepository.deleteAll();
-		//archiveRepository.deleteAll();
+
 		bookingRepository.deleteAll();
-		//bookRepository.deleteAll();
-		//headLibrarianRepository.deleteAll();
 		librarianRepository.deleteAll();
-		//libraryItemRepository.deleteAll();
 		libraryRepository.deleteAll();
-		//loanRepository.deleteAll();
-		//memberRepository.deleteAll();
-		//movieRepository.deleteAll();
-		//musicAlbumRepository.deleteAll();
-		//newspaperRepository.deleteAll();
-		//onlineMemberRepository.deleteAll();
 		scheduleRepository.deleteAll();
 		
 	}	

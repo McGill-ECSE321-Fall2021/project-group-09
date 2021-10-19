@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.projectgroup09.dao;
 import java.sql.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
@@ -47,8 +46,9 @@ public class TestPersistAndLoadLoan {
 		bookRepository.deleteAll();
 		accountRepository.deleteAll();
 	}
+	
 	@Test
-	//@Transactional
+	@Transactional
 	public void testPersistAndLoadLoan() {
 		// Account Attributes 
 		String fullname = "Testing Name";
