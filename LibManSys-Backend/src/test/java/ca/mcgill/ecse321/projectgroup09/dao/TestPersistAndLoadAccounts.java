@@ -252,7 +252,6 @@ public class TestPersistAndLoadAccounts {
 	@Test
 	public void testPersistAndLoadOnlineMember() {
 		// Account Attributes 
-		//String fullname = "Testing Name";
 
 		//Librarian Attributes
 		String librarianFullName = "Test Librarian";
@@ -330,6 +329,25 @@ public class TestPersistAndLoadAccounts {
 		om.setPhoneNumber("5141234567");
 		loanRepository.save(loan);
 		
+		om = null; 
+		om = onlineMemberRepository.findOnlineMemberByLibCardNumber(1000101002L);
+
+		book = null;
+		book = bookRepository.findBookByISBN(ISBN);
+
+		librarian = null; 
+		librarian = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+
+		loan = null;
+		loan = loanRepository.findLoanByLoanID(12312L);
+
+		assertNotNull(om);
+		assertNotNull(book); 
+		assertNotNull(librarian);
+		assertNotNull(loan); 
+	
+		assertEquals(om.getFullName(), loan.getMember().getFullName());
+		assertEquals(loan.getLibraryItem().getTitle(), book.getTitle());
 	}
 }
 
