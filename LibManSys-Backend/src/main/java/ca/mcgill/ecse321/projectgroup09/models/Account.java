@@ -28,17 +28,17 @@ public abstract class Account {
 		return fullName;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	public LibraryManagement getLibraryManagement() {
 		return libraryManagement;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Booking> getBookings() {
 		return this.bookings;
 	}
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
 	}
