@@ -74,7 +74,7 @@ public class OnlineMember extends Member{
 
 		@Override
 		public void setActiveLoans(int anActiveLoans) {
-			this.setActiveLoans(anActiveLoans);
+			super.setActiveLoans(anActiveLoans);
 		}
 
 		@Override
@@ -84,7 +84,7 @@ public class OnlineMember extends Member{
 		
 		@Override
 		public void setIsVerified(boolean aIsVerified) {
-			this.setIsVerified(aIsVerified);
+			super.setIsVerified(aIsVerified);
 		}
 		
 		@Override
