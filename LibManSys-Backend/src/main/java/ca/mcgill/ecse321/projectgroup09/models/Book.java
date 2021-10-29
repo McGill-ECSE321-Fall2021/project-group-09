@@ -11,6 +11,15 @@ public class Book extends LibraryItem{
 	  private String publisher;
 	  private String ISBN;
 	  private int numPages;
+	  
+	  // Default No Arg Constructor
+	  public Book() {
+		  
+	  }
+	  
+	  public Book (Long alibraryItemId) {
+		  super(alibraryItemId);
+	  }
 
 	  @Override
 		public void setlibraryItemID(Long alibraryItemID) {

@@ -1,10 +1,12 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 //import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
@@ -25,7 +27,7 @@ public class Member extends Account {
 	private double amountOwed;
 	private int activeLoans;
 	private boolean isVerified;
-
+	
 	// Member Associations
 	@ElementCollection
 	private List<Loan> loans;
@@ -33,6 +35,20 @@ public class Member extends Account {
 	@ElementCollection
 	private List<Booking> bookings;
 
+	@ElementCollection
+	private List<LibraryItem> reserved;
+
+	// Member Default Constructor, Entities must have a no-arg constructor
+	public Member() {
+		
+	}
+	
+	public Member (Long aLibCardNumber) {
+		this.loans = new ArrayList<Loan>();
+		this.bookings = new ArrayList<Booking>();
+		this.reserved = new ArrayList<LibraryItem>();
+		this.libCardNumber = aLibCardNumber;
+	}
 
 	@Override
 	public void setFullName(String aFullName) {
@@ -120,6 +136,14 @@ public class Member extends Account {
 		this.bookings = aBooking;
 	}
 
+	@OneToMany(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
+	public List<LibraryItem> getReserved() {
+		return this.reserved;
+	}
+	
+	public void setReserved(List<LibraryItem> aReserved) {
+		this.reserved = aReserved;
+	}
 }
 
 //package ca.mcgill.ecse321.projectgroup09.models;

@@ -28,9 +28,21 @@ public abstract class LibraryItem {
 
 	// LibraryItem Associations
 	private LibraryManagement libraryManagement;
+	private Member member; // Member who is currently reserving this library item.
+	
 	@ElementCollection
 	private List<Loan> loans;
 
+	// Default No Arg Constructor
+	public LibraryItem() {
+		
+	}
+	
+	// Constructor to inialize item with ID
+	public LibraryItem(Long aLibraryItemID) {
+		this.libraryItemID = aLibraryItemID;
+	}
+	
 	public void setlibraryItemID(Long alibraryItemID) {
 		this.libraryItemID = alibraryItemID;
 	}
@@ -90,6 +102,10 @@ public abstract class LibraryItem {
 		return this.libraryManagement;
 	}
 
+	@ManyToOne
+	public Member getMember() {
+		return member;
+	}
 	
 	public void setLibraryManagement(LibraryManagement aLibraryManagement) {
 		this.libraryManagement = aLibraryManagement;
@@ -99,6 +115,10 @@ public abstract class LibraryItem {
 	public void setLoans(List<Loan> aNewLoan) {
 		this.loans = aNewLoan;
 	}
-
+	
+	public void setMember(Member aMember) {
+		this.member = aMember;
+	}
+	
 }
 
