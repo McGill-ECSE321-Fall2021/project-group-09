@@ -20,9 +20,14 @@ public class TestPersistenceArchive {
 	@Autowired
 	private ArchiveRepository  archiveRepository;
 	
+	@Autowired 
+	private LibraryItemRepository libraryItemRepository;
+	
 	@AfterEach
 	public void clearDatabase() {
+		
 		archiveRepository.deleteAll();
+		libraryItemRepository.deleteAll();
 	}
 	
 	@Test

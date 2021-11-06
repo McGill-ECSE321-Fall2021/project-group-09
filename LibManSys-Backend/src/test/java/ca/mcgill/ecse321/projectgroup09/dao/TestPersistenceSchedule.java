@@ -35,8 +35,9 @@ public class TestPersistenceSchedule {
 	
 	@AfterEach
 	public void clearDatabase() {
-		librarianRepository.deleteAll();
+		
 		scheduleRepository.deleteAll();
+		librarianRepository.deleteAll();
 	}	
 
 	/**

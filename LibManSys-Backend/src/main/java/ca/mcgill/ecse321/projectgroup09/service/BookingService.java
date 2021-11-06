@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +41,7 @@ public class BookingService { // service class for booking out the library for e
 	 * @return
 	 */
 	
-	
+	@Transactional
 	public Booking createBooking (Time startTime, Time endTime, Long bookingID, Date bookingDate, OnlineMember onlineMember) {
 	
 		//checks for account go here?
@@ -76,18 +75,41 @@ public class BookingService { // service class for booking out the library for e
 		
 	}
 	
-	
-	public List<Booking> getBookingsByMember(OnlineMember onlineMember) {
-		List<Booking> bookings = new ArrayList<Booking>();
-		
-		
-		return bookings;
+
+	@Transactional
+	public Booking getBookingByID(Long ID) {
+		Booking booking = bookingRepository.findBookingByBookingID(ID);
+		return booking;
 	}
 	
+	public List<Booking> getBookingsByMember(OnlineMember member) {
+		return toList(bookingRepository.findByMember(member));
+	}
 	
+	public List<Booking> getBookingsByLibrary(Librarian librarian) {
+		return toList(bookingRepository.findByLibrarian(librarian));
+	}
+	
+	public List<Booking> getAllBookings() {
+		return toList(bookingRepository.findAll());
+		
+	}
+
+	@Transactional
 	public void deleteBooking(Booking aBooking) {
 		//insert 
 	}
+	
+	<T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
+	}
+
+
+
 	
 
 	

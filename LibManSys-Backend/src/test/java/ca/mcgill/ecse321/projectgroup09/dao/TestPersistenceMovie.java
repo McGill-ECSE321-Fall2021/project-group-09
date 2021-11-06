@@ -19,11 +19,15 @@ public class TestPersistenceMovie {
 
 
 	@Autowired
-	private MovieRepository movieRepository; 
+	private MovieRepository movieRepository;
+	
+	@Autowired 
+	private LibraryItemRepository libraryItemRepository;
 
 	@AfterEach
 	public void clearDatabase() {
 		movieRepository.deleteAll();
+		libraryItemRepository.deleteAll();
 	}
 	
 	@Test

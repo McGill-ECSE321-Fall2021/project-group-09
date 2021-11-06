@@ -37,10 +37,12 @@ public class TestPersistenceHeadLibrarian {
 	
 	@AfterEach
 	public void clearAccountsDatabase() {
-		headLibrarianRepository.deleteAll();
-		librarianRepository.deleteAll();
+		
+		
 		libraryRepository.deleteAll();
 		scheduleRepository.deleteAll();
+		headLibrarianRepository.deleteAll();
+		librarianRepository.deleteAll();
 	}
 	
 	

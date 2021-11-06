@@ -20,9 +20,13 @@ public class TestPersistenceNewspaper {
 	@Autowired
 	private NewspaperRepository newspaperRepository; 
 	
+	@Autowired
+	private LibraryItemRepository libraryItemRepository; 
+	
 	@AfterEach
 	public void clearDatabase() {
 		newspaperRepository.deleteAll();
+		libraryItemRepository.deleteAll();
 	}
 	
 	@Test

@@ -20,9 +20,13 @@ public class TestPersistenceBook {
 	@Autowired
 	private BookRepository bookRepository;
 	
+	@Autowired
+	private LibraryItemRepository libraryItemRepository; 
+	
 	@AfterEach
 	public void clearDatabase() {
 		bookRepository.deleteAll();
+		libraryItemRepository.deleteAll();
 	}
 
 	@Test

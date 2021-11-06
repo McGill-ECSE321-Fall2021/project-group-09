@@ -20,10 +20,15 @@ public class TestPersistenceMusicAlbum {
 	@Autowired
 	private MusicAlbumRepository musicAlbumRepository; 
 	
+	@Autowired 
+	private LibraryItemRepository libraryItemRepository;
+	
 	@AfterEach
 	public void clearDatabase() {
 		musicAlbumRepository.deleteAll();
+		libraryItemRepository.deleteAll();
 	}
+	
 	@Test
 	public void testPersistAndLoadMusicAlbum() {
 		
