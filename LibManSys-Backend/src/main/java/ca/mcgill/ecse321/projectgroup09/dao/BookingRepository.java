@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.projectgroup09.dao;
 
-import java.util.List;
+import java.util.*;
+import java.sql.Date;
 import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
@@ -15,5 +16,5 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
 	List<Booking> findByMember(Member member);
 	List<Booking> findByLibrarian(Librarian librarian);
 	Booking findBookingByBookingID(Long bookingID);
-	
+	List<Booking> findByBookingDate (Date date);
 }

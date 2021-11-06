@@ -24,7 +24,6 @@ import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
 import ca.mcgill.ecse321.projectgroup09.models.Library;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
-import ca.mcgill.ecse321.projectgroup09.models.LibraryManagement;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -43,17 +42,7 @@ public class TestPersistenceLibrary {
 	@Autowired
 	private LibraryRepository libraryRepository; 
 
-	private LibraryManagement lm;
-	
-	
-	@BeforeEach
-	public void setupLibraryManagement() {
-		lm = new LibraryManagement();
-		lm.setID(1L);
-		lm.setAccounts(new ArrayList<Account>());
-		lm.setLibraries(new ArrayList<Library>());
-		lm.setLibraryItems(new ArrayList<LibraryItem>());
-	}
+
 
 	@AfterEach
 	public void clearDatabase() {
@@ -94,7 +83,6 @@ public class TestPersistenceLibrary {
 		hl.setLibrarianPassword("password123");
 		hl.setLibrarianUsername("username456");
 		//hl.setLibrary();
-		hl.setLibraryManagement(lm);
 		//hl.setLoans();
 		//hl.setSchedules();
 		

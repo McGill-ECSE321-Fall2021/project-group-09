@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import ca.mcgill.ecse321.projectgroup09.models.LibraryManagement;
 
 /**
  * No persistence tests for abstract class.
@@ -45,8 +44,6 @@ public class TestPersistenceAccount {
 	@Autowired 
 	private LibraryItemRepository libraryItemRepository;
 
-
-	LibraryManagement lm = new LibraryManagement();
 
 	@AfterEach
 	public void clearAccountsDatabase() {
