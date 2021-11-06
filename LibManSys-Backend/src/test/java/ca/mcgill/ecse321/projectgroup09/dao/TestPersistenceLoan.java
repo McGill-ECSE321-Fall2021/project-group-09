@@ -20,7 +20,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
  * */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class TestPersistAndLoadLoan {
+public class TestPersistenceLoan {
 	@Autowired
 	private LoanRepository loanRepository;  
 	@Autowired
