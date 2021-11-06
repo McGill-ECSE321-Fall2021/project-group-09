@@ -75,12 +75,16 @@ public class LoanService {
 	
 	public void deleteLoan(Long loanId) {
       Loan loan = loanRepository.findLoanByLoanID(loanId);
+      if (loan ==null) {
+ 	     throw new IllegalArgumentException ("Loan does not exist"); 
+ 	      }
       loanRepository.delete(loan);
       
 	}
 	
 	public Loan readLoan(Long loanId) {
 	 Loan loan = loanRepository.findLoanByLoanID(loanId);
+	 
     return loan;
 	}
 	
