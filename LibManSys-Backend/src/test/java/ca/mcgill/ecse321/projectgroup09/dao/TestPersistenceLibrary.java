@@ -117,8 +117,7 @@ public class TestPersistenceLibrary {
 		bookingRepository.save(booking);
 		headLibrarianRepository.save(hl);
 		
-		library.setHeadLibrarian(hl);
-		library.setBookings(emptyBookingsList);
+
 		//library.setLibraryManagement(lm);
 		
 		libraryRepository.save(library);

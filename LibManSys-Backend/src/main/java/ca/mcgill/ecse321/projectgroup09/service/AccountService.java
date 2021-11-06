@@ -9,7 +9,7 @@ import ca.mcgill.ecse321.projectgroup09.dao.AccountRepository;
 public class AccountService {
 	
 	@Autowired
-	private AccountRepository acountRepo;
+	private AccountRepository accountRepo;
 	
 	
 	

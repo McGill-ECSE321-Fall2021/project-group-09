@@ -130,7 +130,6 @@ public class TestPersistenceHeadLibrarian {
 		hl.setemployeeIDNum(hlEmployeeId);
 		hl.setmanagerIDNum(hlManagerId);
 		//hl.setLibrary(library);
-		library.setHeadLibrarian(hl);
 		sampleSchedule.setLibrarian(hl);
 
 		// save Head Librarian

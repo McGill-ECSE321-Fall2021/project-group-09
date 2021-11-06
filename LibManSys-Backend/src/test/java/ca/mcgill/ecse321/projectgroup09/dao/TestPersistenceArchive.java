@@ -25,7 +25,6 @@ public class TestPersistenceArchive {
 	
 	@AfterEach
 	public void clearDatabase() {
-		
 		archiveRepository.deleteAll();
 		libraryItemRepository.deleteAll();
 	}
@@ -60,6 +59,5 @@ public class TestPersistenceArchive {
 
 		assertEquals(Title, archive.getTitle());
 		assertEquals(libraryItemID, archive.getlibraryItemID());
-	
 	}
 }

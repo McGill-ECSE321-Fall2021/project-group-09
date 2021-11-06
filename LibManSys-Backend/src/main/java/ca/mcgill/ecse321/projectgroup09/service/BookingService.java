@@ -42,9 +42,7 @@ public class BookingService { // service class for booking out the library for e
 	 */
 	
 	@Transactional
-	public Booking createBooking (Time startTime, Time endTime, Long bookingID, Date bookingDate, OnlineMember onlineMember) {
-	
-		//checks for account go here?
+	public Booking createBooking (Time startTime, Time endTime, Long bookingID, Date bookingDate, Member member, Librarian librarian) {
 		
 		
 		//checks for startTime, endTime, and bookingDate
@@ -53,7 +51,7 @@ public class BookingService { // service class for booking out the library for e
 			throw new IllegalArgumentException("Start time cannot be later than end time");
 		}
 		
-		if (onlineMember == null) {
+		if (member == null) {
 			throw new IllegalArgumentException("Error: Member is null"); 
 		}
 		
@@ -68,7 +66,8 @@ public class BookingService { // service class for booking out the library for e
 		booking.setBookingDate(bookingDate);
 		booking.setBookingEndTime(endTime);
 		booking.setBookingID(bookingID);
-		booking.setMember(onlineMember);
+		booking.setMember(member);
+		booking.setLibrarian(librarian);
 		
 		bookingRepository.save(booking);
 		return booking;

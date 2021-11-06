@@ -22,7 +22,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class TestLibraryItemReservationService {
+public class TestBookService {
 
 	@Autowired
 	private LibraryItemRepository libraryItemRepository; 
@@ -32,7 +32,7 @@ public class TestLibraryItemReservationService {
 	
 	// Service this class is focused on testing
 	@Autowired
-	private LibraryItemReservationService testService;
+	private BookService testService;
 	
 	@Autowired
 	private MemberService memberService;
