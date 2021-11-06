@@ -126,7 +126,7 @@ public class BookingService { // service class for booking out the library for e
 	public List<Booking> getBookingsByDate(Date date) {
 		return toList(bookingRepository.findByBookingDate(date));
 	}
-	
+
 	
 	@Transactional 
 	public List<Booking> getAllBookings() {
