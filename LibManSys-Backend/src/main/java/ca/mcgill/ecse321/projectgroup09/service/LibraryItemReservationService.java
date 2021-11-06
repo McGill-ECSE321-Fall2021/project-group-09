@@ -11,6 +11,13 @@ import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
 
+/**
+ *
+ * This class may not be used because does not relate
+ * directly a model. Can implement functionality in other
+ * service classes.
+ *
+ */
 @Service
 public class LibraryItemReservationService {
 	
