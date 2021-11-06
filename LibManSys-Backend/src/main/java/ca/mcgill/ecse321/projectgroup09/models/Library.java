@@ -9,7 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 import java.util.List;
 
@@ -83,7 +83,7 @@ public class Library
 
 	
 	//Association Methods
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Schedule> getSchedules()
 	{
 		return this.schedules;
@@ -93,7 +93,6 @@ public class Library
 	{
 		this.schedules = schedules;
 	}
-
 
 	@OneToMany(cascade={CascadeType.ALL})
 	public List<Account> getAccounts() {

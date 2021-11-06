@@ -27,7 +27,6 @@ public abstract class LibraryItem {
 	private ItemStatus itemStatus;
 
 	// LibraryItem Associations
-	private LibraryManagement libraryManagement;
 	private Member member; // Member who is currently reserving this library item.
 	
 	@ElementCollection
@@ -96,22 +95,13 @@ public abstract class LibraryItem {
 	public List<Loan> getLoans() {
 		return this.loans;
 	}
-	
-	@ManyToOne
-	public LibraryManagement getLibraryManagement() {
-		return this.libraryManagement;
-	}
 
 	@ManyToOne
 	public Member getMember() {
 		return member;
 	}
 	
-	public void setLibraryManagement(LibraryManagement aLibraryManagement) {
-		this.libraryManagement = aLibraryManagement;
-	}
 
-	
 	public void setLoans(List<Loan> aNewLoan) {
 		this.loans = aNewLoan;
 	}

@@ -13,7 +13,6 @@ public abstract class Account {
 	
 	private String fullName;
 	
-	private LibraryManagement libraryManagement;
 	
 	@ElementCollection
 	private List<Booking> bookings;
@@ -28,10 +27,6 @@ public abstract class Account {
 		return fullName;
 	}
 
-	@ManyToOne(cascade = {CascadeType.ALL})
-	public LibraryManagement getLibraryManagement() {
-		return libraryManagement;
-	}
 
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Booking> getBookings() {
@@ -43,11 +38,7 @@ public abstract class Account {
 		this.bookings = bookings;
 	}
 	
-	public void setLibraryManagement(LibraryManagement aLibraryManagement) {
-		this.libraryManagement = aLibraryManagement;
-	}
 
-	
 
 }
 

@@ -1,5 +1,63 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
+import ca.mcgill.ecse321.projectgroup09.dao.*;
+import ca.mcgill.ecse321.projectgroup09.models.*;
+
+@Service
 public class LibraryService {
 
+	@Autowired 
+	private LibraryRepository libraryRepository; 
+	
+	@Transactional
+	public Library createLibrary(String address, String phoneNo, String email, String libraryName) {
+		Library library = new Library();
+		library.setLibraryEmail(email);
+		library.setLibraryName(libraryName);
+		library.setLibraryPhone(phoneNo);
+		library.setLibraryAddress(address);
+		
+		libraryRepository.save(library);
+		return library;
+	}
+
+	@Transactional
+	public Library updateLibraryEmail (Library library, String email) {
+		library.setLibraryEmail(email);
+		libraryRepository.save(library);
+		return library;		
+	}
+	
+	@Transactional
+	public Library updateLibraryName (Library library, String name) {
+		library.setLibraryEmail(name);
+		libraryRepository.save(library);
+		return library;		
+	}
+	
+	@Transactional 
+	public Library updateLibraryPhoneNo (Library library, String phoneNo) { 
+		library.setLibraryPhone(phoneNo);
+		libraryRepository.save(library);
+		return library;
+	}
+	
+	@Transactional 
+	public List<Schedule> getLibraryHours(Library library) {
+		List<Schedule> weeklyHours = library.getSchedules(); 
+		return weeklyHours; 
+	}
+	//Add schedule methods once schedule service class is implemented 
+	
+	@Transactional 
+	public void deleteLibrary(Library library) {
+		libraryRepository.delete(library);
+	}
+	
+	
 }

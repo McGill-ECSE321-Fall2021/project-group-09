@@ -19,7 +19,6 @@ import ca.mcgill.ecse321.projectgroup09.models.Account;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.Library;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
-import ca.mcgill.ecse321.projectgroup09.models.LibraryManagement;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 
