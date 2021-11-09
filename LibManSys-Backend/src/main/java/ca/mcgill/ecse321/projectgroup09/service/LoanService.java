@@ -1,6 +1,9 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +37,7 @@ public class LoanService {
 		Loan loan = new Loan();
 		loan.setBorrowedDate(borrowedDate);
 		loan.setReturnDate(borrowedDate);
-		loan.setLateFees(lateFees); //0?
+		loan.setLateFees(lateFees); //0? or called fro
 		loan.setLoanStatus(loanStatus);
 		loan.setloanID(loanId); //random number? or catch if no id put random
 		loan.setMember(member);
@@ -89,15 +92,33 @@ public class LoanService {
 	}
 	
 	//business methods
-	
-	public int setLateFee() {	
-	return 0;
+
+	public long getLateDays(Date borrowedDate, Date returnDate) {	
+		
+		//calculate scheduled return date
+		// borrowed date + loanable period
+		
+		//LocalDate borrowedDateTrans = convertToLocalDateViaInstant(borrowedDate);
+		long diffInMillies = Math.abs(returnDate.getTime() - borrowedDate.getTime());
+		long lateDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+		//LocalDate returnDateTrans = convertToLocalDateViaInstant(returnDate);
+		//long lateDays = ChronoUnit.DAYS.between(returnDateTrans, borrowedDateTrans);
+	return lateDays;
 	}	
 	
-	public int getLateDays() {	
-	return 0;
+	public double getLateFee(Date borrowedDate, Date returnDate, LibraryItem libraryItem) {	
+		long lateDays = getLateDays(borrowedDate, returnDate);
+		double overdueFee = libraryItem.getDailyOverdueFee();
+		double lateFees = overdueFee * lateDays;
+		return lateFees;	
+	}	
+	public void setLateFee(Date borrowedDate, Date returnDate,Long lateDays, LibraryItem libraryItem,Long loanId) {	
+		double lateFees = getLateFee(borrowedDate, returnDate, libraryItem);
+		Loan loan = loanRepository.findLoanByLoanID(loanId);
+		loan.setLateFees(lateFees);
 	}	
 	
+
 	
 	@Transactional
 	public List<Loan> getAllLoans(){
@@ -112,6 +133,23 @@ public class LoanService {
 		}
 		return loansByMember;
 	}
+	
+	@Transactional
+	public double getLoanFeesbyMember(Member member) {
+		double fee = 0;
+		for (Loan loan :loanRepository.findLoanByMember(member)) {
+			double tempFee = loan.getLateFees();
+			fee += tempFee;
+		}
+		member.setAmountOwed(fee);
+		return fee; //maybe void method ie return nothing
+	}
+	/*
+	public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+	    return dateToConvert.toInstant()
+	      .atZone(ZoneId.systemDefault())
+	      .toLocalDate();
+	}*/
 	
 	//from tutorials
 	private <T> List<T> toList(Iterable<T> iterable){

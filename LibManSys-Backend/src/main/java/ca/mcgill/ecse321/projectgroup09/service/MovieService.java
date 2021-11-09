@@ -87,6 +87,13 @@ public class MovieService {
 		 Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
 	    return movie;
 		}
+		
+		@Transactional
+		public List<Movie> getAllMovies(){
+			return toList(movieRepository.findAll());
+		}
+		
+
 	
 	//from tutorials
 		private <T> List<T> toList(Iterable<T> iterable){
