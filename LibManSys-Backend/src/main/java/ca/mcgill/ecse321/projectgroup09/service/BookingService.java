@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,12 @@ public class BookingService { // service class for booking out the library for e
 	@Autowired 
 	private BookingRepository bookingRepository;
 	
+	@Autowired 
+	private MemberRepository memberRepository;
+	
+	@Autowired 
+	private LibrarianRepository librarianRepository;
+	
 	/**
 	 * Creates new booking object for a member and assigns a timeslot and date 
 	 * @param startTime
@@ -30,12 +38,18 @@ public class BookingService { // service class for booking out the library for e
 	 */
 	
 	@Transactional
-	public Booking createBooking (Time startTime, Time endTime, Long bookingID, Date bookingDate, Member member, Librarian librarian) throws IllegalArgumentException {
+	public Booking createBooking (String startTime, String endTime, Long bookingID, String bookingDate, long memberID, long librarianID) throws IllegalArgumentException {
 		
-		
+		Member member = memberRepository.findMemberByLibCardNumber(memberID);
+		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianID);
 		//checks for startTime, endTime, and bookingDate
+		//startTime = endTime.valueOf(LocalTime.)
 		
-		if (startTime.toLocalTime().isAfter(endTime.toLocalTime())) {
+		Time sTime = java.sql.Time.valueOf(startTime);
+		Time eTime = java.sql.Time.valueOf(endTime);
+		Date date = java.sql.Date.valueOf(bookingDate);
+		
+		if (sTime.toLocalTime().isAfter(eTime.toLocalTime())) {
 			throw new IllegalArgumentException("Start time cannot be later than end time");
 		}
 		
@@ -43,7 +57,7 @@ public class BookingService { // service class for booking out the library for e
 			throw new IllegalArgumentException("Error: Member is null"); 
 		}
 		
-		if (bookingDate.toLocalDate().isBefore(java.time.LocalDate.now())) {
+		if (date.toLocalDate().isBefore(java.time.LocalDate.now())) {
 			throw new IllegalArgumentException("Cannot pick a date in the past. Please choose another date."); 
 		}
 		
@@ -52,9 +66,10 @@ public class BookingService { // service class for booking out the library for e
 		
 		
 		Booking booking = new Booking(); 
-		booking.setBookingStartTime(startTime);
-		booking.setBookingDate(bookingDate);
-		booking.setBookingEndTime(endTime);
+		//booking.setBookingStartTime(Time.valueOf(null));
+		booking.setBookingDate(date);
+		booking.setBookingStartTime(sTime);
+		booking.setBookingEndTime(eTime);
 		booking.setBookingID(bookingID);
 		booking.setMember(member);
 		booking.setLibrarian(librarian);
@@ -95,7 +110,7 @@ public class BookingService { // service class for booking out the library for e
 		
 		//Insert checks to ensure booking is within library hours and not overlapping with other bookings
 		//Using schedule service class
-		
+
 		
 
 		booking.setBookingStartTime(startTime);
