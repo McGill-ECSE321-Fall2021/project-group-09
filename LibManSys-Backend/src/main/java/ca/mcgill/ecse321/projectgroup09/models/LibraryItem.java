@@ -16,7 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Table (name = "libraryItem")
 @Entity
 public abstract class LibraryItem {
+	// Code for automattically generating library item IDs
 	private static Long nextLibraryItemId = 1L;
+	/**
+	 * Gets the next unique library item ID to assign to a library item.
+	 * @return {@code long} a unique library item ID.
+	 */
 	private static Long getNextLibraryItemId() {
 		Long nextId = nextLibraryItemId;
 		nextLibraryItemId++;
