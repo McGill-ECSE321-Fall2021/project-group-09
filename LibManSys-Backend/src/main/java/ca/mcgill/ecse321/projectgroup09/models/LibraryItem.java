@@ -1,19 +1,28 @@
 
 package ca.mcgill.ecse321.projectgroup09.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //JPA tags added
 
 import javax.persistence.*;
 
+import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Library Item Model Class.
+ */
 @Table (name = "libraryItem")
 @Entity
-
 public abstract class LibraryItem {
-
-
+	private static Long nextLibraryItemId = 1L;
+	private static Long getNextLibraryItemId() {
+		Long nextId = nextLibraryItemId;
+		nextLibraryItemId++;
+		return nextId;
+	}
+	
 	public enum ItemStatus {
 		Available, Reserved, CheckedOut, LibraryOnly
 	}
@@ -30,11 +39,19 @@ public abstract class LibraryItem {
 	private Member member; // Member who is currently reserving this library item.
 	
 	@ElementCollection
-	private List<Loan> loans;
+	private List<Loan> loans; // Contains info on current and past loans
 
-	// Default No Arg Constructor
+	/**
+	 * Default No Arg Constructor for LibraryItem.
+	 * Will initialize a new LibraryItem object with an automatically
+	 * generated library item ID.
+	 */
 	public LibraryItem() {
-		
+		// initialize library item to next ID automatically
+		this.libraryItemID = getNextLibraryItemId();
+		// initialize collections
+		member = null;
+		loans = new ArrayList<Loan>();
 	}
 	
 	// Constructor to inialize item with ID

@@ -12,25 +12,4 @@ public class LibraryItemService {
 	@Autowired
 	LibraryItemRepository libraryItemRepo;
 	
-	private Long nextId;
-	
-	
-	/**
-	 * Constructor
-	 */
-	public LibraryItemService() {
-		nextId = 1L;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	@Transactional
-	public Long getNextLibraryItemId() {
-		Long nextId = this.nextId;
-		this.nextId++;
-		return nextId;
-	}
-	
 }

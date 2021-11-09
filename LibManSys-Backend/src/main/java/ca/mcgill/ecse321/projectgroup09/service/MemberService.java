@@ -25,14 +25,14 @@ public class MemberService {
 	 * @return {@code List<LibraryItem>} List of LibraryItems.
 	 */
 	@Transactional
-	public List<LibraryItem> getReservedItems(Long memberID) {
-		if (Objects.isNull(memberID)) {
+	public List<LibraryItem> getReservedItems(Long memberId) {
+		if (memberId == null) {
 			throw new IllegalArgumentException("memberID argument must not be null");
 		}
 		
-		Member m = memberDao.findMemberByLibCardNumber(memberID);
-		if (Objects.isNull(m)) {
-			throw new IllegalStateException("Member with library card number " + memberID + " , does not exists in Member repository.");
+		Member m = memberDao.findMemberByLibCardNumber(memberId);
+		if (m == null) {
+			throw new IllegalStateException("Member with library card number " + memberId + " , does not exists in Member repository.");
 		}
 		
 		List<LibraryItem> reservedItems = m.getReserved();// = new ArrayList<LibraryItem>();

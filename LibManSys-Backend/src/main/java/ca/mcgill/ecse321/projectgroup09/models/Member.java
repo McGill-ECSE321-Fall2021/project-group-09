@@ -40,7 +40,10 @@ public class Member extends Account {
 
 	// Member Default Constructor, Entities must have a no-arg constructor
 	public Member() {
-		
+		// Is this necessary?
+		loans = new ArrayList<Loan>();
+		bookings = new ArrayList<Booking>();
+		reserved = new ArrayList<LibraryItem>();
 	}
 	
 	public Member (Long aLibCardNumber) {
