@@ -80,9 +80,11 @@ public class TestBookingService {
 	private static final String LIBRARIAN_FULLNAME = "Test Librarian";
 
 
-	private static final String LIBRARY_ID = "Test Library"; //library ID 
-	private static 
-
+	private static final String LIBRARY_NAME = "Test Library"; //library ID 
+	private static final String LIB_ADDRESS = "123 Lib Street"; 
+	private static final String LIB_PHONE = "905-999-9999";
+	private static final String LIB_EMAIL = "lib@email.ca";
+	
 
 
 
