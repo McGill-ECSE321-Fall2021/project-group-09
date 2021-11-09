@@ -15,12 +15,14 @@ public class LibraryService {
 	private LibraryRepository libraryRepository; 
 	
 	@Transactional
-	public Library createLibrary(String address, String phoneNo, String email, String libraryName) {
+	public Library createLibrary(String address, String phoneNo, String email, String libraryName, List<Schedule> schedules) {
 		Library library = new Library();
 		library.setLibraryEmail(email);
 		library.setLibraryName(libraryName);
 		library.setLibraryPhone(phoneNo);
 		library.setLibraryAddress(address);
+		// setup opening hours / library schedule
+		library.setSchedules(schedules);
 		
 		libraryRepository.save(library);
 		return library;
@@ -53,6 +55,12 @@ public class LibraryService {
 		return weeklyHours; 
 	}
 	//Add schedule methods once schedule service class is implemented 
+	
+	@Transactional
+	public void setLibraryHours(Library library, List<Schedule> schedules) {
+		library.setSchedules(schedules);
+		libraryRepository.save(library);
+	}
 	
 	@Transactional 
 	public void deleteLibrary(Library library) {
