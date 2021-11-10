@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.springframework.transaction.annotation.Transactional;
-
 /**
  * Library Item Model Class.
  */

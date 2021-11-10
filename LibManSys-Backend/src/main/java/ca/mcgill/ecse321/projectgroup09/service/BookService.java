@@ -78,8 +78,7 @@ public class BookService {
 		// dailyOverdueFee is set by default in Book constructor
 		//newBook.setDailyOverdueFee(dailyOverdueFee);
 		// itemStatus is set by default in Book constructor
-		//newBook.setItemStatus(itemStatus);
-		System.out.println("Creating book with publisher = " + publisher);
+		//newBook.setItemStatus(itemStatus);\
 		// Set custom attributes of Book
 		newBook.setTitle(title);
 		newBook.setPublishedYear(publishedYear);

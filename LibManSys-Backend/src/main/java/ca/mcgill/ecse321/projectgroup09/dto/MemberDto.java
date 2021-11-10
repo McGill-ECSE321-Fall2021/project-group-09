@@ -69,12 +69,25 @@ public class MemberDto {
 	}
 	
 	/**
-	 * TODO implement
+	 * Creates MemberDto object to store information of member.
 	 * @param member
-	 * @return
+	 * @return MemberDto object representing member.
 	 */
 	public static MemberDto convertToDto(Member member) {
-		return new MemberDto();
+		MemberDto memberDto = new MemberDto(
+				member.getFullName(),
+				member.getLibCardNumber(),
+				member.getAddress(),
+				member.getIsResident(),
+				member.getPhoneNumber(),
+				member.getAmountOwed(),
+				member.getActiveLoans(),
+				member.getIsVerified(),
+				member.getLoans(),
+				member.getBookings(),
+				member.getReserved()
+		);
+		return memberDto;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-import java.util.List;
+
 
 //JPA tags added
 
