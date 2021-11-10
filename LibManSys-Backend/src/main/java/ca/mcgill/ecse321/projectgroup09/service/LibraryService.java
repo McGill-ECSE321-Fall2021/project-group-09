@@ -21,7 +21,8 @@ public class LibraryService {
 		library.setLibraryName(libraryName);
 		library.setLibraryPhone(phoneNo);
 		library.setLibraryAddress(address);
-		// setup opening hours / library schedule
+		
+		// setup opening hours and closing hours 
 		library.setSchedules(schedules);
 		
 		libraryRepository.save(library);
@@ -63,8 +64,12 @@ public class LibraryService {
 	}
 	
 	@Transactional 
-	public void deleteLibrary(Library library) {
+	public Library deleteLibrary(String name) {
+		Library library = libraryRepository.findLibraryByLibraryName(name);
 		libraryRepository.delete(library);
+		library = libraryRepository.findLibraryByLibraryName(name);
+		return library;
+		
 	}
 	
 	

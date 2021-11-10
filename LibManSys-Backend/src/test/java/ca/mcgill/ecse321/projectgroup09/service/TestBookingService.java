@@ -4,35 +4,25 @@ package ca.mcgill.ecse321.projectgroup09.service;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
-
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.LocalDate;
-import java.time.DayOfWeek;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.lenient;
+
+import java.time.DayOfWeek;
+
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.projectgroup09.models.*;
-//import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 import ca.mcgill.ecse321.projectgroup09.dao.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,9 +52,9 @@ public class TestBookingService {
 	private static final String END_TIME = "16:00:00"; 
 	private static final String DATE = "2021-11-11";
 
-	private static final String NEW_START_TIME = "10:00:00";
-	private static final String NEW_END_TIME = "18:00:00";
-	private static final String NEW_DATE = "2021-12-12";
+//	private static final String NEW_START_TIME = "10:00:00";
+//	private static final String NEW_END_TIME = "18:00:00";
+//	private static final String NEW_DATE = "2021-12-12";
 
 	private static final long LIB_CARD_NO = 999999999; //member ID 
 	private static final String MEM_ADDRESS = "123 Test Address";
@@ -82,10 +72,10 @@ public class TestBookingService {
 	private static final String LIBRARIAN_FULLNAME = "Test Librarian";
 
 
-	private static final String LIBRARY_NAME = "Test Library"; //library ID 
-	private static final String LIB_ADDRESS = "123 Lib Street"; 
-	private static final String LIB_PHONE = "905-999-9999";
-	private static final String LIB_EMAIL = "lib@email.ca";
+//	private static final String LIBRARY_NAME = "Test Library"; //library ID 
+//	private static final String LIB_ADDRESS = "123 Lib Street"; 
+//	private static final String LIB_PHONE = "905-999-9999";
+//	private static final String LIB_EMAIL = "lib@email.ca";
 	
 	
 	private static final long SCHED1 = 1; //Sunday (beginning of week)
@@ -138,7 +128,7 @@ public class TestBookingService {
 			if (invocation.getArgument(0).equals(BOOKING_ID)) {
 				Booking booking = new Booking(); 
 				booking.setBookingID(BOOKING_ID);
-			
+				
 				booking.setBookingDate(java.sql.Date.valueOf(DATE));
 				booking.setBookingStartTime(java.sql.Time.valueOf(START_TIME));
 				booking.setBookingEndTime(java.sql.Time.valueOf(END_TIME));
@@ -246,23 +236,6 @@ public class TestBookingService {
 		
 		long librarianID = 12345678;
 		long memberID = 999999999;
-		
-		//		Member member = new Member();
-		//		member.setFullName("Test Member");
-		//		member.setAddress("123 Test Address");
-		//		member.setActiveLoans(0);
-		//		member.setAmountOwed(0);
-		//		member.setLibCardNumber((long) 999999999);
-		//		member.setIsResident(true);
-		//		member.setIsVerified(true);
-		//		member.setPhoneNumber("123-456-7890");
-		//		
-		//		Librarian librarian = new Librarian();
-		//		librarian.setFullName("Test Librarian");
-		//		librarian.setemployeeIDNum((long) 12345678);
-		//		librarian.setLibrarianEmail("librarian@email.com");
-		//		librarian.setLibrarianUsername("username");
-		//		librarian.setLibrarianPassword("ASDF1234");
 
 		Booking booking = null; 
 		
@@ -282,12 +255,113 @@ public class TestBookingService {
 	
 
 	@Test 
-	public void updateBooking() {
+	public void createBookingWithNullParameters() { 
+		String error = null;
+		long bookingID = 12345678;
+		String endTime = "16:00:00";
+		String bookingDate = "2021-11-11";
 		
+		long librarianID = 12345678;
+		long memberID = 999999999;
+
+		Booking booking = null; 
+		
+		try { 
+			booking = bookingService.createBooking(null, endTime, bookingID, bookingDate, memberID, librarianID);
+		}
+		catch (IllegalArgumentException e) {
+			error = e.getMessage();
+
+		}
+
+		assertNotNull(error);
+		assertNull(booking);
+		assertEquals(error, "Please enter a start time for your event.");
+	}
+	
+	
+	
+	@Test 
+	public void updateBooking() {
+		long BOOKING_ID = 12345678;
+		String START_TIME = "09:00:00";
+		String END_TIME = "13:00:00";
+		String DATE = "2021-11-11";
+	
+		
+		Booking booking = null;
+	
+	try { 
+		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, END_TIME, DATE);
+	}
+	catch (IllegalArgumentException e) {
+		System.out.println(e);
+		fail();
+		
+	}
+	assertNotNull(booking);
+	assertEquals(START_TIME, booking.getBookingStartTime().toString());
+	assertEquals(END_TIME, booking.getBookingEndTime().toString());
 	}
 	
 	@Test 
-	public void deleteBooking() {
+	public void updateBookingWithAcceptableNullParameters() {
+		long BOOKING_ID = 12345678;
+		String START_TIME = "09:00:00";
+	
 		
+		Booking booking = null;
+	
+	try { 
+		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, null, null);
+	}
+	catch (IllegalArgumentException e) {
+		System.out.println(e);
+		fail();
+		
+	}
+	assertNotNull(booking);
+	assertEquals(START_TIME, booking.getBookingStartTime().toString());
+	assertEquals(END_TIME, booking.getBookingEndTime().toString());
+	assertEquals(DATE, booking.getBookingDate().toString());
+	}
+	
+	
+	@Test 
+	public void deleteBooking() {
+		Member member = new Member();
+		member.setFullName(FULL_NAME);
+		member.setAddress(MEM_ADDRESS);
+		member.setActiveLoans(ACTIVE_LOANS);
+		member.setAmountOwed(AMOUNT_OWED);
+		member.setLibCardNumber(LIB_CARD_NO);
+		member.setIsResident(IS_RESIDENT);
+		member.setIsVerified(IS_VERIFIED);
+		member.setPhoneNumber(PHONE_NO);
+
+		Librarian librarian = new Librarian();
+		librarian.setFullName(LIBRARIAN_FULLNAME);
+		librarian.setemployeeIDNum(EMPLOYEE_ID);
+		librarian.setLibrarianEmail(LIBRARIAN_EMAIL);
+		librarian.setLibrarianUsername(LIBRARIAN_USERNAME);
+		librarian.setLibrarianPassword(LIBRARIAN_PASSWORD);
+
+		Booking booking = new Booking();
+		booking.setBookingDate(java.sql.Date.valueOf(DATE));
+		booking.setBookingEndTime(java.sql.Time.valueOf(START_TIME));
+		booking.setBookingStartTime(java.sql.Time.valueOf(END_TIME));
+		booking.setBookingID(BOOKING_ID);
+		booking.setMember(member);
+		booking.setLibrarian(librarian);
+		
+
+		try {
+			booking = bookingService.deleteBooking(BOOKING_ID);
+		}
+		catch (IllegalArgumentException e) {
+			fail();
+		}
+		
+		assertNotNull(booking);
 	}
 }
