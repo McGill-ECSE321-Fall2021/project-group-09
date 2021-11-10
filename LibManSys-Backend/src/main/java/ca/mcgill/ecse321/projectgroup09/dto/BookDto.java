@@ -1,8 +1,12 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
+import ca.mcgill.ecse321.projectgroup09.models.Loan;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 /**
  * Data Transfer Object for Book model class.
@@ -37,7 +41,7 @@ public class BookDto {
 	}
 	
 	/**
-	 * Initialize a new BookDto object with the specified attributes.
+	 * Initialize a new BookDto object with the specified attributes. This constructor creates a BookDto object with all fields filled.
 	 * @param aLibraryItemId
 	 * @param aTitle
 	 * @param aPublishedYear
@@ -52,19 +56,54 @@ public class BookDto {
 	 * @param aNumPages
 	 */
 	public BookDto(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee,
-			ItemStatus aItemStatus, MemberDto aMember, List<LoanDto> aLoans, String aAuthor, String aPublisher, String aISBN, int aNumPages) {
+			ItemStatus aItemStatus, Member aMember, List<Loan> aLoans, String aAuthor, String aPublisher, String aISBN, int aNumPages) {
 		this.libraryItemID = aLibraryItemId;
 		this.title = aTitle;
 		this.publishedYear = aPublishedYear;
 		this.loanablePeriod = aLoanablePeriod;
 		this.dailyOverdueFee = aDailyOverdueFee;
 		this.itemStatus = aItemStatus;
-		this.member = aMember;
-		this.loans = aLoans;
+		// convert object
+		MemberDto aMemberDto = MemberDto.convertToDto(aMember);
+		this.member = aMemberDto;
+		// convert collection
+		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+		this.loans = aLoansDto;
 		this.author = aAuthor;
 		this.publisher = aPublisher;
 		this.ISBN = aISBN;
 		this.numPages = aNumPages;
+	}
+	
+	/**
+	 * Isn't this just the same as above constructor? But takes input as entire object.
+	 * Simply takes information of passed object and calls BookDto constructor with it.
+	 * 
+	 * Construct a BookDto object containing the information of {@code book} and return it.
+	 * @param book Returned BookDto object will contain the same information as this input.
+	 * @return The BookDto object.
+	 */
+	public static BookDto convertToDto(Book book) {
+		if (book == null) {
+			throw new IllegalArgumentException("book parameter cannot be null.");
+		}
+		//MemberDto memberDto = MemberDto.convertToDto(book.getMember());
+		//List<LoanDto> loansDto = new ArrayList<LoanDto>();
+		BookDto bookDto = new BookDto(
+				book.getlibraryItemID(),
+				book.getTitle(),
+				book.getPublishedYear(),
+				book.getLoanablePeriod(),
+				book.getDailyOverdueFee(),
+				book.getItemStatus(),
+				book.getMember(),
+				book.getLoans(),
+				book.getAuthor(),
+				book.getPublisher(),
+				book.getISBN(),
+				book.getNumPages()
+		);
+		return bookDto;
 	}
 
 	/**
