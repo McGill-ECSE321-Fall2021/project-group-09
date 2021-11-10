@@ -72,21 +72,62 @@ public class MovieService {
 		movieRepository.save(movie);
 		return movie;
 	}
-	
-	public void deleteMovie(Long libraryItemId) {
+	@Transactional
+	public boolean deleteMovie(Long libraryItemId) {
 		
 	      Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
 	      if (movie ==null) {
 	     throw new IllegalArgumentException ("Movie does not exist"); 
 	      }
 	      movieRepository.delete(movie);
-	      
+	      return true;
 		}
-		
+	@Transactional
 		public Movie readMovie(Long libraryItemId) {
 		 Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
 	    return movie;
 		}
+	
+					//BUSINESS METHODS//	
+		
+		@Transactional
+		
+		
+		
+		//call methods from libraryItem
+		public void reserveMovie() {
+			
+		}
+		
+		public void returnMovie() {
+			
+		}
+		
+		public void checkedMovie() {
+		
+		} 
+		
+		public List<Movie> getAllMovies(){
+			return toList(movieRepository.findAll());
+		}
+		
+		@Transactional
+		public List<Movie> getMoviesbyPublishedYear(Integer year) {
+			return toList(movieRepository.findMoviesByPublishedYear(year));
+		}
+		
+		@Transactional
+		public List<Movie> getMoviesbyGenre(String genre) {
+			return toList(movieRepository.findMoviesByGenre(genre));
+		}
+		
+		@Transactional
+		public List<Movie> getMoviesbyDirector(String director) {
+			return toList(movieRepository.findMoviesByDirector(director));
+		}
+		
+		
+					//HELPER METHODS//	
 	
 	//from tutorials
 		private <T> List<T> toList(Iterable<T> iterable){
