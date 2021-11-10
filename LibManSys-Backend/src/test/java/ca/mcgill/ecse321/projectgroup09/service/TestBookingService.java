@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
@@ -31,7 +32,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.projectgroup09.models.*;
-import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
+//import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 import ca.mcgill.ecse321.projectgroup09.dao.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -101,13 +102,14 @@ public class TestBookingService {
 	private static final String WEEKEND_OPEN = "7:30:00";
 	private static final String WEEKEND_CLOSE = "19:00:00"; 
 	
-	private static final DayofWeek Monday = DayofWeek.Monday; 
-	private static final DayofWeek Tuesday = DayofWeek.Tuesday;
-	private static final DayofWeek Wednesday = DayofWeek.Wednesday;
-	private static final DayofWeek Thursday = DayofWeek.Thursday;
-	private static final DayofWeek Friday = DayofWeek.Friday;
-	private static final DayofWeek Saturday = DayofWeek.Saturday;
-	private static final DayofWeek Sunday = DayofWeek.Sunday;
+	private static final DayOfWeek Monday = DayOfWeek.MONDAY; 
+	private static final DayOfWeek Tuesday = DayOfWeek.TUESDAY;
+	private static final DayOfWeek Wednesday = DayOfWeek.WEDNESDAY;
+	private static final DayOfWeek Thursday = DayOfWeek.THURSDAY;
+	private static final DayOfWeek Friday = DayOfWeek.FRIDAY;
+	private static final DayOfWeek Saturday = DayOfWeek.SATURDAY;
+	private static final DayOfWeek Sunday = DayOfWeek.SUNDAY;
+
 
 
 
@@ -276,9 +278,8 @@ public class TestBookingService {
 		assertNotNull(booking);
 		assertEquals(bookingID, booking.getBookingID());
 		assertEquals(booking.getMember().getFullName(), FULL_NAME);
-		
-		
 	}
+	
 
 	@Test 
 	public void updateBooking() {
