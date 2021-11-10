@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
 import java.sql.Time;
+import java.time.DayOfWeek;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,16 +10,18 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Schedule {
 	
+	/* Use java.time.DayOfWeek instead, same thing
 	public enum DayofWeek {
 		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 	}
+	*/
 
 	// Schedule Attributes
 
 	private Long scheduleID;
 	private Time openingTime;
 	private Time closingTime;
-	private DayofWeek dayofWeek;
+	private DayOfWeek dayOfWeek;
 
 	// Schedule Associations
 	private Librarian librarian;
@@ -56,8 +59,8 @@ public class Schedule {
 		this.closingTime = aClosingTime;
 	}
 
-	public void setDayofWeek(DayofWeek aDayOfWeek) {
-		this.dayofWeek = aDayOfWeek; 
+	public void setDayofWeek(DayOfWeek aDayOfWeek) {
+		this.dayOfWeek = aDayOfWeek; 
 	}
 	
 	@Id
@@ -73,8 +76,8 @@ public class Schedule {
 		return this.closingTime;
 	}
 
-	public DayofWeek getDayofWeek() {
-		return this.dayofWeek;
+	public DayOfWeek getDayofWeek() {
+		return this.dayOfWeek;
 	}
 
 	@ManyToOne

@@ -1,10 +1,14 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
+import ca.mcgill.ecse321.projectgroup09.dto.BookDto;
 import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
@@ -109,6 +113,15 @@ public class BookService {
 		}
 		Book book = bookRepo.findBookBylibraryItemID(libraryItemId);
 		return book;
+	}
+	
+	/**
+	 * Get all books in book repository.
+	 * @return list of all books in library management system.
+	 */
+	public List<Book> getAllBooks() {
+		List<Book> books = bookRepo.findAll();
+		return books;
 	}
 	
 	
@@ -281,5 +294,6 @@ public class BookService {
 		libraryItemRepo.save(book);
 		memberRepo.save(rm);
 	}
+
 	
 }

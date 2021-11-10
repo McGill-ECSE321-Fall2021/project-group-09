@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Time;
+import java.time.DayOfWeek;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,6 @@ import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.Library;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule;
-import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -86,7 +86,7 @@ public class TestPersistenceHeadLibrarian {
 		Long scheduleId = 111L;
 		Time openingTime = new Time(1632974400000L);
 		Time closingTime = new Time(1632974410000L);
-		DayofWeek day = DayofWeek.Monday;
+		DayOfWeek day = DayOfWeek.MONDAY;
 		sampleSchedule.setscheduleID(scheduleId);
 		sampleSchedule.setOpeningTime(openingTime);
 		sampleSchedule.setClosingTime(closingTime);

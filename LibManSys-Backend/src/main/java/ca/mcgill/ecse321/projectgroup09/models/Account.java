@@ -13,9 +13,9 @@ public abstract class Account {
 	
 	private String fullName;
 	
-	
-	@ElementCollection
-	private List<Booking> bookings;
+	// Already defined in Member, Librarian (both subclasses of Account)
+	//@ElementCollection
+	//private List<Booking> bookings;
 
 	public void setFullName(String aFullName) {
 		this.fullName = aFullName; 
@@ -27,7 +27,9 @@ public abstract class Account {
 		return fullName;
 	}
 
-
+	
+	/* Already defined in Member, Librarian (both subclasses of Account)
+	
 	@OneToMany(cascade = {CascadeType.ALL})
 	public List<Booking> getBookings() {
 		return this.bookings;
@@ -37,7 +39,7 @@ public abstract class Account {
 	public void setBookings(List<Booking> bookings) {
 		this.bookings = bookings;
 	}
-	
+	*/
 
 
 }
