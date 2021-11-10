@@ -49,10 +49,9 @@ public class TestMovieService {
 	private static final ItemStatus ITEMStatus = ItemStatus.Available;
 	private static final Integer LoanablePeriod = 7;
 	private static final Long Id = (long) 1111111;
-	
-		private static final String Title = "TestMovie";
-	    private static final int SERVICE_DURATION = 2;
-	    private static final double SERVICE_PRICE = 49.99;
+	private static final Integer Runtime = 20;
+	private static final Integer PublishedYear = 2021;
+	private static final String Title = "TestMovie";
 	    
 	@BeforeEach
 		 public void setMockOutput() {
@@ -68,8 +67,8 @@ public class TestMovieService {
 		            movie.setlibraryItemID(Id);//
 		            movie.setLoanablePeriod(LoanablePeriod);
 		            movie.setMember(member);
-		            movie.setPublishedYear(SERVICE_DURATION);
-		            movie.setRuntime(SERVICE_DURATION);
+		            movie.setPublishedYear(Runtime);
+		            movie.setRuntime(PublishedYear);
 		            movie.setTitle(Title);
 
 		            List<Movie> movies = new ArrayList<>();
@@ -78,4 +77,4 @@ public class TestMovieService {
 
 		        });
 
-}
+}}
