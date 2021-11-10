@@ -1,14 +1,15 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.lenient;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.lenient;
 
-import org.junit.jupiter.api.AfterEach;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,10 +18,7 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import ca.mcgill.ecse321.projectgroup09.dao.BookRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
@@ -37,15 +35,19 @@ public class TestBookService {
 	@Mock
 	private BookRepository bookDao;
 	
-	@Mock
-	private LibraryItemRepository libraryItemDao; 
+	//@Mock
+	//private LibraryItemRepository libraryItemDao; 
 	
 	@Mock
 	private MemberRepository memberDao;
-	
-	// Service this class is focused on testing
+
+	//@Autowired
 	@InjectMocks
 	private BookService bookService;
+	
+	// Can't figure out how to test a service that uses another service.
+	//@Mock
+	//private LibraryItemService libraryItemService;
 	
 	@InjectMocks
 	private MemberService memberService;
@@ -90,6 +92,7 @@ public class TestBookService {
 			}
 		});
 		// Setup mock book for libraryItemDao, same as bookDao
+		/*
 		lenient().when(libraryItemDao.findLibraryItemByLibraryItemID(anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(BOOK_ID)) {
 				Book book = new Book();
@@ -101,13 +104,14 @@ public class TestBookService {
 				return null;
 			}
 		});
+		*/
 		// Whenever anything is saved, just return the parameter object
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
 		};
 		lenient().when(memberDao.save(any(Member.class))).thenAnswer(returnParameterAsAnswer);
 		lenient().when(bookDao.save(any(Book.class))).thenAnswer(returnParameterAsAnswer);
-		lenient().when(libraryItemDao.save(any(LibraryItem.class))).thenAnswer(returnParameterAsAnswer);
+		//lenient().when(libraryItemDao.save(any(LibraryItem.class))).thenAnswer(returnParameterAsAnswer);
 	}
 	
 	// CRUD methods
@@ -153,7 +157,7 @@ public class TestBookService {
 	// Not really using update methods for library items. Keep test just in case.
 	@Test
 	public void testUpdateBook() {
-		Book book = bookDao.findBookBylibraryItemID(BOOK_ID);
+		//Book book = bookDao.findBookBylibraryItemID(BOOK_ID);
 		String newTitle = "Updated title";
 		int newPubYear = 2031;
 		int newLoanPeriod = 1;
@@ -222,9 +226,7 @@ public class TestBookService {
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
-		
-		// Should be 1 if service is working properly
 		assertNotNull(error);
-		assertEquals("Arguments must not be null", error);
+		assertEquals("Arguments must not be null.", error);
 	}
 }

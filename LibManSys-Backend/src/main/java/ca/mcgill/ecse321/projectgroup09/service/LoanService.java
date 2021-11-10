@@ -33,7 +33,7 @@ public class LoanService {
         
 		Loan loan = new Loan();
 		loan.setBorrowedDate(borrowedDate);
-		loan.setReturnDate(borrowedDate);
+		loan.setReturnDate(returnDate);
 		loan.setLateFees(lateFees); //0?
 		loan.setLoanStatus(loanStatus);
 		loan.setloanID(loanId); //random number? or catch if no id put random

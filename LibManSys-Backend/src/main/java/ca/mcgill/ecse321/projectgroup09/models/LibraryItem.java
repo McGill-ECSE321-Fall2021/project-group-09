@@ -39,7 +39,8 @@ public abstract class LibraryItem {
 	private ItemStatus itemStatus;
 
 	// LibraryItem Associations
-	private Member member; // Member who is currently reserving this library item.
+	/** Member who is currently reserving this library item. */
+	private Member member;
 	
 	@ElementCollection
 	private List<Loan> loans; // Contains info on current and past loans

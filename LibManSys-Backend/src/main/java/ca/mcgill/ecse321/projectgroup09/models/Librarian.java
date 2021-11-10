@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -30,6 +31,16 @@ public class Librarian extends Account {
 	@ElementCollection
 	private List<Booking> bookings;
 
+	/**
+	 * Default no-arg constructor.
+	 * Initializes collections that represent associations of Librarian.
+	 */
+	public Librarian() {
+		this.schedules = new ArrayList<Schedule>();
+		this.loans = new ArrayList<Loan>();
+		this.bookings = new ArrayList<Booking>();
+	}
+	
 	@Override
 	public void setFullName(String aFullName) {
 		super.setFullName(aFullName); 
