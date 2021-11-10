@@ -131,7 +131,7 @@ public class TestBookingService {
 			if (invocation.getArgument(0).equals(BOOKING_ID)) {
 				Booking booking = new Booking(); 
 				booking.setBookingID(BOOKING_ID);
-			
+				
 				booking.setBookingDate(java.sql.Date.valueOf(DATE));
 				booking.setBookingStartTime(java.sql.Time.valueOf(START_TIME));
 				booking.setBookingEndTime(java.sql.Time.valueOf(END_TIME));

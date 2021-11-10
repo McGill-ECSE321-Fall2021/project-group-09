@@ -22,23 +22,36 @@ public class LoanService {
 
 	@Autowired
 	private LoanRepository loanRepository;
+	@Autowired
+	private MemberRepository memberRepository;
+	@Autowired
+	private BookRepository bookRepository;
+	@Autowired
+	private LibrarianRepository librarianRepository;
+	@Autowired
+	private LibraryItemRepository libraryItemRepository;
 
 	@Transactional
 	public Loan createLoan(Date borrowedDate, Date returnDate, Double lateFees, LoanStatus loanStatus, Long loanId,
-			Member member, Librarian librarian, LibraryItem libraryItem) {
+			Long memberId, Long librarianId, Long libraryItemId) {
+		
+
+		Loan loan = new Loan();
+		Member member = memberRepository.findMemberByLibCardNumber(memberId);
+		LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
+		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianId);
+
 		if (loanRepository.findLoanByMember(member) == null) {
 			throw new IllegalArgumentException("Member does not exist");
 		}
 		if (loanRepository.findLoanByLibraryItem(libraryItem) == null) {
 			throw new IllegalArgumentException("Library Item does not exist");
 		}
-
-		Loan loan = new Loan();
 		loan.setBorrowedDate(borrowedDate);
 		loan.setReturnDate(borrowedDate);
 		loan.setLateFees(lateFees); // 0? or called fro
 		loan.setLoanStatus(loanStatus);
-		loan.setloanID(loanId); // random number? or catch if no id put random
+	//	loan.setloanID(loanId); // random number? or catch if no id put random
 		loan.setMember(member);
 		loan.setLibrarian(librarian);
 		loan.setLibraryItem(libraryItem);
@@ -48,7 +61,14 @@ public class LoanService {
 
 	@Transactional
 	public Loan updateLoan(Date borrowedDate, Date returnDate, Double lateFees, LoanStatus loanStatus, Long loanId,
-			Member member, Librarian librarian, LibraryItem libraryItem) {
+			Long memberId, Long librarianId, Long libraryItemId) {
+		
+
+		Loan loan = loanRepository.findLoanByLoanID(loanId);
+		Member member = memberRepository.findMemberByLibCardNumber(memberId);
+		LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
+		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianId);
+
 		if (loanRepository.findLoanByLoanID(loanId) == null) {
 			throw new IllegalArgumentException("Loan does not exist");
 		}
@@ -58,8 +78,6 @@ public class LoanService {
 		if (loanRepository.findLoanByLibraryItem(libraryItem) == null) {
 			throw new IllegalArgumentException("Library Item does not exist");
 		}
-
-		Loan loan = loanRepository.findLoanByLoanID(loanId);
 		loan.setBorrowedDate(borrowedDate);
 		loan.setReturnDate(borrowedDate);
 		loan.setLateFees(0);
@@ -72,12 +90,13 @@ public class LoanService {
 		return loan;
 	}
 
-	public void deleteLoan(Long loanId) {
+	public boolean deleteLoan(Long loanId) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
 		if (loan == null) {
 			throw new IllegalArgumentException("Loan does not exist");
 		}
 		loanRepository.delete(loan);
+		return true;
 
 	}
 
@@ -180,7 +199,7 @@ public class LoanService {
 
 							// HELPER METHODS //
 
-	public Date addDate(Date borrowedDate, Integer loanablePeriod) {
+	private Date addDate(Date borrowedDate, Integer loanablePeriod) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, loanablePeriod);
 		Date modifiedDate = cal.getTime();

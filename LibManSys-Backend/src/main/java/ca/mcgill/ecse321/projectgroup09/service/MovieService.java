@@ -73,14 +73,14 @@ public class MovieService {
 		return movie;
 	}
 	@Transactional
-	public void deleteMovie(Long libraryItemId) {
+	public boolean deleteMovie(Long libraryItemId) {
 		
 	      Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
 	      if (movie ==null) {
 	     throw new IllegalArgumentException ("Movie does not exist"); 
 	      }
 	      movieRepository.delete(movie);
-	      
+	      return true;
 		}
 	@Transactional
 		public Movie readMovie(Long libraryItemId) {
@@ -91,9 +91,7 @@ public class MovieService {
 					//BUSINESS METHODS//	
 		
 		@Transactional
-		public List<Movie> getAllMovies(){
-			return toList(movieRepository.findAll());
-		}
+		
 		
 		
 		//call methods from libraryItem
@@ -108,6 +106,26 @@ public class MovieService {
 		public void checkedMovie() {
 		
 		} 
+		
+		public List<Movie> getAllMovies(){
+			return toList(movieRepository.findAll());
+		}
+		
+		@Transactional
+		public List<Movie> getMoviesbyPublishedYear(Integer year) {
+			return toList(movieRepository.findMoviesByPublishedYear(year));
+		}
+		
+		@Transactional
+		public List<Movie> getMoviesbyGenre(String genre) {
+			return toList(movieRepository.findMoviesByGenre(genre));
+		}
+		
+		@Transactional
+		public List<Movie> getMoviesbyDirector(String director) {
+			return toList(movieRepository.findMoviesByDirector(director));
+		}
+		
 		
 					//HELPER METHODS//	
 	
