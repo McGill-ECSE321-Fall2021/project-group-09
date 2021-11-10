@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.lenient;
@@ -22,6 +23,7 @@ import org.mockito.stubbing.Answer;
 
 
 import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MovieRepository;
 import ca.mcgill.ecse321.projectgroup09.models.Movie;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
@@ -41,6 +43,9 @@ public class TestMovieService {
 	@Mock
     private LibraryItemRepository libraryItemRepository;
 	
+	@Mock
+    private MemberRepository memberRepository;
+
 	@InjectMocks
     private MovieService movieService;
 	private static final double Fees = 0.10;
@@ -56,9 +61,9 @@ public class TestMovieService {
 	@BeforeEach
 		 public void setMockOutput() {
 
-		        lenient().when(movieRepository.findAll()).thenAnswer((InvocationOnMock invocation) -> {
+	        lenient().when(movieRepository.findMovieBylibraryItemID(Id)).thenAnswer((InvocationOnMock invocation) -> {
 
-		            Movie movie = new Movie();
+		        	Movie movie = new Movie();
 		            Member member = new Member();
 		            movie.setDailyOverdueFee(Fees);
 		            movie.setDirector(Director);
@@ -71,10 +76,38 @@ public class TestMovieService {
 		            movie.setRuntime(PublishedYear);
 		            movie.setTitle(Title);
 
-		            List<Movie> movies = new ArrayList<>();
-		            movies.add(movie);
-		            return movies;
+		            
+		            return movie;
 
 		        });
+	        
+	        lenient().when(movieRepository.findMoviesByGenre(Genre)).thenAnswer((InvocationOnMock invocation) -> {
 
-}}
+	        	Movie movie = new Movie();
+	            Member member = new Member();
+
+	            
+	            return movie;
+
+	        });
+	        
+	        lenient().when(movieRepository.findMoviesByDirector(Director)).thenAnswer((InvocationOnMock invocation) ->  {
+
+	        	Movie movie = new Movie();
+	            Member member = new Member();
+
+	            
+	            return movie;
+
+	        });
+	        
+	        
+			Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> invocation.getArgument(0);
+	        lenient().when(libraryItemRepository.save(any(LibraryItem.class))).thenAnswer(returnParameterAsAnswer);
+			lenient().when(memberRepository.save(any(Member.class))).thenAnswer(returnParameterAsAnswer);
+
+
+}
+
+
+}
