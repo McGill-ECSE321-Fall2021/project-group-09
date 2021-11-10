@@ -31,6 +31,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.projectgroup09.models.*;
+import ca.mcgill.ecse321.projectgroup09.models.Schedule.DayofWeek;
 import ca.mcgill.ecse321.projectgroup09.dao.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -85,6 +86,28 @@ public class TestBookingService {
 	private static final String LIB_PHONE = "905-999-9999";
 	private static final String LIB_EMAIL = "lib@email.ca";
 	
+	
+	private static final long SCHED1 = 1; //Sunday (beginning of week)
+	private static final long SCHED2 = 2;
+	private static final long SCHED3 = 3;
+	private static final long SCHED4 = 4;
+	private static final long SCHED5 = 5;
+	private static final long SCHED6 = 6;
+	private static final long SCHED7 = 7; //Saturday (end of week)
+	
+	private static final String WEEKDAY_OPEN = "7:00:00";
+	private static final String WEEKDAY_CLOSE = "22:00:00";
+	
+	private static final String WEEKEND_OPEN = "7:30:00";
+	private static final String WEEKEND_CLOSE = "19:00:00"; 
+	
+	private static final DayofWeek Monday = DayofWeek.Monday; 
+	private static final DayofWeek Tuesday = DayofWeek.Tuesday;
+	private static final DayofWeek Wednesday = DayofWeek.Wednesday;
+	private static final DayofWeek Thursday = DayofWeek.Thursday;
+	private static final DayofWeek Friday = DayofWeek.Friday;
+	private static final DayofWeek Saturday = DayofWeek.Saturday;
+	private static final DayofWeek Sunday = DayofWeek.Sunday;
 
 
 
@@ -113,9 +136,10 @@ public class TestBookingService {
 			if (invocation.getArgument(0).equals(BOOKING_ID)) {
 				Booking booking = new Booking(); 
 				booking.setBookingID(BOOKING_ID);
-				booking.setBookingDate(Date.valueOf(LocalDate.parse(DATE)));
-				booking.setBookingStartTime(Time.valueOf(LocalTime.parse(START_TIME)));
-				booking.setBookingEndTime(Time.valueOf(LocalTime.parse(END_TIME)));
+			
+				booking.setBookingDate(java.sql.Date.valueOf(DATE));
+				booking.setBookingStartTime(java.sql.Time.valueOf(START_TIME));
+				booking.setBookingEndTime(java.sql.Time.valueOf(END_TIME));
 				return booking;
 			}
 			else {
@@ -138,6 +162,69 @@ public class TestBookingService {
 			}
 
 		});
+		lenient().when(scheduleRepository.findScheduleByScheduleID(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+			if (invocation.getArgument(0).equals(SCHED2)) {
+				Schedule monday = new Schedule();
+				monday.setscheduleID(SCHED2);
+				monday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				monday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				monday.setDayofWeek(Monday);
+				return monday;
+			} 
+			else if (invocation.getArgument(0).equals(SCHED3)) {
+				Schedule tuesday = new Schedule();
+				tuesday.setscheduleID(SCHED3);
+				tuesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				tuesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				tuesday.setDayofWeek(Tuesday);
+				return tuesday;
+			}
+			else if (invocation.getArgument(0).equals(SCHED4)) {
+				Schedule wednesday = new Schedule();
+				wednesday.setscheduleID(SCHED4);
+				wednesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				wednesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				wednesday.setDayofWeek(Wednesday);
+				return wednesday;
+			}
+			else if (invocation.getArgument(0).equals(SCHED5)) {
+				Schedule thursday = new Schedule();
+				thursday.setscheduleID(SCHED5);
+				thursday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				thursday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				thursday.setDayofWeek(Thursday);
+				return thursday;
+			}
+			else if (invocation.getArgument(0).equals(SCHED6)) {
+				Schedule friday = new Schedule();
+				friday.setscheduleID(SCHED6);
+				friday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				friday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				friday.setDayofWeek(Friday);
+				return friday;
+			}
+			else if (invocation.getArgument(0).equals(SCHED7)) {
+				Schedule saturday = new Schedule();
+				saturday.setscheduleID(SCHED7);
+				saturday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
+				saturday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
+				saturday.setDayofWeek(Saturday);
+				return saturday;
+			}
+			else if (invocation.getArgument(0).equals(SCHED1)) {
+				Schedule sunday = new Schedule();
+				sunday.setscheduleID(SCHED1);
+				sunday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
+				sunday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
+				sunday.setDayofWeek(Sunday);
+				return sunday;
+			}
+			else {
+				return null;
+			}
+
+		});
+		
 
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
@@ -147,7 +234,7 @@ public class TestBookingService {
 		lenient().when(librarianRepository.save(any(Librarian.class))).thenAnswer(returnParameterAsAnswer);
 	}
 
-
+	
 	@Test 
 	public void createBooking() { 
 		long bookingID = 12345678;
@@ -157,8 +244,7 @@ public class TestBookingService {
 		
 		long librarianID = 12345678;
 		long memberID = 999999999;
-
-
+		
 		//		Member member = new Member();
 		//		member.setFullName("Test Member");
 		//		member.setAddress("123 Test Address");
@@ -190,6 +276,7 @@ public class TestBookingService {
 		assertNotNull(booking);
 		assertEquals(bookingID, booking.getBookingID());
 		assertEquals(booking.getMember().getFullName(), FULL_NAME);
+		
 		
 	}
 

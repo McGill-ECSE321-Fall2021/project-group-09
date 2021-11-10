@@ -2,8 +2,8 @@ package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalTime;
-import java.time.LocalDate;
+import java.util.Calendar;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,9 @@ public class BookingService { // service class for booking out the library for e
 	
 	@Autowired 
 	private LibrarianRepository librarianRepository;
+	
+	@Autowired
+	private ScheduleRepository scheduleRepository;
 	
 	/**
 	 * Creates new booking object for a member and assigns a timeslot and date 
@@ -61,12 +64,19 @@ public class BookingService { // service class for booking out the library for e
 			throw new IllegalArgumentException("Cannot pick a date in the past. Please choose another date."); 
 		}
 		
-		//Insert checks to ensure booking is within library hours and not overlapping with other bookings
+		//Check to ensure that booking is within library opening hours 
+		Schedule libHours = scheduleRepository.findScheduleByScheduleID(getDayOfWeekForScheduleID(date));
 		
+		if (sTime.toLocalTime().isBefore(libHours.getOpeningTime().toLocalTime())) {
+			throw new IllegalArgumentException("The library opens at " + libHours.getOpeningTime().toString() + ", please choose a later time..");
+		}
 		
+		if (eTime.toLocalTime().isAfter(libHours.getClosingTime().toLocalTime())) {
+			throw new IllegalArgumentException("The library closes at " + libHours.getClosingTime().toString() + ", please choose an earlier time.");
+		}
+	
 		
 		Booking booking = new Booking(); 
-		//booking.setBookingStartTime(Time.valueOf(null));
 		booking.setBookingDate(date);
 		booking.setBookingStartTime(sTime);
 		booking.setBookingEndTime(eTime);
@@ -79,7 +89,13 @@ public class BookingService { // service class for booking out the library for e
 		
 	}
 	
-
+	private long getDayOfWeekForScheduleID(Date date) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		long dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+		return dayOfWeek;
+	}
+	
 	@Transactional
 	public Booking updateBooking (Long id, Time startTime, Time endTime, Date bookingDate) {
 		Time st = startTime;
