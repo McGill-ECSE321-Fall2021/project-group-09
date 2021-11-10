@@ -72,7 +72,7 @@ public class MovieService {
 		movieRepository.save(movie);
 		return movie;
 	}
-	
+	@Transactional
 	public void deleteMovie(Long libraryItemId) {
 		
 	      Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
@@ -82,18 +82,34 @@ public class MovieService {
 	      movieRepository.delete(movie);
 	      
 		}
-		
+	@Transactional
 		public Movie readMovie(Long libraryItemId) {
 		 Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
 	    return movie;
 		}
+	
+					//BUSINESS METHODS//	
 		
 		@Transactional
 		public List<Movie> getAllMovies(){
 			return toList(movieRepository.findAll());
 		}
 		
-
+		
+		//call methods from libraryItem
+		public void reserveMovie() {
+			
+		}
+		
+		public void returnMovie() {
+			
+		}
+		
+		public void checkedMovie() {
+		
+		} 
+		
+					//HELPER METHODS//	
 	
 	//from tutorials
 		private <T> List<T> toList(Iterable<T> iterable){
