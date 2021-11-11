@@ -3,12 +3,9 @@ package ca.mcgill.ecse321.projectgroup09.service;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.*;
 import ca.mcgill.ecse321.projectgroup09.dao.*;
 import ca.mcgill.ecse321.projectgroup09.models.*;
@@ -195,8 +192,7 @@ public class BookingService { // service class for booking out the library for e
 	public List<Booking> getBookingsByDate(Date date) {
 		return toList(bookingRepository.findByBookingDate(date));
 	}
-
-
+	
 	@Transactional 
 	public List<Booking> getAllBookings() {
 		return toList(bookingRepository.findAll());

@@ -8,9 +8,7 @@ import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 
-/**
- * Data Transfer Object for Member model class.
- */
+
 public class MemberDto {
 	// Account attributes
 	private String fullName;	
