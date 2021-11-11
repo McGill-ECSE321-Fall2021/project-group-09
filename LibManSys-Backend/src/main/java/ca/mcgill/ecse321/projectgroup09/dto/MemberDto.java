@@ -15,11 +15,10 @@ public class MemberDto {
 	// Member Attributes
 	private Long libCardNumber;
 	private String address;
-	private boolean isResident;
 	private String phoneNumber;
 	private double amountOwed;
 	private int activeLoans;
-	private boolean isVerified;
+	private boolean isVerifiedResident;
 	// Member Associations
 	private List<LoanDto> loans;
 	private List<BookingDto> bookings;
@@ -46,17 +45,16 @@ public class MemberDto {
 	 * @param aBookings
 	 * @param aReserved
 	 */
-	public MemberDto(String aFullName, Long aLibCardNumber, String aAddress, boolean aIsResident,
-			String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerified,
+	public MemberDto(String aFullName, Long aLibCardNumber, String aAddress,
+			String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerifiedResident,
 			List<Loan> aLoans, List<Booking> aBookings, List<LibraryItem> aReserved) {
 		this.fullName = aFullName;
 		this.libCardNumber = aLibCardNumber;
 		this.address = aAddress;
-		this.isResident = aIsResident;
 		this.phoneNumber = aPhoneNumber;
 		this.amountOwed = aAmountOwed;
 		this.activeLoans = aActiveLoans;
-		this.isVerified = aIsVerified;
+		this.isVerifiedResident = aIsVerifiedResident;
 		// convert collections to Dto's
 		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
 		this.loans = aLoansDto;
@@ -76,11 +74,10 @@ public class MemberDto {
 				member.getFullName(),
 				member.getLibCardNumber(),
 				member.getAddress(),
-				member.getIsResident(),
 				member.getPhoneNumber(),
 				member.getAmountOwed(),
 				member.getActiveLoans(),
-				member.getIsVerified(),
+				member.getIsVerifiedResident(),
 				member.getLoans(),
 				member.getBookings(),
 				member.getReserved()
@@ -131,20 +128,6 @@ public class MemberDto {
 	}
 
 	/**
-	 * @return the isResident
-	 */
-	public boolean isResident() {
-		return isResident;
-	}
-
-	/**
-	 * @param isResident the isResident to set
-	 */
-	public void setResident(boolean isResident) {
-		this.isResident = isResident;
-	}
-
-	/**
 	 * @return the phoneNumber
 	 */
 	public String getPhoneNumber() {
@@ -189,15 +172,15 @@ public class MemberDto {
 	/**
 	 * @return the isVerified
 	 */
-	public boolean isVerified() {
-		return isVerified;
+	public boolean isVerifiedResident() {
+		return isVerifiedResident;
 	}
 
 	/**
 	 * @param isVerified the isVerified to set
 	 */
-	public void setVerified(boolean isVerified) {
-		this.isVerified = isVerified;
+	public void setVerifiedResident(boolean isVerified) {
+		this.isVerifiedResident = isVerified;
 	}
 
 	/**

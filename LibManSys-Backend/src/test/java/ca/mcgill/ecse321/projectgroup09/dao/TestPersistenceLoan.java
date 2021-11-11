@@ -57,19 +57,17 @@ public class TestPersistenceLoan {
 		Long LibCardNumber =  2L;
 		Member member = new Member();
 		String address = "12 B";
-		Boolean isResident = true;
 		String phoneNumber = "514";
 		Double amountOwed = 0.10;
 		Integer activeLoans = 0;
-		Boolean isVerified = true;
+		Boolean isVerifiedResident = true;
 		
 		
 		member.setFullName(fullname);
 		member.setActiveLoans(activeLoans);
 		member.setAddress(address);
 		member.setAmountOwed(amountOwed);
-		member.setIsResident(isResident);
-		member.setIsVerified(isVerified);
+		member.setIsVerifiedResident(isVerifiedResident);
 		member.setPhoneNumber(phoneNumber);
 		member.setLibCardNumber(LibCardNumber);
 		

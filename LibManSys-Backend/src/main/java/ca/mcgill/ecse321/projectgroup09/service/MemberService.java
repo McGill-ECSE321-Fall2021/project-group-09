@@ -1,3 +1,7 @@
+/**
+ * @author Zarif Ashraf
+ */
+
 package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.sql.Date;
@@ -56,8 +60,7 @@ public class MemberService {
 		member.setAddress(address);
 		member.setPhoneNumber(phoneNumber);
         member.setLibCardNumber(libCardNumber);
-        member.setIsResident(false);
-        member.setIsVerified(false);
+        member.setIsVerifiedResident(false);
         member.setAmountOwed(amountOwed);
         member.setActiveLoans(activeLoans);
         memberRepository.save(member);
@@ -65,7 +68,7 @@ public class MemberService {
 	}
 
 	@Transactional
-	    public Member getMemberByLibCardNumber(Long libCardNumber) {
+	  public Member getMemberByLibCardNumber(Long libCardNumber) {
 	        if (libCardNumber == null) {
 	            throw new IllegalArgumentException("Library Card Number cannot be null or empty");
 	        }
@@ -85,7 +88,7 @@ public class MemberService {
             throw new IllegalArgumentException("Booking cannot be null or empty");
         }
 		
-		Member member = memberRepository.findMemberByBooking(booking);
+		Member member = memberRepository.findMemberByBookings(booking);
 		
 		if (member == null) {
 			 throw new IllegalArgumentException("No member with the booking exists");
@@ -100,7 +103,7 @@ public class MemberService {
             throw new IllegalArgumentException("Loan cannot be null or empty");
         }
 		
-		Member member = memberRepository.findMemberByLoan(loan);
+		Member member = memberRepository.findMemberByLoans(loan);
 		
 		if (member == null) {
 			 throw new IllegalArgumentException("No member with the loan exists");
@@ -122,22 +125,12 @@ public class MemberService {
 	
 	@Transactional
 	public List<Member> getMembersByVerificationStatus(boolean isVerified) {
-		List<Member> memberList = toList(memberRepository.findMemberByisVerified(isVerified));
+		List<Member> memberList = toList(memberRepository.findMemberByisVerifiedResident(isVerified));
 		
 		if (memberList != null) {
             return memberList;
         } else {
             throw new IllegalArgumentException("No members with this verification status exists!");
-        }
-	}
-	
-	@Transactional
-	public List<Member> getMembersByResidencyStatus(boolean isResident) {
-		List<Member> memberList = toList(memberRepository.findMemberByisResident(isResident));
-		if (memberList != null) {
-            return memberList;
-        } else {
-            throw new IllegalArgumentException("No members with this residency status exists!");
         }
 	}
 	
@@ -234,7 +227,7 @@ public class MemberService {
 	}
 	
 	@Transactional
-	public Member changeMemberVerificationStatus(Long libCardNumber, String fullName, boolean isVerified) {
+	public Member changeMemberVerificationStatus(Long libCardNumber, String fullName, boolean isVerifiedResident) {
 		if (libCardNumber == null) {
             throw new IllegalArgumentException("Library Card Number cannot be null or empty.");
         }
@@ -253,31 +246,7 @@ public class MemberService {
         	throw new IllegalArgumentException("The library Card Number and the member name does not match");
         }
         
-        member.setIsVerified(isVerified);
-        memberRepository.save(member);
-		return member;
-	}
-	
-	public Member changeMemberResidencyStatus(Long libCardNumber, String fullName, boolean isResident) {
-		if (libCardNumber == null) {
-            throw new IllegalArgumentException("Library Card Number cannot be null or empty.");
-        }
-        
-		if (fullName == null) {
-            throw new IllegalArgumentException("The name cannot be null or empty.");
-        }
-		
-		Member member = memberRepository.findMemberByLibCardNumber(libCardNumber);
-        
-        if (member == null) {
-            throw new IllegalArgumentException("No member with the library card number exists.");
-        }
-        
-        if (member.getFullName() != fullName) {
-        	throw new IllegalArgumentException("The library Card Number and the member name does not match");
-        }
-        
-        member.setIsResident(isResident);
+        member.setIsVerifiedResident(isVerifiedResident);
         memberRepository.save(member);
 		return member;
 	}

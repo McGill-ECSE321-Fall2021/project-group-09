@@ -58,10 +58,9 @@ public class TestBookingService {
 
 	private static final long LIB_CARD_NO = 999999999; //member ID 
 	private static final String MEM_ADDRESS = "123 Test Address";
-	private static final boolean IS_RESIDENT = true; 
 	private static final double AMOUNT_OWED = 0; 
 	private static final int ACTIVE_LOANS = 0; 
-	private static final boolean IS_VERIFIED = true; 
+	private static final boolean IS_VERIFIED_RESIDENT = true; 
 	private static final String FULL_NAME = "Test Member";
 	private static final String PHONE_NO = "123-456-7890";
 
@@ -113,8 +112,7 @@ public class TestBookingService {
 				member.setActiveLoans(ACTIVE_LOANS);
 				member.setAmountOwed(AMOUNT_OWED);
 				member.setFullName(FULL_NAME);
-				member.setIsResident(IS_RESIDENT);
-				member.setIsVerified(IS_VERIFIED);
+				member.setIsVerifiedResident(IS_VERIFIED_RESIDENT);
 				member.setPhoneNumber(PHONE_NO);
 				return member;
 			}
@@ -335,8 +333,7 @@ public class TestBookingService {
 		member.setActiveLoans(ACTIVE_LOANS);
 		member.setAmountOwed(AMOUNT_OWED);
 		member.setLibCardNumber(LIB_CARD_NO);
-		member.setIsResident(IS_RESIDENT);
-		member.setIsVerified(IS_VERIFIED);
+		member.setIsVerifiedResident(IS_VERIFIED_RESIDENT);
 		member.setPhoneNumber(PHONE_NO);
 
 		Librarian librarian = new Librarian();
