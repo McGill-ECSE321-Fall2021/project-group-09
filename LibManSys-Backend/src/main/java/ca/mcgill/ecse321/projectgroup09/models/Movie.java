@@ -5,11 +5,22 @@ import javax.persistence.Entity;
 @Entity
 public class Movie extends LibraryItem{
 
+	
+	private static final int LOANABLE_PERIOD = 7;
+	private static final double DAILYFEE = 0.5;
+	private static final LibraryItem.ItemStatus LIBRARY_ITEM_STATUS = LibraryItem.ItemStatus.Available;
+
 	  //Movie Attributes
 	  private String director;
 	  private int runtime;
 	  private String genre;
 
+	  public Movie() {
+			
+			this.setDailyOverdueFee(DAILYFEE);
+			this.setItemStatus(LIBRARY_ITEM_STATUS);
+			this.setLoanablePeriod(LOANABLE_PERIOD);
+		}
 	
 	  @Override
 		public void setlibraryItemID(Long alibraryItemID) {
