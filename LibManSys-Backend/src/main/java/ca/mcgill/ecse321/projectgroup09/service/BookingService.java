@@ -179,13 +179,13 @@ public class BookingService { // service class for booking out the library for e
 	}
 
 	@Transactional
-	public List<Booking> getBookingsByMember(OnlineMember member) {
-		return toList(bookingRepository.findByMember(member));
+	public List<Booking> getBookingsByMember(long libCardNo) {
+		return toList(bookingRepository.findByMember(memberRepository.findMemberByLibCardNumber(libCardNo)));
 	}
 
 	@Transactional
-	public List<Booking> getBookingsByLibrarian(Librarian librarian) {
-		return toList(bookingRepository.findByLibrarian(librarian));
+	public List<Booking> getBookingsByLibrarian(long employeeID) {
+		return toList(bookingRepository.findByLibrarian(librarianRepository.findLibrarianByEmployeeIDNum(employeeID)));
 	}
 
 	@Transactional 
