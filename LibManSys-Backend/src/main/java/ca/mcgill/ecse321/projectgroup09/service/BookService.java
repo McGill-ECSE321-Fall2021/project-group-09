@@ -33,11 +33,16 @@ public class BookService {
 	@Autowired
 	private BookRepository bookRepo;
 	
-	@Autowired
-	private LibraryItemRepository libraryItemRepo;
+	// Should only need to use BookRepository in this service class
+	//@Autowired
+	//private LibraryItemRepository libraryItemRepo;
 	
 	@Autowired
 	private MemberRepository memberRepo;
+	
+	// Doesn't seem to be Mocked correctly 
+	@Autowired
+	private LibraryItemService libraryItemService;
 	
 	// Methods //
 	
@@ -78,8 +83,7 @@ public class BookService {
 		// dailyOverdueFee is set by default in Book constructor
 		//newBook.setDailyOverdueFee(dailyOverdueFee);
 		// itemStatus is set by default in Book constructor
-		//newBook.setItemStatus(itemStatus);
-		System.out.println("Creating book with publisher = " + publisher);
+		//newBook.setItemStatus(itemStatus);\
 		// Set custom attributes of Book
 		newBook.setTitle(title);
 		newBook.setPublishedYear(publishedYear);
@@ -104,7 +108,7 @@ public class BookService {
 	 * book / library item repository.
 	 * 
 	 * @param libraryItemId {@code long} library item id of book. Must not be {@code null}.
-	 * @return {@code book} matching [@code libraryItemId} if found in repository, {@code null} otherwise.
+	 * @return {@code book} matching {@code libraryItemId} if found in repository, {@code null} otherwise.
 	 */
 	@Transactional
 	public Book getBookById(Long libraryItemId) {
@@ -119,6 +123,7 @@ public class BookService {
 	 * Get all books in book repository.
 	 * @return list of all books in library management system.
 	 */
+	@Transactional
 	public List<Book> getAllBooks() {
 		List<Book> books = bookRepo.findAll();
 		return books;
@@ -216,7 +221,7 @@ public class BookService {
 	
 	
 	/**
-	 * Delete the specified book from the book / library item repositories using library item ID.
+	 * Delete the specified book from the book repositorie using library item ID.
 	 * @param libraryItemId {@code long} ID of book to delete
 	 * @return {@code true} if book was deleted from repository, {@code false} if {@code libraryItemId} was not present in repository.
 	 */
@@ -227,7 +232,6 @@ public class BookService {
 		}
 		Book book = bookRepo.findBookBylibraryItemID(libraryItemId);
 		return deleteBook(book);
-		
 	}
 	
 	
@@ -242,25 +246,13 @@ public class BookService {
 	 */
 	@Transactional
 	public void reserveBook(Member rm, Book book) {
+		// this doesn't work when testing...
+		//libraryItemService.reserveLibraryItem(rm, (LibraryItem)book);
+		
 		// Check inputs not null
 		if (rm == null || book == null) {
-			throw new IllegalArgumentException("Arguments must not be null");
+			throw new IllegalArgumentException("Arguments must not be null.");
 		}
-		
-		/*
-		// Reserving Member
-		Member rm = memberRepo.findMemberByLibCardNumber(memberId);
-		// Book to reserve
-		LibraryItem book = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
-		
-		// Make sure member and library item exists
-		if (rm == null) {
-			throw new NullPointerException("Could not find member in Member repository.");
-		}
-		if (book == null) {
-			throw new NullPointerException("Could not find book in LibraryItem repository.");
-		}
-		*/
 		
 		// Make book library item status is set
 		if (book.getItemStatus() == null) {
@@ -291,7 +283,6 @@ public class BookService {
 		
 		// Save member and book to update information
 		bookRepo.save((Book)book);
-		libraryItemRepo.save(book);
 		memberRepo.save(rm);
 	}
 

@@ -19,7 +19,6 @@ public class Member extends Account {
 
 
 	// Member Attributes
-	
 	private Long libCardNumber;
 	private String address;
 	private boolean isResident;
@@ -38,9 +37,10 @@ public class Member extends Account {
 	@ElementCollection
 	private List<LibraryItem> reserved;
 
-	// Member Default Constructor, Entities must have a no-arg constructor
+	/**
+	 * Member Default Constructor, Entities must have a no-arg constructor
+	 */
 	public Member() {
-		// Is this necessary?
 		loans = new ArrayList<Loan>();
 		bookings = new ArrayList<Booking>();
 		reserved = new ArrayList<LibraryItem>();
@@ -91,8 +91,8 @@ public class Member extends Account {
 		this.isVerified = aIsVerified; 
 	}
 	
-	
-	//@Transient
+	// see accountId
+	//@Id
 	public Long getLibCardNumber() {
 		return this.libCardNumber;
 	}

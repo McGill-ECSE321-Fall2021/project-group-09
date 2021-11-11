@@ -48,8 +48,8 @@ public class LoanService {
 			throw new IllegalArgumentException("Library Item does not exist");
 		}
 		loan.setBorrowedDate(borrowedDate);
-		loan.setReturnDate(borrowedDate);
-		loan.setLateFees(lateFees); // 0? or called fro
+		loan.setReturnDate(returnDate);
+		loan.setLateFees(lateFees); //0?
 		loan.setLoanStatus(loanStatus);
 	//	loan.setloanID(loanId); // random number? or catch if no id put random
 		loan.setMember(member);

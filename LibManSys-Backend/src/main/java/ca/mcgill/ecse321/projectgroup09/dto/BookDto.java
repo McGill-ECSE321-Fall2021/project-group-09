@@ -64,8 +64,13 @@ public class BookDto {
 		this.dailyOverdueFee = aDailyOverdueFee;
 		this.itemStatus = aItemStatus;
 		// convert object
-		MemberDto aMemberDto = MemberDto.convertToDto(aMember);
-		this.member = aMemberDto;
+		if (member != null) {
+			MemberDto aMemberDto = MemberDto.convertToDto(aMember);
+			this.member = aMemberDto;
+		} else {
+			// else if member is null, just set to null in dto
+			this.member = null;
+		}
 		// convert collection
 		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
 		this.loans = aLoansDto;
@@ -76,7 +81,7 @@ public class BookDto {
 	}
 	
 	/**
-	 * Isn't this just the same as above constructor? But takes input as entire object.
+	 * Isn't this just the same as above constructor? But takes entire object as input.
 	 * Simply takes information of passed object and calls BookDto constructor with it.
 	 * 
 	 * Construct a BookDto object containing the information of {@code book} and return it.
