@@ -143,6 +143,17 @@ public class Book extends LibraryItem{
 	  {
 	    return this.numPages;
 	  }
+	  
+	  /**
+	   * Determines if the input string is a valid 10 or 13 digit ISBN.
+	   * ISBN string can have dashed in random places?
+	   * TODO implement
+	   * @param isbn
+	   * @return {@code true} if isbn is valid, {@code false} otherwise.
+	   */
+	  public static boolean isValidISBN(String isbn) {
+		  return true;
+	  }
 
 }
 

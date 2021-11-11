@@ -62,13 +62,17 @@ public class BookService {
 			throw new IllegalArgumentException("Parameters to create a new book must not be null.");
 		}
 		// Extra param checks necessary? or should this method just be 'dumb' and create object with whatever input values gives (as long as not null obvs)
+		// check publishedYear not negative
+		if (publishedYear < 0) {
+			throw new IllegalArgumentException("Cannot create a book with a negative published year.");
+		}
 		// Check ISBN is valid ISBN
-		if (false /*ISBN is invalid*/) {
+		if (!Book.isValidISBN(ISBN)) {
 			throw new IllegalArgumentException("Cannot create a book with an invalid ISBN: " + ISBN);
 		}
 		// Check numPages is positive
 		if (numPages < 0) {
-			
+			throw new IllegalArgumentException("Cannot create a book with a negative number of pages.");
 		}
 		
 		Book newBook = new Book();
@@ -165,12 +169,16 @@ public class BookService {
 			// throw error or just return null
 			throw new IllegalStateException("Could not find a book with the specified id (id: " + libraryItemId + ").");
 		}
-
+		
 		// Update attributes of <Book> that are not null
 		if (title != null) {
 			book.setTitle(title);
 		} 
 		if (publishedYear != null) {
+			// check publishedYear not negative
+			if (publishedYear < 0) {
+				throw new IllegalArgumentException("Cannot create a book with a negative published year.");
+			}
 			book.setPublishedYear(publishedYear);
 		}
 		if (loanablePeriod != null) {
@@ -189,9 +197,17 @@ public class BookService {
 			book.setPublisher(publisher);
 		}
 		if (ISBN != null) {
+			// Check ISBN is valid ISBN
+			if (!Book.isValidISBN(ISBN)) {
+				throw new IllegalArgumentException("Cannot create a book with an invalid ISBN: " + ISBN);
+			}
 			book.setISBN(ISBN);
 		}
 		if (numPages != null) {
+			// Check numPages is positive
+			if (numPages < 0) {
+				throw new IllegalArgumentException("Cannot create a book with a negative number of pages.");
+			}
 			book.setNumPages(numPages);
 		}
 		
