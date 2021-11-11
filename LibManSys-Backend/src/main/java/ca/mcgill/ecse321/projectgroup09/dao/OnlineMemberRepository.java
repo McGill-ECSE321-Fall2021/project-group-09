@@ -7,7 +7,7 @@ import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
  * @author Zarif Ashraf
  *
  */
-public interface OnlineMemberRepository extends CrudRepository<OnlineMember, Integer> {
+public interface OnlineMemberRepository extends CrudRepository<OnlineMember, Long> {
 
 	OnlineMember findOnlineMemberByLibCardNumber(Long libCardNumber);
 	OnlineMember findOnlineMemberByMemberUsername(String memberUsername);

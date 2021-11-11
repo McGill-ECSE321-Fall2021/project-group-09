@@ -10,7 +10,7 @@ import java.util.List;
  * @author Zarif Ashraf
  *
  */
-public interface LibraryItemRepository extends CrudRepository<LibraryItem, Integer> {
+public interface LibraryItemRepository extends CrudRepository<LibraryItem, Long> {
 
 	LibraryItem findLibraryItemByLibraryItemID(Long libraryItemID);
 	LibraryItem findLibraryItemByLoans(Loan loan);

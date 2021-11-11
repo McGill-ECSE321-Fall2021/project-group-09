@@ -8,7 +8,7 @@ import java.util.List;
  * @author Zarif Ashraf
  *
  */
-public interface MovieRepository extends CrudRepository<Movie, Integer> {
+public interface MovieRepository extends CrudRepository<Movie, Long> {
 	
 	Movie findMovieBylibraryItemID(Long libraryItemID);
 	List<Movie> findMoviesByPublishedYear(int publishedYear);

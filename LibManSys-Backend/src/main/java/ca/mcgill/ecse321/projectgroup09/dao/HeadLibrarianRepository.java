@@ -10,7 +10,7 @@ import java.util.List;
  * @author Zarif Ashraf
  *
  */
-public interface HeadLibrarianRepository extends CrudRepository<HeadLibrarian, Integer> {
+public interface HeadLibrarianRepository extends CrudRepository<HeadLibrarian, Long> {
 	
 	List<HeadLibrarian> findHeadLibrarianByLibrary(Library library);
 	HeadLibrarian findHeadLibrarianByManagerIDNum(Long managerIDNum);
