@@ -9,13 +9,15 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Schedule {
-	
-	/* Use java.time.DayOfWeek instead, same thing
-	public enum DayofWeek {
-		Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+	// automatically generate schedule ID's
+	/** Schedule ID's start at 8, because first 7 are reserved for library hours. */
+	private static Long nextScheduleId = 8L;
+	private static Long getNextScheduleId() {
+		Long nextId = nextScheduleId;
+		nextScheduleId++;
+		return nextId;
 	}
-	*/
-
+	
 	// Schedule Attributes
 
 	private Long scheduleID;
@@ -30,18 +32,29 @@ public class Schedule {
 	// CONSTRUCTOR
 	// ------------------------
 
-	/**public Schedule(Integer ascheduleID, Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek,
+	/**
+	 * Default no-arg constructor.
+	 */
+	public Schedule() {
+		this.scheduleID = getNextScheduleId();
+	}
+	
+	/**
+	 * Arg constructor for Schedule. Schedule Id will be initialized automatically.
+	 * Use setScheduleId to set it manually after initializing schedule object.
+	 * @param aOpeningTime
+	 * @param aClosingTime
+	 * @param aDayOfWeek
+	 * @param aLibrarian
+	 */
+	public Schedule(Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek,
 			Librarian aLibrarian) {
-		scheduleID = ascheduleID;
-		openingTime = aOpeningTime;
-		closingTime = aClosingTime;
-		dayOfWeek = aDayOfWeek;
-		boolean didAddLibrarian = setLibrarian(aLibrarian);
-		if (!didAddLibrarian) {
-			throw new RuntimeException(
-					"Unable to create schedule due to librarian. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-		}
-	}*/
+		this.scheduleID = getNextScheduleId();
+		this.openingTime = aOpeningTime;
+		this.closingTime = aClosingTime;
+		this.dayOfWeek = aDayOfWeek;
+		this.librarian = aLibrarian;
+	}
 
 	// ------------------------
 	// INTERFACE
@@ -87,6 +100,6 @@ public class Schedule {
 
 	public void setLibrarian(Librarian aLibrarian) {
 		this.librarian = aLibrarian;
-		}
+	}
 
 }
