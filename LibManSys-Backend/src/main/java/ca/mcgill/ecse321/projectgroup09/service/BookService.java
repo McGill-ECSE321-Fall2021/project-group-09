@@ -1,20 +1,17 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ca.mcgill.ecse321.projectgroup09.dao.BookRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
-import ca.mcgill.ecse321.projectgroup09.dto.BookDto;
 import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
-import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
-import ca.mcgill.ecse321.projectgroup09.dao.BookRepository;
-import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 /**
  * Book service.
