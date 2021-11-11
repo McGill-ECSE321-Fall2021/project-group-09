@@ -22,12 +22,26 @@ public class LibraryService {
 		library.setLibraryPhone(phoneNo);
 		library.setLibraryAddress(address);
 		
+		
+		//*********REPLACE WITH DEFAULT LIB HOURS****************
 		// setup opening hours and closing hours 
 		library.setSchedules(schedules);
 		
 		libraryRepository.save(library);
 		return library;
 	}
+	
+	/**
+	 * TODO: Complete method to update library hours by passing a headlibrarianID and a list of 7 schedules
+	 * 		 This should override the default library hours set in createLibrary
+	 * @param 
+	 * @param 
+	 * @return
+	 */
+//	public Library updateLibraryHours(long headLibrarianID,  List<Schedule> schedules) {
+//		return library;
+//		
+//	}
 
 	@Transactional
 	public Library updateLibraryEmail (Library library, String email) {
