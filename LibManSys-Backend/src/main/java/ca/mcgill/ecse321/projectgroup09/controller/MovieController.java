@@ -22,7 +22,7 @@ import ca.mcgill.ecse321.projectgroup09.service.MovieService;
 @CrossOrigin(origins = "*")
 @RestController
 public class MovieController {
-	/*
+	
 
 	@Autowired
 	private MovieService movieService;
@@ -44,13 +44,13 @@ public class MovieController {
 		return movieService.getAllMovies().stream().map(movie -> MovieDto.convertToDto(movie)).collect(Collectors.toList());
 	}
 
-	@PostMapping(value = { "/Loan/Delete/{id}", "/Loan/Delete/{id}" })
+	@PostMapping(value = { "/Moan/Delete/{id}", "/Moan/Delete/{id}" })
 	public void deleteMovie(@PathVariable("loanId") Long loanId)  {
 		movieService.deleteMovie(loanId);
 		//return true;
 	}
 	
-	@PostMapping(value = { "/Loan/LoanId", "/Loan/LoanId/" })
+	@PostMapping(value = { "/Movie/PublishedYear", "/Movie/PublishedYear/" })
 	public List<MovieDto> getMoviesbyPublishedYear(@PathVariable("publishedYear") Integer publishedYear)  {
 		List <MovieDto> movieDto = new ArrayList<MovieDto>();
 		for(Movie movie : movieService.getMoviesbyPublishedYear(publishedYear)) {
@@ -60,7 +60,7 @@ public class MovieController {
 		return movieDto;
 	}
 	
-	@PostMapping(value = { "/Loan/LoanId", "/Loan/LoanId/" })
+	@PostMapping(value = { "/Movie/Genre", "/Movie/Genre/" })
 	public List<MovieDto> getMoviesbyGenre(@PathVariable("genre") String genre)  {
 		List <MovieDto> movieDto = new ArrayList<MovieDto>();
 		for(Movie movie : movieService.getMoviesbyGenre(genre)) {
@@ -70,7 +70,7 @@ public class MovieController {
 		return movieDto;
 	}
 	
-	@PostMapping(value = { "/Loan/LoanId", "/Loan/LoanId/" })
+	@PostMapping(value = { "/Movie/Director", "/Movie/Director/" })
 	public List<MovieDto> getMoviesbyDirector(@PathVariable("director") String director)  {
 		List <MovieDto> movieDto = new ArrayList<MovieDto>();
 		for(Movie movie : movieService.getMoviesbyGenre(director)) {
@@ -78,6 +78,6 @@ public class MovieController {
 		}
 
 		return movieDto;
-	}*/
+	}
 
 }
