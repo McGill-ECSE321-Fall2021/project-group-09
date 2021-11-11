@@ -232,8 +232,10 @@ public class BookService {
 	}
 	
 	
+	
 	/**
-	 * Business method.
+	 * @deprecated
+	 * Checkout, reserve, renew, return are all now in LibraryItemService only.
 	 * 
 	 * This service method reserves a book for a user,
 	 * as long as that book is not already being reserved.
@@ -241,6 +243,7 @@ public class BookService {
 	 * @param memberId {@code Long} Library card number of member attemping to reserve a Book.
 	 * @param libraryItemId {@code Long} Id of book member is attemping to reserve.
 	 */
+	@Deprecated
 	@Transactional
 	public void reserveBook(Member rm, Book book) {
 		// this doesn't work when testing...
@@ -282,6 +285,5 @@ public class BookService {
 		bookRepo.save((Book)book);
 		memberRepo.save(rm);
 	}
-
 	
 }

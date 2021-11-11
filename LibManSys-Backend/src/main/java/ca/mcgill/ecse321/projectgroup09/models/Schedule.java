@@ -101,5 +101,31 @@ public class Schedule {
 	public void setLibrarian(Librarian aLibrarian) {
 		this.librarian = aLibrarian;
 	}
-
+	
+	/**
+	 * Two schedules are equal if all attributes are equal. Schedule.
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (! (o instanceof Schedule)) {
+			return false;
+		}
+		Schedule s = (Schedule) o;
+		if (!this.scheduleID.equals(s.scheduleID)) {
+			return false;
+		}
+		if (!this.dayOfWeek.equals(s.dayOfWeek)) {
+			return false;
+		}
+		if (!this.openingTime.equals(s.openingTime)) {
+			return false;
+		}
+		if (!this.closingTime.equals(s.closingTime)) {
+			return false;
+		}
+		if (!this.librarian.equals(s.getLibrarian())) {
+			return false;
+		}
+		return true;
+	}
 }

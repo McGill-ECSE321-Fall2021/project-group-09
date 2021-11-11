@@ -76,6 +76,23 @@ public abstract class Account {
 	}
 	*/
 
+	/**
+	 * Returns true if this Account object is equal to specified object.
+	 * Two accounts are equal if they have the same account Id.
+	 */
+	@Override
+	public boolean equals(Object o) {
+		// if o is not an Account, return false
+		if (! (o instanceof Account)) {
+			return false;
+		}
+		Account a = (Account) o;
+		// if Ids not equal, return false
+		if (!this.getAccountId().equals(a.getAccountId())) {
+			return false;
+		}
+		return true;
+	}
 
 }
 

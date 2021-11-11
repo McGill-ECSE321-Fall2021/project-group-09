@@ -10,12 +10,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
+import java.sql.Time;
 import java.util.List;
 
 @Entity
 public class Library
 {
+	// Default Library Hours, used in scheduleService.createDefaultLibraryScheduleList()
+	public static final Time DEFAULT_WEEKDAY_OPENING_TIME = Time.valueOf("8:00:00");
+	public static final Time DEFAULT_WEEKDAY_CLOSING_TIME = Time.valueOf("18:00:00");
+	public static final Time DEFAULT_WEEKEND_OPENING_TIME = Time.valueOf("10:00:00");
+	public static final Time DEFAULT_WEEKEND_CLOSING_TIME = Time.valueOf("14:00:00");
 
 	//Library Attributes
 	private String libraryName;

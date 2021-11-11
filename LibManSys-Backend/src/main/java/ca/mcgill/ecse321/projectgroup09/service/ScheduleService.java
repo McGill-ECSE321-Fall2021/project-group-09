@@ -2,14 +2,18 @@ package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.sql.Time;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ca.mcgill.ecse321.projectgroup09.dao.HeadLibrarianRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.ScheduleRepository;
+import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
+import ca.mcgill.ecse321.projectgroup09.models.Library;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule;
 
 /**
@@ -20,6 +24,9 @@ public class ScheduleService {
 
 	@Autowired
 	private ScheduleRepository scheduleRepo;
+	
+	@Autowired
+	private HeadLibrarianRepository hlRepo;
 	
 	/**
 	 * Create a new schedule object and save it to schedule repository.
@@ -149,6 +156,7 @@ public class ScheduleService {
 	}
 	
 	/**
+	 * Create library hours.
 	 * Takes 14 times or 7 scheduleDtos as input and returns a list of
 	 * 7 schedule objects. Sets the schedules Ids to 1-7 to indicate that
 	 * they are the library schedule.
@@ -157,7 +165,62 @@ public class ScheduleService {
 	 * @return
 	 */
 	@Transactional
-	public List<Schedule> createLibrarySchedule(Time sundayOpeningTime, Time sundayClosingTime) {
+	public List<Schedule> createLibraryScheduleList(Time sundayOpeningTime, Time sundayClosingTime) {
 		return null;
+	}
+	
+	/**
+	 * Create default schedule for the library.
+	 * Default schedule is:
+	 * 8:00 - 18:00 Monday to Friday,
+	 * 10:00 - 14:00 Saturday to Sunday
+	 * <br>
+	 * Saves the schedules to the first 7 Ids of schedule repo.
+	 * 1 = Sunday 7 = Saturday
+	 * 
+	 * @param headLibrarianId head librarian who will be associated with the schedule objects.
+	 * @return list of schedules representing the library hours.
+	 */
+	@Transactional
+	public List<Schedule> createDefaultLibraryScheduleList(Long headLibrarianId) {
+		if (headLibrarianId == null) {
+			throw new IllegalArgumentException("Argument must not be null.");
+		}
+		HeadLibrarian hl = hlRepo.findHeadLibrarianByManagerIDNum(headLibrarianId);
+		if (hl == null) {
+			throw new IllegalArgumentException("Head librarian does not exist in repository.");
+		}
+		List<Schedule> sList = new ArrayList<Schedule>();
+		DayOfWeek days[] = DayOfWeek.values();
+		// Create a schedule for each day of the week
+		for (int i = 1; i < 8; i++) {
+			int dayIndex = (i - 2) % 7;
+			// java modulo gives negative numbers so ensure indexs are all positive
+			if (dayIndex < 0) {
+				dayIndex+=7;
+			}
+			DayOfWeek day = days[dayIndex];
+			Schedule s = new Schedule();
+			// set IDs to reserved library hours schedule id (1-7)
+			s.setscheduleID(Long.valueOf(i));
+			// set day of week
+			s.setDayofWeek(day);
+			// set librarian to head librarian
+			s.setLibrarian(hl);
+			if (day.equals(DayOfWeek.SATURDAY) || day.equals(DayOfWeek.SUNDAY)) {
+				// weekend hours
+				s.setOpeningTime(Library.DEFAULT_WEEKEND_OPENING_TIME);
+				s.setClosingTime(Library.DEFAULT_WEEKEND_CLOSING_TIME);
+			} else {
+				// weekday hours
+				s.setOpeningTime(Library.DEFAULT_WEEKDAY_OPENING_TIME);
+				s.setClosingTime(Library.DEFAULT_WEEKDAY_CLOSING_TIME);
+			}
+			// Save schedule to repo
+			scheduleRepo.save(s);
+			// Add schedule to list
+			sList.add(s);
+		}
+		return sList;
 	}
 }

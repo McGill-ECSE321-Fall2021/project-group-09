@@ -190,6 +190,7 @@ public class TestBookService {
 	}
 	
 	// Business method
+	/* reserve,checkout,renew,return will now all by in LibraryItemService only.
 	@Test
 	public void testReserveBook() {		
 		Book book = bookDao.findBookBylibraryItemID(BOOK_ID);
@@ -229,4 +230,5 @@ public class TestBookService {
 		assertNotNull(error);
 		assertEquals("Arguments must not be null.", error);
 	}
+	*/
 }
