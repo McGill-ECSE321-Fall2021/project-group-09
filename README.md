@@ -27,16 +27,3 @@ For future references, 'Zarif Ashraf Zidane' & 'Zarif Ashraf' refer to the same 
 |Zarif Ashraf Zidane| Set up Heroku, additional UML edits           |         50     |
 
 All members also contributed to the detailed Use Case specifications, Persistence layer, and the test suite. 
-
-# Deliverable 2:
-[Project Wiki](https://github.com/McGill-ECSE321-Fall2021/project-group-09/wiki)
-
-| Member            | Tasks                                         | Effort (Hours) |
-|-------------------|-----------------------------------------------|----------------|
-|Abdullah Arafat    | --------------------------------------------- |         40     |
-|Christos Cunning   | --------------------------------------------- |         40     |
-|Omar Abdelaziz     | ----------------------------------------      |         45     |
-|Rajaa Boukhelif    | -----------------------                       |         45     |
-|Sneha Singh        | ----------------------------------------------|         45     |
-|Zarif Ashraf Zidane| ----------------------------------------      |         50     |
-
