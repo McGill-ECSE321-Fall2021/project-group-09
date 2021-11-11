@@ -38,8 +38,8 @@ public class BookService {
 	private MemberRepository memberRepo;
 	
 	// Doesn't seem to be Mocked correctly 
-	@Autowired
-	private LibraryItemService libraryItemService;
+	//@Autowired
+	//private LibraryItemService libraryItemService;
 	
 	// Methods //
 	
