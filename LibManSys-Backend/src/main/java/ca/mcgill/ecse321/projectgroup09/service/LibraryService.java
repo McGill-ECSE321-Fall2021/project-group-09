@@ -25,11 +25,15 @@ public class LibraryService {
 		
 		//*********REPLACE WITH DEFAULT LIB HOURS****************
 		// setup opening hours and closing hours 
+		///get default schedule method 
 		library.setSchedules(schedules);
 		
 		libraryRepository.save(library);
 		return library;
 	}
+	
+	
+
 	
 	/**
 	 * TODO: Complete method to update library hours by passing a headlibrarianID and a list of 7 schedules
@@ -38,10 +42,14 @@ public class LibraryService {
 	 * @param 
 	 * @return
 	 */
-//	public Library updateLibraryHours(long headLibrarianID,  List<Schedule> schedules) {
-//		return library;
-//		
-//	}
+	@Transactional
+	public Library updateLibraryHours(long headLibrarianID,  List<Schedule> schedules, String libraryName) {
+		Library library = libraryRepository.findLibraryByLibraryName(libraryName);
+		library.setSchedules(schedules);
+		libraryRepository.save(library);
+		return library;
+		
+	}
 
 	@Transactional
 	public Library updateLibraryEmail (Library library, String email) {
@@ -69,7 +77,7 @@ public class LibraryService {
 		List<Schedule> weeklyHours = library.getSchedules(); 
 		return weeklyHours; 
 	}
-	//Add schedule methods once schedule service class is implemented 
+	
 	
 	@Transactional
 	public void setLibraryHours(Library library, List<Schedule> schedules) {
