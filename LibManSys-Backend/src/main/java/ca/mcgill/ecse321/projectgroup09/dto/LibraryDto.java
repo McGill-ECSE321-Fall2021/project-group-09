@@ -2,14 +2,9 @@ package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.OneToMany;
 
-import ca.mcgill.ecse321.projectgroup09.models.Account;
-import ca.mcgill.ecse321.projectgroup09.models.Booking;
-import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
-import ca.mcgill.ecse321.projectgroup09.models.Schedule;
+import ca.mcgill.ecse321.projectgroup09.models.Library;
+
 
 public class LibraryDto {
 
@@ -70,7 +65,7 @@ public class LibraryDto {
 		this.libraryItems = aLibraryItem;
 	}
 	
-	public static BookingDto convertToDto(Booking booking) {
+	public static BookingDto convertToDto(Library library) {
 		return new BookingDto();
 	}
 }
