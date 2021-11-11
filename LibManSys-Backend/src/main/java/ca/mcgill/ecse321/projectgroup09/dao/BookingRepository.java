@@ -11,7 +11,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Booking;
  * @author Zarif Ashraf
  *
  */
-public interface BookingRepository extends CrudRepository<Booking, Integer> {
+public interface BookingRepository extends CrudRepository<Booking, Long> {
 	
 	List<Booking> findByMember(Member member);
 	List<Booking> findByLibrarian(Librarian librarian);

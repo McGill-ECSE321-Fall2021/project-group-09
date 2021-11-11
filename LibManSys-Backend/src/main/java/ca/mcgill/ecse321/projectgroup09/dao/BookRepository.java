@@ -9,7 +9,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Book;
  * @author Zarif Ashraf
  *
  */
-public interface BookRepository extends CrudRepository<Book, Integer> {
+public interface BookRepository extends CrudRepository<Book, Long> {
 	
 	Book findBookBylibraryItemID(Long libraryItemID);
 	Book findBookByISBN(String ISBN);

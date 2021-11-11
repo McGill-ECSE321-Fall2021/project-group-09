@@ -8,7 +8,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Archive;
  * @author Zarif Ashraf
  *
  */
-public interface ArchiveRepository extends CrudRepository<Archive, Integer> {
+public interface ArchiveRepository extends CrudRepository<Archive, Long> {
 	
 	Archive findArchiveBylibraryItemID(Long libraryItemID);
 	List<Archive> findArchivesByInstitution(String institution);

@@ -11,7 +11,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Librarian;
  * @author Zarif Ashraf
  *
  */
-public interface ScheduleRepository extends CrudRepository<Schedule, Integer> {
+public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
 	
 	Schedule findScheduleByScheduleID(Long scheduleID);
 	List<Schedule> findScheduleByLibrarian(Librarian librarian);

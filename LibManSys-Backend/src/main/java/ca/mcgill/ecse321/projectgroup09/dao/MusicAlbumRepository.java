@@ -8,7 +8,7 @@ import java.util.List;
  * @author Zarif Ashraf
  *
  */
-public interface MusicAlbumRepository extends CrudRepository<MusicAlbum, Integer> {
+public interface MusicAlbumRepository extends CrudRepository<MusicAlbum, Long> {
 	
 	MusicAlbum findMusicAlbumBylibraryItemID(Long libraryItemID);
 	List<MusicAlbum> findMusicAlbumByGenre(String genre);
