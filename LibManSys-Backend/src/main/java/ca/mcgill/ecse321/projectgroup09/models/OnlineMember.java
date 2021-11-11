@@ -43,16 +43,6 @@ public class OnlineMember extends Member{
 		}
 
 		@Override
-		public void setIsResident(boolean aIsResident) {
-			super.setIsResident(aIsResident);
-		}
-		
-		@Override
-		public boolean getIsResident() {
-			return super.getIsResident();
-		}
-
-		@Override
 		public void setPhoneNumber(String aPhoneNumber) {
 			super.setPhoneNumber(aPhoneNumber);
 		}
@@ -83,13 +73,13 @@ public class OnlineMember extends Member{
 		}
 		
 		@Override
-		public void setIsVerified(boolean aIsVerified) {
-			super.setIsVerified(aIsVerified);
+		public void setIsVerifiedResident(boolean aisVerifiedResident) {
+			super.setIsVerifiedResident(aisVerifiedResident);
 		}
 		
 		@Override
-		public boolean getIsVerified() {
-			return super.getIsVerified();
+		public boolean getIsVerifiedResident() {
+			return super.getIsVerifiedResident();
 		}
 		
 	  

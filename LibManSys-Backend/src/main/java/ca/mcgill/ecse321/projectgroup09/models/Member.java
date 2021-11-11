@@ -21,11 +21,10 @@ public class Member extends Account {
 	// Member Attributes
 	private Long libCardNumber;
 	private String address;
-	private boolean isResident;
 	private String phoneNumber;
 	private double amountOwed;
 	private int activeLoans;
-	private boolean isVerified;
+	private boolean isVerifiedResident;
 	
 	// Member Associations
 	@ElementCollection
@@ -71,10 +70,6 @@ public class Member extends Account {
 		this.address = anAddress;
 	}
 
-	public void setIsResident(boolean aIsResident) {
-		this.isResident = aIsResident;
-	}
-
 	public void setPhoneNumber(String aPhoneNumber) {
 		this.phoneNumber = aPhoneNumber;
 	}
@@ -87,8 +82,8 @@ public class Member extends Account {
 		this.activeLoans = anActiveLoans;
 	}
 
-	public void setIsVerified(boolean aIsVerified) {
-		this.isVerified = aIsVerified; 
+	public void setIsVerifiedResident(boolean aisVerifiedResident) {
+		this.isVerifiedResident = aisVerifiedResident; 
 	}
 	
 	// see accountId
@@ -99,10 +94,6 @@ public class Member extends Account {
 
 	public String getAddress() {
 		return this.address;
-	}
-
-	public boolean getIsResident() {
-		return this.isResident;
 	}
 
 	public String getPhoneNumber() {
@@ -117,8 +108,8 @@ public class Member extends Account {
 		return this.activeLoans;
 	}
 
-	public boolean getIsVerified() {
-		return this.isVerified;
+	public boolean getIsVerifiedResident() {
+		return this.isVerifiedResident;
 	}
 
 	@OneToMany(cascade = {CascadeType.ALL})

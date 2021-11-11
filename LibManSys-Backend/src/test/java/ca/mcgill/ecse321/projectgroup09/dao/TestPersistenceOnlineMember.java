@@ -80,8 +80,7 @@ public class TestPersistenceOnlineMember {
 		om.setAmountOwed(100);
 		om.setBookings(new ArrayList<Booking>());
 
-		om.setIsResident(true);
-		om.setIsVerified(true);
+		om.setIsVerifiedResident(true);
 		om.setLibCardNumber((long) 1000101002L);
 		om.setPhoneNumber("1234567890");
 
