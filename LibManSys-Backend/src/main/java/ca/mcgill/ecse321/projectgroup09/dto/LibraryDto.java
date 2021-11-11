@@ -65,8 +65,8 @@ public class LibraryDto {
 		this.libraryItems = aLibraryItem;
 	}
 	
-	public static BookingDto convertToDto(Library library) {
-		return new BookingDto();
+	public static LibraryDto convertToDto(Library library) {
+		return new LibraryDto();
 	}
 }
 
