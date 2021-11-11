@@ -143,9 +143,9 @@ public class LoanService {
 	}
 
 	@Transactional
-	public void removeLateFee(Long loanId) {
+	public void changeLateFee(Long loanId, Long newLateFee) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
-		loan.setLateFees(0);
+		loan.setLateFees(newLateFee);
 		loanRepository.save(loan);
 	}
 
@@ -164,6 +164,8 @@ public class LoanService {
 		// if renewal method (in libraryItem) set as renewal
 
 		// if returned method in libraryItem set as closed
+		
+		
 		loanRepository.save(loan);
 	}
 
@@ -180,6 +182,15 @@ public class LoanService {
 		}
 		return loansByMember;
 	}
+	
+	public Loan getLoanbyId(Long loanId) {
+		if (loanId == null) {
+			throw new IllegalArgumentException("Id must not be null.");
+		}
+		Loan loan = loanRepository.findLoanByLoanID(loanId);
+		return loan;
+	}
+	
 
 	@Transactional
 	public double getLoanFeesbyMember(Member member) {
