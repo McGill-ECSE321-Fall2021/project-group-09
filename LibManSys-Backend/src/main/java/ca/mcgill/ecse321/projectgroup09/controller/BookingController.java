@@ -1,8 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.controller;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.util.Calendar;
 import java.util.List;
 
 import java.util.stream.Collectors;
@@ -32,13 +30,13 @@ public class BookingController {
 		return bookingService.getAllBookings().stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	}
 	
-	@PostMapping(value = {"/bookings/{bookingID}", "bookings/{bookingID}/"})
+	@PostMapping(value = {"/bookings/create/{bookingID}", "bookings/create/{bookingID}/"})
 	public BookingDto createBooking (@PathVariable("startTime") String startTime, @PathVariable("endTime") String endTime, @PathVariable("bookingID") Long bookingID, @PathVariable("bookingDate") String bookingDate, @PathVariable("memberID") long memberID, @PathVariable("librarianID") long librarianID) throws IllegalArgumentException {
 		Booking booking = bookingService.createBooking(startTime, endTime, bookingID, bookingDate, memberID, librarianID);
 		return BookingDto.convertToDto(booking);
 	}
 
-	@PostMapping(value = {"/bookings/{bookingID}", "bookings/{bookingID}/"})
+	@PostMapping(value = {"/bookings/update/{bookingID}", "bookings/update/{bookingID}/"})
 	public BookingDto updateBooking (@PathVariable("id") Long id, @PathVariable("startTime") String startTime, @PathVariable("endTime") String endTime, @PathVariable("bookingDate") String bookingDate) {
 		Booking booking = bookingService.updateBooking(id, startTime, endTime, bookingDate);
 		return BookingDto.convertToDto(booking);
