@@ -11,7 +11,7 @@ import java.util.List;
  * @author Zarif Ashraf
  *
  */
-public interface LoanRepository extends CrudRepository<Loan, Integer> {
+public interface LoanRepository extends CrudRepository<Loan, Long> {
 	
 	Loan findLoanByLoanID(Long loanID);
 	List<Loan> findLoanByMember(Member member);
