@@ -58,7 +58,7 @@ public class LibraryDto {
 		return accounts;
 	}
 
-	public void setAccounts(List<AccountDto> anAccount){
+	public void setAccounts(List<AccountDto> accounts){
 		this.accounts = accounts;
 	}
 
