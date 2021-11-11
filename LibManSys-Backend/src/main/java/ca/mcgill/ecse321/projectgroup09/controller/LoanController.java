@@ -21,7 +21,7 @@ import ca.mcgill.ecse321.projectgroup09.service.LoanService;
 @CrossOrigin(origins = "*")
 @RestController
 public class LoanController {
-
+ /*
 	@Autowired
 	private LoanService loanService;
 	
@@ -62,7 +62,7 @@ public class LoanController {
 		return LoanDto.convertToDto(loan);
 	}*/
 	
-	@PostMapping(value = { "/Loan/Delete/{id}", "/Loan/Delete/{id}" })
+	/*@PostMapping(value = { "/Loan/Delete/{id}", "/Loan/Delete/{id}" })
 	public void deleteLoan(@PathVariable("loanId") Long loanId)  {
 		//Loan loan = loanService.getLoanbyId(loanId);
 		loanService.deleteLoan(loanId);
@@ -74,7 +74,7 @@ public class LoanController {
 	public List<LoanDto> getAllLoans() {
 		// Create list of all books, converted to Dto's
 		return loanService.getAllLoans().stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
-	}
+	}*/
 	
 	
 

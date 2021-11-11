@@ -22,7 +22,7 @@ import ca.mcgill.ecse321.projectgroup09.service.MovieService;
 @CrossOrigin(origins = "*")
 @RestController
 public class MovieController {
-	
+	/*
 
 	@Autowired
 	private MovieService movieService;
@@ -78,6 +78,6 @@ public class MovieController {
 		}
 
 		return movieDto;
-	}
+	}*/
 
 }
