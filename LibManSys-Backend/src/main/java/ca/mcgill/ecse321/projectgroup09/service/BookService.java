@@ -157,7 +157,7 @@ public class BookService {
 			ItemStatus itemStatus, String author, String publisher, String ISBN, Integer numPages) {
 		// Check input params not null
 		if (libraryItemId == null) {
-			throw new IllegalArgumentException("Failed to update book: library item must not be null.");
+			throw new IllegalArgumentException("Library item ID not be null.");
 		}
 		
 		Book book = bookRepo.findBookBylibraryItemID(libraryItemId);
@@ -220,7 +220,7 @@ public class BookService {
 	/**
 	 * Delete the specified book from the book repositorie using library item ID.
 	 * @param libraryItemId {@code long} ID of book to delete
-	 * @return {@code true} if book was deleted from repository, {@code false} if {@code libraryItemId} was not present in repository.
+	 * @return {@code true} if book was deleted from repository, {@code false} if {@code libraryItemId} was null.
 	 */
 	@Transactional
 	public boolean deleteBookById(Long libraryItemId) {
