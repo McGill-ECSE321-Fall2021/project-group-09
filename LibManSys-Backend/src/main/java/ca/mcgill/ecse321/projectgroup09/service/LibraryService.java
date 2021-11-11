@@ -32,16 +32,7 @@ public class LibraryService {
 		return library;
 	}
 	
-	
 
-	
-	/**
-	 * TODO: Complete method to update library hours by passing a headlibrarianID and a list of 7 schedules
-	 * 		 This should override the default library hours set in createLibrary
-	 * @param 
-	 * @param 
-	 * @return
-	 */
 	@Transactional
 	public Library updateLibraryHours(long headLibrarianID,  List<Schedule> schedules, String libraryName) {
 		Library library = libraryRepository.findLibraryByLibraryName(libraryName);
@@ -77,7 +68,6 @@ public class LibraryService {
 		List<Schedule> weeklyHours = library.getSchedules(); 
 		return weeklyHours; 
 	}
-	
 	
 	@Transactional
 	public void setLibraryHours(Library library, List<Schedule> schedules) {
