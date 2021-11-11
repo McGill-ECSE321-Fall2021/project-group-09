@@ -19,7 +19,6 @@ public class Member extends Account {
 
 
 	// Member Attributes
-	
 	private Long libCardNumber;
 	private String address;
 	private boolean isResident;
@@ -92,8 +91,8 @@ public class Member extends Account {
 		this.isVerified = aIsVerified; 
 	}
 	
-	
-	//@Transient
+	// see accountId
+	//@Id
 	public Long getLibCardNumber() {
 		return this.libCardNumber;
 	}
