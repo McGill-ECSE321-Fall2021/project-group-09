@@ -184,7 +184,7 @@ public void testCreateLoan() {
 public void testCreateLoanWithNoBorrowedDate() {
 	String error = null;
 	Loan loan1 = null;
-
+	//@SuppressWarnings("deprecation")
 	Date borrowedDate = null;
 	try {
 	 
@@ -288,7 +288,7 @@ public void testGetLoanFail() {
 
 }
 
-
+//@SuppressWarnings("deprecation")
 @Test
 public void testUpdateLoan() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
