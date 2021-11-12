@@ -63,9 +63,10 @@ public class TestLoanService {
 	@InjectMocks
 	private LoanService loanService;
 
-	 @SuppressWarnings("deprecation")
-	 private static final Date BORROWEDDATE = new Date( 2020, 1, 2);
-	 private static final Date RETURNEDDATE = new Date( 2020, 1, 3);
+
+	 private static final Date BORROWEDDATE = Date.valueOf("2020-02-02");
+	// new Date( 2020, 1, 2);
+	 private static final Date RETURNEDDATE = Date.valueOf("2020-03-03");
 	 private static final Double LATEFEES = 0.10;
 	 private static final Double OVERDUEFEE = 0.20;
 
@@ -183,7 +184,7 @@ public void testCreateLoan() {
 public void testCreateLoanWithNoBorrowedDate() {
 	String error = null;
 	Loan loan1 = null;
-	 @SuppressWarnings("deprecation")
+
 	Date borrowedDate = null;
 	try {
 	 
@@ -287,7 +288,7 @@ public void testGetLoanFail() {
 
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
 public void testUpdateLoan() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
@@ -308,7 +309,7 @@ public void testUpdateLoan() {
 	assertEquals(LOANID, newLoan.getLoanID());
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
 public void testUpdateLoanNoBorrowedDate() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
@@ -327,7 +328,7 @@ public void testUpdateLoanNoBorrowedDate() {
 	
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
 public void testUpdateLoanReturnDatebeforeBorrowedDate() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
@@ -346,7 +347,7 @@ public void testUpdateLoanReturnDatebeforeBorrowedDate() {
 	
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
 public void testUpdateLoanNoId() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
@@ -364,7 +365,7 @@ public void testUpdateLoanNoId() {
 	
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
 public void testUpdateNegativeFees() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
