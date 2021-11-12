@@ -5,21 +5,24 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.List;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
 import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
+import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 
 @Service
 public class MemberService {
@@ -68,7 +71,7 @@ public class MemberService {
 	}
 
 	@Transactional
-	  public Member getMemberByLibCardNumber(Long libCardNumber) {
+	 public Member getMemberByLibCardNumber(Long libCardNumber) {
 	        if (libCardNumber == null) {
 	            throw new IllegalArgumentException("Library Card Number cannot be null or empty");
 	        }
@@ -124,8 +127,8 @@ public class MemberService {
 	    }
 	
 	@Transactional
-	public List<Member> getMembersByVerificationStatus(boolean isVerified) {
-		List<Member> memberList = toList(memberRepository.findMemberByisVerifiedResident(isVerified));
+	public List<Member> getMembersByVerificationStatus(boolean isVerifiedResident) {
+		List<Member> memberList = toList(memberRepository.findMemberByisVerifiedResident(isVerifiedResident));
 		
 		if (memberList != null) {
             return memberList;
@@ -227,7 +230,7 @@ public class MemberService {
 	}
 	
 	@Transactional
-	public Member changeMemberVerificationStatus(Long libCardNumber, String fullName, boolean isVerifiedResident) {
+	public Member updateMemberVerificationStatus(Long libCardNumber, String fullName, boolean isVerifiedResident) {
 		if (libCardNumber == null) {
             throw new IllegalArgumentException("Library Card Number cannot be null or empty.");
         }
@@ -251,6 +254,67 @@ public class MemberService {
 		return member;
 	}
 	
+	@Transactional
+	public Member AddOrSubtractAmountOwed(Long libCardNumber, String fullName, double changeInAmount) {
+		if (libCardNumber == null) {
+            throw new IllegalArgumentException("Library Card Number cannot be null or empty.");
+        }
+        
+		if (fullName == null) {
+            throw new IllegalArgumentException("The name cannot be null or empty.");
+        }
+		
+		if (changeInAmount == 0) {
+			throw new IllegalArgumentException("The change in amount owed cannot be 0.");
+		}
+		
+		Member member = memberRepository.findMemberByLibCardNumber(libCardNumber);
+        
+        if (member == null) {
+            throw new IllegalArgumentException("No member with the library card number exists.");
+        }
+        
+        if (member.getFullName() != fullName) {
+        	throw new IllegalArgumentException("The library Card Number and the member name does not match");
+        }
+        
+        double oldAmountOwed = member.getAmountOwed();
+        double newAmountOwed = (oldAmountOwed + changeInAmount);
+        member.setAmountOwed(newAmountOwed);
+        memberRepository.save(member);
+		return member;
+	}
+	
+	@Transactional
+	public Member AddOrSubtractActiveLoans(Long libCardNumber, String fullName, int changeInActiveLoans) {
+		if (libCardNumber == null) {
+            throw new IllegalArgumentException("Library Card Number cannot be null or empty.");
+        }
+        
+		if (fullName == null) {
+            throw new IllegalArgumentException("The name cannot be null or empty.");
+        }
+		
+		if (changeInActiveLoans == 0) {
+			throw new IllegalArgumentException("The change in active loans cannot be 0.");
+		}
+		
+		Member member = memberRepository.findMemberByLibCardNumber(libCardNumber);
+        
+        if (member == null) {
+            throw new IllegalArgumentException("No member with the library card number exists.");
+        }
+        
+        if (member.getFullName() != fullName) {
+        	throw new IllegalArgumentException("The library Card Number and the member name does not match");
+        }
+        
+        int oldActiveLoans = member.getActiveLoans();
+        int newActiveLoans = (oldActiveLoans + changeInActiveLoans);
+        member.setActiveLoans(newActiveLoans);
+        memberRepository.save(member);
+		return member;
+	}
 	
 	@Transactional
 	 public void deleteMember(Long libCardNumber) {
@@ -288,4 +352,5 @@ public class MemberService {
 		}
 		return resultList;
 	}
+	
 }

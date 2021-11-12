@@ -89,27 +89,12 @@ public class MovieService {
 		}
 	
 					//BUSINESS METHODS//	
-		
-		@Transactional
-		
-		
-		
-		//call methods from libraryItem
-		public void reserveMovie() {
-			
-		}
-		
-		public void returnMovie() {
-			
-		}
-		
-		public void checkedMovie() {
-		
-		} 
+
 		
 		public List<Movie> getAllMovies(){
 			return toList(movieRepository.findAll());
 		}
+		
 		
 		@Transactional
 		public List<Movie> getMoviesbyPublishedYear(Integer year) {

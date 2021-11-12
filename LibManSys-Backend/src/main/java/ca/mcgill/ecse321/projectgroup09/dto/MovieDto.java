@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
+import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Movie;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 
@@ -34,6 +35,10 @@ public class MovieDto {
 			this.runtime = runtime;
 			
 					}
+	  
+		public static MovieDto convertToDto(Movie movie) {
+			return new MovieDto();
+		}
 	
 		public void setTitle(String aTitle) {
 			this.title= aTitle;

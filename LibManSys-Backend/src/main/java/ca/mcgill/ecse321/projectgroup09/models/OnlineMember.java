@@ -11,7 +11,7 @@ public class OnlineMember extends Member{
 	  private String memberUsername;
 
 	  
-	  @Override
+	    @Override
 		public void setFullName(String aFullName) {
 			super.setFullName(aFullName); 
 		}

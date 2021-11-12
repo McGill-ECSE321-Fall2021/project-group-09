@@ -3,6 +3,9 @@ package ca.mcgill.ecse321.projectgroup09.dto;
 import java.sql.Time;
 import java.time.DayOfWeek;
 
+import ca.mcgill.ecse321.projectgroup09.models.Library;
+import ca.mcgill.ecse321.projectgroup09.models.Schedule;
+import java.util.*;
 /**
  * Data Transfer Object class for Schedule model class.
  * Holds all attributes of Schedule class.
@@ -109,4 +112,14 @@ public class ScheduleDto {
 	public void setLibrarian(LibrarianDto librarian) {
 		this.librarian = librarian;
 	}
+	
+	public static ScheduleDto convertToDto(Schedule schedule) {
+		return new ScheduleDto();
+	}
+	
+	public static List<ScheduleDto> convertToDto(List<Schedule> schedule) {
+		List<ScheduleDto> scheduleDto = new ArrayList<ScheduleDto>();
+		return scheduleDto;
+	}
+	
 }

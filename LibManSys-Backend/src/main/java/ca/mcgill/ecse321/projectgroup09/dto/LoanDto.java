@@ -1,10 +1,13 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 public class LoanDto {
 	// Loan Attributes
@@ -49,9 +52,9 @@ public class LoanDto {
 	 * set all attributes of new LoanDto object. See BookDto for example.
 	 * @param aBorrowedData
 	 */
-	public LoanDto(Date aBorrowedData) {
+	/*public LoanDto(Date aBorrowedData) {
 		
-	}
+	}*/
 	
 	/**
 	 * TODO implement
@@ -61,6 +64,11 @@ public class LoanDto {
 	public static LoanDto convertToDto(Loan loan) {
 		return new LoanDto();
 	}
+	
+	/*public List <LoanDto> convertToDtoList(List<Loan> loans) {
+
+		return new List <LoanDto()>;
+	}*/
 
 	public Date getBorrowedDate() {
 		return borrowedDate;

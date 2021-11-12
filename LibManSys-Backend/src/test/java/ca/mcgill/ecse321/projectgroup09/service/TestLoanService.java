@@ -104,22 +104,7 @@ public class TestLoanService {
 	        	else {return null;}
 
 		        });
-		 
-		/* lenient().when(librarianRepository.findLibrarianByEmployeeIDNum(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
-				if (invocation.getArgument(0).equals(librarianId)) {
-					Librarian librarian = new Librarian(); 
-					librarian.setemployeeIDNum(librarianId);
-					librarian.setFullName(librarianName); 
-					librarian.setLibrarianEmail(librarianEmail);
-					librarian.setLibrarianPassword(librarianPass);
-					librarian.setLibrarianUsername(librarianUser);
-					return librarian;
-				}
-				else {
-					return null;
-				}
 
-			});*/
 		 
 		/* lenient().when(loanRepository.findLoanByLibrarian(any(Librarian.class))).thenAnswer((InvocationOnMock invocation) ->
 		 {
@@ -198,7 +183,7 @@ public void deleteLoan() {
 }
 	// Test Add Late Fees //
 
-	// Test Remove Late Fees //
+	// Test Change Late Fees //
 
 	// Test Change Loan Status //
 
