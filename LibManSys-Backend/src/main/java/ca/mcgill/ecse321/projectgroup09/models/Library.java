@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
+import java.util.*;
 
 //JPA tags added
 
@@ -30,7 +31,6 @@ public class Library
 
 
 	//Library Associations
-
 	@ElementCollection
 	private List<Account> accounts;
 
@@ -43,6 +43,13 @@ public class Library
 	@ElementCollection
 	private List<Schedule> schedules;
 
+
+	
+	public Library() {
+		this.schedules = new ArrayList<Schedule>();
+		this.libraryItems = new ArrayList<LibraryItem>();
+		this.accounts = new ArrayList<Account>();
+	}
 	
 	//Methods
 	public void setLibraryName(String aLibraryName)

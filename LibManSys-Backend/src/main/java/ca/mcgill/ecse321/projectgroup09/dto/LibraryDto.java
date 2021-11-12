@@ -1,9 +1,12 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-
+import ca.mcgill.ecse321.projectgroup09.models.Account;
 import ca.mcgill.ecse321.projectgroup09.models.Library;
+import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
+import ca.mcgill.ecse321.projectgroup09.models.Schedule;
 
 
 public class LibraryDto {
@@ -18,6 +21,22 @@ public class LibraryDto {
 	private List<LibraryItemDto> libraryItems;
 	private List<ScheduleDto> schedules;
 	
+	public LibraryDto(String libName, String libEmail, String phoneNo, String libAddress, List<Schedule> schedules, List<Account> accounts, List<LibraryItem> libraryItems) {
+		this.libraryAddress = libAddress;
+		this.libraryEmail = libEmail;
+		this.libraryName = libName; 
+		this.libraryPhone = phoneNo;
+		
+
+		List<ScheduleDto> scheduleDto = schedules.stream().map(schedule -> ScheduleDto.convertToDto(schedule)).collect(Collectors.toList());
+		this.schedules = scheduleDto;
+		
+//		List<AccountDto> accountDto = accounts.stream().map(account -> AccountDto.convertToDto(account)).collect(Collectors.toList());
+//		this.accounts = accountDto;
+		
+		List<LibraryItemDto> libraryItemDto = libraryItems.stream().map(libraryItem -> LibraryItemDto.convertToDto(libraryItem)).collect(Collectors.toList());
+		this.libraryItems = libraryItemDto;
+	}
 	
 	public String getLibraryName()
 	{
@@ -66,7 +85,14 @@ public class LibraryDto {
 	}
 	
 	public static LibraryDto convertToDto(Library library) {
-		return new LibraryDto();
+		LibraryDto libraryDto = new LibraryDto(
+				library.getLibraryName(),
+				library.getLibraryEmail(),
+				library.getLibraryPhone(),
+				library.getLibraryAddress(), library.getSchedules(), library.getAccounts(), library.getLibraryItems()
+				);
+		
+		return libraryDto; 
 	}
 }
 

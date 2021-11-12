@@ -16,6 +16,8 @@ import java.util.TimerTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import ca.mcgill.ecse321.projectgroup09.dao.BookingRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
 import ca.mcgill.ecse321.projectgroup09.models.Booking;
@@ -32,9 +34,12 @@ public class MemberService {
 	
 	@Autowired 
 	private LoanRepository loanRepository;
+	
+	@Autowired 
+	private BookingRepository bookingRepository;
 
 	@Transactional
-	public Member createMember(String fullName, String address, String phoneNumber, double amountOwed, int activeLoans) {
+	public Member createMember(String fullName, String address, String phoneNumber) {
 		
 		if (address == null || address == "" || address.equals("undefined")) {
             throw new IllegalArgumentException("Address cannot be null or empty");
@@ -52,10 +57,6 @@ public class MemberService {
             throw new IllegalArgumentException("Full Name cannot be null or empty");
         }
 		
-		if(activeLoans < 0) {
-			throw new IllegalArgumentException("The number of active loans cannot be negative.");
-		}
-		
 		Long libCardNumber = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 	
 		Member member = new Member();
@@ -64,8 +65,8 @@ public class MemberService {
 		member.setPhoneNumber(phoneNumber);
         member.setLibCardNumber(libCardNumber);
         member.setIsVerifiedResident(false);
-        member.setAmountOwed(amountOwed);
-        member.setActiveLoans(activeLoans);
+        member.setAmountOwed(0);
+        member.setActiveLoans(0);
         memberRepository.save(member);
         return member;
 	}
@@ -86,12 +87,12 @@ public class MemberService {
 	    }
 	
 	@Transactional
-	public Member getMemberByBooking(Booking booking) {
-		if (booking == null) {
+	public Member getMemberByBookingID(Long bookingID) {
+		if (bookingID == null) {
             throw new IllegalArgumentException("Booking cannot be null or empty");
         }
 		
-		Member member = memberRepository.findMemberByBookings(booking);
+		Member member = (memberRepository.findMemberByBookings(bookingRepository.findBookingByBookingID(bookingID)));
 		
 		if (member == null) {
 			 throw new IllegalArgumentException("No member with the booking exists");
@@ -101,12 +102,12 @@ public class MemberService {
 	}
 	
 	@Transactional
-	public Member getMemberByLoan(Loan loan) {
-		if (loan == null) {
+	public Member getMemberByLoanID(Long loanID) {
+		if (loanID == null) {
             throw new IllegalArgumentException("Loan cannot be null or empty");
         }
 		
-		Member member = memberRepository.findMemberByLoans(loan);
+		Member member = (memberRepository.findMemberByLoans(loanRepository.findLoanByLoanID(loanID)));
 		
 		if (member == null) {
 			 throw new IllegalArgumentException("No member with the loan exists");
@@ -255,7 +256,7 @@ public class MemberService {
 	}
 	
 	@Transactional
-	public Member AddOrSubtractAmountOwed(Long libCardNumber, String fullName, double changeInAmount) {
+	public Member updateAmountOwed(Long libCardNumber, String fullName, double changeInAmount) {
 		if (libCardNumber == null) {
             throw new IllegalArgumentException("Library Card Number cannot be null or empty.");
         }
@@ -286,7 +287,7 @@ public class MemberService {
 	}
 	
 	@Transactional
-	public Member AddOrSubtractActiveLoans(Long libCardNumber, String fullName, int changeInActiveLoans) {
+	public Member updateActiveLoans(Long libCardNumber, String fullName, int changeInActiveLoans) {
 		if (libCardNumber == null) {
             throw new IllegalArgumentException("Library Card Number cannot be null or empty.");
         }
@@ -317,12 +318,16 @@ public class MemberService {
 	}
 	
 	@Transactional
-	 public void deleteMember(Long libCardNumber) {
+	 public Member deleteMember(Long libCardNumber) {
 			Member member = memberRepository.findMemberByLibCardNumber(libCardNumber);
+			
 			if (member == null) {
 				throw new IllegalArgumentException("Member does not exist");
 			}
+			
 			memberRepository.delete(member);
+			return member;
+			
 		}
 	
 	@Transactional

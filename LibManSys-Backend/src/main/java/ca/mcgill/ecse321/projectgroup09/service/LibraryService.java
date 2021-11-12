@@ -14,27 +14,22 @@ public class LibraryService {
 	@Autowired 
 	private LibraryRepository libraryRepository; 
 	
+	@Autowired ScheduleRepository scheduleRepository; 
+	
 	@Transactional
-	public Library createLibrary(String address, String phoneNo, String email, String libraryName, List<Schedule> schedules) {
+	public Library createLibrary(String address, String phoneNo, String email, String libraryName) {
 		Library library = new Library();
 		library.setLibraryEmail(email);
 		library.setLibraryName(libraryName);
 		library.setLibraryPhone(phoneNo);
 		library.setLibraryAddress(address);
 		
-		
-		//*********REPLACE WITH DEFAULT LIB HOURS****************
-		// setup opening hours and closing hours 
-		///get default schedule method 
-		library.setSchedules(schedules);
-		
 		libraryRepository.save(library);
 		return library;
 	}
 	
-
 	@Transactional
-	public Library updateLibraryHours(long headLibrarianID,  List<Schedule> schedules, String libraryName) {
+	public Library setLibraryHours(long headLibrarianID,  List<Schedule> schedules, String libraryName) {
 		Library library = libraryRepository.findLibraryByLibraryName(libraryName);
 		library.setSchedules(schedules);
 		libraryRepository.save(library);
@@ -43,37 +38,56 @@ public class LibraryService {
 	}
 
 	@Transactional
-	public Library updateLibraryEmail (Library library, String email) {
+	public Library updateLibraryEmail (String name, String email) {
+		Library library = libraryRepository.findLibraryByLibraryName(name);
+		
+		if (email == null) {
+			throw new IllegalArgumentException("Please enter a new email.");
+		}
 		library.setLibraryEmail(email);
 		libraryRepository.save(library);
 		return library;		
 	}
 	
-	@Transactional
-	public Library updateLibraryName (Library library, String name) {
-		library.setLibraryEmail(name);
-		libraryRepository.save(library);
-		return library;		
-	}
 	
 	@Transactional 
-	public Library updateLibraryPhoneNo (Library library, String phoneNo) { 
+	public Library updateLibraryPhoneNo (String name, String phoneNo) { 
+		Library library = libraryRepository.findLibraryByLibraryName(name);
+		
+		if (phoneNo == null) {
+			throw new IllegalArgumentException("Please enter a new phone number.");
+		}
+		
 		library.setLibraryPhone(phoneNo);
 		libraryRepository.save(library);
 		return library;
 	}
 	
 	@Transactional 
-	public List<Schedule> getLibraryHours(Library library) {
+	public List<Schedule> getLibraryHours(String name) {
+		Library library = libraryRepository.findLibraryByLibraryName(name);
 		List<Schedule> weeklyHours = library.getSchedules(); 
 		return weeklyHours; 
 	}
 	
-	@Transactional
-	public void setLibraryHours(Library library, List<Schedule> schedules) {
-		library.setSchedules(schedules);
-		libraryRepository.save(library);
+	@Transactional 
+	public List<Schedule> getLibrarySchedules() {
+		
+		List<Schedule> weeklySchedule = new ArrayList<Schedule>();
+		
+		for (long i =0; i < 7; i++) {
+			weeklySchedule.add(scheduleRepository.findScheduleByScheduleID(i+1));
+		}
+		
+		return weeklySchedule; 
 	}
+	
+//	@Transactional
+//	public void setLibraryHours(String name, List<Schedule> schedules) {
+//		Library library = libraryRepository.findLibraryByLibraryName(name);
+//		library.setSchedules(schedules);
+//		libraryRepository.save(library);
+//	}
 	
 	@Transactional 
 	public Library deleteLibrary(String name) {

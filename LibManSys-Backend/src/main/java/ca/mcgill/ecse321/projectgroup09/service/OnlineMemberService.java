@@ -4,8 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.projectgroup09.dao.OnlineMemberRepository;
-import ca.mcgill.ecse321.projectgroup09.models.Booking;
-import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 
@@ -15,7 +13,7 @@ public class OnlineMemberService extends MemberService {
 	private OnlineMemberRepository onlineMemberRepository;
 
 	@Transactional
-	public OnlineMember createMember(String fullName, String address, String phoneNumber, double amountOwed, int activeLoans, String memberEmail, String memberPassword, String memberUsername) {
+	public OnlineMember createMember(String fullName, String address, String phoneNumber, String memberEmail, String memberPassword, String memberUsername) {
 		
 		if (memberEmail == null || memberEmail == ""|| memberEmail.equals("undefined")) {
 	        throw new IllegalArgumentException("Email Address cannot be null or empty");
@@ -40,7 +38,7 @@ public class OnlineMemberService extends MemberService {
 		}
 		
 		
-		OnlineMember onlineMember = (OnlineMember) super.createMember(fullName, address, phoneNumber, amountOwed, activeLoans);
+		OnlineMember onlineMember = (OnlineMember) super.createMember(fullName, address, phoneNumber);
 		onlineMember.setMemberEmail(memberEmail);
 		onlineMember.setMemberPassword(memberPassword);
 		onlineMember.setMemberUsername(memberUsername);
@@ -56,14 +54,14 @@ public class OnlineMemberService extends MemberService {
 
 	@Transactional
 	@Override
-	public OnlineMember getMemberByBooking(Booking booking) {
-		return (OnlineMember)super.getMemberByBooking(booking);
+	public OnlineMember getMemberByBookingID(Long bookingID) {
+		return (OnlineMember)super.getMemberByBookingID(bookingID);
 	}
 	
 	@Transactional
 	@Override
-	public OnlineMember getMemberByLoan(Loan loan) {
-		return (OnlineMember)super.getMemberByLoan(loan);
+	public OnlineMember getMemberByLoanID(Long loanID) {
+		return (OnlineMember)super.getMemberByLoanID(loanID);
 	}
 	
 	@Transactional
@@ -108,20 +106,21 @@ public class OnlineMemberService extends MemberService {
 	
 	@Transactional
 	@Override
-	public OnlineMember AddOrSubtractAmountOwed(Long libCardNumber, String fullName, double changeInAmount) {
-		return (OnlineMember) super.AddOrSubtractAmountOwed(libCardNumber, fullName, changeInAmount);
+	public OnlineMember updateAmountOwed(Long libCardNumber, String fullName, double changeInAmount) {
+		return (OnlineMember) super.updateAmountOwed(libCardNumber, fullName, changeInAmount);
 	}
 	
 	@Transactional
 	@Override
-	public OnlineMember AddOrSubtractActiveLoans(Long libCardNumber, String fullName, int changeInActiveLoans) {
-		return (OnlineMember) super.AddOrSubtractActiveLoans(libCardNumber, fullName, changeInActiveLoans);
+	public OnlineMember updateActiveLoans(Long libCardNumber, String fullName, int changeInActiveLoans) {
+		return (OnlineMember) super.updateActiveLoans(libCardNumber, fullName, changeInActiveLoans);
 	}
 	
 	@Transactional
 	@Override
-	 public void deleteMember(Long libCardNumber) {
-		 super.deleteMember(libCardNumber);
+	 public OnlineMember deleteMember(Long libCardNumber) {
+		 return (OnlineMember) super.deleteMember(libCardNumber);
+		 
 	}
 	
 	public OnlineMember updateOnlineMemberPassword(Long libCardNumber, String memberUsername, String old_memberPassword, String new_memberPassword) {

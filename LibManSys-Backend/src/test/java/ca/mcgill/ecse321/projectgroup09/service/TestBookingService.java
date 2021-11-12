@@ -124,7 +124,7 @@ public class TestBookingService {
 
 		lenient().when(bookingRepository.findBookingByBookingID(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
 			if (invocation.getArgument(0).equals(BOOKING_ID)) {
-				Booking booking = new Booking(); 
+				Booking booking = new Booking();  
 				booking.setBookingID(BOOKING_ID);
 				
 				booking.setBookingDate(java.sql.Date.valueOf(DATE));
@@ -223,7 +223,7 @@ public class TestBookingService {
 		lenient().when(memberRepository.save(any(Member.class))).thenAnswer(returnParameterAsAnswer);
 		lenient().when(librarianRepository.save(any(Librarian.class))).thenAnswer(returnParameterAsAnswer);
 	}
-
+ 
 	
 	@Test 
 	public void createBooking() { 
@@ -241,7 +241,6 @@ public class TestBookingService {
 			booking = bookingService.createBooking(startTime, endTime, bookingID, bookingDate, memberID, librarianID);
 		}
 		catch (IllegalArgumentException e) {
-			System.out.println(e);
 			fail();
 			
 		}
@@ -293,7 +292,6 @@ public class TestBookingService {
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, END_TIME, DATE);
 	}
 	catch (IllegalArgumentException e) {
-		System.out.println(e);
 		fail();
 		
 	}
@@ -313,8 +311,7 @@ public class TestBookingService {
 	try { 
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, null, null);
 	}
-	catch (IllegalArgumentException e) {
-		System.out.println(e);
+	catch (IllegalArgumentException e) { 
 		fail();
 		
 	}

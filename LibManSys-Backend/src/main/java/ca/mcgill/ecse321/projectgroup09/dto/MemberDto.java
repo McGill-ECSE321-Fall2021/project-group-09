@@ -9,7 +9,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 
-public class MemberDto {
+public class MemberDto extends AccountDto {
 	// Account attributes
 	private String fullName;	
 	// Member Attributes
