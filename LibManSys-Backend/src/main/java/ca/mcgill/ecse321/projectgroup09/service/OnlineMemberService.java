@@ -5,14 +5,15 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.projectgroup09.dao.BookingRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.OnlineMemberRepository;
-import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 
+@Service
 public class OnlineMemberService extends MemberService {
 	
 	@Autowired
