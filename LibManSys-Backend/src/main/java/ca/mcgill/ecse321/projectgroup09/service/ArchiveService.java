@@ -71,7 +71,7 @@ public class ArchiveService {
 		
 		Archive archive = archiveRepo.findArchiveBylibraryItemID(libraryItemId);
 		if (archive == null) {
-			throw new IllegalStateException("Could not find a book with the specified id (id: " + libraryItemId + ").");
+			throw new IllegalStateException("Could not find an archive with the specified id (id: " + libraryItemId + ").");
 		}
 		
 		if (title != null) {
