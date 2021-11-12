@@ -275,7 +275,13 @@ public void testGetLoan() {
 @Test
 public void testGetLoanFail() {
 	Long loanId = (long) -1;
-	Loan newLoan = loanService.getLoanbyId(loanId);
+	String error =null;
+	Loan newLoan = null;
+	try {
+	 newLoan = loanService.getLoanbyId(loanId);}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
 	assertNull(newLoan);
 	
 
@@ -585,7 +591,8 @@ public void TestGetLoansbyNonMember() {
 	catch (Exception e) {
 		error = (e.getMessage());
 	}
-	assertNotNull(newLoan);
+	assertNull(newLoan);
+	assertNotNull(error);
 
 
 }
