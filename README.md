@@ -27,3 +27,15 @@ For future references, 'Zarif Ashraf Zidane' & 'Zarif Ashraf' refer to the same 
 |Zarif Ashraf Zidane| Set up Heroku, additional UML edits           |         50     |
 
 All members also contributed to the detailed Use Case specifications, Persistence layer, and the test suite. 
+
+# Deliverable 2:
+| Member            | Tasks                                         | Effort (Hours) |
+|-------------------|-----------------------------------------------|----------------|
+|Abdullah Arafat    |Librarian and Head Librarian.                  |    3 + x.      |   
+|Christos Cunning   |Book, Schedule and Library Item classes.       |         44     |   
+|Omar Abdelaziz     |Archive, Newspaper, and Music Album classes.   |        7+4+rn  |   
+|Rajaa Boukhelif    |Loan and Movie classes.                        |        40      |   
+|Sneha Singh        |Library and Booking classes.                   |         44     |   
+|Zarif Ashraf Zidane|Member and Online member classes.              |     20 + x     |   
+
+Classes were split up between all six members and each member was responsible for the respective Service, Controller, ServiceTest, and DTO classes. 
