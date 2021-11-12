@@ -242,7 +242,7 @@ public class TestBookingService {
 			booking = bookingService.createBooking(startTime, endTime, bookingID, bookingDate, memberID, librarianID);
 		}
 		catch (IllegalArgumentException e) {
-			fail();		
+			fail(e.getMessage());		
 		}
 
 		assertNotNull(booking);
@@ -292,7 +292,7 @@ public class TestBookingService {
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, END_TIME, DATE);
 	}
 	catch (IllegalArgumentException e) {
-		fail();
+		fail(e.getMessage());
 		
 	}
 	assertNotNull(booking);
@@ -312,7 +312,7 @@ public class TestBookingService {
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, null, null);
 	}
 	catch (IllegalArgumentException e) { 
-		fail();
+		fail(e.getMessage());
 		
 	}
 	assertNotNull(booking);
