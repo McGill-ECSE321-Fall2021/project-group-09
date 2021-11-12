@@ -1,30 +1,35 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.lenient;
 
 import java.time.DayOfWeek;
-import java.util.*;
+import java.util.List;
 
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
-import ca.mcgill.ecse321.projectgroup09.models.*;
-import ca.mcgill.ecse321.projectgroup09.dao.*;
+import ca.mcgill.ecse321.projectgroup09.dao.BookingRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.LibrarianRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.LibraryRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.ScheduleRepository;
+import ca.mcgill.ecse321.projectgroup09.models.Booking;
+import ca.mcgill.ecse321.projectgroup09.models.Librarian;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
+import ca.mcgill.ecse321.projectgroup09.models.Schedule;
 
 @ExtendWith(MockitoExtension.class)
 public class TestBookingService {
@@ -78,27 +83,27 @@ public class TestBookingService {
 //	private static final String LIB_EMAIL = "lib@email.ca";
 	
 	
-	private static final long SCHED1 = 1; //Sunday (beginning of week)
-	private static final long SCHED2 = 2;
-	private static final long SCHED3 = 3;
-	private static final long SCHED4 = 4;
+//	private static final long SCHED1 = 1; //Sunday (beginning of week)
+//	private static final long SCHED2 = 2;
+//	private static final long SCHED3 = 3;
+//	private static final long SCHED4 = 4;
 	private static final long SCHED5 = 5;
-	private static final long SCHED6 = 6;
-	private static final long SCHED7 = 7; //Saturday (end of week)
+//	private static final long SCHED6 = 6;
+//	private static final long SCHED7 = 7; //Saturday (end of week)
 	
 	private static final String WEEKDAY_OPEN = "7:00:00";
 	private static final String WEEKDAY_CLOSE = "22:00:00";
 	
-	private static final String WEEKEND_OPEN = "7:30:00";
-	private static final String WEEKEND_CLOSE = "19:00:00"; 
-	
-	private static final DayOfWeek Monday = DayOfWeek.MONDAY; 
-	private static final DayOfWeek Tuesday = DayOfWeek.TUESDAY;
-	private static final DayOfWeek Wednesday = DayOfWeek.WEDNESDAY;
+//	private static final String WEEKEND_OPEN = "7:30:00";
+//	private static final String WEEKEND_CLOSE = "19:00:00"; 
+//	
+//	private static final DayOfWeek Monday = DayOfWeek.MONDAY; 
+//	private static final DayOfWeek Tuesday = DayOfWeek.TUESDAY;
+//	private static final DayOfWeek Wednesday = DayOfWeek.WEDNESDAY;
 	private static final DayOfWeek Thursday = DayOfWeek.THURSDAY;
-	private static final DayOfWeek Friday = DayOfWeek.FRIDAY;
-	private static final DayOfWeek Saturday = DayOfWeek.SATURDAY;
-	private static final DayOfWeek Sunday = DayOfWeek.SUNDAY;
+//	private static final DayOfWeek Friday = DayOfWeek.FRIDAY;
+//	private static final DayOfWeek Saturday = DayOfWeek.SATURDAY;
+//	private static final DayOfWeek Sunday = DayOfWeek.SUNDAY;
 
 
 
@@ -364,7 +369,7 @@ public class TestBookingService {
 	public void getBookingsByMember() {
 
 		List<Booking> bookings = null;
-		Long memberID = null;
+	
 		
 		try {
 			bookings = bookingService.getBookingsByMember(LIB_CARD_NO);
