@@ -32,6 +32,9 @@ public class TestLibraryService {
 
 	@Mock
 	private ScheduleRepository scheduleRepository;
+	
+	@Mock 
+	private HeadLibrarianRepository hlibrarianRepository; 
 
 	@InjectMocks
 	private LibraryService libraryService;
@@ -65,69 +68,80 @@ public class TestLibraryService {
 	private static final DayOfWeek Saturday = DayOfWeek.SATURDAY;
 	private static final DayOfWeek Sunday = DayOfWeek.SUNDAY;
 
+	
+	//Initializing Head Librarian Attributes for Mock 
+	private static final long EMPLOYEE_ID = 123456789; //librarian ID
+	private static final String LIBRARIAN_EMAIL = "librarian@email.com";
+	private static final String LIBRARIAN_PASSWORD = "ASDF12343";
+	private static final String LIBRARIAN_USERNAME = "username";
+	private static final String LIBRARIAN_FULLNAME = "Test Librarian";
+	private static final long HLIBRARIAN_ID = EMPLOYEE_ID;
+	
+	
 	@BeforeEach
 	public void setMockOutput() {
-		lenient().when(scheduleRepository.findScheduleByScheduleID(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
-			if (invocation.getArgument(0).equals(SCHED2)) {
-				Schedule monday = new Schedule();
-				monday.setscheduleID(SCHED2);
-				monday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-				monday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-				monday.setDayofWeek(Monday);
-				return monday;
-			} 
-			else if (invocation.getArgument(0).equals(SCHED3)) {
-				Schedule tuesday = new Schedule();
-				tuesday.setscheduleID(SCHED3);
-				tuesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-				tuesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-				tuesday.setDayofWeek(Tuesday);
-				return tuesday;
-			}
-			else if (invocation.getArgument(0).equals(SCHED4)) {
-				Schedule wednesday = new Schedule();
-				wednesday.setscheduleID(SCHED4);
-				wednesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-				wednesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-				wednesday.setDayofWeek(Wednesday);
-				return wednesday;
-			}
-			else if (invocation.getArgument(0).equals(SCHED5)) {
-				Schedule thursday = new Schedule();
-				thursday.setscheduleID(SCHED5);
-				thursday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-				thursday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-				thursday.setDayofWeek(Thursday);
-				return thursday;
-			}
-			else if (invocation.getArgument(0).equals(SCHED6)) {
-				Schedule friday = new Schedule();
-				friday.setscheduleID(SCHED6);
-				friday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-				friday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-				friday.setDayofWeek(Friday);
-				return friday;
-			}
-			else if (invocation.getArgument(0).equals(SCHED7)) {
-				Schedule saturday = new Schedule();
-				saturday.setscheduleID(SCHED7);
-				saturday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
-				saturday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
-				saturday.setDayofWeek(Saturday);
-				return saturday;
-			}
-			else if (invocation.getArgument(0).equals(SCHED1)) {
-				Schedule sunday = new Schedule();
-				sunday.setscheduleID(SCHED1);
-				sunday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
-				sunday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
-				sunday.setDayofWeek(Sunday);
-				return sunday;
-			}
-			else {
-				return null;
-			}
-		});
+//		lenient().when(scheduleRepository.findScheduleByScheduleID(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+//			if (invocation.getArgument(0).equals(SCHED2)) {
+//				Schedule monday = new Schedule();
+//				monday.setscheduleID(SCHED2);
+//				monday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+//				monday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+//				monday.setDayofWeek(Monday);
+//				return monday;
+//			} 
+//			else if (invocation.getArgument(0).equals(SCHED3)) {
+//				Schedule tuesday = new Schedule();
+//				tuesday.setscheduleID(SCHED3);
+//				tuesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+//				tuesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+//				tuesday.setDayofWeek(Tuesday);
+//				return tuesday;
+//			}
+//			else if (invocation.getArgument(0).equals(SCHED4)) {
+//				Schedule wednesday = new Schedule();
+//				wednesday.setscheduleID(SCHED4);
+//				wednesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+//				wednesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+//				wednesday.setDayofWeek(Wednesday);
+//				return wednesday;
+//			}
+//			else if (invocation.getArgument(0).equals(SCHED5)) {
+//				Schedule thursday = new Schedule();
+//				thursday.setscheduleID(SCHED5);
+//				thursday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+//				thursday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+//				thursday.setDayofWeek(Thursday);
+//				return thursday;
+//			}
+//			else if (invocation.getArgument(0).equals(SCHED6)) {
+//				Schedule friday = new Schedule();
+//				friday.setscheduleID(SCHED6);
+//				friday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+//				friday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+//				friday.setDayofWeek(Friday);
+//				return friday;
+//			}
+//			else if (invocation.getArgument(0).equals(SCHED7)) {
+//				Schedule saturday = new Schedule();
+//				saturday.setscheduleID(SCHED7);
+//				saturday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
+//				saturday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
+//				saturday.setDayofWeek(Saturday);
+//				return saturday;
+//			}
+//			else if (invocation.getArgument(0).equals(SCHED1)) {
+//				Schedule sunday = new Schedule();
+//				sunday.setscheduleID(SCHED1);
+//				sunday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
+//				sunday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
+//				sunday.setDayofWeek(Sunday);
+//				return sunday;
+//			}
+//			else {
+//				return null;
+//			}
+//		});
+		
 		lenient().when(libraryRepository.findLibraryByLibraryName(anyString())).thenAnswer((InvocationOnMock invocation) -> { 
 			if (invocation.getArgument(0).equals(LIBRARY_NAME)) {
 				Library library = new Library();
@@ -140,6 +154,24 @@ public class TestLibraryService {
 			else {
 				return null;
 			}
+		});
+		
+		lenient().when(hlibrarianRepository.findHeadLibrarianByManagerIDNum(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+			if (invocation.getArgument(0).equals(EMPLOYEE_ID)) {
+				HeadLibrarian hlibrarian = new HeadLibrarian(); 
+				hlibrarian.setemployeeIDNum(EMPLOYEE_ID);
+				hlibrarian.setFullName(LIBRARIAN_FULLNAME); 
+				hlibrarian.setLibrarianEmail(LIBRARIAN_EMAIL);
+				hlibrarian.setLibrarianPassword(LIBRARIAN_PASSWORD);
+				hlibrarian.setLibrarianUsername(LIBRARIAN_USERNAME);
+				hlibrarian.setmanagerIDNum(HLIBRARIAN_ID);
+				
+				return hlibrarian;
+			}
+			else {
+				return null;
+			}
+
 		});
 
 	}
@@ -195,18 +227,69 @@ public class TestLibraryService {
 		
 	}
 	
+	private ArrayList<Schedule> getNewLibrarySchedule() {
+		ArrayList<Schedule> libHours = new ArrayList<Schedule>();
+		String weekdayOpen = "08:00:00";
+		String weekdayClose = "22:00:00";
+		String weekendOpen = "09:30:00";
+		String weekendClose = "15:00:00";
+	 
+		//Create 7 schedules (one for each day of week)
+		Schedule monday = new Schedule();
+		monday.setDayofWeek(Monday);
+		libHours.add(monday);
+		
+		Schedule tuesday = new Schedule();
+		tuesday.setDayofWeek(Tuesday);
+		libHours.add(tuesday);
+		
+		Schedule wednesday = new Schedule();
+		wednesday.setDayofWeek(Wednesday);
+		libHours.add(wednesday);
+		
+		Schedule thursday = new Schedule();
+		thursday.setDayofWeek(Thursday);
+		libHours.add(thursday);
+		
+		Schedule friday = new Schedule();
+		friday.setDayofWeek(Friday);
+		libHours.add(friday);
+		
+		Schedule saturday = new Schedule();
+		saturday.setDayofWeek(Saturday);
+		saturday.setClosingTime(java.sql.Time.valueOf(weekendClose));
+		saturday.setOpeningTime(java.sql.Time.valueOf(weekendOpen));
+		libHours.add(saturday);
+		
+		Schedule sunday = new Schedule();
+		saturday.setDayofWeek(Sunday);
+		sunday.setClosingTime(java.sql.Time.valueOf(weekendClose));
+		sunday.setOpeningTime(java.sql.Time.valueOf(weekendOpen));
+		libHours.add(sunday);
+
+		for (int i = 0; i < 7; i++) {
+			libHours.get(i).setscheduleID((long) i+1);
+		}
+		for (int i = 1; i < 6; i++) {
+			libHours.get(i).setClosingTime(java.sql.Time.valueOf(weekdayClose));
+			libHours.get(i).setOpeningTime(java.sql.Time.valueOf(weekdayOpen));
+		}
+		return libHours;
+		
+	}
+	
 	@Test
-	public void createLibrary() {
+	public void createLibraryWithDefaultSchedule() {
 		String libName = "Test Library";
 		String libPhone = "905-999-9999";
 		String libAddress = "123 Lib Street"; 
 		String libEmail = "lib@email.ca";
-		List<Schedule> libHours = getLibrarySchedule();
+		//List<Schedule> libHours = getLibrarySchedule();
 
 		Library library = null; 
 		
 		try {
-			library = libraryService.createLibrary(libAddress, libPhone, libEmail, libName, libHours);
+			library = libraryService.createLibrary(libAddress, libPhone, libEmail, libName/* libHours*/);
 		}
 		catch (IllegalArgumentException e) {
 			System.out.println(e);
@@ -215,7 +298,21 @@ public class TestLibraryService {
 		
 		assertNotNull(library);
 		assertEquals(libName, library.getLibraryName());
-		assertEquals(libHours.get(3).getDayofWeek(), library.getSchedules().get(3).getDayofWeek());
+		//assertEquals(libHours.get(3).getDayofWeek(), library.getSchedules().get(3).getDayofWeek());
+	}
+	
+	@Test 
+	public void updateLibraryHours() {
+		String libName = "Test Library";
+		List<Schedule> libHours = getNewLibrarySchedule();
+		Library library = null; 
+		
+		try {
+			library = libraryService.updateLibraryHours(HLIBRARIAN_ID, getLibrarySchedule(), libName);
+		}
+		catch (IllegalArgumentException e){
+			fail();
+		}
 	}
 	
 	@Test 

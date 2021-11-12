@@ -24,11 +24,11 @@ public class LibraryController {
 	private LibraryService libraryService; 
 	
 
-	@PostMapping(value = {"/library/create", "/library/create/"})
+	@PostMapping(value = {"/library/create/{libraryName}/{address}/{phoneNo}/{email}", "/library/create/{libraryName}/{address}/{phoneNo}/{email}/"})
 	public LibraryDto createLibrary(@PathVariable("address") String address, @PathVariable("phoneNo") String phoneNo, @PathVariable("email") String email,
-			@PathVariable("libraryName") String libraryName, @PathVariable("schedules") List<Schedule> schedules) {
+			@PathVariable("libraryName") String libraryName) {
 		
-		Library library = libraryService.createLibrary(address, phoneNo, email, libraryName, schedules);
+		Library library = libraryService.createLibrary(address, phoneNo, email, libraryName);
 		return LibraryDto.convertToDto(library);
 	}
 
@@ -42,26 +42,26 @@ public class LibraryController {
 	}
 
 	@PostMapping(value = {"/library/update/email", "/library/update/email/"})
-	public LibraryDto updateLibraryEmail (@PathVariable("library") Library library, @PathVariable("email") String email) {
-		libraryService.updateLibraryEmail(library, email);
+	public LibraryDto updateLibraryEmail (@PathVariable("name") String name, @PathVariable("email") String email) {
+		Library library = libraryService.updateLibraryEmail(name, email);
 		return LibraryDto.convertToDto(library);	
 	}
 
 	@PostMapping(value = {"/library/update/name", "/library/update/name/"})
-	public LibraryDto updateLibraryName (Library library, String name) {
-		libraryService.updateLibraryName(library, name);
+	public LibraryDto updateLibraryName (@PathVariable("oldName") String oldName, @PathVariable("name") String name) {
+		Library library = libraryService.updateLibraryName(oldName, name);
 		return LibraryDto.convertToDto(library);	
 	}
 
 	@PostMapping(value = {"/library/update/phoneNo", "/library/update/phoneNo/"})
-	public LibraryDto updateLibraryPhoneNo (@PathVariable("library") Library library, @PathVariable("phoneNo") String phoneNo) { 
-		libraryService.updateLibraryPhoneNo(library, phoneNo);
+	public LibraryDto updateLibraryPhoneNo (@PathVariable("name") String name, @PathVariable("phoneNo") String phoneNo) { 
+		Library library = libraryService.updateLibraryPhoneNo(name, phoneNo);
 		return LibraryDto.convertToDto(library);
 	}
 
 	@GetMapping(value = {"/library/hours", "/library/hours/"})
-	public List<ScheduleDto> getLibraryHours(@PathVariable("library") Library library) {
-		return ScheduleDto.convertToDto(libraryService.getLibraryHours(library));
+	public List<ScheduleDto> getLibraryHours(@PathVariable("name") String name) {
+		return ScheduleDto.convertToDto(libraryService.getLibraryHours(name));
 	}
 
 //	@PostMapping(value = {"/library/create", "/library/create/"})
