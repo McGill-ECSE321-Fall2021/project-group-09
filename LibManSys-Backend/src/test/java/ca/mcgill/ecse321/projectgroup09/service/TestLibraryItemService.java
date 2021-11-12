@@ -9,7 +9,10 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,13 +28,16 @@ import ca.mcgill.ecse321.projectgroup09.dao.LibrarianRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
+import ca.mcgill.ecse321.projectgroup09.models.Archive;
 import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
+import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.models.Movie;
+import ca.mcgill.ecse321.projectgroup09.models.MusicAlbum;
 
 @ExtendWith(MockitoExtension.class)
 public class TestLibraryItemService {
@@ -64,23 +70,132 @@ public class TestLibraryItemService {
 	
 	// LI3 = LibraryItem 3 (Music Album)
 	private static final Long LI3_ID = 903L;
-	// TODO
+	private static final String LI3_TITLE = "MONTERO";
+	private static final ItemStatus LI3_STATUS = ItemStatus.CheckedOut;
+	
+	// LI4 = LibraryItem 4 (Archive)
+	private static final Long LI4_ID = 904L;
+	private static final String LI4_TITLE = "ARchive title?? wtf are archives called";
+	private static final ItemStatus LI4_STATUS = ItemStatus.LibraryOnly;
+	
+	/** LI5 = Library Item 5 (Book) for renew test */
+	private static final Long LI5_ID = 905L;
+	private static final String LI5_TITLE = "Stewart Calculus";
+	private static final ItemStatus LI5_STATUS = ItemStatus.CheckedOut;
+	
+	/** LI6 - library item 6 (MusicAlbum) for renew with overdue loan */
+	private static final Long LI6_ID = 906L;
+	private static final String LI6_TITLE = "The Life of Pablo";
+	private static final ItemStatus LI6_STATUS = ItemStatus.CheckedOut;
+	
+	/** LI7 - library item 7 (Book) (corresponds to M7 and L1 and LOAN7) for return test */
+	private static final Long LI7_ID = 907L;
+	private static final String LI7_TITLE = "Lord of the Flies";
+	private static final ItemStatus LI7_STATUS = ItemStatus.CheckedOut;
+	
+	
+	/** Loan 5 - for test renew  - corresponds with member 5 and li5 */
+	private static final Long LOAN5_ID = 705L;
+	private static final LoanStatus LOAN5_STATUS = LoanStatus.Active;
+	
+	/** Loan 6 - for test renew with overdue loan */
+	private static final Long LOAN6_ID = 706L;
+	private static final LoanStatus LOAN6_STATUS = LoanStatus.Overdue;
+	
+	/** Loan 7 - see LI7 */
+	private static final Long LOAN7_ID = 705L;
+	private static final LoanStatus LOAN7_STATUS = LoanStatus.Active;
+	
 	
 	// M1 = Member 1
-	private static final Long M1_ID = 800L;
-	private static final int M1_ACTIVE_LOANS = 1;
+	private static final Long M1_ID = 801L;
+	private static final int M1_ACTIVE_LOANS = 0;
+	
+	// M2 = Member 2
+	private static final Long M2_ID = 802L;
+	private static final int M2_ACTIVE_LOANS = 10;
+	
+	/** M5 = Member 5 (renew test) */
+	private static final Long M5_ID = 805L;
+	private static final int M5_ACTIVE_LOANS = 1;
+	
+	/** M6 = Member 6 (renew overdue loan) */
+	private static final Long M6_ID = 806L;
+	private static final int M6_ACTIVE_LOANS = 1;
+	
+	/** M7 - see LI7 */
+	private static final Long M7_ID = 807L;
+	private static final int M7_ACTIVE_LOANS = 1;
+	
 	
 	// L1 = Librarian 1
-	private static final Long L1_ID = 850L;
-
+	private static final Long L1_ID = 851L;
+	
+	
 	// invalid ID
 	private static final Long NAN_ID = -1L;
 	// invalid title
 	private static final String NAN_TITLE = "";
 	
+	private static final Date TODAY = Date.valueOf(LocalDate.now());
+
+	
 	// Setup mocks
 	@BeforeEach
 	public void setMockOutput() {
+		// renew test
+		Member m5 = new Member();
+		m5.setLibCardNumber(M5_ID);
+		m5.setActiveLoans(M5_ACTIVE_LOANS);
+		LibraryItem li5 = new Book();
+    	li5.setlibraryItemID(LI5_ID);
+    	li5.setTitle(LI5_TITLE);
+    	li5.setItemStatus(LI5_STATUS);
+    	//li.setMember(null);
+    	Loan loan5 = new Loan();
+    	loan5.setloanID(LOAN5_ID);
+    	loan5.setLoanStatus(LOAN5_STATUS);
+    	loan5.setLibraryItem(li5);
+    	loan5.setMember(m5);
+    	List<Loan> loanList = Arrays.asList(loan5);
+    	li5.setLoans(loanList);
+    	m5.setLoans(loanList);
+    	
+    	// renew overdue loan test
+    	Member m6 = new Member();
+    	m6.setLibCardNumber(M6_ID);
+    	m6.setActiveLoans(M6_ACTIVE_LOANS);
+    	LibraryItem li6 = new MusicAlbum();
+    	li6.setlibraryItemID(LI6_ID);
+    	li6.setTitle(LI6_TITLE);
+    	li6.setItemStatus(LI6_STATUS);
+    	Loan loan6 = new Loan();
+    	loan6.setloanID(LOAN6_ID);
+    	loan6.setLoanStatus(LOAN6_STATUS);
+    	loan6.setLibraryItem(li6);
+    	loan6.setMember(m6);
+    	loanList = Arrays.asList(loan6);
+    	li6.setLoans(loanList);
+    	m6.setLoans(loanList);
+    	
+    	// return test
+    	// library item 7 (corresponds to M7 and L1 and LOAN5) 
+    	Member m7 = new Member();
+    	m7.setLibCardNumber(M7_ID);
+    	m7.setActiveLoans(M7_ACTIVE_LOANS);
+    	LibraryItem li7 = new Book();
+    	li7.setlibraryItemID(LI7_ID);
+    	li7.setTitle(LI7_TITLE);
+    	li7.setItemStatus(LI7_STATUS);
+    	Loan loan7 = new Loan();
+    	loan7.setloanID(LOAN7_ID);
+    	loan7.setLoanStatus(LOAN7_STATUS);
+    	loan7.setLibraryItem(li7);
+    	loan7.setMember(m7);
+    	loanList = Arrays.asList(loan7);
+    	li7.setLoans(loanList);
+    	m7.setLoans(loanList);
+		
 		// setup mock library item to be checked out
 		lenient().when(libraryItemRepo.findLibraryItemByLibraryItemID(anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
 	        if(invocation.getArgument(0).equals(LI1_ID)) {
@@ -98,8 +213,25 @@ public class TestLibraryItemService {
 	            //li.setMember(null);
 	            return li;
 	        } else if (invocation.getArgument(0).equals(LI3_ID)) {
-	        	// TODO
-	        	return null;
+	        	LibraryItem li = new MusicAlbum();
+	        	li.setlibraryItemID(LI3_ID);
+	        	li.setTitle(LI3_TITLE);
+	        	li.setItemStatus(LI3_STATUS);
+	        	//li.setMember(null);
+	        	return li;
+	        } else if (invocation.getArgument(0).equals(LI4_ID)) {
+	        	LibraryItem li = new Archive();
+	        	li.setlibraryItemID(LI4_ID);
+	        	li.setTitle(LI4_TITLE);
+	        	li.setItemStatus(LI4_STATUS);
+	        	//li.setMember(null);
+	        	return li;
+	        } else if (invocation.getArgument(0).equals(LI5_ID)) {
+	        	// created above
+	        	return li5;
+	        } else if (invocation.getArgument(0).equals(LI6_ID)) {
+	        	// created above
+	        	return li6;
 	        } else {
 	            return null;
 	        }
@@ -127,6 +259,15 @@ public class TestLibraryItemService {
 	            member.setLibCardNumber(M1_ID);
 	            member.setActiveLoans(M1_ACTIVE_LOANS);
 	            return member;
+	        } else if(invocation.getArgument(0).equals(M2_ID)) {
+	            Member member = new Member();
+	            member.setLibCardNumber(M2_ID);
+	            member.setActiveLoans(M2_ACTIVE_LOANS);
+	            return member;
+	        } else if(invocation.getArgument(0).equals(M5_ID)) {
+	            return m5;
+	        } else if(invocation.getArgument(0).equals(M6_ID)) {
+	            return m6;
 	        } else {
 	            return null;
 	        }
@@ -199,11 +340,12 @@ public class TestLibraryItemService {
 		Member member = memberRepo.findMemberByLibCardNumber(M1_ID);
 		
 		try {
-			libraryItemService.reserveLibraryItem(member, book);
+			book = (Book) libraryItemService.reserveLibraryItem(M1_ID, LI1_ID);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-		
+		// get updated info
+		member = book.getMember();
 		// Check reserve list has been updated
 		List<LibraryItem> reserved = member.getReserved();
 		
@@ -215,12 +357,9 @@ public class TestLibraryItemService {
 	
 	@Test
 	public void testReserveLibraryItem_NullInputs() {
-		String error = null;
-		LibraryItem li = null;
-		Member member = null;
-		
+		String error = null;		
 		try {
-			libraryItemService.reserveLibraryItem(member, li);
+			libraryItemService.reserveLibraryItem(null, null);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
@@ -230,12 +369,12 @@ public class TestLibraryItemService {
 	
 	@Test
 	public void testReserveLibraryItem_AlreadyReserved() {		
-		Movie movie = (Movie) libraryItemRepo.findLibraryItemByLibraryItemID(LI2_ID);
+		//Movie movie = (Movie) libraryItemRepo.findLibraryItemByLibraryItemID(LI2_ID);
 		Member member = memberRepo.findMemberByLibCardNumber(M1_ID);
 		String error = null;
 		
 		try {
-			libraryItemService.reserveLibraryItem(member, movie);
+			libraryItemService.reserveLibraryItem(M1_ID, LI2_ID);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
@@ -256,31 +395,182 @@ public class TestLibraryItemService {
 		Librarian l = librarianRepo.findLibrarianByEmployeeIDNum(L1_ID);
 		
 		// attempt to checkout book
+		Loan loan = null;
 		try {
-			libraryItemService.checkoutLibraryItem(l, m, li);
+			loan = libraryItemService.checkoutLibraryItem(L1_ID, M1_ID, LI1_ID);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
+		// reset li,l,m with references from loan bcause not actually saving in test
+		li = loan.getLibraryItem();
+		m = loan.getMember();
+		l = loan.getLibrarian();
+		assertNotNull(loan);
 		assertEquals(M1_ACTIVE_LOANS + 1, m.getActiveLoans());
 		assertEquals(1, l.getLoans().size());
 		assertEquals(1, m.getLoans().size());
 		assertEquals(ItemStatus.CheckedOut, li.getItemStatus());
 		assertEquals(l.getLoans().get(0), m.getLoans().get(0));
+		// return date is set when library item is returned
+		assertEquals(null, loan.getReturnDate());
+		assertEquals(TODAY , loan.getBorrowedDate());
 	}
 	
 	@Test
 	public void testCheckoutLibraryItem_NullInputs() {
-		LibraryItem li = null;
-		Member m = null;
-		Librarian l = null;
 		String error = null;
 		// attempt to checkout book
 		try {
-			libraryItemService.checkoutLibraryItem(l, m, li);
+			libraryItemService.checkoutLibraryItem(null, null, null);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
 		assertNotNull(error);
 		assertEquals("Arguments must not be null.", error);
+	}
+	
+	@Test
+	public void testCheckoutLibraryItem_AlreadyCheckedOut() {
+		String error = null;
+		try {
+			libraryItemService.checkoutLibraryItem(L1_ID, M1_ID, LI3_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		assertNotNull(error);
+		assertEquals("Can not checkout a library item that is already checked out.", error);
+	}
+	
+	@Test
+	public void testCheckoutLibraryItem_LibraryOnly() {
+		// try to checkout a archive (not allowed because library only item)
+		String error = null;
+		try {
+			libraryItemService.checkoutLibraryItem(L1_ID, M1_ID, LI4_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		assertNotNull(error);
+		assertEquals("Cannot checkout library item because it is for library use only.", error);
+	}
+	
+	@Test
+	public void testCheckoutLibraryItem_MaxCheckedOut() {
+		// try to checkout a library item, but member has already checked out 10 library items
+		String error = null;
+		try {
+			libraryItemService.checkoutLibraryItem(L1_ID, M2_ID, LI1_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		assertNotNull(error);
+		assertEquals("Cannot checkout library item, member has reached maximum number of library items allowed to be borrowed at a time (10).", error);
+	}
+	
+	@Test
+	public void testRenewLibraryItem() {
+		Loan l = null;
+		try {
+			l = libraryItemService.renewLibraryItem(M5_ID, LI5_ID);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		assertNotNull(l);
+		assertEquals(LoanStatus.Renewed, l.getLoanStatus());
+		assertEquals(TODAY, l.getBorrowedDate());
+	}
+	
+	@Test
+	public void testRenewLibraryItem_Overdue() {
+		// try to renew overdue loan (not allowed)
+		String error = null;
+		Loan l = null;
+		try {
+			l = libraryItemService.renewLibraryItem(M6_ID, LI6_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		assertNull(l);
+		assertNotNull(error);
+		assertEquals("Cannot renew library item that is already overdue.", error);
+	}
+	
+	@Test
+	public void testRenewLibraryItem_NotCheckedOut() {
+		// try to renew a library item that user does not have checked out
+		String error = null;
+		Loan loan = null;
+		try {
+			loan = libraryItemService.renewLibraryItem(M1_ID, LI1_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		assertNull(loan);
+		assertNotNull(error);
+		assertEquals("Cannot renew library item that is not currently checked out.", error);
+	}
+	
+	@Test
+	public void testRenewLibraryItem_CheckedOutOtherMember() {
+		// try to renew a library item that user does not have checked out
+		String error = null;
+		Loan l = null;
+		try {
+			// try to renew with not matching member and library item
+			l = libraryItemService.renewLibraryItem(M5_ID, LI6_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		assertNull(l);
+		assertNotNull(error);
+		assertEquals("Could not renew library item, not currently checked out by this member.", error);
+	}
+
+	@Test
+	public void testReturnLibraryItem() {
+		Loan loan = null;
+		try {
+			loan = libraryItemService.returnLibraryItem(L1_ID, M7_ID, LI7_ID);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		LibraryItem li = loan.getLibraryItem();
+		Member m = loan.getMember();
+		assertNotNull(loan);
+		assertEquals(LoanStatus.Closed, loan.getLoanStatus());
+		assertEquals(TODAY, loan.getReturnDate());
+		assertEquals(ItemStatus.Available, li.getItemStatus());
+		assertEquals(0, m.getActiveLoans());
+	}
+	
+	@Test
+	public void testReturnLibraryItem_NotCheckedOut() {
+		// try to renew a library item that member does not currently have checked out
+		String error = null;
+		Loan loan = null;
+		try {
+			// LI1 is ItemStatus.Available, so can't be returned
+			loan = libraryItemService.returnLibraryItem(L1_ID, M1_ID, LI1_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		assertNull(loan);
+		assertNotNull(error);
+		assertEquals("Cannot return library item that is not currently checked out.", error);
+	}
+	
+	@Test
+	public void testReturnLibraryItem_CheckedOutOtherMember() {
+		// try to renew a library item that is currently checked out by another member
+		String error = null;
+		Loan loan = null;
+		try {
+			loan = libraryItemService.returnLibraryItem(L1_ID, M6_ID, LI7_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		assertNull(loan);
+		assertNotNull(error);
+		assertEquals("Cannot return library item, not currently checked out by this member.", error);
 	}
 }
