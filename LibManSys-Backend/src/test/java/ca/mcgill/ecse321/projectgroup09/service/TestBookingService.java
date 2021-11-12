@@ -80,33 +80,33 @@ public class TestBookingService {
 	private static final String LIBRARIAN_FULLNAME = "Test Librarian";
 
 
-//	private static final String LIBRARY_NAME = "Test Library"; //library ID 
-//	private static final String LIB_ADDRESS = "123 Lib Street"; 
-//	private static final String LIB_PHONE = "905-999-9999";
-//	private static final String LIB_EMAIL = "lib@email.ca";
+	private static final String LIBRARY_NAME = "Test Library"; //library ID 
+	private static final String LIB_ADDRESS = "123 Lib Street"; 
+	private static final String LIB_PHONE = "905-999-9999";
+	private static final String LIB_EMAIL = "lib@email.ca";
 	
 	
-//	private static final long SCHED1 = 1; //Sunday (beginning of week)
-//	private static final long SCHED2 = 2;
-//	private static final long SCHED3 = 3;
-//	private static final long SCHED4 = 4;
+	private static final long SCHED1 = 1; //Sunday (beginning of week)
+	private static final long SCHED2 = 2;
+	private static final long SCHED3 = 3;
+	private static final long SCHED4 = 4;
 	private static final long SCHED5 = 5;
-//	private static final long SCHED6 = 6;
-//	private static final long SCHED7 = 7; //Saturday (end of week)
+	private static final long SCHED6 = 6;
+	private static final long SCHED7 = 7; //Saturday (end of week)
 	
 	private static final String WEEKDAY_OPEN = "7:00:00";
 	private static final String WEEKDAY_CLOSE = "22:00:00";
 	
-//	private static final String WEEKEND_OPEN = "7:30:00";
-//	private static final String WEEKEND_CLOSE = "19:00:00"; 
+	private static final String WEEKEND_OPEN = "7:30:00";
+	private static final String WEEKEND_CLOSE = "19:00:00"; 
 //	
-//	private static final DayOfWeek Monday = DayOfWeek.MONDAY; 
-//	private static final DayOfWeek Tuesday = DayOfWeek.TUESDAY;
-//	private static final DayOfWeek Wednesday = DayOfWeek.WEDNESDAY;
+	private static final DayOfWeek Monday = DayOfWeek.MONDAY; 
+	private static final DayOfWeek Tuesday = DayOfWeek.TUESDAY;
+	private static final DayOfWeek Wednesday = DayOfWeek.WEDNESDAY;
 	private static final DayOfWeek Thursday = DayOfWeek.THURSDAY;
-//	private static final DayOfWeek Friday = DayOfWeek.FRIDAY;
-//	private static final DayOfWeek Saturday = DayOfWeek.SATURDAY;
-//	private static final DayOfWeek Sunday = DayOfWeek.SUNDAY;
+	private static final DayOfWeek Friday = DayOfWeek.FRIDAY;
+	private static final DayOfWeek Saturday = DayOfWeek.SATURDAY;
+	private static final DayOfWeek Sunday = DayOfWeek.SUNDAY;
 
 
 
@@ -162,30 +162,30 @@ public class TestBookingService {
 
 		});
 		lenient().when(scheduleRepository.findScheduleByScheduleID(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
-//			if (invocation.getArgument(0).equals(SCHED2)) {
-//				Schedule monday = new Schedule();
-//				monday.setscheduleID(SCHED2);
-//				monday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-//				monday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-//				monday.setDayofWeek(Monday);
-//				return monday;
-//			} 
-//			else if (invocation.getArgument(0).equals(SCHED3)) {
-//				Schedule tuesday = new Schedule();
-//				tuesday.setscheduleID(SCHED3);
-//				tuesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-//				tuesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-//				tuesday.setDayofWeek(Tuesday);
-//				return tuesday;
-//			}
-//			else if (invocation.getArgument(0).equals(SCHED4)) {
-//				Schedule wednesday = new Schedule();
-//				wednesday.setscheduleID(SCHED4);
-//				wednesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-//				wednesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-//				wednesday.setDayofWeek(Wednesday);
-//				return wednesday;
-//			}
+			if (invocation.getArgument(0).equals(SCHED2)) {
+				Schedule monday = new Schedule();
+				monday.setscheduleID(SCHED2);
+				monday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				monday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				monday.setDayofWeek(Monday);
+				return monday;
+			} 
+			else if (invocation.getArgument(0).equals(SCHED3)) {
+				Schedule tuesday = new Schedule();
+				tuesday.setscheduleID(SCHED3);
+				tuesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				tuesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				tuesday.setDayofWeek(Tuesday);
+				return tuesday;
+			}
+			else if (invocation.getArgument(0).equals(SCHED4)) {
+				Schedule wednesday = new Schedule();
+				wednesday.setscheduleID(SCHED4);
+				wednesday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				wednesday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				wednesday.setDayofWeek(Wednesday);
+				return wednesday;
+			}
 			 if (invocation.getArgument(0).equals(SCHED5)) {
 				Schedule thursday = new Schedule();
 				thursday.setscheduleID(SCHED5);
@@ -194,30 +194,30 @@ public class TestBookingService {
 				thursday.setDayofWeek(Thursday);
 				return thursday;
 			}
-//			else if (invocation.getArgument(0).equals(SCHED6)) {
-//				Schedule friday = new Schedule();
-//				friday.setscheduleID(SCHED6);
-//				friday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
-//				friday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
-//				friday.setDayofWeek(Friday);
-//				return friday;
-//			}
-//			else if (invocation.getArgument(0).equals(SCHED7)) {
-//				Schedule saturday = new Schedule();
-//				saturday.setscheduleID(SCHED7);
-//				saturday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
-//				saturday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
-//				saturday.setDayofWeek(Saturday);
-//				return saturday;
-//			}
-//			else if (invocation.getArgument(0).equals(SCHED1)) {
-//				Schedule sunday = new Schedule();
-//				sunday.setscheduleID(SCHED1);
-//				sunday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
-//				sunday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
-//				sunday.setDayofWeek(Sunday);
-//				return sunday;
-//			}
+			else if (invocation.getArgument(0).equals(SCHED6)) {
+				Schedule friday = new Schedule();
+				friday.setscheduleID(SCHED6);
+				friday.setClosingTime(java.sql.Time.valueOf(WEEKDAY_CLOSE));
+				friday.setOpeningTime(java.sql.Time.valueOf(WEEKDAY_OPEN));
+				friday.setDayofWeek(Friday);
+				return friday;
+			}
+			else if (invocation.getArgument(0).equals(SCHED7)) {
+				Schedule saturday = new Schedule();
+				saturday.setscheduleID(SCHED7);
+				saturday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
+				saturday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
+				saturday.setDayofWeek(Saturday);
+				return saturday;
+			}
+			else if (invocation.getArgument(0).equals(SCHED1)) {
+				Schedule sunday = new Schedule();
+				sunday.setscheduleID(SCHED1);
+				sunday.setClosingTime(java.sql.Time.valueOf(WEEKEND_CLOSE));
+				sunday.setOpeningTime(java.sql.Time.valueOf(WEEKEND_OPEN));
+				sunday.setDayofWeek(Sunday);
+				return sunday;
+			}
 			else {
 				return null;
 			}
@@ -239,7 +239,7 @@ public class TestBookingService {
 		long bookingID = 12345678;
 		String startTime = "8:00:00";
 		String endTime = "16:00:00";
-		String bookingDate = "2021-11-12";
+		String bookingDate = "2021-11-30";
 		
 		long librarianID = 12345678;
 		long memberID = 999999999;
