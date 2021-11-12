@@ -223,7 +223,7 @@ public class TestBookingService {
 		lenient().when(memberRepository.save(any(Member.class))).thenAnswer(returnParameterAsAnswer);
 		lenient().when(librarianRepository.save(any(Librarian.class))).thenAnswer(returnParameterAsAnswer);
 	}
-
+ 
 	
 	@Test 
 	public void createBooking() { 
@@ -241,7 +241,6 @@ public class TestBookingService {
 			booking = bookingService.createBooking(startTime, endTime, bookingID, bookingDate, memberID, librarianID);
 		}
 		catch (IllegalArgumentException e) {
-			System.out.println(e);
 			fail();
 			
 		}
@@ -293,7 +292,6 @@ public class TestBookingService {
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, END_TIME, DATE);
 	}
 	catch (IllegalArgumentException e) {
-		System.out.println(e);
 		fail();
 		
 	}
@@ -314,7 +312,6 @@ public class TestBookingService {
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, null, null);
 	}
 	catch (IllegalArgumentException e) { 
-		System.out.println(e);
 		fail();
 		
 	}
