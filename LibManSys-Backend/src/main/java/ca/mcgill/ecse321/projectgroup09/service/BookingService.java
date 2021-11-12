@@ -36,7 +36,7 @@ public class BookingService { // service class for booking out the library for e
 	 * @param memberID
 	 * @param librarianID
 	 * @return booking
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException 
 	 */
 	@Transactional
 	public Booking createBooking (String startTime, String endTime, Long bookingID, String bookingDate, Long memberID, Long librarianID) throws IllegalArgumentException {

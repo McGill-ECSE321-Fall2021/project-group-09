@@ -36,7 +36,7 @@ public class LibraryController {
 	public LibraryDto updateLibraryHours(@PathVariable("headLibrarianID") long headLibrarianID, @PathVariable("schedules") List<Schedule> schedules, 
 			@PathVariable("libraryName") String libraryName) {
 		
-		Library library = libraryService.updateLibraryHours(headLibrarianID, schedules, libraryName);
+		Library library = libraryService.setLibraryHours(headLibrarianID, schedules, libraryName);
 		return LibraryDto.convertToDto(library);
 
 	}
@@ -44,12 +44,6 @@ public class LibraryController {
 	@PostMapping(value = {"/library/update/email", "/library/update/email/"})
 	public LibraryDto updateLibraryEmail (@PathVariable("name") String name, @PathVariable("email") String email) {
 		Library library = libraryService.updateLibraryEmail(name, email);
-		return LibraryDto.convertToDto(library);	
-	}
-
-	@PostMapping(value = {"/library/update/name", "/library/update/name/"})
-	public LibraryDto updateLibraryName (@PathVariable("oldName") String oldName, @PathVariable("name") String name) {
-		Library library = libraryService.updateLibraryName(oldName, name);
 		return LibraryDto.convertToDto(library);	
 	}
 

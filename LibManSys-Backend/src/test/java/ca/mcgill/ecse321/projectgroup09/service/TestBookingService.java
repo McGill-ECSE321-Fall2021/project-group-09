@@ -124,7 +124,7 @@ public class TestBookingService {
 
 		lenient().when(bookingRepository.findBookingByBookingID(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
 			if (invocation.getArgument(0).equals(BOOKING_ID)) {
-				Booking booking = new Booking(); 
+				Booking booking = new Booking();  
 				booking.setBookingID(BOOKING_ID);
 				
 				booking.setBookingDate(java.sql.Date.valueOf(DATE));
@@ -313,7 +313,7 @@ public class TestBookingService {
 	try { 
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, null, null);
 	}
-	catch (IllegalArgumentException e) {
+	catch (IllegalArgumentException e) { 
 		System.out.println(e);
 		fail();
 		
