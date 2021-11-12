@@ -232,6 +232,9 @@ public class TestLibraryItemService {
 	        } else if (invocation.getArgument(0).equals(LI6_ID)) {
 	        	// created above
 	        	return li6;
+	        } else if (invocation.getArgument(0).equals(LI7_ID)) {
+	        	// created above
+	        	return li7;
 	        } else {
 	            return null;
 	        }
@@ -268,6 +271,8 @@ public class TestLibraryItemService {
 	            return m5;
 	        } else if(invocation.getArgument(0).equals(M6_ID)) {
 	            return m6;
+	        } else if(invocation.getArgument(0).equals(M7_ID)) {
+	            return m7;
 	        } else {
 	            return null;
 	        }
