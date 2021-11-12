@@ -11,11 +11,9 @@ import static org.mockito.Mockito.lenient;
 
 import java.time.DayOfWeek;
 import java.util.List;
-<<<<<<< HEAD
-=======
+
 import java.sql.Date;
 
->>>>>>> efb58afcc0ace54e4822403121ba912e5b7881db
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
