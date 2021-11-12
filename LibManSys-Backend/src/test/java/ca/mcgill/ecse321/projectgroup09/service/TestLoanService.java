@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.projectgroup09.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -12,6 +13,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,19 +62,34 @@ public class TestLoanService {
 	
 	@InjectMocks
 	private LoanService loanService;
-	@SuppressWarnings("deprecation")
-	private static final Date borrowedDate = new Date( 1999, 1, 2);
-	@SuppressWarnings("deprecation")
-	private  static final Date returnDate = new Date( 1999, 2, 2);
-	private  static final double lateFees = 2;
-	private  static final  LoanStatus loanStatus = LoanStatus.Active;
-	private static final Long loanID = (long) 9999999;
-	private static final Long librarianId = (long) 9999999;
-	private static final String librarianName ="rajaa";
-	private static final String librarianPass ="rajaa99";
-	private static final String librarianEmail ="rajaabk@gmail.com";
-	private static final String librarianUser ="rajaabk";
 
+	 @SuppressWarnings("deprecation")
+	 private static final Date BORROWEDDATE = new Date( 2020, 1, 2);
+	 private static final Date RETURNEDDATE = new Date( 2020, 1, 3);
+	 private static final Double LATEFEES = 0.10;
+	 private static final Double OVERDUEFEE = 0.20;
+
+	 private static final Long LOANID = (long) 9999999;
+	 private static final Long LIBRARYITEMID = (long) 9999999;
+
+	 private static final Long MEMBERID = (long) 11111;
+	 private static final Long LIBRARIANID = (long) 22222;
+	 private static final Long LIBRARIANITEMID = (long) 333333;
+	 private static final	LoanStatus LOANSTATUS = LoanStatus.Overdue;
+	 
+		private static final long EMPLOYEE_ID = 123456789; //librarian ID
+		private static final String LIBRARIAN_EMAIL = "librarian@email.com";
+		private static final String LIBRARIAN_PASSWORD = "ASDF12343";
+		private static final String LIBRARIAN_USERNAME = "username";
+		private static final String LIBRARIAN_FULLNAME = "Test Librarian";
+
+		private static final long LIB_CARD_NO = 999999999; //member ID 
+		private static final String MEM_ADDRESS = "123 Test Address";
+		private static final double AMOUNT_OWED = 0; 
+		private static final int ACTIVE_LOANS = 0; 
+		private static final boolean IS_VERIFIED_RESIDENT = true; 
+		private static final String FULL_NAME = "Test Member";
+		private static final String PHONE_NO = "123-456-7890";
 
 
 
@@ -86,32 +103,56 @@ public class TestLoanService {
 	public void setMockOutput() { 
 		
 		 lenient().when(loanRepository.findLoanByLoanID(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
-	        	if (invocation.getArgument(0).equals(loanID)) {
+	        	if (invocation.getArgument(0).equals(LOANID)) {
 		        	Loan loan = new Loan();
 		        	Librarian librarian = new Librarian();
 		        	Member member = new Member();
 		        	Book book = new Book();
-		            loan.setBorrowedDate(borrowedDate);
-		            loan.setLateFees(lateFees);
+		            loan.setBorrowedDate(BORROWEDDATE);
 		            loan.setLibrarian(librarian);
 		            loan.setLibraryItem(book);
-		            loan.setloanID(loanID);
-		            loan.setLoanStatus(loanStatus);
+		            loan.setloanID(LOANID);
 		            loan.setMember(member);
-		            loan.setReturnDate(returnDate);
 		            return loan;
 	        	}
-	        	else {return null;}
+	        	else {return null;
+	        	}
+	        	});
+	        	
+	    		lenient().when(librarianRepository.findLibrarianByEmployeeIDNum(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+	    			if (invocation.getArgument(0).equals(EMPLOYEE_ID)) {
+	    				Librarian librarian = new Librarian(); 
+	    				librarian.setemployeeIDNum(EMPLOYEE_ID);
+	    				librarian.setFullName(LIBRARIAN_FULLNAME); 
+	    				librarian.setLibrarianEmail(LIBRARIAN_EMAIL);
+	    				librarian.setLibrarianPassword(LIBRARIAN_PASSWORD);
+	    				librarian.setLibrarianUsername(LIBRARIAN_USERNAME);
+	    				return librarian;
+	    			}
+	    			else {
+	    				return null;
+	    			}
 
-		        });
+	    		});
+	    		lenient().when(memberRepository.findMemberByLibCardNumber(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+	    			if (invocation.getArgument(0).equals(LIB_CARD_NO)) {
+	    				Member member = new Member();
+	    				member.setLibCardNumber(LIB_CARD_NO);
+	    				member.setAddress(MEM_ADDRESS);
+	    				member.setActiveLoans(ACTIVE_LOANS);
+	    				member.setAmountOwed(AMOUNT_OWED);
+	    				member.setFullName(FULL_NAME);
+	    				member.setIsVerifiedResident(IS_VERIFIED_RESIDENT);
+	    				member.setPhoneNumber(PHONE_NO);
+	    				return member;
+	    			}
+	    			else {
+	    				return null; 
+	    			}
 
-		 
-		/* lenient().when(loanRepository.findLoanByLibrarian(any(Librarian.class))).thenAnswer((InvocationOnMock invocation) ->
-		 {
-			 figure out how
-		 });*/
-		 
-		 //maybe mocks for member, a libraryitem and librarian
+	    		});
+
+		      
 		 
 			Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
 				return invocation.getArgument(0);
@@ -121,59 +162,227 @@ public class TestLoanService {
 			lenient().when(librarianRepository.save(any(Librarian.class))).thenAnswer(returnParameterAsAnswer);
 
 	}
-	// Test Create Loan //
+	
 @Test
 public void createLoan() {
 	Loan loan1 = null;
-	 Date borrowedDate = new Date( 1999, 1, 2);
-	@SuppressWarnings("deprecation")
-	Date returnDate = new Date( 1999, 2, 2);
-	double lateFees = 2;
-	LoanStatus loanStatus = LoanStatus.Active;
-	Long loanID = (long) 9999999;
-	Long memberId = (long) 11111;
-	Long librarianId = (long) 22222;
-	Long librarianItemId = (long) 333333;
+
 	try {
 	 
-		loan1 = loanService.createLoan(borrowedDate, returnDate, lateFees, loanStatus, loanID, memberId, librarianId, librarianItemId);
+		loan1 = loanService.createLoan(BORROWEDDATE, LOANID, MEMBERID, LIBRARIANID, LIBRARIANITEMID);
 	}
 	catch (Exception e) {
 		fail(e.getMessage());
 	}
+	assertNotNull(loan1);
+	assertEquals(BORROWEDDATE, loan1.getBorrowedDate());
+	assertEquals(LOANID, loan1.getLoanID());
 }
 
+@Test
+public void createLoanWithNoBorrowedDate() {
+	String error = null;
+	Loan loan1 = null;
+	 @SuppressWarnings("deprecation")
+	Date borrowedDate = null;
+	try {
+	 
+		loan1 = loanService.createLoan(borrowedDate, LOANID, MEMBERID, LIBRARIANID, LIBRARIANITEMID);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNull(loan1);
+	assertNotNull(error);
+
+}
+
+@Test
+public void createLoanWithNoMember() {
+	String error = null;
+	Loan loan1 = null;
+	Long memberId = null;
+	try {
+	 
+		loan1 = loanService.createLoan(BORROWEDDATE, LOANID, memberId, LIBRARIANID, LIBRARIANITEMID);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNull(loan1);
+	assertNotNull(error);
+
+}
+
+@Test
+public void createLoanWithNoLibrarian() {
+	String error = null;
+	Loan loan1 = null;
+	Long Librarian = null;
+	try {
+	 
+		loan1 = loanService.createLoan(BORROWEDDATE, LOANID, MEMBERID, Librarian, LIBRARIANITEMID);}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNull(loan1);
+	assertNotNull(error);
+
+}
+
+@Test
+public void createLoanWithNoID() {
+	String error = null;
+	Loan loan1 = null;
+	Long loanId = null;
+	try {
+	 
+		loan1 = loanService.createLoan(BORROWEDDATE, loanId, MEMBERID, LIBRARIANID, LIBRARIANITEMID);}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNull(loan1);
+	assertNotNull(error);
+
+}
+
+@Test
+public void createLoanWithNoLibraryItemID() {
+	String error = null;
+	Loan loan1 = null;
+	Long libraryItemId = null;
+	try {
+	 
+		loan1 = loanService.createLoan(BORROWEDDATE, LOANID, MEMBERID, LIBRARIANID, libraryItemId);}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNull(loan1);
+	assertNotNull(error);
+
+}
+
+@Test
+public void testGetLoan() {
+	Loan newLoan = loanService.getLoanbyId(LOANID);
+	assertNotNull(newLoan);
+	
+	assertEquals(LOANID, newLoan.getLoanID());
+	assertEquals(BORROWEDDATE, newLoan.getBorrowedDate());
+
+}
+
+@Test
+public void testGetLoanFail() {
+	Long loanId = (long) -1;
+	Loan newLoan = loanService.getLoanbyId(loanId);
+	assertNull(newLoan);
+	
+
+}
+
+@SuppressWarnings("deprecation")
 @Test
 public void updateLoan() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
 	
-	 Date borrowedDate = new Date( 1999, 1, 2);
-	@SuppressWarnings("deprecation")
-	Date returnDate = new Date( 1999, 2, 2);
-	double lateFees = 2;
-	LoanStatus loanStatus = LoanStatus.Active;
-	Long memberId = (long) 11111;
-	Long librarianId = (long) 22222;
-	Long librarianItemId = (long) 333333;
+	
 	Loan newLoan = null;
 	try {
 		
-		newLoan = loanService.updateLoan(borrowedDate, returnDate, lateFees, loanStatus, loanID, memberId, librarianId, librarianItemId);
-	}
+		newLoan = loanService.updateLoan(BORROWEDDATE, RETURNEDDATE, LATEFEES, LOANSTATUS, LOANID);}
 	catch (Exception e) {
 		fail(e.getMessage());
 	}
-	assertEquals(borrowedDate, newLoan.getBorrowedDate());
+	assertNotNull(newLoan);
+	assertEquals(BORROWEDDATE, newLoan.getBorrowedDate());
+	assertEquals(RETURNEDDATE, newLoan.getReturnDate());
+	assertEquals(LATEFEES, newLoan.getLateFees());
+	assertEquals(LOANSTATUS, newLoan.getLoanStatus());
+	assertEquals(LOANID, newLoan.getLoanID());
+}
+
+@SuppressWarnings("deprecation")
+@Test
+public void updateLoanNoBorrowedDate() {
+	//Loan loan = loanRepository.findLoanByLoanID(loanID);
+	
+	String error = null;
+	Loan newLoan = null;
+	Date borrowedDate = null;
+	try {
+		
+		newLoan = loanService.updateLoan(borrowedDate, RETURNEDDATE, LATEFEES, LOANSTATUS, LOANID);}
+	catch (Exception e) {
+		error = e.getMessage();
+	}
+	assertNull(newLoan);
+	assertNotNull(error);
 	
 }
-	// Test Delete Loan //
+
+@SuppressWarnings("deprecation")
+@Test
+public void updateLoanReturnDatebeforeBorrowedDate() {
+	//Loan loan = loanRepository.findLoanByLoanID(loanID);
+	
+	String error = null;
+	Loan newLoan = null;
+	Date borrowedDate = new Date (2021-01-01);
+	Date returnedDate = new Date (2020-01-01);
+	try {
+		newLoan = loanService.updateLoan(borrowedDate, returnedDate, LATEFEES, LOANSTATUS, LOANID);}
+	catch (Exception e) {
+		error = e.getMessage();
+	}
+	assertNull(newLoan);
+	assertNotNull(error);
+	
+}
+
+@SuppressWarnings("deprecation")
+@Test
+public void updateLoanNoId() {
+	//Loan loan = loanRepository.findLoanByLoanID(loanID);
+	
+	String error = null;
+	Loan newLoan = null;
+	Long id = null;
+	try {
+		newLoan = loanService.updateLoan(BORROWEDDATE, RETURNEDDATE, LATEFEES, LOANSTATUS, id);}
+	catch (Exception e) {
+		error = e.getMessage();
+	}
+	assertNull(newLoan);
+	assertNotNull(error);
+	
+}
+
+@SuppressWarnings("deprecation")
+@Test
+public void updateNegativeFees() {
+	//Loan loan = loanRepository.findLoanByLoanID(loanID);
+	
+	String error = null;
+	Loan newLoan = null;
+	Double fees = -0.1;
+	try {
+		
+		newLoan = loanService.updateLoan(BORROWEDDATE, RETURNEDDATE, fees, LOANSTATUS, LOANID);}
+	catch (Exception e) {
+		error = e.getMessage();
+	}
+	assertNull(newLoan);
+	assertNotNull(error);
+	
+}
 @Test
 public void deleteLoan() {
 	Loan loan = null;
 	boolean delete =false;
 	try {
 	 	
-		 delete = loanService.deleteLoan(loanID);
+		 delete = loanService.deleteLoan(LOANID);
 	}
 	catch (Exception e) {
 		fail(e.getMessage());
@@ -181,10 +390,205 @@ public void deleteLoan() {
 	//assertNotNull(loan);
 	assertEquals(true, delete);
 }
-	// Test Add Late Fees //
 
-	// Test Change Late Fees //
+@Test
+public void deleteLoanFail() {
+	Loan loan = null;
+	boolean delete =false;
+	Long loanId = null;
+	String error = null;
+	try {
+	 	
+		 delete = loanService.deleteLoan(loanId);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	//assertNotNull(loan);
+	assertEquals(false, delete);
+	assertNotNull(error);
 
-	// Test Change Loan Status //
+}
+@Test
+public void addLateFee() {
+	Loan newLoan = null;
+	String error = null;
+	double overdueFee = 0.1;
+	try {
+	 	
+		newLoan = loanService.addLateFee(LIBRARYITEMID,LOANID, OVERDUEFEE, LOANSTATUS);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	//assertNotNull(loan);
+	//assertEquals(false, delete);
+	assertNotNull(newLoan);
+
+}
+
+@Test
+public void addLateFeeNotActive() {
+	Loan newLoan = null;
+	String error = null;
+	LoanStatus loanStatus = LoanStatus.Closed;
+	try {
+	 	
+		newLoan = loanService.addLateFee(LIBRARYITEMID,LOANID, OVERDUEFEE, loanStatus);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	//assertNotNull(loan);
+	//assertEquals(false, delete);
+	assertNull(newLoan);
+
+}
+
+@Test
+public void TestChangeLateFee() {
+	Loan newLoan = null;
+	String error = null;
+	try {
+	 	
+		newLoan = loanService.changeLateFee(LOANID, LATEFEES);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNotNull(newLoan);
+	//assertEquals(false, delete);
+//	assertNotNull(error);
+
+
+
+}
+
+@Test
+public void TestChangeLoanStatus() {
+	Loan newLoan = null;
+	String error = null;
+	try {
+	 	
+		newLoan = loanService.changeLoanStatus(LOANID, LIBRARYITEMID, LOANSTATUS);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNotNull(newLoan);
+	//assertEquals(false, delete);
+//	assertNotNull(error);
+
+
+
+}
+
+@Test
+public void TestChangeLoanStatusNoLoanId() {
+	Loan newLoan = null;
+	String error = null;
+	Long id = null;
+	try {
+	 	
+		newLoan = loanService.changeLoanStatus(id, LIBRARYITEMID, LOANSTATUS);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNull(newLoan);
+	assertNotNull(error);
+;
+	//assertEquals(false, delete);
+//	assertNotNull(error);
+
+}
+
+@Test
+public void TestChangeLoanStatusNoLibraryItemId() {
+	Loan newLoan = null;
+	String error = null;
+	Long id = null;
+	try {
+	 	
+		newLoan = loanService.changeLoanStatus(LOANID, id, LOANSTATUS);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNull(newLoan);
+	assertNotNull(error);
+
+}
+
+
+@Test
+public void TestGetLoanFeesbyMember() {
+	Member member = new Member();
+	Long memberId = member.getLibCardNumber();
+	double newLoan = 0 ;
+	String error = null;
+	try {
+	 	
+		newLoan = loanService.getLoanFeesbyMember(MEMBERID);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNotNull(newLoan);
+
+}
+
+@Test
+public void TestGetLoanFeesbyNonMember() {
+	Double newLoan = null;
+	String error = null;
+	Long id = null;
+	try {
+	 	
+		newLoan = loanService.getLoanFeesbyMember(id);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNull(newLoan);
+	assertNotNull(error);
+
+
+}
+
+@Test
+public void TestGetLoansbyMember() {
+	List<Loan> newLoan = null;
+	String error = null;
+	Long id = null;
+	try {
+	 	
+		newLoan = loanService.getLoansbyMember(MEMBERID);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNotNull(newLoan);
+
+
+}
+
+@Test
+public void TestGetLoansbyNonMember() {
+	List<Loan> newLoan = null;
+	String error = null;
+	Long id = null;
+	try {
+	 	
+		newLoan = loanService.getLoansbyMember(id);
+	}
+	catch (Exception e) {
+		error = (e.getMessage());
+	}
+	assertNotNull(newLoan);
+
+
+}
+
 
 }
