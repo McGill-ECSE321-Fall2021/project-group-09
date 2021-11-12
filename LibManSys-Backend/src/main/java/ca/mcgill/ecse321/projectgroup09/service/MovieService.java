@@ -28,7 +28,19 @@ public class MovieService {
         		movieRepository.findMoviesByGenre(genre)== null  ||
         		movieRepository.findMoviesByPublishedYear(publishedYear)== null
                ){
-            throw new IllegalArgumentException ("Movie does not exist");
+            throw new IllegalArgumentException ("Movies doe not exist");
+        }
+        if(genre == null) {
+            throw new IllegalArgumentException ("Movies doe not have a grenre");
+        }
+        if(loanablePeriod == null) {
+            throw new IllegalArgumentException ("Movies doe not have a loablePeriod");
+        }
+        if(publishedYear == null) {
+            throw new IllegalArgumentException ("Movies doe not have a publishedYear");
+        }
+        if(director == null) {
+            throw new IllegalArgumentException ("Movies doe not have a director");
         }
         
         
@@ -57,7 +69,18 @@ public class MovieService {
                ){
             throw new IllegalArgumentException ("Movie does not exist");
         }
-        
+        if(genre == null) {
+            throw new IllegalArgumentException ("Movies doe not have a grenre");
+        }
+        if(loanablePeriod == null) {
+            throw new IllegalArgumentException ("Movies doe not have a loablePeriod");
+        }
+        if(publishedYear == null) {
+            throw new IllegalArgumentException ("Movies doe not have a publishedYear");
+        }
+        if(director == null) {
+            throw new IllegalArgumentException ("Movies doe not have a director");
+        }
         
 		Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
 		//movie.setlibraryItemID(libraryItemId); don't set id since we know it here

@@ -11,6 +11,11 @@ import static org.mockito.Mockito.lenient;
 
 import java.time.DayOfWeek;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.sql.Date;
+
+>>>>>>> efb58afcc0ace54e4822403121ba912e5b7881db
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -236,7 +241,7 @@ public class TestBookingService {
 		long bookingID = 12345678;
 		String startTime = "8:00:00";
 		String endTime = "16:00:00";
-		String bookingDate = "2021-11-11";
+		String bookingDate = "2021-11-12";
 		
 		long librarianID = 12345678;
 		long memberID = 999999999;
@@ -247,7 +252,7 @@ public class TestBookingService {
 			booking = bookingService.createBooking(startTime, endTime, bookingID, bookingDate, memberID, librarianID);
 		}
 		catch (IllegalArgumentException e) {
-			fail();		
+			fail(e.getMessage());		
 		}
 
 		assertNotNull(booking);
@@ -288,7 +293,7 @@ public class TestBookingService {
 		long BOOKING_ID = 12345678;
 		String START_TIME = "09:00:00";
 		String END_TIME = "13:00:00";
-		String DATE = "2021-11-11";
+		String DATE = "2021-11-12";
 	
 		
 		Booking booking = null;
@@ -297,7 +302,7 @@ public class TestBookingService {
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, END_TIME, DATE);
 	}
 	catch (IllegalArgumentException e) {
-		fail();
+		fail(e.getMessage());
 		
 	}
 	assertNotNull(booking);
@@ -317,7 +322,7 @@ public class TestBookingService {
 		booking = bookingService.updateBooking(BOOKING_ID, START_TIME, null, null);
 	}
 	catch (IllegalArgumentException e) { 
-		fail();
+		fail(e.getMessage());
 		
 	}
 	assertNotNull(booking);

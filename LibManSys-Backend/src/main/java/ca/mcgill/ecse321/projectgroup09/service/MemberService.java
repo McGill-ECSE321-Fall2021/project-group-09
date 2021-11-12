@@ -4,14 +4,9 @@
 
 package ca.mcgill.ecse321.projectgroup09.service;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.UUID;
 import java.util.List;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.projectgroup09.dao.BookingRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
-import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
-import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
-import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 
 @Service
 public class MemberService {
