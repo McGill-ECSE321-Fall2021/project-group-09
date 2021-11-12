@@ -1,7 +1,7 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 
 @Entity

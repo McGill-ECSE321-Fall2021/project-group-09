@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.sql.Date;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
@@ -131,15 +132,25 @@ public class LibraryItemService {
 	 * Library Item can only be reserved by one member at a time and
 	 * some Library Items can not be reserved.
 	 * 
-	 * @param rm {@code Member} Member attemping to reserve a library item.
-	 * @param libraryItem {@code LibraryItem} Library item member is attemping to reserve.
+	 * @param memberId Member attemping to reserve a library item.
+	 * @param libraryItemId Library item member is attemping to reserve.
+	 * @return updated library item.
 	 */
 	@Transactional
-	public void reserveLibraryItem(Member rm, LibraryItem libraryItem) {
+	public LibraryItem reserveLibraryItem(Long memberId, Long libraryItemId) {
 		// Check inputs not null
-		if (rm == null || libraryItem == null) {
+		if (memberId == null || libraryItemId == null) {
 			throw new IllegalArgumentException("Arguments must not be null.");
-		}		
+		}
+		// get member and library item from repo
+		Member rm = memberRepo.findMemberByLibCardNumber(memberId);
+		if (rm == null) {
+			throw new IllegalStateException("Could not find member with id: " + memberId + " in repository.");
+		}
+		LibraryItem libraryItem = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
+		if (libraryItem == null) {
+			throw new IllegalStateException("Could not find library item with id: " + libraryItemId + " in repository.");
+		}
 		// Make book library item status is set
 		if (libraryItem.getItemStatus() == null) {
 			throw new IllegalStateException("libraryItem.getItemStatus() == null");
@@ -162,12 +173,16 @@ public class LibraryItemService {
 		
 		// Add item to member's reserved list
 		rm.getReserved().add(libraryItem);
+		// add member to items association
+		libraryItem.setMember(rm);
 		// Set book status to reserved
 		libraryItem.setItemStatus(LibraryItem.ItemStatus.Reserved);
 		
 		// Save member and library item to update information
 		libraryItemRepo.save(libraryItem);
 		memberRepo.save(rm);
+		
+		return libraryItem;
 	}
 	
 	/**
@@ -177,25 +192,38 @@ public class LibraryItemService {
 	 * 
 	 * {@link https://github.com/McGill-ECSE321-Fall2021/project-group-09/wiki/Use-Case-Diagram#checkout-library-item-abe-arafat}
 	 * 
-	 * @param l Librarian that is performing the library item checkout operation.
-	 * @param m Member who is attempting to checkout an item
-	 * @param li LibraryItem member is attemping to checkout
+	 * @param librarianId Librarian that is performing the library item checkout operation.
+	 * @param memberId Member who is attempting to checkout an item
+	 * @param libraryItemId LibraryItem member is attemping to checkout
 	 */
 	@Transactional
-	public void checkoutLibraryItem(Librarian l, Member m, LibraryItem li) {
+	public Loan checkoutLibraryItem(Long librarianId, Long memberId, Long libraryItemId) {
 		// make sure params not null
-		if (l == null || m == null || li == null) {
+		if (librarianId == null || memberId == null || libraryItemId == null) {
 			throw new IllegalArgumentException("Arguments must not be null.");
+		}
+		// find in repo
+		Librarian l = librarianRepo.findLibrarianByEmployeeIDNum(librarianId);
+		if (l == null) {
+			throw new IllegalStateException("Could not find librarian in repository.");
+		}
+		Member m = memberRepo.findMemberByLibCardNumber(memberId);
+		if (m == null) {
+			throw new IllegalStateException("Could not find member in repository");
+		}
+		LibraryItem li = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
+		if (li == null) {
+			throw new IllegalStateException("Could not find library item in repository.");
 		}
 		// Make sure member has less than 10 library items checked out
 		if (m.getActiveLoans() == 10) {
-			throw new IllegalStateException("Member has reached maximum number of library items allowed to be borrowed at a time (10).");
+			throw new IllegalStateException("Cannot checkout library item, member has reached maximum number of library items allowed to be borrowed at a time (10).");
 		}
 		// make sure library item is avaiable or reserved by this member
 		if (li.getItemStatus() == ItemStatus.CheckedOut) {
 			throw new IllegalStateException("Can not checkout a library item that is already checked out.");
 		} else if (li.getItemStatus() == ItemStatus.LibraryOnly) {
-			throw new IllegalStateException("Can not checkout a library item that is has status 'LibraryOnly'.");
+			throw new IllegalStateException("Cannot checkout library item because it is for library use only.");
 		} else if (li.getItemStatus() == ItemStatus.Reserved) {
 			// if item is reserved, make sure that it is reserved by same member that is currently attempting to check it out
 			if (!li.getMember().getLibCardNumber().equals(m.getLibCardNumber())) {
@@ -212,6 +240,8 @@ public class LibraryItemService {
 		loan.setBorrowedDate(today);
 		
 		// calculate return date based on library item loanable period
+		// wait don't do this, not what return date is for...
+		/*
 		int loanPeriod = li.getLoanablePeriod();
 		Calendar c = Calendar.getInstance();
 		c.setTime(today);
@@ -219,6 +249,7 @@ public class LibraryItemService {
 		java.util.Date utilReturnDate = c.getTime();
 		java.sql.Date returnDate = new java.sql.Date(utilReturnDate.getTime());
 		loan.setReturnDate(returnDate);
+		*/
 		
 		// start with no late fees
 		loan.setLateFees(0);
@@ -247,6 +278,8 @@ public class LibraryItemService {
 		memberRepo.save(m);
 		libraryItemRepo.save(li);
 		loanRepo.save(loan);
+		
+		return loan;
 	}
 	
 	/**
@@ -255,19 +288,148 @@ public class LibraryItemService {
 	 * Reset borrowed day and returned day for loan.
 	 * @param m Member attempting to renew their loan.
 	 * @param li LibraryItem that member wants to renew.
+	 * @return loan Updated loan object.
 	 */
 	@Transactional
-	public void renewLibraryItem(Member m, LibraryItem li) {
+	public Loan renewLibraryItem(Long memberId, Long libraryItemId) {
+		if (memberId == null || libraryItemId == null) {
+			throw new IllegalArgumentException("Arguments must not be null.");
+		}
+		// find in repo
+		Member m = memberRepo.findMemberByLibCardNumber(memberId);
+		if (m == null) {
+			throw new IllegalStateException("Could not find member in repository.");
+		}
+		LibraryItem li = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
+		if (li == null) {
+			throw new IllegalStateException("Could not find library item in repository.");
+		}
+		// Make sure library item is checked out
+		if (!li.getItemStatus().equals(ItemStatus.CheckedOut)) {
+			// if not checked out, throw error
+			throw new IllegalStateException("Cannot renew library item that is not currently checked out.");
+		}
 		
+		// get all present and past loans for library item
+		List<Loan> loans = li.getLoans();
+		
+		// look for non-Closed loan (should only be one)
+		Loan loan = null;
+		for (Loan l : loans) {
+			if (!l.getLoanStatus().equals(LoanStatus.Closed)) {
+				// make sure we have no already found a non-Closed Loan for this Library Item
+				if (loan == null) {
+					loan = l;
+				} else {
+					throw new IllegalStateException("LibraryItem should only have one non-Closed loan at the same time.");
+				}
+			}
+		}
+		// if no library item has active or renewed loan, or if loan belongs to other member, throw error
+		if (loan == null || !loan.getMember().equals(m)) {
+			throw new IllegalStateException("Could not renew library item, not currently checked out by this member.");
+		}
+		// make sure loan is not overdue
+		if (loan.getLoanStatus().equals(LoanStatus.Overdue)) {
+			throw new IllegalStateException("Cannot renew library item that is already overdue.");
+		}
+		// make sure loan is present in member.loans?
+		//if (!m.getLoans().contains(loan)) {
+		//	throw new IllegalStateException("Loan not present in member loan list.");
+		//}
+		
+		// renew item
+		loan.setLoanStatus(LoanStatus.Renewed);
+		Date today = Date.valueOf(LocalDate.now());
+		loan.setBorrowedDate(today);
+		
+		// save loan to repo to update
+		// member and library item not changing so don't need to save them to repo again
+		loanRepo.save(loan);
+		return loan;
 	}
 	
 	/**
-	 * TODO
-	 * @param m
-	 * @param li
+	 * Allows a librarian to return a book for a member.
+	 * @param librarianId not actually needed?
+	 * @param memberId Id of member returning an item
+	 * @param libraryItemId Id of library item member is returning
+	 * @return updated loan object
 	 */
 	@Transactional
-	public void returnLibraryItem(Member m, LibraryItem li) {
+	public Loan returnLibraryItem(Long librarianId, Long memberId, Long libraryItemId) {
+		if (librarianId == null || memberId == null || libraryItemId == null) {
+			throw new IllegalArgumentException("Arguments must not be null.");
+		}
+		// find in repo
+		Librarian l = librarianRepo.findLibrarianByEmployeeIDNum(librarianId);
+		if (l == null) {
+			throw new IllegalStateException("Could not find librarian in repository.");
+		}
+		Member m = memberRepo.findMemberByLibCardNumber(memberId);
+		if (m == null) {
+			throw new IllegalStateException("Could not find member in repository.");
+		}
+		LibraryItem li = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
+		if (li == null) {
+			throw new IllegalStateException("Could not find library item in repository.");
+		}
+		// Make sure library item is currently checked out
+		if (!li.getItemStatus().equals(ItemStatus.CheckedOut)) {
+			// if not checked out, throw error
+			throw new IllegalStateException("Cannot return library item that is not currently checked out.");
+		}
+		if (m.getActiveLoans() == 0) {
+			throw new IllegalStateException("Member active loans is 0 but member is attemping to return library item.");
+		}
 		
+		// get all present and past loans for library item
+		List<Loan> loans = li.getLoans();
+		
+		// look for non-Closed loan (should only be one)
+		Loan loan = null;
+		for (Loan ll : loans) {
+			if (!ll.getLoanStatus().equals(LoanStatus.Closed)) {
+				// make sure we have no already found a non-Closed Loan for this Library Item
+				if (loan == null) {
+					loan = ll;
+				} else {
+					throw new IllegalStateException("LibraryItem should only have one non-Closed loan at the same time.");
+				}
+			}
+		}
+		
+		// if no library item has active or renewed loan, or if loan belongs to other member, throw error
+		if (loan == null || !loan.getMember().equals(m)) {
+			throw new IllegalStateException("Cannot return library item, not currently checked out by this member.");
+		}
+		
+		// return item
+
+		// set loan return date to today
+		Date today = Date.valueOf(LocalDate.now());
+		loan.setReturnDate(today);
+		
+		// calculate and set late fees if over due
+		double lateFee = 0;
+		if (loan.getLoanStatus().equals(LoanStatus.Overdue)) {
+			LocalDate returnDate = loan.getReturnDate().toLocalDate();
+			LocalDate borrowDate = loan.getBorrowedDate().toLocalDate();
+			Duration d = Duration.between(borrowDate, returnDate);
+			long daysLate = Math.abs(d.toDays());
+			lateFee = ((double) daysLate) * li.getDailyOverdueFee();
+		}
+		loan.setLateFees(lateFee);
+		
+		// set loan status to closed when item is returned
+		loan.setLoanStatus(LoanStatus.Closed);
+		
+		// update library item attributes
+		li.setItemStatus(ItemStatus.Available);
+		
+		// update member attributes
+		m.setActiveLoans(m.getActiveLoans() - 1);
+		
+		return loan;
 	}
 }

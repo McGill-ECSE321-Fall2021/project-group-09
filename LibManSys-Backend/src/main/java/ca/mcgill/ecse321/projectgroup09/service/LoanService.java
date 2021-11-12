@@ -1,18 +1,24 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
-import java.time.*;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.projectgroup09.dao.*;
-import ca.mcgill.ecse321.projectgroup09.models.*;
-import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
+import ca.mcgill.ecse321.projectgroup09.dao.LibrarianRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
+import ca.mcgill.ecse321.projectgroup09.models.Librarian;
+import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
+import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 /**
  * author: Rajaa
@@ -24,8 +30,6 @@ public class LoanService {
 	private LoanRepository loanRepository;
 	@Autowired
 	private MemberRepository memberRepository;
-	@Autowired
-	private BookRepository bookRepository;
 	@Autowired
 	private LibrarianRepository librarianRepository;
 	@Autowired
@@ -64,7 +68,9 @@ public class LoanService {
 	/*	if (loanRepository.findLoanByLibraryItem(libraryItem) == null) {
 			throw new IllegalArgumentException("Library Item does not exist");
 		}*/
-		loan.setBorrowedDate(borrowedDate);
+		// Convert Date from util.Date to sql.Date
+		java.sql.Date sqlBorrowedDate = new java.sql.Date(borrowedDate.getTime());
+		loan.setBorrowedDate(sqlBorrowedDate);
 		//loan.setReturnDate(returnDate);
 		loan.setLateFees(0); //0?
 		loan.setLoanStatus(LoanStatus.Active);
@@ -90,9 +96,9 @@ public class LoanService {
 		}
 		
 		
-		if (borrowedDate == null) {
-		loan.setBorrowedDate(borrowedDate);
-		}
+		//if (borrowedDate == null) {
+		//loan.setBorrowedDate(borrowedDate);
+		//}
 		
 		if (returnDate.before(borrowedDate)) {
 			throw new IllegalArgumentException("Return date is before Borrowed Date");
@@ -103,9 +109,13 @@ public class LoanService {
 		if (loanId == null) {
 			throw new IllegalArgumentException("No LoanId");
 		}
+
+		// Convert Date from util.Date to sql.Date
+		java.sql.Date sqlBorrowedDate = new java.sql.Date(borrowedDate.getTime());
+		java.sql.Date sqlReturnDate = new java.sql.Date(returnDate.getTime());
+		loan.setBorrowedDate(sqlBorrowedDate);
+		loan.setReturnDate(sqlReturnDate);
 		
-		loan.setBorrowedDate(borrowedDate);
-		loan.setReturnDate(returnDate);
 		loan.setLateFees(lateFees);
 		loan.setLoanStatus(loanStatus);
 		// loan.setloanID(loanId);
