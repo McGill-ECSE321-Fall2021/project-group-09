@@ -43,6 +43,9 @@ public class Member extends Account {
 		loans = new ArrayList<Loan>();
 		bookings = new ArrayList<Booking>();
 		reserved = new ArrayList<LibraryItem>();
+		this.amountOwed = 0;
+		this.activeLoans = 0;
+		this.isVerifiedResident = false;
 	}
 	
 	public Member (Long aLibCardNumber) {

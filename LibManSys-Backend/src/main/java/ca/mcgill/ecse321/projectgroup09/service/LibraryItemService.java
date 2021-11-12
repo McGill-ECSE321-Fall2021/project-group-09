@@ -1,10 +1,10 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.sql.Date;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -186,6 +186,27 @@ public class LibraryItemService {
 	}
 	
 	/**
+	 * Cancels the reservation a library member has placed on a library item.
+	 * @param memberId
+	 * @param libraryItemId
+	 * @return Updated library item
+	 */
+	@Transactional
+	public LibraryItem cancelReservation(long memberId, long libraryItemId) {
+		Member m = memberRepo.findMemberByLibCardNumber(memberId);
+		if (m == null) {
+			throw new IllegalArgumentException("There does not exist a member with that id.");
+		}
+		LibraryItem li = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
+		if (li == null) {
+			throw new IllegalArgumentException("There does not exist a library item with that id.");
+		}
+		// TODO
+		return li;
+		
+	}
+	
+	/**
 	 * Allows member to checkout a library item. LibraryItem must not currently
 	 * be checked out. Member must be verfied? or else they pay a fee.
 	 * Members can only checkout a maximum of 10 library items at a time
@@ -230,6 +251,10 @@ public class LibraryItemService {
 				// LibraryItem reserving member is not same as member currently attempting to checkout:
 				throw new IllegalStateException("Can not checkout a library item that is currently reserved by another member.");
 			}
+		}
+		// Make sure member does not have any outstanding fees
+		if (m.getAmountOwed() > 0) {
+			throw new IllegalStateException("Cannot checkout library item because member owes $" + m.getAmountOwed() + ".");
 		}
 		
 		// create new loan for library item
@@ -330,7 +355,15 @@ public class LibraryItemService {
 			throw new IllegalStateException("Could not renew library item, not currently checked out by this member.");
 		}
 		// make sure loan is not overdue
-		if (loan.getLoanStatus().equals(LoanStatus.Overdue)) {
+		// calculate due date
+		Calendar c = Calendar.getInstance();
+		c.setTime(loan.getBorrowedDate());
+		c.add(Calendar.DAY_OF_MONTH, loan.getLibraryItem().getLoanablePeriod());
+		Date dueDate = new Date(c.getTime().getTime());
+		// Check if loan is overdue
+		// calculate and set late fees if over due
+		Date today = Date.valueOf(LocalDate.now());
+		if (loan.getLoanStatus().equals(LoanStatus.Overdue) || today.after(dueDate)) {
 			throw new IllegalStateException("Cannot renew library item that is already overdue.");
 		}
 		// make sure loan is present in member.loans?
@@ -340,7 +373,6 @@ public class LibraryItemService {
 		
 		// renew item
 		loan.setLoanStatus(LoanStatus.Renewed);
-		Date today = Date.valueOf(LocalDate.now());
 		loan.setBorrowedDate(today);
 		
 		// save loan to repo to update
@@ -350,7 +382,9 @@ public class LibraryItemService {
 	}
 	
 	/**
-	 * Allows a librarian to return a book for a member.
+	 * Allows a librarian to return a book for a member. If todays date is after the due date for the library item
+	 * then late fees will be applied to the loan. If the library item is successfully returned, the loan status
+	 * will be set to Closed.
 	 * @param librarianId not actually needed?
 	 * @param memberId Id of member returning an item
 	 * @param libraryItemId Id of library item member is returning
@@ -410,16 +444,25 @@ public class LibraryItemService {
 		Date today = Date.valueOf(LocalDate.now());
 		loan.setReturnDate(today);
 		
+		
+		// calculate due date
+		Calendar c = Calendar.getInstance();
+		c.setTime(loan.getBorrowedDate());
+		c.add(Calendar.DAY_OF_MONTH, loan.getLibraryItem().getLoanablePeriod());
+		Date dueDate = new Date(c.getTime().getTime());
+		
+		// Check if loan is overdue
 		// calculate and set late fees if over due
 		double lateFee = 0;
-		if (loan.getLoanStatus().equals(LoanStatus.Overdue)) {
-			LocalDate returnDate = loan.getReturnDate().toLocalDate();
-			LocalDate borrowDate = loan.getBorrowedDate().toLocalDate();
-			Duration d = Duration.between(borrowDate, returnDate);
-			long daysLate = Math.abs(d.toDays());
+		if (loan.getReturnDate().after(dueDate)) {
+			// OVERDUE - calculate late fee, returnDate = today
+			long daysLateInMillies = today.getTime() - dueDate.getTime();
+			long daysLate = TimeUnit.DAYS.convert(daysLateInMillies, TimeUnit.MILLISECONDS);			
 			lateFee = ((double) daysLate) * li.getDailyOverdueFee();
 		}
 		loan.setLateFees(lateFee);
+		// Not sure if I should add fee to member account here, or have them call LoanService.getLoanFeesByMember
+		//m.setAmountOwed(m.getAmountOwed() + lateFee);
 		
 		// set loan status to closed when item is returned
 		loan.setLoanStatus(LoanStatus.Closed);

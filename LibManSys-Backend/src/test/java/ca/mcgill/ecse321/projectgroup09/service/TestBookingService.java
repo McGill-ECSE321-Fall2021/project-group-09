@@ -59,7 +59,7 @@ public class TestBookingService {
 	private static final long BOOKING_ID = 12345678; //booking ID
 	private static final String START_TIME = "8:00:00"; 
 	private static final String END_TIME = "16:00:00"; 
-	private static final String DATE = "2021-11-11";
+	private static final String DATE = "2022-11-11";
 
 //	private static final String NEW_START_TIME = "10:00:00";
 //	private static final String NEW_END_TIME = "18:00:00";

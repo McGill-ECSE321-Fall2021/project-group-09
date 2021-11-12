@@ -5,14 +5,25 @@ import javax.persistence.Entity;
 
 @Entity
 public class MusicAlbum extends LibraryItem {
-
+	/** Daily overdue fee for music album (in dollars). */
+	private static final double DAILY_OVERDUE_FEE = 0.8;
+	/** Period allowed for loans of music album type library items (in days). */
+	private static final int LOANABLE_PERIOD = 5;
+	/** Initial value for music album item status. */
+	private static final LibraryItem.ItemStatus LIBRARY_ITEM_STATUS = LibraryItem.ItemStatus.Available;
 
 	// MusicAlbum Attributes
 	private String genre;
 	private String artist;
 	private int albumLengthInMinutes;
 	private int numSongs;
-
+	
+	public MusicAlbum() {
+		this.setDailyOverdueFee(DAILY_OVERDUE_FEE);
+		this.setItemStatus(LIBRARY_ITEM_STATUS);
+		this.setLoanablePeriod(LOANABLE_PERIOD);
+	}
+	
 	@Override
 	public void setlibraryItemID(Long alibraryItemID) {
 		super.setlibraryItemID(alibraryItemID);

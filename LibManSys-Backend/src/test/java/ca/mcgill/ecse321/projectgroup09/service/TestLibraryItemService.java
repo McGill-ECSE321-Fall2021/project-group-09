@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,6 +94,12 @@ public class TestLibraryItemService {
 	private static final String LI7_TITLE = "Lord of the Flies";
 	private static final ItemStatus LI7_STATUS = ItemStatus.CheckedOut;
 	
+	/** LI8 - library item 8 (Movie) (return overdue fee test) */
+	private static final Long LI8_ID = 908L;
+	private static final String LI8_TITLE = "Jurassic Park";
+	private static final ItemStatus LI8_STATUS = ItemStatus.CheckedOut;
+	// Movie: loanable period: 7, daily over due fee: 0.5
+	
 	
 	/** Loan 5 - for test renew  - corresponds with member 5 and li5 */
 	private static final Long LOAN5_ID = 705L;
@@ -101,10 +108,16 @@ public class TestLibraryItemService {
 	/** Loan 6 - for test renew with overdue loan */
 	private static final Long LOAN6_ID = 706L;
 	private static final LoanStatus LOAN6_STATUS = LoanStatus.Overdue;
+	private static final Date LOAN6_BORROWED_DATE = Date.valueOf("2021-10-1");
 	
 	/** Loan 7 - see LI7 */
-	private static final Long LOAN7_ID = 705L;
+	private static final Long LOAN7_ID = 707L;
 	private static final LoanStatus LOAN7_STATUS = LoanStatus.Active;
+	
+	/** Loan 8 - see LI8 */
+	private static final Long LOAN8_ID = 708L;
+	private static final LoanStatus LOAN8_STATUS = LoanStatus.Overdue; // active would work too I think
+	private static final Date LOAN8_BORROWED_DATE = Date.valueOf("2021-11-1");
 	
 	
 	// M1 = Member 1
@@ -127,6 +140,10 @@ public class TestLibraryItemService {
 	private static final Long M7_ID = 807L;
 	private static final int M7_ACTIVE_LOANS = 1;
 	
+	/** M8 - see LI8 */
+	private static final Long M8_ID = 808L;
+	private static final int M8_ACTIVE_LOANS = 1;
+	
 	
 	// L1 = Librarian 1
 	private static final Long L1_ID = 851L;
@@ -138,7 +155,7 @@ public class TestLibraryItemService {
 	private static final String NAN_TITLE = "";
 	
 	private static final Date TODAY = Date.valueOf(LocalDate.now());
-
+	private static final Date YESTERDAY = new Date(TODAY.getTime() - TimeUnit.DAYS.toMillis(1)); 
 	
 	// Setup mocks
 	@BeforeEach
@@ -155,6 +172,7 @@ public class TestLibraryItemService {
     	Loan loan5 = new Loan();
     	loan5.setloanID(LOAN5_ID);
     	loan5.setLoanStatus(LOAN5_STATUS);
+    	loan5.setBorrowedDate(YESTERDAY);
     	loan5.setLibraryItem(li5);
     	loan5.setMember(m5);
     	List<Loan> loanList = Arrays.asList(loan5);
@@ -172,6 +190,7 @@ public class TestLibraryItemService {
     	Loan loan6 = new Loan();
     	loan6.setloanID(LOAN6_ID);
     	loan6.setLoanStatus(LOAN6_STATUS);
+    	loan6.setBorrowedDate(LOAN6_BORROWED_DATE);
     	loan6.setLibraryItem(li6);
     	loan6.setMember(m6);
     	loanList = Arrays.asList(loan6);
@@ -190,11 +209,30 @@ public class TestLibraryItemService {
     	Loan loan7 = new Loan();
     	loan7.setloanID(LOAN7_ID);
     	loan7.setLoanStatus(LOAN7_STATUS);
+    	loan7.setBorrowedDate(YESTERDAY);
     	loan7.setLibraryItem(li7);
     	loan7.setMember(m7);
     	loanList = Arrays.asList(loan7);
     	li7.setLoans(loanList);
     	m7.setLoans(loanList);
+    	
+    	// return test for overdue fee
+    	Member m8 = new Member();
+    	m8.setLibCardNumber(M8_ID);
+    	m8.setActiveLoans(M8_ACTIVE_LOANS);
+    	LibraryItem li8 = new Movie();
+    	li8.setlibraryItemID(LI8_ID);
+    	li8.setTitle(LI8_TITLE);
+    	li8.setItemStatus(LI8_STATUS);
+    	Loan loan8 = new Loan();
+    	loan8.setloanID(LOAN8_ID);
+    	loan8.setLoanStatus(LOAN8_STATUS);
+    	loan8.setBorrowedDate(LOAN8_BORROWED_DATE);
+    	loan8.setLibraryItem(li8);
+    	loan8.setMember(m8);
+    	loanList = Arrays.asList(loan8);
+    	li8.setLoans(loanList);
+    	m8.setLoans(loanList);
 		
 		// setup mock library item to be checked out
 		lenient().when(libraryItemRepo.findLibraryItemByLibraryItemID(anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
@@ -235,6 +273,9 @@ public class TestLibraryItemService {
 	        } else if (invocation.getArgument(0).equals(LI7_ID)) {
 	        	// created above
 	        	return li7;
+	        } else if (invocation.getArgument(0).equals(LI8_ID)) {
+	        	// created above
+	        	return li8;
 	        } else {
 	            return null;
 	        }
@@ -273,6 +314,8 @@ public class TestLibraryItemService {
 	            return m6;
 	        } else if(invocation.getArgument(0).equals(M7_ID)) {
 	            return m7;
+	        } else if(invocation.getArgument(0).equals(M8_ID)) {
+	            return m8;
 	        } else {
 	            return null;
 	        }
@@ -577,5 +620,31 @@ public class TestLibraryItemService {
 		assertNull(loan);
 		assertNotNull(error);
 		assertEquals("Cannot return library item, not currently checked out by this member.", error);
+	}
+	
+	@Test
+	public void testReturnLibraryItem_OverdueFees() {
+		// test the overdue fees are calculated correctly
+		// calculate what fees should be, for Movie, loanable period = 7, daily fee = 0.5
+		// Should be $2
+		Date bd = LOAN8_BORROWED_DATE;
+		Date dueDate = new Date(bd.getTime() + TimeUnit.DAYS.toMillis(7)); 
+		//Duration d = Duration.between(dueDate.toLocalDate(), TODAY.toLocalDate());
+		long daysLateInMillies = TODAY.getTime() - dueDate.getTime();
+		long daysLate = TimeUnit.DAYS.convert(daysLateInMillies, TimeUnit.MILLISECONDS);
+		double expectedFeesOwed = ( (double) daysLate) * 0.5;
+		System.out.println("exfees: " + expectedFeesOwed);
+		Loan loan = null;
+		try {
+			loan = libraryItemService.returnLibraryItem(L1_ID, M8_ID, LI8_ID);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+		assertNotNull(loan);
+		// assert overdue fee is calculate properly
+		assertEquals(expectedFeesOwed, loan.getLateFees());
+		// not sure if returnLibraryItem should update member amout owed or not
+		//assertEquals(expectedFeesOwed, loan.getMember().getAmountOwed());
+		assertEquals(0, loan.getMember().getActiveLoans());
 	}
 }

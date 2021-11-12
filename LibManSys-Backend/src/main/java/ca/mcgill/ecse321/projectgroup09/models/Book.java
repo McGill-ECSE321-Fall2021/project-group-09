@@ -8,11 +8,11 @@ import javax.persistence.Entity;
 @Entity
 public class Book extends LibraryItem{
 	/** Daily overdue fee for books (in dollars). */
-	private static final double BOOK_DAILY_OVERDUE_FEE = 0.1;
+	private static final double DAILY_OVERDUE_FEE = 0.1;
 	/** Period allowed for loans of Book type library items (in days). */
-	private static final int BOOK_LOANABLE_PERIOD = 14;
+	private static final int LOANABLE_PERIOD = 14;
 	/** Initial value for book item status. */
-	private static final LibraryItem.ItemStatus BOOK_LIBRARY_ITEM_STATUS = LibraryItem.ItemStatus.Available;
+	private static final LibraryItem.ItemStatus LIBRARY_ITEM_STATUS = LibraryItem.ItemStatus.Available;
 	
 	  //Book Attributes
 	private String author;
@@ -27,11 +27,11 @@ public class Book extends LibraryItem{
 	 */
 	public Book() {
 		// DailyOverdueFee is a constant value
-		this.setDailyOverdueFee(BOOK_DAILY_OVERDUE_FEE);
+		this.setDailyOverdueFee(DAILY_OVERDUE_FEE);
 		// Always init ItemStatus to Avaiable for books
-		this.setItemStatus(BOOK_LIBRARY_ITEM_STATUS);
+		this.setItemStatus(LIBRARY_ITEM_STATUS);
 		// Loanable period is always same for books
-		this.setLoanablePeriod(BOOK_LOANABLE_PERIOD);
+		this.setLoanablePeriod(LOANABLE_PERIOD);
 	}
 	  
 	  public Book (Long alibraryItemId) {
