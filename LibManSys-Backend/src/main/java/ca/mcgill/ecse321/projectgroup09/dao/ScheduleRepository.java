@@ -17,4 +17,5 @@ public interface ScheduleRepository extends CrudRepository<Schedule, Long> {
 	List<Schedule> findScheduleByLibrarian(Librarian librarian);
 	List<Schedule> findSchedulesByDayofWeek(DayOfWeek dayOfWeek);
 	//List<Schedule> findScheduleByLibrary(Library library);
+	List<Schedule> findAll();
 }

@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import java.sql.Time;
 import java.time.DayOfWeek;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +11,10 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Schedule {
+	/** The ID's in this list are reserved for schedules that correspond to the library hours. 
+	 *  No other schedules should be created with these ID's. */
+	public static List<Long> RESERVED_IDS = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L);
+
 	// automatically generate schedule ID's
 	/** Schedule ID's start at 8, because first 7 are reserved for library hours. */
 	private static Long nextScheduleId = 8L;
