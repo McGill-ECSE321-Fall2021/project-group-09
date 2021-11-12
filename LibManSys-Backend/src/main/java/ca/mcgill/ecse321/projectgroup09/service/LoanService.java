@@ -32,7 +32,7 @@ public class LoanService {
 	private LibraryItemRepository libraryItemRepository;
 
 	@Transactional
-	public Loan createLoan(Date borrowedDate, Date returnDate, Double lateFees, LoanStatus loanStatus, Long loanId,
+	public Loan createLoan(Date borrowedDate,  Long loanId,
 			Long memberId, Long librarianId, Long libraryItemId) {
 		
 
@@ -41,17 +41,34 @@ public class LoanService {
 		LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
 		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianId);
 
-		if (loanRepository.findLoanByMember(member) == null) {
+		/*if (loanRepository.findLoanByMember(member) == null) {
+			throw new IllegalArgumentException("Member does not exist");
+		}*/
+		
+		if (memberId == null) {
 			throw new IllegalArgumentException("Member does not exist");
 		}
-		if (loanRepository.findLoanByLibraryItem(libraryItem) == null) {
-			throw new IllegalArgumentException("Library Item does not exist");
+		if (librarianId == null) {
+			throw new IllegalArgumentException("Librairan does not exist");
 		}
+		if (libraryItemId == null) {
+			throw new IllegalArgumentException("Item does not exist");
+		}
+		if (borrowedDate == null) {
+			throw new IllegalArgumentException("No BorrowedDate");
+		}
+		if (loanId == null || loanId <0) {
+			throw new IllegalArgumentException("No LoanId");
+		}
+		
+	/*	if (loanRepository.findLoanByLibraryItem(libraryItem) == null) {
+			throw new IllegalArgumentException("Library Item does not exist");
+		}*/
 		loan.setBorrowedDate(borrowedDate);
-		loan.setReturnDate(returnDate);
-		loan.setLateFees(lateFees); //0?
-		loan.setLoanStatus(loanStatus);
-	//	loan.setloanID(loanId); // random number? or catch if no id put random
+		//loan.setReturnDate(returnDate);
+		loan.setLateFees(0); //0?
+		loan.setLoanStatus(LoanStatus.Active);
+		loan.setloanID(loanId); // random number? or catch if no id put random
 		loan.setMember(member);
 		loan.setLibrarian(librarian);
 		loan.setLibraryItem(libraryItem);
@@ -60,32 +77,38 @@ public class LoanService {
 	}
 
 	@Transactional
-	public Loan updateLoan(Date borrowedDate, Date returnDate, Double lateFees, LoanStatus loanStatus, Long loanId,
-			Long memberId, Long librarianId, Long libraryItemId) {
+	public Loan updateLoan(Date borrowedDate,Date returnDate, Double lateFees, LoanStatus loanStatus,Long loanId){
 		
 
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
-		Member member = memberRepository.findMemberByLibCardNumber(memberId);
-		LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
-		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianId);
+		//Member member = memberRepository.findMemberByLibCardNumber(memberId);
+		//LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
+		//Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianId);
 
 		if (loanRepository.findLoanByLoanID(loanId) == null) {
 			throw new IllegalArgumentException("Loan does not exist");
 		}
-		if (loanRepository.findLoanByMember(member) == null) {
-			throw new IllegalArgumentException("Member does not exist");
-		}
-		if (loanRepository.findLoanByLibraryItem(libraryItem) == null) {
-			throw new IllegalArgumentException("Library Item does not exist");
-		}
+		
+		
+		if (borrowedDate == null) {
 		loan.setBorrowedDate(borrowedDate);
-		loan.setReturnDate(borrowedDate);
-		loan.setLateFees(0);
+		}
+		
+		if (returnDate.before(borrowedDate)) {
+			throw new IllegalArgumentException("Return date is before Borrowed Date");
+			}
+		if (lateFees<0) {
+			throw new IllegalArgumentException("Late Fees Negative");
+			}
+		if (loanId == null) {
+			throw new IllegalArgumentException("No LoanId");
+		}
+		
+		loan.setBorrowedDate(borrowedDate);
+		loan.setReturnDate(returnDate);
+		loan.setLateFees(lateFees);
 		loan.setLoanStatus(loanStatus);
 		// loan.setloanID(loanId);
-		loan.setMember(member);
-		loan.setLibrarian(librarian);
-		loan.setLibraryItem(libraryItem);
 		loanRepository.save(loan);
 		return loan;
 	}
@@ -100,15 +123,11 @@ public class LoanService {
 
 	}
 
-	public Loan readLoan(Long loanId) {
-		Loan loan = loanRepository.findLoanByLoanID(loanId);
-		return loan;
-	}
 
 							// BUSINESS METHODS //
 
 	// not sure if it should be a business method rather than helper method
-	public long getLateDays(Date borrowedDate, Date returnDate, Integer loanablePeriod) {
+	private long getLateDays(Date borrowedDate, Date returnDate, Integer loanablePeriod) {
 		// maybe I should call loan here, if a user wants to see the lateDays without
 		// the fee?
 		Date returnedDate = addDate(borrowedDate, loanablePeriod);
@@ -120,53 +139,88 @@ public class LoanService {
 		return lateDays;
 	}
 
-	public double calculateLateFee(Date borrowedDate, Date returnDate, LibraryItem libraryItem,
+/*	private double calculateLateFee(Date borrowedDate, Date returnDate, Long libraryItemId,
 			Integer loanablePeriod) {
 		long lateDays = getLateDays(borrowedDate, returnDate, loanablePeriod);
+		LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
 		double overdueFee = libraryItem.getDailyOverdueFee();
 		double lateFees = overdueFee * lateDays;
 		return lateFees;
-	}
+	}*/
 
 	@Transactional
-	public void addLateFee(LibraryItem libraryItem, Long loanId) {
+	public Loan addLateFee(Long libraryItemId, Long loanId, Double overdueFee, LoanStatus loanStatus) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
 		Date returnDate = loan.getReturnDate();
 		Date borrowedDate = loan.getBorrowedDate();
 		Integer loanablePeriod = loan.getLibraryItem().getLoanablePeriod();
-		double lateFees = calculateLateFee(borrowedDate, returnDate, libraryItem, loanablePeriod);
-		LoanStatus loanStatus = loan.getLoanStatus();
-		if (loanStatus == LoanStatus.Active) {
+		//LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
+		//double lateFees = calculateLateFee(borrowedDate, returnDate, libraryItemId, loanablePeriod);
+		long lateDays = getLateDays(borrowedDate, returnDate, loanablePeriod);
+		LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
+		
+		
+		//double overdueFee = libraryItem.getDailyOverdueFee();
+		
+		double lateFees = overdueFee * lateDays;
+		//return lateFees;
+		//LoanStatus loanStatus = loan.getLoanStatus();
+		if (loanStatus == LoanStatus.Overdue) {
 			loan.setLateFees(lateFees);
 		}
+		if (loanStatus != LoanStatus.Overdue) {
+			throw new IllegalArgumentException("Loan is not overdue");
+		}
 		loanRepository.save(loan);
+		return loan;
 	}
 
 	@Transactional
-	public void changeLateFee(Long loanId, Long newLateFee) {
+	public Loan changeLateFee(Long loanId, Double newLateFee) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
 		loan.setLateFees(newLateFee);
 		loanRepository.save(loan);
+		return loan;
 	}
 
 	@Transactional
-	public void changeLoanStatus(Long loanId, Long libraryItemId, LibraryItem libraryItem) {
+	public Loan changeLoanStatus(Long loanId, Long libraryItemId, LoanStatus loanStatus) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
 		Date returnDate = loan.getReturnDate();
 		Date borrowedDate = loan.getBorrowedDate();
 		Integer loanablePeriod = loan.getLibraryItem().getLoanablePeriod();
-		if (calculateLateFee(borrowedDate, returnDate, libraryItem, loanablePeriod) > 0) {
+		
+		
+		if (loanId == null) {
+			throw new IllegalArgumentException("Loan does not exist");
+
+		}
+		if (libraryItemId == null) {
+			throw new IllegalArgumentException("Item does not exist");
+
+		}
+		
+
+		loan.setLoanStatus(loanStatus);
+		loanRepository.save(loan);
+		return loan;
+	/*	if (calculateLateFee(borrowedDate, returnDate, libraryItemId, loanablePeriod) > 0) {
 			loan.setLoanStatus(LoanStatus.Overdue);
-		}
-		if (calculateLateFee(borrowedDate, returnDate, libraryItem, loanablePeriod) == 0 /* && renewal false */) {
-			loan.setLoanStatus(LoanStatus.Active);
-		}
+		}*/
+	//	if (calculateLateFee(borrowedDate, returnDate, libraryItem, loanablePeriod) == 0 // && renewal false */) {
+		//	loan.setLoanStatus(LoanStatus.Active);
+	//	}
+		
+		/*if (loanablePeriod == null) {
+			throw new IllegalArgumentException("No loanable  Date");
+
+		}*/
 		// if renewal method (in libraryItem) set as renewal
 
 		// if returned method in libraryItem set as closed
 		
 		
-		loanRepository.save(loan);
+		
 	}
 
 	@Transactional
@@ -175,16 +229,21 @@ public class LoanService {
 	}
 
 	@Transactional
-	public List<Loan> getLoansbyMember(Member member) {
+	public List<Loan> getLoansbyMember(Long libCard) {
+		Member member = memberRepository.findMemberByLibCardNumber(libCard);
 		List<Loan> loansByMember = new ArrayList<>();
 		for (Loan loan : loanRepository.findLoanByMember(member)) {
 			loansByMember.add(loan);
+		}
+		if (libCard ==null) {
+			throw new IllegalArgumentException("Id must not be null.");
+
 		}
 		return loansByMember;
 	}
 	
 	public Loan getLoanbyId(Long loanId) {
-		if (loanId == null) {
+		if (loanId == null || loanId <0) {
 			throw new IllegalArgumentException("Id must not be null.");
 		}
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
@@ -193,8 +252,14 @@ public class LoanService {
 	
 
 	@Transactional
-	public double getLoanFeesbyMember(Member member) {
+	public double getLoanFeesbyMember(Long memberLib) {
 		double fee = 0;
+		
+		if(memberLib == null) {
+			throw new IllegalArgumentException("Id must not be null.");
+
+		}
+		Member member = memberRepository.findMemberByLibCardNumber(memberLib);
 		for (Loan loan : loanRepository.findLoanByMember(member)) {
 			double tempFee = loan.getLateFees();
 			fee += tempFee;

@@ -1,7 +1,8 @@
 package ca.mcgill.ecse321.projectgroup09.controller;
 
-import java.sql.Date;
+//import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,12 +27,11 @@ public class LoanController {
 	private LoanService loanService;
 	
 	
-	@PostMapping(value = { "/Loan/createLoan", "/Loan/createLoan/" })
-	public LoanDto createLoan(@PathVariable("borrowedDate") Date borrowedDate, @PathVariable("returnDate") Date returnDate,
-			@PathVariable("lateFee") Double lateFee,@PathVariable("loanStatus") LoanStatus loanStatus,
+	@PostMapping(value = { "/Loan/createLoan/{borrowedDate}/{loanId}/{memberId}/{librarianId}/{libraryItemId}", "/Loan/createLoan/{borrowedDate}/{returnDate}/{lateFee}/{loanStatus}/{loanStatus}/{loanId}/{memberId}/{librarianId}/{libraryItemId}/" })
+	public LoanDto createLoan(@PathVariable("borrowedDate") Date borrowedDate, 
 			@PathVariable("loanId") Long loanId,@PathVariable("memberId") Long memberId,
 			@PathVariable("librarianId") Long librarianId,@PathVariable("libraryItemId") Long libraryItemId)  {
-		Loan loan = loanService.createLoan(borrowedDate, returnDate, lateFee, loanStatus, loanId, librarianId, memberId, libraryItemId);
+		Loan loan = loanService.createLoan(borrowedDate, loanId, librarianId, memberId, libraryItemId);
 		return LoanDto.convertToDto(loan);
 	}
 	
@@ -44,10 +44,10 @@ public class LoanController {
 	}
 	//getloansbymember
 	@PostMapping(value = { "/Loan/Member/MemberId", "/Loan/Member/MemberId/" })
-	public List<LoanDto> getAllLoansbyMember(@PathVariable("member") Member member)  {
+	public List<LoanDto> getAllLoansbyMember(@PathVariable("member") Long memberId)  {
 	
 		List <LoanDto> loansDto = new ArrayList<LoanDto>();
-		for(Loan loan : loanService.getLoansbyMember(member)) {
+		for(Loan loan : loanService.getLoansbyMember(memberId)) {
 			loansDto.add(LoanDto.convertToDto(loan));
 		}
 
@@ -62,7 +62,7 @@ public class LoanController {
 		return LoanDto.convertToDto(loan);
 	}*/
 	
-	@PostMapping(value = { "/Loan/Delete/{id}", "/Loan/Delete/{id}" })
+	@PostMapping(value = { "/Loan/Delete/Id", "/Loan/Delete/Id/" })
 	public void deleteLoan(@PathVariable("loanId") Long loanId)  {
 		//Loan loan = loanService.getLoanbyId(loanId);
 		loanService.deleteLoan(loanId);
