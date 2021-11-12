@@ -15,7 +15,8 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.lenient;
 
 import java.time.DayOfWeek;
-import java.util.*;
+import java.util.List;
+import java.sql.Date;
 
 
 import org.mockito.InjectMocks;
@@ -231,7 +232,7 @@ public class TestBookingService {
 		long bookingID = 12345678;
 		String startTime = "8:00:00";
 		String endTime = "16:00:00";
-		String bookingDate = "2021-11-11";
+		String bookingDate = "2021-11-12";
 		
 		long librarianID = 12345678;
 		long memberID = 999999999;
@@ -283,7 +284,7 @@ public class TestBookingService {
 		long BOOKING_ID = 12345678;
 		String START_TIME = "09:00:00";
 		String END_TIME = "13:00:00";
-		String DATE = "2021-11-11";
+		String DATE = "2021-11-12";
 	
 		
 		Booking booking = null;
