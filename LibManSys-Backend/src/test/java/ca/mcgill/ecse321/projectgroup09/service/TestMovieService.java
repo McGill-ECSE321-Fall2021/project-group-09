@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.projectgroup09.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -53,33 +54,33 @@ public class TestMovieService {
 
 	@InjectMocks
     private MovieService movieService;
-	private static final double Fees = 0.10;
-	private static final String Director = "Rajaa";
-	private static final String Genre = "Cool";
-	private static final ItemStatus ITEMStatus = ItemStatus.Available;
-	private static final Integer LoanablePeriod = 7;
-	private static final Long movieId = (long) 1111111;
-	private static final Integer Runtime = 20;
-	private static final Integer PublishedYear = 2021;
-	private static final String Title = "TestMovie";
+	private static final double FEES = 0.10;
+	private static final String DIRECTOR = "Rajaa";
+	private static final String GENRE = "Cool";
+	private static final ItemStatus ITEMSTATUS = ItemStatus.Available;
+	private static final Integer LOANABLEPERIOD = 7;
+	private static final Long MOVIEID = (long) 1111111;
+	private static final Integer RUNTIME = 20;
+	private static final Integer PUBLISHEDYEAR = 2021;
+	private static final String TITLE = "TestMovie";
 	    
 	@BeforeEach
 		 public void setMockOutput() {
 
 	        lenient().when(movieRepository.findMovieBylibraryItemID(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
-	        	if (invocation.getArgument(0).equals(movieId)) {
+	        	if (invocation.getArgument(0).equals(MOVIEID)) {
 		        	Movie movie = new Movie();
 		            Member member = new Member();
-		            movie.setDailyOverdueFee(Fees);
-		            movie.setDirector(Director);
-		            movie.setGenre(Genre);
-		            movie.setItemStatus(ITEMStatus);
-		            movie.setlibraryItemID(movieId);//
-		            movie.setLoanablePeriod(LoanablePeriod);
+		            movie.setDailyOverdueFee(FEES);
+		            movie.setDirector(DIRECTOR);
+		            movie.setGenre(GENRE);
+		            movie.setItemStatus(ITEMSTATUS);
+		            movie.setlibraryItemID(MOVIEID);//
+		            movie.setLoanablePeriod(LOANABLEPERIOD);
 		            movie.setMember(member);
-		            movie.setPublishedYear(Runtime);
-		            movie.setRuntime(PublishedYear);
-		            movie.setTitle(Title);
+		            movie.setPublishedYear(RUNTIME);
+		            movie.setRuntime(PUBLISHEDYEAR);
+		            movie.setTitle(TITLE);
 		            return movie;
 	        	}
 	        	else {return null;}
@@ -98,60 +99,209 @@ public class TestMovieService {
 }
 
 	@Test
-	public void createMovie() {
+	public void testCreateMovie() {
 		
 		Movie movie1 = null;
-		double Fees = 0.10;
-		 String Director = "Rajaa";
-		 String Genre = "Cool";
-		 ItemStatus ITEMStatus = ItemStatus.Available;
-		 Integer LoanablePeriod = 7;
-		 Long movieId = (long) 1111111;
-	   Integer Runtime = 20;
-		 Integer PublishedYear = 2021;
-		 String Title = "TestMovie";
+		String error = null;
+
+		//double Fees = 0.10;
 		try {
 			
-			movie1 = movieService.createMovie(movieId, Title, PublishedYear, LoanablePeriod, Fees, ITEMStatus, Director, Runtime, Genre);
+			movie1 = movieService.createMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
 		}
 		catch (Exception e) {
-			fail(e.getMessage());
+			error = (e.getMessage());
 		}
+		assertNotNull(movie1);
+
 	}
+	
+	@Test
+	public void testCreateMovieNoDirector() {
+		
+		Movie movie1 = null;
+		String error = null;
+		String director = null;
+
+		//double Fees = 0.10;
+		try {
+			
+			movie1 = movieService.createMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, director, RUNTIME, GENRE);
+		}
+		catch (Exception e) {
+			error = (e.getMessage());
+		}
+		assertNull(movie1);
+		assertNotNull(error);
+
+	}
+	
+	@Test
+	public void testCreateMovieNoGenre() {
+		
+		Movie movie1 = null;
+		String error = null;
+		String genre = null;
+
+		//double Fees = 0.10;
+		try {
+			
+			movie1 = movieService.createMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, genre);
+		}
+		catch (Exception e) {
+			error = (e.getMessage());
+		}
+		assertNull(movie1);
+		assertNotNull(error);
+
+	}
+	
+	@Test
+	public void testCreateMovieNoPublishedYear() {
+		
+		Movie movie1 = null;
+		String error = null;
+		Integer publishedYear = null;
+
+		//double Fees = 0.10;
+		try {
+			
+			movie1 = movieService.createMovie(MOVIEID, TITLE, publishedYear, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
+		}
+		catch (Exception e) {
+			error = (e.getMessage());
+		}
+		assertNull(movie1);
+		assertNotNull(error);
+
+	}
+	
+	@Test
+	public void testCreateMovieNoLoanablePeriod() {
+		
+		Movie movie1 = null;
+		String error = null;
+		Integer loanablePeriod = null;
+
+		//double Fees = 0.10;
+		try {
+			
+			movie1 = movieService.createMovie(MOVIEID, TITLE, PUBLISHEDYEAR, loanablePeriod, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
+		}
+		catch (Exception e) {
+			error = (e.getMessage());
+		}
+		assertNull(movie1);
+		assertNotNull(error);
+
+	}
+	
 
 	@Test
-	public void updateMovie() {
+	public void testUpdateMovie() {
 		//Movie movie = movieRepository.findMovieBylibraryItemID(movieId);
 		Movie movie1 = null;
-		double Fees = 0.10;
-		 String Director = "Rajaa";
-		 String Genre = "Cool";
-		 ItemStatus ITEMStatus = ItemStatus.Available;
-		 Integer LoanablePeriod = 7;
-		 Long movieId = (long) 1111111;
-	   Integer Runtime = 20;
-		 Integer PublishedYear = 2021;
-		 String Title = "TestMovie";
+		
 		 
 		try {
 			
-			movie1 = movieService.updateMovie(movieId, Title, PublishedYear, LoanablePeriod, Fees, ITEMStatus, Director, Runtime, Genre);
+			movie1 = movieService.updateMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
 		}
 		catch (Exception e) {
 			fail(e.getMessage());
 		}
 		assertNotNull(movie1);
-		assertEquals(LoanablePeriod, movie1.getLoanablePeriod());
+		assertEquals(LOANABLEPERIOD, movie1.getLoanablePeriod());
+
+	}
+	
+	@Test
+	public void testUpdateMovieNoDirector() {
+		
+		Movie movie1 = null;
+		String error = null;
+		String director = null;
+
+		//double Fees = 0.10;
+		try {
+			
+			movie1 = movieService.updateMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, director, RUNTIME, GENRE);
+		}
+		catch (Exception e) {
+			error = (e.getMessage());
+		}
+		assertNull(movie1);
+		assertNotNull(error);
+
+	}
+	
+	@Test
+	public void testUpdateMovieNoGenre() {
+		
+		Movie movie1 = null;
+		String error = null;
+		String genre = null;
+
+		//double Fees = 0.10;
+		try {
+			
+			movie1 = movieService.updateMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, genre);
+		}
+		catch (Exception e) {
+			error = (e.getMessage());
+		}
+		assertNull(movie1);
+		assertNotNull(error);
+
+	}
+	
+	@Test
+	public void testUpdateMovieNoPublishedYear() {
+		
+		Movie movie1 = null;
+		String error = null;
+		Integer publishedYear = null;
+
+		//double Fees = 0.10;
+		try {
+			
+			movie1 = movieService.updateMovie(MOVIEID, TITLE, publishedYear, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
+		}
+		catch (Exception e) {
+			error = (e.getMessage());
+		}
+		assertNull(movie1);
+		assertNotNull(error);
+
+	}
+	
+	@Test
+	public void testUpdateMovieNoLoablePeriod() {
+		
+		Movie movie1 = null;
+		String error = null;
+		Integer loanablePeriod = null;
+
+		//double Fees = 0.10;
+		try {
+			
+			movie1 = movieService.updateMovie(MOVIEID, TITLE, PUBLISHEDYEAR, loanablePeriod, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
+		}
+		catch (Exception e) {
+			error = (e.getMessage());
+		}
+		assertNull(movie1);
+		assertNotNull(error);
 
 	}
 		// Test Delete Loan //
 	@Test
-	public void deleteMovie() {
+	public void testDeleteMovie() {
 		//Movie movie = null;
 		boolean delete =false;
 		try {
 		 	
-			 delete = movieService.deleteMovie(movieId);
+			 delete = movieService.deleteMovie(MOVIEID);
 		}
 		catch (Exception e) {
 			fail(e.getMessage());

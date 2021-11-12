@@ -63,9 +63,10 @@ public class TestLoanService {
 	@InjectMocks
 	private LoanService loanService;
 
-	 @SuppressWarnings("deprecation")
-	 private static final Date BORROWEDDATE = new Date( 2020, 1, 2);
-	 private static final Date RETURNEDDATE = new Date( 2020, 1, 3);
+
+	 private static final Date BORROWEDDATE = Date.valueOf("2020-02-02");
+	// new Date( 2020, 1, 2);
+	 private static final Date RETURNEDDATE = Date.valueOf("2020-03-03");
 	 private static final Double LATEFEES = 0.10;
 	 private static final Double OVERDUEFEE = 0.20;
 
@@ -119,7 +120,7 @@ public class TestLoanService {
 	        	}
 	        	});
 	        	
-	    		lenient().when(librarianRepository.findLibrarianByEmployeeIDNum(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+	    	/*	lenient().when(librarianRepository.findLibrarianByEmployeeIDNum(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
 	    			if (invocation.getArgument(0).equals(EMPLOYEE_ID)) {
 	    				Librarian librarian = new Librarian(); 
 	    				librarian.setemployeeIDNum(EMPLOYEE_ID);
@@ -150,7 +151,7 @@ public class TestLoanService {
 	    				return null; 
 	    			}
 
-	    		});
+	    		});*/
 
 		      
 		 
@@ -164,7 +165,7 @@ public class TestLoanService {
 	}
 	
 @Test
-public void createLoan() {
+public void testCreateLoan() {
 	Loan loan1 = null;
 
 	try {
@@ -180,10 +181,10 @@ public void createLoan() {
 }
 
 @Test
-public void createLoanWithNoBorrowedDate() {
+public void testCreateLoanWithNoBorrowedDate() {
 	String error = null;
 	Loan loan1 = null;
-	 @SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	Date borrowedDate = null;
 	try {
 	 
@@ -198,7 +199,7 @@ public void createLoanWithNoBorrowedDate() {
 }
 
 @Test
-public void createLoanWithNoMember() {
+public void testCreateLoanWithNoMember() {
 	String error = null;
 	Loan loan1 = null;
 	Long memberId = null;
@@ -215,7 +216,7 @@ public void createLoanWithNoMember() {
 }
 
 @Test
-public void createLoanWithNoLibrarian() {
+public void testCreateLoanWithNoLibrarian() {
 	String error = null;
 	Loan loan1 = null;
 	Long Librarian = null;
@@ -231,7 +232,7 @@ public void createLoanWithNoLibrarian() {
 }
 
 @Test
-public void createLoanWithNoID() {
+public void testCreateLoanWithNoID() {
 	String error = null;
 	Loan loan1 = null;
 	Long loanId = null;
@@ -247,7 +248,7 @@ public void createLoanWithNoID() {
 }
 
 @Test
-public void createLoanWithNoLibraryItemID() {
+public void testCreateLoanWithNoLibraryItemID() {
 	String error = null;
 	Loan loan1 = null;
 	Long libraryItemId = null;
@@ -287,9 +288,9 @@ public void testGetLoanFail() {
 
 }
 
-@SuppressWarnings("deprecation")
+//@SuppressWarnings("deprecation")
 @Test
-public void updateLoan() {
+public void testUpdateLoan() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
 	
 	
@@ -308,9 +309,9 @@ public void updateLoan() {
 	assertEquals(LOANID, newLoan.getLoanID());
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
-public void updateLoanNoBorrowedDate() {
+public void testUpdateLoanNoBorrowedDate() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
 	
 	String error = null;
@@ -327,9 +328,9 @@ public void updateLoanNoBorrowedDate() {
 	
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
-public void updateLoanReturnDatebeforeBorrowedDate() {
+public void testUpdateLoanReturnDatebeforeBorrowedDate() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
 	
 	String error = null;
@@ -342,13 +343,13 @@ public void updateLoanReturnDatebeforeBorrowedDate() {
 		error = e.getMessage();
 	}
 	assertNull(newLoan);
-	assertNotNull(error);
+	assertNotNull(error); 
 	
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
-public void updateLoanNoId() {
+public void testUpdateLoanNoId() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
 	
 	String error = null;
@@ -364,9 +365,9 @@ public void updateLoanNoId() {
 	
 }
 
-@SuppressWarnings("deprecation")
+
 @Test
-public void updateNegativeFees() {
+public void testUpdateNegativeFees() {
 	//Loan loan = loanRepository.findLoanByLoanID(loanID);
 	
 	String error = null;
@@ -383,7 +384,7 @@ public void updateNegativeFees() {
 	
 }
 @Test
-public void deleteLoan() {
+public void testDeleteLoan() {
 	Loan loan = null;
 	boolean delete =false;
 	try {
@@ -398,7 +399,7 @@ public void deleteLoan() {
 }
 
 @Test
-public void deleteLoanFail() {
+public void testDeleteLoanFail() {
 	Loan loan = null;
 	boolean delete =false;
 	Long loanId = null;
@@ -416,7 +417,7 @@ public void deleteLoanFail() {
 
 }
 @Test
-public void addLateFee() {
+public void testAddLateFee() {
 	Loan newLoan = null;
 	String error = null;
 	double overdueFee = 0.1;
@@ -434,7 +435,7 @@ public void addLateFee() {
 }
 
 @Test
-public void addLateFeeNotActive() {
+public void testAddLateFeeNotActive() {
 	Loan newLoan = null;
 	String error = null;
 	LoanStatus loanStatus = LoanStatus.Closed;
@@ -452,7 +453,7 @@ public void addLateFeeNotActive() {
 }
 
 @Test
-public void TestChangeLateFee() {
+public void testChangeLateFee() {
 	Loan newLoan = null;
 	String error = null;
 	try {
@@ -471,7 +472,7 @@ public void TestChangeLateFee() {
 }
 
 @Test
-public void TestChangeLoanStatus() {
+public void testChangeLoanStatus() {
 	Loan newLoan = null;
 	String error = null;
 	try {
@@ -490,7 +491,7 @@ public void TestChangeLoanStatus() {
 }
 
 @Test
-public void TestChangeLoanStatusNoLoanId() {
+public void testChangeLoanStatusNoLoanId() {
 	Loan newLoan = null;
 	String error = null;
 	Long id = null;
@@ -510,7 +511,7 @@ public void TestChangeLoanStatusNoLoanId() {
 }
 
 @Test
-public void TestChangeLoanStatusNoLibraryItemId() {
+public void testChangeLoanStatusNoLibraryItemId() {
 	Loan newLoan = null;
 	String error = null;
 	Long id = null;
@@ -528,9 +529,9 @@ public void TestChangeLoanStatusNoLibraryItemId() {
 
 
 @Test
-public void TestGetLoanFeesbyMember() {
+public void testGetLoanFeesbyMember() {
 	Member member = new Member();
-	Long memberId = member.getLibCardNumber();
+	//Long memberId = member.getLibCardNumber();
 	double newLoan = 0 ;
 	String error = null;
 	try {
@@ -545,7 +546,7 @@ public void TestGetLoanFeesbyMember() {
 }
 
 @Test
-public void TestGetLoanFeesbyNonMember() {
+public void testGetLoanFeesbyNonMember() {
 	Double newLoan = null;
 	String error = null;
 	Long id = null;
@@ -563,7 +564,7 @@ public void TestGetLoanFeesbyNonMember() {
 }
 
 @Test
-public void TestGetLoansbyMember() {
+public void testGetLoansbyMember() {
 	List<Loan> newLoan = null;
 	String error = null;
 	Long id = null;
@@ -580,7 +581,7 @@ public void TestGetLoansbyMember() {
 }
 
 @Test
-public void TestGetLoansbyNonMember() {
+public void testGetLoansbyNonMember() {
 	List<Loan> newLoan = null;
 	String error = null;
 	Long id = null;
