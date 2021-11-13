@@ -13,7 +13,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 public class ArchiveDto {
 	
-	   // LibraryItem attributes
+
 		private Long libraryItemID;
 		private String title;
 		private int publishedYear;
@@ -21,16 +21,14 @@ public class ArchiveDto {
 		private double dailyOverdueFee;
 		private ItemStatus itemStatus;
 		
-		// LibraryItem associations
+
 		private MemberDto member;
 		private List<LoanDto> loans;
 		
-		// Archive attribute
+
 		private String institution;
 		
-		/**
-		 * Default constructor.
-		 */
+
 		public ArchiveDto() {
 		
 		}
@@ -44,15 +42,15 @@ public class ArchiveDto {
 			this.loanablePeriod = aLoanablePeriod;
 			this.dailyOverdueFee = aDailyOverdueFee;
 			this.itemStatus = aItemStatus;
-			// convert object
+
 			if (member != null) {
 				MemberDto aMemberDto = MemberDto.convertToDto(aMember);
 				this.member = aMemberDto;
 			} else {
-				// else if member is null, just set to null in dto
+
 				this.member = null;
 			}
-			// convert collection
+
 			List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
 			this.institution = aInstitution;
 		}
