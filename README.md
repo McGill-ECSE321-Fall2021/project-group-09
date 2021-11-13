@@ -33,7 +33,7 @@ All members also contributed to the detailed Use Case specifications, Persistenc
 |-------------------|-----------------------------------------------|----------------|
 |Abdullah Arafat    |Librarian and Head Librarian.                  |    3 + x.      |   
 |Christos Cunning   |Book, Schedule and Library Item classes.       |         44     |   
-|Omar Abdelaziz     |Archive, Newspaper, and Music Album classes.   |        7+4+rn  |   
+|Omar Abdelaziz     |Archive, Newspaper, and Music Album classes.   |        38.     |   
 |Rajaa Boukhelif    |Loan and Movie classes.                        |        40      |   
 |Sneha Singh        |Library and Booking classes.                   |         44     |   
 |Zarif Ashraf Zidane|Member and Online member classes.              |     20 + x     |   
