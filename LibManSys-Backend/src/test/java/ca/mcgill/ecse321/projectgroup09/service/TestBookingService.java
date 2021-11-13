@@ -59,11 +59,11 @@ public class TestBookingService {
 	private static final long BOOKING_ID = 12345678; //booking ID
 	private static final String START_TIME = "8:00:00"; 
 	private static final String END_TIME = "16:00:00"; 
-	private static final String DATE = "2022-11-11";
+	private static final String DATE = "2023-11-11";
 
 //	private static final String NEW_START_TIME = "10:00:00";
 //	private static final String NEW_END_TIME = "18:00:00";
-//	private static final String NEW_DATE = "2021-12-12";
+//	private static final String NEW_DATE = "2024-12-12";
 
 	private static final long LIB_CARD_NO = 999999999; //member ID 
 	private static final String MEM_ADDRESS = "123 Test Address";
@@ -239,7 +239,7 @@ public class TestBookingService {
 		long bookingID = 12345678;
 		String startTime = "8:00:00";
 		String endTime = "16:00:00";
-		String bookingDate = "2021-11-30";
+		String bookingDate = "2023-11-30";
 		
 		long librarianID = 12345678;
 		long memberID = 999999999;
@@ -264,7 +264,7 @@ public class TestBookingService {
 		String error = null;
 		long bookingID = 12345678;
 		String endTime = "16:00:00";
-		String bookingDate = "2021-11-11";
+		String bookingDate = "2023-11-11";
 		
 		long librarianID = 12345678;
 		long memberID = 999999999;
@@ -291,7 +291,7 @@ public class TestBookingService {
 		long BOOKING_ID = 12345678;
 		String START_TIME = "09:00:00";
 		String END_TIME = "13:00:00";
-		String DATE = "2021-11-12";
+		String DATE = "2023-11-12";
 	
 		
 		Booking booking = null;
