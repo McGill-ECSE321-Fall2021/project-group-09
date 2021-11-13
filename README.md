@@ -31,7 +31,7 @@ All members also contributed to the detailed Use Case specifications, Persistenc
 # Deliverable 2:
 | Member            | Tasks                                         | Effort (Hours) |
 |-------------------|-----------------------------------------------|----------------|
-|Abdullah Arafat    |Librarian and Head Librarian.                  |    3 + x.      |   
+|Abdullah Arafat    |Librarian and Head Librarian.                  |       35.      |   
 |Christos Cunning   |Book, Schedule and Library Item classes.       |         44     |   
 |Omar Abdelaziz     |Archive, Newspaper, and Music Album classes.   |        38.     |   
 |Rajaa Boukhelif    |Loan and Movie classes.                        |        40      |   
