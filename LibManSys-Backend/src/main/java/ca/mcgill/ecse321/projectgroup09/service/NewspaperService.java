@@ -10,7 +10,7 @@ import ca.mcgill.ecse321.projectgroup09.dao.*;
 import ca.mcgill.ecse321.projectgroup09.models.*;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 
-
+@Service
 public class NewspaperService {
 	
 	@Autowired
