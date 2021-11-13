@@ -31,7 +31,7 @@ private static final String BASE_URL = "/music album";
 	
 
 	@GetMapping(value = {BASE_URL, BASE_URL + "/"})
-	public List<MusicAlbumDto> getAllBooks() {
+	public List<MusicAlbumDto> getAllMusicAlbums() {
 
 		return musicAlbumService.getAllMusicAlbums().stream().map(musicAlbum -> MusicAlbumDto.convertToDto(musicAlbum)).collect(Collectors.toList());
 	}
