@@ -121,3 +121,4 @@ public boolean deleteNewspaperById(Long libraryItemId) {
 	Newspaper newspaper = NewspaperRepo.findNewspaperBylibraryItemID(libraryItemId);
 	return deleteNewspaper(newspaper);
 }
+}
