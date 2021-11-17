@@ -36,6 +36,6 @@ All members also contributed to the detailed Use Case specifications, Persistenc
 |Omar Abdelaziz     |Archive, Newspaper, and Music Album classes.   |        38.     |   
 |Rajaa Boukhelif    |Loan and Movie classes.                        |        40      |   
 |Sneha Singh        |Library and Booking classes.                   |         44     |   
-|Zarif Ashraf Zidane|Member and Online member classes.              |     20 + x     |   
+|Zarif Ashraf Zidane|Member and Online member classes.              |         39     |   
 
 Classes were split up between all six members and each member was responsible for the respective Service, Controller, ServiceTest, and DTO classes. 
