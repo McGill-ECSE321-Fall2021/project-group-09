@@ -194,7 +194,7 @@ public class LibraryItemController {
 	 * @param libraryItemId
 	 * @return
 	 */
-	@PostMapping(value = {BASE_URL + "", BASE_URL + ""})
+	@PostMapping(value = {BASE_URL + "/checkout", BASE_URL + "/checkout/"})
 	public ResponseEntity<?> checkoutLibraryItem(@RequestParam("librarianId") Long librarianId,
 			@RequestParam("memberId") Long memberId, @RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
@@ -213,7 +213,7 @@ public class LibraryItemController {
 	 * @param libraryItemId
 	 * @return Updated loan object if successful, otherwise error message.
 	 */
-	@PostMapping(value = {BASE_URL + "", BASE_URL + ""})
+	@PostMapping(value = {BASE_URL + "/renew", BASE_URL + "/renew/"})
 	public ResponseEntity<?> renewLibraryItem(@RequestParam("memberId") Long memberId, @RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
 		try {
@@ -231,7 +231,7 @@ public class LibraryItemController {
 	 * @param libraryItemId
 	 * @return Updated loan object if successful, otherwise error message.
 	 */
-	@PostMapping(value = {BASE_URL + "", BASE_URL + ""})
+	@PostMapping(value = {BASE_URL + "/return", BASE_URL + "/return/"})
 	public ResponseEntity<?> returnLibraryItem(@RequestParam("memberId") Long memberId, @RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
 		try {
