@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.Booking;
@@ -103,7 +104,7 @@ public class TestPersistenceOnlineMember {
 		int numPages = 200;
 
 		Book book = new Book();
-		book.setlibraryItemID(libraryItemID);
+        ReflectionTestUtils.setField(book, "libraryItemID", libraryItemID);
 		book.setTitle(Title);
 		book.setPublishedYear(publishedYear);
 		book.setLoanablePeriod(loanablePeriod);
@@ -115,8 +116,11 @@ public class TestPersistenceOnlineMember {
 		book.setISBN(ISBN);
 		book.setNumPages(numPages);
 
-		bookRepository.save(book);
-		libraryItemRepository.save(book);
+		// double save
+		//bookRepository.save(book);
+		book = libraryItemRepository.save(book);
+		// get auto-set library id
+		libraryItemID = book.getlibraryItemID();
 		
 		Loan loan = new Loan();
 		loan.setMember(om);

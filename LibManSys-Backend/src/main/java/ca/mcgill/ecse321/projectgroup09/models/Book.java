@@ -22,10 +22,33 @@ public class Book extends LibraryItem{
 	
 	/**
 	 * Default No Arg Constructor.
-	 * DailyOverdueFee, ItemStatus, and LoanablePeriod are all set to default values by constructor.
-	 * LibraryItemId is set by LibraryItem (superclass) constructor.
 	 */
 	public Book() {
+		// DailyOverdueFee is a constant value
+		this.setDailyOverdueFee(DAILY_OVERDUE_FEE);
+		// Always init ItemStatus to Avaiable for books
+		this.setItemStatus(LIBRARY_ITEM_STATUS);
+		// Loanable period is always same for books
+		this.setLoanablePeriod(LOANABLE_PERIOD);
+	}
+	
+	/**
+	 * DailyOverdueFee, ItemStatus, and LoanablePeriod are all set to default values by constructor.
+	 * LibraryItemId is set by LibraryItem (superclass) constructor.
+	 * @param title
+	 * @param aPublishedYear
+	 * @param author
+	 * @param publisher
+	 * @param ISBN
+	 * @param numPages
+	 */
+	public Book(String title, int aPublishedYear, String author, String publisher,
+			String ISBN, int numPages) {
+		super(title, aPublishedYear);
+		this.author = author;
+		this.publisher = publisher;
+		this.ISBN = ISBN;
+		this.numPages = numPages;
 		// DailyOverdueFee is a constant value
 		this.setDailyOverdueFee(DAILY_OVERDUE_FEE);
 		// Always init ItemStatus to Avaiable for books

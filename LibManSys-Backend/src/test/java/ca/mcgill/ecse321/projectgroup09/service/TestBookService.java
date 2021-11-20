@@ -16,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import org.springframework.test.util.ReflectionTestUtils;
+
 import ca.mcgill.ecse321.projectgroup09.dao.BookRepository;
 import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
@@ -56,7 +58,7 @@ public class TestBookService {
 	/** Invalid book id. */
 	private static final Long       NAN_BOOK_ID   = -1L;
 	
-	private static final Long       BOOK_ID       = 800L;
+	private static Long       BOOK_ID  = 800L;
 	private static final String     BOOK_TITLE    = "Frankenstein";
 	private static final ItemStatus BOOK_STATUS   = ItemStatus.Available;
 	
@@ -88,7 +90,7 @@ public class TestBookService {
 		lenient().when(bookRepo.findBookBylibraryItemID(anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(BOOK_ID)) {
 				Book book = new Book();
-				book.setlibraryItemID(BOOK_ID);
+				ReflectionTestUtils.setField(book, "libraryItemID", BOOK_ID);
 				// make sure book has library item status set for reserve tests
 				book.setItemStatus(BOOK_STATUS);
 				book.setTitle(BOOK_TITLE);
@@ -180,8 +182,16 @@ public class TestBookService {
 	
 	@Test
 	public void testGetBook_NotExisting() {
-		Book book = bookService.getBookById(NAN_BOOK_ID);
+		String error = null;
+		Book  book = null;
+		try {
+			book = bookService.getBookById(NAN_BOOK_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
 		assertNull(book);
+		assertNotNull(error);
+		assertEquals(error, "Book with id -1 does not exist in library item repository.");
 	}
 	
 	// Not really using update methods for library items. Keep test just in case.

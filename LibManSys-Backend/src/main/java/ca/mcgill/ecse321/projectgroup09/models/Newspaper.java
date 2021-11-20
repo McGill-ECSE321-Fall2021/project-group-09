@@ -4,14 +4,22 @@ import javax.persistence.Entity;
 
 @Entity
 public class Newspaper extends LibraryItem{
-
+	private static final double DAILY_OVERDUE_FEE = -1;
+	private static final int LOANABLE_PERIOD = -1;
+	private static final LibraryItem.ItemStatus LIBRARY_ITEM_STATUS = LibraryItem.ItemStatus.LibraryOnly;
 
 	  //Newspaper Attributes
 	  private String journalName;
 	  private String edition;
 	  private String chiefEditor;
 
-	
+
+	public Newspaper() {
+		this.setDailyOverdueFee(DAILY_OVERDUE_FEE);
+		this.setLoanablePeriod(LOANABLE_PERIOD);
+		this.setItemStatus(LIBRARY_ITEM_STATUS);
+	}
+	  
 	  @Override
 		public void setlibraryItemID(Long alibraryItemID) {
 			super.setlibraryItemID(alibraryItemID);

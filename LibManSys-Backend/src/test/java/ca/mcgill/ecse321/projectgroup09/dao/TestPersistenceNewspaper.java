@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import ca.mcgill.ecse321.projectgroup09.models.Newspaper;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
@@ -44,7 +45,6 @@ public class TestPersistenceNewspaper {
 		String chiefEditor = "Test Editor";
 				
 		Newspaper newspaper = new Newspaper();
-		newspaper.setlibraryItemID(libraryItemID);
 		newspaper.setTitle(Title);
 		newspaper.setPublishedYear(publishedYear);
 		newspaper.setLoanablePeriod(loanablePeriod);
@@ -55,7 +55,8 @@ public class TestPersistenceNewspaper {
 		newspaper.setEdition(edition);
 		newspaper.setChiefEditor(chiefEditor);
 		
-		newspaperRepository.save(newspaper);
+		Newspaper updatedNewspaper = newspaperRepository.save(newspaper);
+		libraryItemID = updatedNewspaper.getlibraryItemID();
 		
 		newspaper = null;
 		newspaper = newspaperRepository.findNewspaperBylibraryItemID(libraryItemID);

@@ -9,9 +9,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
-import ca.mcgill.ecse321.projectgroup09.models.MusicAlbum;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
+import ca.mcgill.ecse321.projectgroup09.models.MusicAlbum;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -45,7 +46,6 @@ public class TestPersistenceMusicAlbum {
 		int numSongs = 10;
 				
 		MusicAlbum musicAlbum = new MusicAlbum();
-		musicAlbum.setlibraryItemID(libraryItemID);
 		musicAlbum.setTitle(Title);
 		musicAlbum.setPublishedYear(publishedYear);
 		musicAlbum.setLoanablePeriod(loanablePeriod);
@@ -58,7 +58,9 @@ public class TestPersistenceMusicAlbum {
 		musicAlbum.setNumSongs(numSongs);
 		
 		
-		musicAlbumRepository.save(musicAlbum);
+		MusicAlbum updatedMusicAlbum = musicAlbumRepository.save(musicAlbum);
+		libraryItemID = updatedMusicAlbum.getlibraryItemID();
+		
 		musicAlbum = null;
 		
 		musicAlbum = musicAlbumRepository.findMusicAlbumBylibraryItemID(libraryItemID);

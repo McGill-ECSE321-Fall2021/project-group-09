@@ -14,17 +14,6 @@ import javax.persistence.*;
 @Table (name = "libraryItem")
 @Entity
 public abstract class LibraryItem {
-	// Code for automattically generating library item IDs
-	private static Long nextLibraryItemId = 1L;
-	/**
-	 * Gets the next unique library item ID to assign to a library item.
-	 * @return {@code long} a unique library item ID.
-	 */
-	private static Long getNextLibraryItemId() {
-		Long nextId = nextLibraryItemId;
-		nextLibraryItemId++;
-		return nextId;
-	}
 	
 	public enum ItemStatus {
 		Available, Reserved, CheckedOut, LibraryOnly
@@ -47,15 +36,26 @@ public abstract class LibraryItem {
 
 	/**
 	 * Default No Arg Constructor for LibraryItem.
-	 * Will initialize a new LibraryItem object with an automatically
-	 * generated library item ID.
 	 */
 	public LibraryItem() {
-		// initialize library item to next ID automatically
-		this.libraryItemID = getNextLibraryItemId();
+		this.libraryItemID = null;
 		// initialize collections
 		member = null;
 		loans = new ArrayList<Loan>();
+	}
+	
+	/**
+	 * Will initialize a new LibraryItem object with an automatically
+	 * generated library item ID.
+	 * @param aTitle
+	 * @param publisherYear
+	 */
+	public LibraryItem(String aTitle, int aPublishedYear) {
+		// initialize collections
+		member = null;
+		loans = new ArrayList<Loan>();
+		this.title = aTitle;
+		this.publishedYear = aPublishedYear;
 	}
 	
 	// Constructor to inialize item with ID
@@ -88,6 +88,7 @@ public abstract class LibraryItem {
 	}
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getlibraryItemID() {
 		return this.libraryItemID;
 	}

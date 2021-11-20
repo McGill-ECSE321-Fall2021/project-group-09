@@ -67,3 +67,4 @@ private static final String BASE_URL = "/music album";
 		MusicAlbum musicAlbum = musicAlbumService.createMusicAlbum(title, pubYear, genre, artist, numSongs, albumLengthInMinutes);
 		return MusicAlbumDto.convertToDto(musicAlbum);
 	}
+}

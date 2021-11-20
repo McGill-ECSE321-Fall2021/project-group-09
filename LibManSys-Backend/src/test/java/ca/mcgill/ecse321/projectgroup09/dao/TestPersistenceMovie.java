@@ -45,7 +45,6 @@ public class TestPersistenceMovie {
 		String genre = "Horror";
 				
 		Movie movie = new Movie();
-		movie.setlibraryItemID(libraryItemID);
 		movie.setTitle(Title);
 		movie.setPublishedYear(publishedYear);
 		movie.setLoanablePeriod(loanablePeriod);
@@ -57,6 +56,7 @@ public class TestPersistenceMovie {
 		movie.setGenre(genre);
 		
 		movieRepository.save(movie);
+		libraryItemID = movie.getlibraryItemID();
 		
 		movie = null; 
 		movie = movieRepository.findMovieBylibraryItemID(libraryItemID);

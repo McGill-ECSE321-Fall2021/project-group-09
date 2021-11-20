@@ -75,32 +75,12 @@ public class BookService {
 			throw new IllegalArgumentException("Cannot create a book with a negative number of pages.");
 		}
 		
-		Book newBook = new Book();
-		// LibraryItem constructor sets ID automatically
-		//Long newId = libraryItemService.getNextLibraryItemId();
-		//newBook.setlibraryItemID(newId);
-		// loanablePeriod is set by default in book constructor
-		//newBook.setLoanablePeriod(loanablePeriod);
-		// dailyOverdueFee is set by default in Book constructor
-		//newBook.setDailyOverdueFee(dailyOverdueFee);
-		// itemStatus is set by default in Book constructor
-		//newBook.setItemStatus(itemStatus);\
-		// Set custom attributes of Book
-		newBook.setTitle(title);
-		newBook.setPublishedYear(publishedYear);
-		newBook.setAuthor(author);
-		newBook.setPublisher(publisher);
-		newBook.setISBN(ISBN);
-		newBook.setNumPages(numPages);
-		
-		//newBook.setMember(null);
-		//ArrayList<Loan> loans = new ArrayList<Loan>();
-		//newBook.setLoans(null);
+		Book newBook = new Book(title, publishedYear, author, 
+								publisher, ISBN, numPages);
 		
 		// Save new book to repository and return it (savedBook should be identical to newBook)
-		Book savedBook = bookRepo.save(newBook);
-		
-		return savedBook;
+		newBook = bookRepo.save(newBook);
+		return newBook;
 	}
 	
 	
@@ -117,6 +97,9 @@ public class BookService {
 			throw new IllegalArgumentException("Id must not be null.");
 		}
 		Book book = bookRepo.findBookBylibraryItemID(libraryItemId);
+		if (book == null) {
+			throw new IllegalStateException("Book with id " + libraryItemId + " does not exist in library item repository.");
+		}
 		return book;
 	}
 	

@@ -16,6 +16,7 @@ import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.models.MusicAlbum;
 
+@Service
 public class MusicAlbumService {
 	// Repos // 
 		@Autowired

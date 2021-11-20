@@ -61,9 +61,12 @@ public class TestPersistenceBook {
 		
 		book = null; 
 		book = bookRepository.findBookByISBN(ISBN);
+		libraryItemID = book.getlibraryItemID();
 		assertNotNull(book);
 		
 		book = bookRepository.findBookBylibraryItemID(libraryItemID);
+		
+		assertNotNull(book);
 		assertEquals(ISBN, book.getISBN());
 		assertEquals(libraryItemID, book.getlibraryItemID());
 		

@@ -24,7 +24,7 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-
+import org.springframework.test.util.ReflectionTestUtils;
 
 import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
@@ -75,7 +75,7 @@ public class TestMovieService {
 		            movie.setDirector(DIRECTOR);
 		            movie.setGenre(GENRE);
 		            movie.setItemStatus(ITEMSTATUS);
-		            movie.setlibraryItemID(MOVIEID);//
+		            ReflectionTestUtils.setField(movie, "libraryItemID", MOVIEID);
 		            movie.setLoanablePeriod(LOANABLEPERIOD);
 		            movie.setMember(member);
 		            movie.setPublishedYear(RUNTIME);

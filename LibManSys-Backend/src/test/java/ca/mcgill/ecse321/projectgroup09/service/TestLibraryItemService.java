@@ -24,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import ca.mcgill.ecse321.projectgroup09.dao.LibrarianRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
@@ -165,7 +166,7 @@ public class TestLibraryItemService {
 		m5.setLibCardNumber(M5_ID);
 		m5.setActiveLoans(M5_ACTIVE_LOANS);
 		LibraryItem li5 = new Book();
-    	li5.setlibraryItemID(LI5_ID);
+		ReflectionTestUtils.setField(li5, "libraryItemID", LI5_ID);
     	li5.setTitle(LI5_TITLE);
     	li5.setItemStatus(LI5_STATUS);
     	//li.setMember(null);
@@ -184,7 +185,7 @@ public class TestLibraryItemService {
     	m6.setLibCardNumber(M6_ID);
     	m6.setActiveLoans(M6_ACTIVE_LOANS);
     	LibraryItem li6 = new MusicAlbum();
-    	li6.setlibraryItemID(LI6_ID);
+    	ReflectionTestUtils.setField(li6, "libraryItemID", LI6_ID);
     	li6.setTitle(LI6_TITLE);
     	li6.setItemStatus(LI6_STATUS);
     	Loan loan6 = new Loan();
@@ -203,7 +204,7 @@ public class TestLibraryItemService {
     	m7.setLibCardNumber(M7_ID);
     	m7.setActiveLoans(M7_ACTIVE_LOANS);
     	LibraryItem li7 = new Book();
-    	li7.setlibraryItemID(LI7_ID);
+    	ReflectionTestUtils.setField(li7, "libraryItemID",LI7_ID);
     	li7.setTitle(LI7_TITLE);
     	li7.setItemStatus(LI7_STATUS);
     	Loan loan7 = new Loan();
@@ -221,7 +222,7 @@ public class TestLibraryItemService {
     	m8.setLibCardNumber(M8_ID);
     	m8.setActiveLoans(M8_ACTIVE_LOANS);
     	LibraryItem li8 = new Movie();
-    	li8.setlibraryItemID(LI8_ID);
+    	ReflectionTestUtils.setField(li8, "libraryItemID", LI8_ID);
     	li8.setTitle(LI8_TITLE);
     	li8.setItemStatus(LI8_STATUS);
     	Loan loan8 = new Loan();
@@ -238,29 +239,29 @@ public class TestLibraryItemService {
 		lenient().when(libraryItemRepo.findLibraryItemByLibraryItemID(anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
 	        if(invocation.getArgument(0).equals(LI1_ID)) {
 	            LibraryItem li = new Book();
-	            li.setlibraryItemID(LI1_ID);
+	            ReflectionTestUtils.setField(li, "libraryItemID", LI1_ID);
 	            li.setItemStatus(LI1_STATUS);
 	            li.setTitle(LI1_TITLE);
 	            //li.setMember(null);
 	            return li;
 	        } else if (invocation.getArgument(0).equals(LI2_ID)) {
 	        	LibraryItem li = new Movie();
-	            li.setlibraryItemID(LI2_ID);
+	            ReflectionTestUtils.setField(li, "libraryItemID", LI2_ID);
 	            li.setItemStatus(LI2_STATUS);
 	            li.setTitle(LI2_TITLE);
 	            //li.setMember(null);
 	            return li;
 	        } else if (invocation.getArgument(0).equals(LI3_ID)) {
 	        	LibraryItem li = new MusicAlbum();
-	        	li.setlibraryItemID(LI3_ID);
+	            ReflectionTestUtils.setField(li, "libraryItemID", LI3_ID);
 	        	li.setTitle(LI3_TITLE);
 	        	li.setItemStatus(LI3_STATUS);
 	        	//li.setMember(null);
 	        	return li;
 	        } else if (invocation.getArgument(0).equals(LI4_ID)) {
 	        	LibraryItem li = new Archive();
-	        	li.setlibraryItemID(LI4_ID);
-	        	li.setTitle(LI4_TITLE);
+	            ReflectionTestUtils.setField(li, "libraryItemID", LI4_ID);
+	            li.setTitle(LI4_TITLE);
 	        	li.setItemStatus(LI4_STATUS);
 	        	//li.setMember(null);
 	        	return li;
@@ -286,7 +287,7 @@ public class TestLibraryItemService {
 				ArrayList<LibraryItem> lis = new ArrayList<LibraryItem>();
 				// Same book as above
 				Book book = new Book();
-				book.setlibraryItemID(LI1_ID);
+				//LI1_ID = book.setlibraryItemID();
 	            book.setItemStatus(LI1_STATUS);
 	            book.setTitle(LI1_TITLE);
 				// add all books with title to list and return it

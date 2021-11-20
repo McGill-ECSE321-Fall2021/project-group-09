@@ -130,8 +130,11 @@ public class TestPersistenceLoan {
 		book.setISBN(ISBN);
 		book.setNumPages(numPages);
 		
-		bookRepository.save(book);
-		libraryItemRepository.save(book);
+		// double save
+		//bookRepository.save(book);
+		book = libraryItemRepository.save(book);
+		// get autoset library item id
+		libraryItemID = book.getlibraryItemID();
 		
 		
 		//Loan Attributes
