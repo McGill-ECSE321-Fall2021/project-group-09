@@ -24,20 +24,18 @@ import ca.mcgill.ecse321.projectgroup09.service.MusicAlbumService;
 @RestController
 public class MusicAlbumController {
 	
-private static final String BASE_URL = "/music album";
-	
+	private static final String BASE_URL = "/music album";
+	 
 	@Autowired
 	private MusicAlbumService musicAlbumService;
 	
 
 	@GetMapping(value = {BASE_URL, BASE_URL + "/"})
 	public List<MusicAlbumDto> getAllMusicAlbums() {
-
 		return musicAlbumService.getAllMusicAlbums().stream().map(musicAlbum -> MusicAlbumDto.convertToDto(musicAlbum)).collect(Collectors.toList());
 	}
 	
 	@PostMapping(value = { BASE_URL + "/create/{title}/{publishedYear}/{genre}/{artist}/", BASE_URL + "/create/{title}/{publishedYear}/{genre}/{artist}"})
-	
 	public MusicAlbumDto createmusicAlbum(@PathVariable("title") String title, @PathVariable("publishedYear") String publishedYear, @PathVariable("genre") String genre, @PathVariable("artist") String artist, @PathVariable("numSongs") int numSongs, @PathVariable("albumLengthInMinutes") int albumLengthInMinutes) 
 			throws IllegalArgumentException {
 		int pubYear;
@@ -62,9 +60,8 @@ private static final String BASE_URL = "/music album";
 			throw new IllegalArgumentException("albumLengthInMinutes must be valid integer. Error" + e.getMessage());
 		}
 		
-		
-	
 		MusicAlbum musicAlbum = musicAlbumService.createMusicAlbum(title, pubYear, genre, artist, numSongs, albumLengthInMinutes);
 		return MusicAlbumDto.convertToDto(musicAlbum);
 	}
+
 }
