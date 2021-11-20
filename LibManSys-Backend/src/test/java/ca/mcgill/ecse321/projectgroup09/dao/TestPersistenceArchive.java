@@ -53,6 +53,8 @@ public class TestPersistenceArchive {
 		
 		archiveRepository.save(archive);
 		
+		libraryItemID = archive.getlibraryItemID();
+		
 		archive = null; 
 		archive = archiveRepository.findArchiveBylibraryItemID(libraryItemID);
 		assertNotNull(archive);
