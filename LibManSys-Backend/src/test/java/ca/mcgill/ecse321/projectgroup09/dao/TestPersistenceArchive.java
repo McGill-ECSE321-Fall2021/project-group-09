@@ -32,7 +32,7 @@ public class TestPersistenceArchive {
 	@Test
 	public void testPersistAndLoadArchive() {
 		
-		Long libraryItemID = (long) 1; 
+		Long libraryItemID; //= (long) 1; 
 		String Title = "TestMovie";
 		int publishedYear = 2021;
 		int loanablePeriod = 21; 
@@ -42,7 +42,7 @@ public class TestPersistenceArchive {
 		String insitution = "Academic";
 				
 		Archive archive = new Archive();
-		archive.setlibraryItemID(libraryItemID);
+		//archive.setlibraryItemID(libraryItemID);
 		archive.setTitle(Title);
 		archive.setPublishedYear(publishedYear);
 		archive.setLoanablePeriod(loanablePeriod);
