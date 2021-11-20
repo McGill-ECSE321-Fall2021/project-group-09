@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.projectgroup09.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.projectgroup09.dto.BookDto;
+import ca.mcgill.ecse321.projectgroup09.dto.LibraryItemDto;
 import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 import ca.mcgill.ecse321.projectgroup09.service.BookService;
@@ -32,22 +32,21 @@ import ca.mcgill.ecse321.projectgroup09.service.BookService;
 @RestController
 public class BookController {
 	
-	private static final String BASE_URL = "/books";
+	private static final String BASE_URL = "/book";
 	
 	@Autowired
 	private BookService bookService;
 	
-	// ==== HTTP ENDPOINTS ==== //
 	
 	/**
 	 * Return list of all books in library management system.
 	 * Base endpoint of /books
 	 * @return
 	 */
-	@GetMapping(value = {BASE_URL, BASE_URL + "/", BASE_URL + "/getAll", BASE_URL + "/getAll/"})
+	@GetMapping(value = {BASE_URL + "", BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/"})
 	public ResponseEntity<?> getAllBooks() {
 		// Create list of all books, converted to Dto's
-		List<BookDto> books = bookService.getAllBooks().stream().map(book -> BookDto.convertToDto(book)).collect(Collectors.toList());
+		List<LibraryItemDto> books = LibraryItemDto.convertToDtos(bookService.getAllBooks());
 		return ResponseEntity.status(HttpStatus.OK).body(books);
 	}
 	
@@ -63,7 +62,7 @@ public class BookController {
 	 * @throws IllegalArgumentException
 	 */
 	@PostMapping(value = { BASE_URL + "/create", BASE_URL + "/create/"})
-	public ResponseEntity<?> createBookPostVars(@RequestParam("title") String title, @RequestParam("publishedYear") String publishedYear, @RequestParam("author") String author,
+	public ResponseEntity<?> createBook(@RequestParam("title") String title, @RequestParam("publishedYear") String publishedYear, @RequestParam("author") String author,
 			@RequestParam("publisher") String publisher, @RequestParam("ISBN") String ISBN, @RequestParam("numPages") String numPages) throws IllegalArgumentException {
 		
 		int pubYear;
@@ -79,10 +78,8 @@ public class BookController {
 			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("numPages must be a valid integer. Error: " + e.getMessage());
 		}
 		Book book;
-		book = bookService.createBook(title, pubYear, author, publisher, ISBN, nPages);
 		try {
-			
-			
+			book = bookService.createBook(title, pubYear, author, publisher, ISBN, nPages);
 		} catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -90,7 +87,7 @@ public class BookController {
 	}
 	
 	/**
-	 * Creates a new book. Use json input instead of PathVariable
+	 * Creates a new book. Use json input instead of PathVariable / request param
 	 * @param jsonInput
 	 * @param request
 	 * @param response
@@ -155,5 +152,28 @@ public class BookController {
 		}
 	}
 	
-	
+	/**
+	 * Delete book from repository.
+	 * Should it return the deleted book or just success message?
+	 * 
+	 * @param bookId
+	 * @return
+	 */
+	@PostMapping(value = {BASE_URL + "/delete/{id}", BASE_URL + "/delete/{id}/"})
+	public ResponseEntity<?> deleteBook(@PathVariable("id") Long bookId) {
+		if (bookId == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: ID cannot be null.");
+		}
+		boolean deleted = false;
+		try {
+			deleted = bookService.deleteBookById(bookId);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+		}
+		if (deleted) {
+			return ResponseEntity.status(HttpStatus.OK).body("Deleted book " + bookId + " from repository succesfully.");
+		}
+		// else
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to delete book: Book with id " + bookId + " does not exist.");
+	}
 }
