@@ -579,7 +579,7 @@ public class TestLibraryItemService {
 	public void testReturnLibraryItem() {
 		Loan loan = null;
 		try {
-			loan = libraryItemService.returnLibraryItem(L1_ID, M7_ID, LI7_ID);
+			loan = libraryItemService.returnLibraryItem(M7_ID, LI7_ID);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -599,7 +599,7 @@ public class TestLibraryItemService {
 		Loan loan = null;
 		try {
 			// LI1 is ItemStatus.Available, so can't be returned
-			loan = libraryItemService.returnLibraryItem(L1_ID, M1_ID, LI1_ID);
+			loan = libraryItemService.returnLibraryItem(M1_ID, LI1_ID);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
@@ -614,7 +614,7 @@ public class TestLibraryItemService {
 		String error = null;
 		Loan loan = null;
 		try {
-			loan = libraryItemService.returnLibraryItem(L1_ID, M6_ID, LI7_ID);
+			loan = libraryItemService.returnLibraryItem(M6_ID, LI7_ID);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
@@ -637,7 +637,7 @@ public class TestLibraryItemService {
 		System.out.println("exfees: " + expectedFeesOwed);
 		Loan loan = null;
 		try {
-			loan = libraryItemService.returnLibraryItem(L1_ID, M8_ID, LI8_ID);
+			loan = libraryItemService.returnLibraryItem(M8_ID, LI8_ID);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
