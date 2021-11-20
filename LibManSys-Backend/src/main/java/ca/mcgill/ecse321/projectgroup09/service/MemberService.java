@@ -1,3 +1,5 @@
+
+
 /**
  * @author Zarif Ashraf
  */
@@ -33,6 +35,10 @@ public class MemberService {
 	@Transactional
 	public Member createMember(String fullName, String address, String phoneNumber) {
 		
+		if (fullName == null || fullName == ""|| fullName.equals("undefined")) {
+            throw new IllegalArgumentException("Full Name cannot be null or empty");
+        }
+		
 		if (address == null || address == "" || address.equals("undefined")) {
             throw new IllegalArgumentException("Address cannot be null or empty");
 		}
@@ -45,11 +51,7 @@ public class MemberService {
 	            throw new IllegalArgumentException("Phone Number must be 10 characters long");
 	        }
 		
-		if (fullName == null || fullName == ""|| fullName.equals("undefined")) {
-            throw new IllegalArgumentException("Full Name cannot be null or empty");
-        }
-		
-		Long libCardNumber = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+		final Long libCardNumber = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 	
 		Member member = new Member();
 		member.setFullName(fullName);
@@ -109,15 +111,27 @@ public class MemberService {
 	}
 	
 	@Transactional
-	 public List<Member> getMemberByFullName(String fullName) {
-	        
+	public List<Member> getMemberByFullName(String fullName) {
+		
+		if (fullName == null || fullName == "") {
+            throw new IllegalArgumentException("Full name cannot be null or empty");
+        }
+		        
 		List<Member> memberList = toList(memberRepository.findMemberByFullName(fullName));
-	        if (memberList != null) {
-	            return memberList;
-	        } else {
-	            throw new IllegalArgumentException("No members with the full name exists!");
-	        }
-	    }
+		
+		//List<Member> memberList = memberRepository.findMemberByFullName(fullName);
+		
+		if ((memberList == null)) {
+			throw new IllegalArgumentException("No members with the full name exists!");
+		}
+		
+		else if (memberList.isEmpty() == true) {
+			throw new IllegalArgumentException("No members with the full name exists!");
+		        } 
+		else {
+		       return memberList;     
+		        }
+		    }
 	
 	@Transactional
 	public List<Member> getMembersByVerificationStatus(boolean isVerifiedResident) {
@@ -141,11 +155,11 @@ public class MemberService {
             throw new IllegalArgumentException("Library Card Number cannot be null or empty.");
         }
         
-		if (old_fullName == null) {
+		if (old_fullName == null || old_fullName == "") {
             throw new IllegalArgumentException("The old full name cannot be null or empty.");
         }
 		
-		if (new_fullName == null) {
+		if (new_fullName == null || new_fullName == "") {
             throw new IllegalArgumentException("The new full name cannot be null or empty.");
         }
 		
