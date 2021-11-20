@@ -162,7 +162,7 @@ public class TestScheduleService {
 		Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
 		Schedule s = null;
 		try {
-			s = sService.createSchedule(openingTime, closingTime, day, l);
+			s = sService.createSchedule(openingTime, closingTime, day, L1_ID);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -170,7 +170,7 @@ public class TestScheduleService {
 		assertEquals(openingTime, s.getOpeningTime());
 		assertEquals(closingTime, s.getClosingTime());
 		assertEquals(day, s.getDayofWeek());
-		assertEquals(l, s.getLibrarian());
+		assertEquals(L1_ID, s.getLibrarian().getemployeeIDNum());
 	}
 	
 	@Test
@@ -183,7 +183,7 @@ public class TestScheduleService {
 		Librarian l = null;
 		Schedule s = null;
 		try {
-			s = sService.createSchedule(openingTime, closingTime, day, l);
+			s = sService.createSchedule(openingTime, closingTime, day, L1_ID);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
@@ -203,7 +203,7 @@ public class TestScheduleService {
 		Schedule s = null;
 		String error = null;
 		try {
-			s = sService.createSchedule(openingTime, closingTime, day, l);
+			s = sService.createSchedule(openingTime, closingTime, day, L1_ID);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
@@ -315,7 +315,7 @@ public class TestScheduleService {
 		DayOfWeek day = DayOfWeek.FRIDAY;
 		Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
 		try {
-			updatedSchedule = sService.updateSchedule(S1_ID, openingTime, closingTime, day, l);
+			updatedSchedule = sService.updateSchedule(S1_ID, openingTime, closingTime, day, L1_ID);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -323,7 +323,7 @@ public class TestScheduleService {
 		assertEquals(openingTime, updatedSchedule.getOpeningTime());
 		assertEquals(closingTime, updatedSchedule.getClosingTime());
 		assertEquals(day, updatedSchedule.getDayofWeek());
-		assertEquals(l, updatedSchedule.getLibrarian());
+		assertEquals(L1_ID, updatedSchedule.getLibrarian().getemployeeIDNum());
 	}
 	
 	@Test
@@ -358,7 +358,7 @@ public class TestScheduleService {
 		}
 		assertNull(updatedSchedule);
 		assertNotNull(error);
-		assertEquals("Could not update schedule with closing time before opening time.", error);
+		assertEquals("Could not update schedule with a new closing time (" + closingTime + ") that is after current opening time (" + openingTime + ").", error);
 	}
 	
 	@Test
