@@ -1,9 +1,13 @@
 <template>
   <div class="hello">
+    
     <h1>{{ msg }}</h1>
     <h2>A project by Group 09</h2>
     
-    <h2>Tada it works</h2>
+    <h2>Tada it works
+    <td>   <button v-on:click="goToRegisterPage()">Register</button>   </td>
+
+    </h2>
     <ul>
      <!-- Commented out Commented
      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
@@ -16,13 +20,27 @@
 </template>
 
 <script>
+import Register from "../components/Register";
+import Router from "../router/index";
+
+
 export default {
   name: 'hello',
   data () {
     return {
       msg: 'Welcome to the Library'
     }
-  }
+  },
+  components: {
+    Register,
+  },
+   methods: {
+        goToRegisterPage: function (){
+            Router.push({
+                path: "/Register",
+                name: "Register"
+            })
+        }}
 }
 </script>
 
@@ -44,5 +62,20 @@ li {
 
 a {
   color: #42b983;
+}
+#container{
+    width: 65%;
+    margin: 0 auto;
+}
+button{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding:16px 32px;
+  background-color: lightskyblue;
+  border-radius: 10px;
+  font-size:23px;
+  color:#000;
+  background: lightskyblue;
+  border:0;
+  font-weight:200;
 }
 </style>
