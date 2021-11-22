@@ -1,19 +1,21 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
-import ca.mcgill.ecse321.projectgroup09.models.Account;
+import java.util.List;
 
+import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
-import ca.mcgill.ecse321.projectgroup09.models.Library;
+import ca.mcgill.ecse321.projectgroup09.models.Loan;
+import ca.mcgill.ecse321.projectgroup09.models.Schedule;
 
 public class HeadLibrarianDto extends LibrarianDto{
 	private Long managerIDNum;
-	private LibraryDto library;
 	
-	public HeadLibrarianDto(){}
 	
-	public HeadLibrarianDto(Long managerIDNum, Library library){
+	public HeadLibrarianDto(long accountID, String fullName, String librarianEmail, String librarianPassword, String librarianUsername,
+			Long employeeIDNum, List<Schedule> schedules, List<Loan> loans, List<Booking> bookings, Long managerIDNum){
+		super(accountID, fullName, librarianEmail, librarianPassword, librarianUsername, employeeIDNum, schedules, loans, bookings);
 		this.managerIDNum = managerIDNum;
-		this.library = LibraryDto.convertToDto(library);
+
 	}
 	
 	public Long getManagerIDNum() {
@@ -24,19 +26,20 @@ public class HeadLibrarianDto extends LibrarianDto{
 		this.managerIDNum =  library;
 	}
 	
-	public LibraryDto getLibrary() {
-		return this.library;
-	}
-	
-	public void setLibrary(LibraryDto library) {
-		this.library = library;
-	}
 
 	
 	public static HeadLibrarianDto convertToDto(HeadLibrarian headLibrarian) {
 		HeadLibrarianDto headLibrarianDto = new HeadLibrarianDto(
-				headLibrarian.getmanagerIDNum(),
-				headLibrarian.getLibrary()
+				headLibrarian.getAccountId(),
+				headLibrarian.getFullName(),
+				headLibrarian.getLibrarianEmail(),
+				headLibrarian.getLibrarianPassword(),
+				headLibrarian.getLibrarianUsername(), 
+				headLibrarian.getemployeeIDNum(), 
+				headLibrarian.getSchedules(),
+				headLibrarian.getLoans(),
+				headLibrarian.getBookings(),
+				headLibrarian.getmanagerIDNum()
 				);
 		
 		return headLibrarianDto; 

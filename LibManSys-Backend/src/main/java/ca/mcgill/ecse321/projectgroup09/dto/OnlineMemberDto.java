@@ -31,27 +31,19 @@ public class OnlineMemberDto extends MemberDto {
 	private List<LoanDto> loans;
 	private List<BookingDto> bookings;
 	private List<LibraryItemDto> reserved;
+
+public OnlineMemberDto(long accountID, String aFullName, Long aLibCardNumber, String anAddress,
+		String aPhoneNumber, double anAmountOwed, int activeLoans, boolean isVerifiedResident,
+		List<Loan> loans, List<Booking> bookings, List<LibraryItem> reserved, String aMemberEmail, String aMemberPassword, String aMemberUsername) {
+	super(accountID, aFullName, aLibCardNumber, anAddress, aPhoneNumber, anAmountOwed, activeLoans, isVerifiedResident, loans, bookings, reserved);
 	
-public OnlineMemberDto() {
-		
-	}
-	
-public OnlineMemberDto(String aFullName, Long aLibCardNumber, String aAddress,
-		String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerifiedResident,
-		List<Loan> aLoans, List<Booking> aBookings, List<LibraryItem> aReserved, String aMemberEmail, String aMemberPassword, String aMemberUsername) {
-	this.fullName = aFullName;
-	this.libCardNumber = aLibCardNumber;
-	this.address = aAddress;
-	this.phoneNumber = aPhoneNumber;
-	this.amountOwed = aAmountOwed;
-	this.activeLoans = aActiveLoans;
-	this.isVerifiedResident = aIsVerifiedResident;
-	List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+	List<LoanDto> aLoansDto = loans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
 	this.loans = aLoansDto;
-	List<BookingDto> aBookingsDto = aBookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
+	List<BookingDto> aBookingsDto = bookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	this.bookings = aBookingsDto;
-	List<LibraryItemDto> aReservedDto = aReserved.stream().map(libraryItem -> LibraryItemDto.convertToDto(libraryItem)).collect(Collectors.toList());
+	List<LibraryItemDto> aReservedDto = reserved.stream().map(libraryItem -> LibraryItemDto.convertToDto(libraryItem)).collect(Collectors.toList());
 	this.reserved = aReservedDto;
+	
 	this.memberEmail = aMemberEmail;
 	this.memberPassword = aMemberPassword;
 	this.memberUsername = aMemberUsername;
@@ -59,6 +51,7 @@ public OnlineMemberDto(String aFullName, Long aLibCardNumber, String aAddress,
 
 public static OnlineMemberDto convertToDto(OnlineMember onlineMember) {
 	OnlineMemberDto onlineMemberDto = new OnlineMemberDto(
+			onlineMember.getAccountId(),
 			onlineMember.getFullName(),
 			onlineMember.getLibCardNumber(),
 			onlineMember.getAddress(),

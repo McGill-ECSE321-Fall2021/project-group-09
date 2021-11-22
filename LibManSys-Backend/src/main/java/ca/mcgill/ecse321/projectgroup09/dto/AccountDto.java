@@ -1,9 +1,9 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
-import javax.persistence.Id;
 
 import ca.mcgill.ecse321.projectgroup09.models.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AccountDto {
 
@@ -33,6 +33,11 @@ public class AccountDto {
 		}
 		
 		return accountDto;
+	}
+	
+	public static List<AccountDto> convertToDto(List<? extends Account> accounts) {
+		return accounts.stream().map(account -> AccountDto.convertToDto(account)).collect(Collectors.toList());
+		
 	}
 	
 	public void setFullName(String aFullName) {

@@ -3,7 +3,6 @@ package ca.mcgill.ecse321.projectgroup09.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
-import java.util.List;
 
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 
@@ -18,19 +17,20 @@ public class LibrarianDto extends AccountDto {
 	private String librarianPassword;
 	private String librarianUsername;
 	private Long employeeIDNum;
-	
+
 	private List<ScheduleDto> schedules;
 	private List<LoanDto> loans;
 	private List<BookingDto> bookings;
-	
-	public LibrarianDto(){}
-	
-	public LibrarianDto(String librarianEmail, String librarianPassword, String librarianUsername, Long employeeIDNum, List<Schedule> schedules, List<Loan> loans, List<Booking> bookings){
+
+
+	public LibrarianDto(long accountID, String fullName, String librarianEmail, String librarianPassword, String librarianUsername,
+			Long employeeIDNum, List<Schedule> schedules, List<Loan> loans, List<Booking> bookings){
+		super(accountID, fullName);
 		this.librarianEmail = librarianEmail;
 		this.librarianPassword = librarianPassword;
 		this.librarianUsername = librarianUsername;
 		this.employeeIDNum = employeeIDNum;
-		
+
 		List<ScheduleDto> scheduleDto = schedules.stream().map(schedule -> ScheduleDto.convertToDto(schedule)).collect(Collectors.toList());
 		this.schedules = scheduleDto;
 		List<LoanDto> loanDto = loans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
@@ -38,7 +38,7 @@ public class LibrarianDto extends AccountDto {
 		List <BookingDto> bookingDto = bookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 		this.bookings = bookingDto;
 	}
-	
+
 	public String getLibrarianEmail() {
 		return librarianEmail;
 	}
@@ -81,20 +81,30 @@ public class LibrarianDto extends AccountDto {
 	public void setBookings(List<BookingDto> bookings) {
 		this.bookings = bookings;
 	}
-	
+
 	public static LibrarianDto convertToDto(Librarian librarian) {
-		LibrarianDto ldto = new LibrarianDto(/*put fields from 'l' here*/);
+		LibrarianDto ldto = new LibrarianDto(
+				librarian.getAccountId(),
+				librarian.getFullName(),
+				librarian.getLibrarianEmail(),
+				librarian.getLibrarianPassword(),
+				librarian.getLibrarianUsername(), 
+				librarian.getemployeeIDNum(), 
+				librarian.getSchedules(),
+				librarian.getLoans(),
+				librarian.getBookings()
+				);
 		return ldto;
 	}
-	
+
 	public static List<LibrarianDto> convertToDtos(List<LibrarianDto> librarians) {
 		List<LibrarianDto> librarianDtos = new ArrayList<LibrarianDto>();
-		
+
 		return librarianDtos;
 	}
-	
-	
 
-	
-	
+
+
+
+
 }
