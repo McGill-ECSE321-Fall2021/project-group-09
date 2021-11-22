@@ -163,6 +163,7 @@ public class TestLibraryItemService {
 	public void setMockOutput() {
 		// renew test
 		Member m5 = new Member();
+		ReflectionTestUtils.setField(m5, "accountId", M5_ID);
 		m5.setLibCardNumber(M5_ID);
 		m5.setActiveLoans(M5_ACTIVE_LOANS);
 		LibraryItem li5 = new Book();
@@ -182,6 +183,7 @@ public class TestLibraryItemService {
     	
     	// renew overdue loan test
     	Member m6 = new Member();
+		ReflectionTestUtils.setField(m6, "accountId", M6_ID);
     	m6.setLibCardNumber(M6_ID);
     	m6.setActiveLoans(M6_ACTIVE_LOANS);
     	LibraryItem li6 = new MusicAlbum();
@@ -201,6 +203,7 @@ public class TestLibraryItemService {
     	// return test
     	// library item 7 (corresponds to M7 and L1 and LOAN5) 
     	Member m7 = new Member();
+		ReflectionTestUtils.setField(m7, "accountId", M7_ID);
     	m7.setLibCardNumber(M7_ID);
     	m7.setActiveLoans(M7_ACTIVE_LOANS);
     	LibraryItem li7 = new Book();
@@ -219,7 +222,8 @@ public class TestLibraryItemService {
     	
     	// return test for overdue fee
     	Member m8 = new Member();
-    	m8.setLibCardNumber(M8_ID);
+		ReflectionTestUtils.setField(m8, "accountId", M8_ID);
+		m8.setLibCardNumber(M8_ID);
     	m8.setActiveLoans(M8_ACTIVE_LOANS);
     	LibraryItem li8 = new Movie();
     	ReflectionTestUtils.setField(li8, "libraryItemID", LI8_ID);
