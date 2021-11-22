@@ -2,8 +2,11 @@ package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.util.Date;
 
+import ca.mcgill.ecse321.projectgroup09.models.Librarian;
+import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 public class LoanDto {
 	// Loan Attributes
@@ -12,8 +15,8 @@ public class LoanDto {
 	private double lateFees;
 	private LoanStatus loanStatus;
 	private Long loanId;
-	private Long librarianId;
-	private Long memberId;
+	//private Long librarianId; already stored as part of librarianDto
+	//private Long memberId; already stored as part of MemberDto
 	// Loan Associations
 	private LibraryItemDto libraryItem;
 	private MemberDto member;
@@ -27,17 +30,22 @@ public class LoanDto {
 	}
 	
 	  public LoanDto(Date borrowedDate, Date returnDate, Double lateFees, LoanStatus loanStatus, Long loanId,
-				Long memberId, Long librarianId, Long libraryItemId) {
+				LibraryItem libraryItem, Member member, Librarian librarian) {
   
 	        
 		  this.borrowedDate = borrowedDate;
 			this.returnDate = returnDate;
 			this.lateFees = lateFees;
 			this.loanStatus = loanStatus;
-			this.librarianId = librarianId;
-			this.memberId = memberId;
 			this.loanId = loanId;
 			
+			// safe to assume Loan must always have valid LibraryItem, Member and Librarian
+			LibraryItemDto lidto = LibraryItemDto.convertToDto(libraryItem);
+			this.libraryItem = lidto;
+			MemberDto mdto = MemberDto.convertToDto(member);
+			this.member = mdto;
+			LibrarianDto ldto = LibrarianDto.convertToDto(librarian);
+			this.librarian = ldto;
 		}
 	
 	/**
@@ -118,21 +126,5 @@ public class LoanDto {
 
 	public void setLoanId(Long loanId) {
 		this.loanId = loanId;
-	}
-
-	public Long getLibrarianId() {
-		return librarianId;
-	}
-
-	public void setLibrarianId(Long librarianId) {
-		this.librarianId = librarianId;
-	}
-
-	public Long getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(Long memberId) {
-		this.memberId = memberId;
 	}
 }
