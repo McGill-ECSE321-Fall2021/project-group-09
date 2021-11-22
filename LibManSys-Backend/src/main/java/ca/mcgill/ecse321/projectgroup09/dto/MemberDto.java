@@ -24,12 +24,12 @@ public class MemberDto extends AccountDto {
 	private List<BookingDto> bookings;
 	private List<LibraryItemDto> reserved;
 	
-	/**
-	 * Default No-Arg Constructor
-	 */
-	public MemberDto() {
-		
-	}
+//	/**
+//	 * Default No-Arg Constructor
+//	 */
+//	public MemberDto() {
+//		
+//	}
 	
 	/**
 	 * Initialize a new MemberDto object with the specified attributes. This constructor creates a MemberDto object with all fields filled.
@@ -45,10 +45,11 @@ public class MemberDto extends AccountDto {
 	 * @param aBookings
 	 * @param aReserved
 	 */
-	public MemberDto(String aFullName, Long aLibCardNumber, String aAddress,
+	public MemberDto(long accountID, String aFullName, Long aLibCardNumber, String aAddress,
 			String aPhoneNumber, double aAmountOwed, int aActiveLoans, boolean aIsVerifiedResident,
 			List<Loan> aLoans, List<Booking> aBookings, List<LibraryItem> aReserved) {
-		this.fullName = aFullName;
+		super(accountID, aFullName);
+		
 		this.libCardNumber = aLibCardNumber;
 		this.address = aAddress;
 		this.phoneNumber = aPhoneNumber;
@@ -71,6 +72,7 @@ public class MemberDto extends AccountDto {
 	 */
 	public static MemberDto convertToDto(Member member) {
 		MemberDto memberDto = new MemberDto(
+				member.getAccountId(),
 				member.getFullName(),
 				member.getLibCardNumber(),
 				member.getAddress(),

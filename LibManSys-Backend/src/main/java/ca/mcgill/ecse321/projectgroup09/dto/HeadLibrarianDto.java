@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
+import ca.mcgill.ecse321.projectgroup09.models.Account;
 import ca.mcgill.ecse321.projectgroup09.models.Library;
 
 public class HeadLibrarianDto {
@@ -26,5 +27,10 @@ public class HeadLibrarianDto {
 	
 	public void setLibrary(LibraryDto library) {
 		this.library = library;
+	}
+
+	public static HeadLibrarianDto convertToDto(Account account) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
