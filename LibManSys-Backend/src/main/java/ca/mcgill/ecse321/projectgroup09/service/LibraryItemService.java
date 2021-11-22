@@ -327,8 +327,8 @@ public class LibraryItemService {
 	 * Allows member to renew their current loan for a library item.
 	 * Cannot renew overdue loan.
 	 * Reset borrowed day and returned day for loan.
-	 * @param m Member attempting to renew their loan.
-	 * @param li LibraryItem that member wants to renew.
+	 * @param memberId library card number of member
+	 * @param libraryItemId ID of library item that member wants to renew.
 	 * @return loan Updated loan object.
 	 */
 	@Transactional
