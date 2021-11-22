@@ -159,7 +159,7 @@ public class TestScheduleService {
 		Time openingTime = Time.valueOf("10:00:00");
 		Time closingTime = Time.valueOf("18:00:00");
 		DayOfWeek day = DayOfWeek.FRIDAY;
-		Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
+		//Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
 		Schedule s = null;
 		try {
 			s = sService.createSchedule(openingTime, closingTime, day, L1_ID);
@@ -180,7 +180,6 @@ public class TestScheduleService {
 		Time openingTime = Time.valueOf("10:00:00");
 		Time closingTime = Time.valueOf("18:00:00");
 		DayOfWeek day = null;
-		Librarian l = null;
 		Schedule s = null;
 		try {
 			s = sService.createSchedule(openingTime, closingTime, day, L1_ID);
@@ -199,7 +198,7 @@ public class TestScheduleService {
 		Time openingTime = Time.valueOf("10:00:00");
 		Time closingTime = Time.valueOf("8:00:00");
 		DayOfWeek day = DayOfWeek.FRIDAY;
-		Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
+		//Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
 		Schedule s = null;
 		String error = null;
 		try {
@@ -313,7 +312,7 @@ public class TestScheduleService {
 		Time openingTime = Time.valueOf("10:00:00");
 		Time closingTime = Time.valueOf("17:00:00");
 		DayOfWeek day = DayOfWeek.FRIDAY;
-		Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
+		//Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
 		try {
 			updatedSchedule = sService.updateSchedule(S1_ID, openingTime, closingTime, day, L1_ID);
 		} catch (Exception e) {
