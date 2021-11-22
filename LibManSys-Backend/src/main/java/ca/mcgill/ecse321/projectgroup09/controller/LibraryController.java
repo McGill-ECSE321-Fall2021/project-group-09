@@ -55,7 +55,7 @@ public class LibraryController {
 
 	@GetMapping(value = {"/library/hours", "/library/hours/"})
 	public List<ScheduleDto> getLibraryHours(@PathVariable("name") String name) {
-		return ScheduleDto.convertToDto(libraryService.getLibraryHours(name));
+		return ScheduleDto.convertToDtos(libraryService.getLibraryHours(name));
 	}
 
 //	@PostMapping(value = {"/library/create", "/library/create/"})

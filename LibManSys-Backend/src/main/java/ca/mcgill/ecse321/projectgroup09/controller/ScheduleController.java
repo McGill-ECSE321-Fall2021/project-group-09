@@ -94,7 +94,7 @@ public class ScheduleController {
 		List<ScheduleDto> sdtos = null;
 		try {
 			List<Schedule> s = scheduleService.getSchedulesByDay(dayOfWeek);
-			sdtos = ScheduleDto.convertToDto(s);
+			sdtos = ScheduleDto.convertToDtos(s);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
@@ -111,7 +111,7 @@ public class ScheduleController {
 		List<ScheduleDto> sdtos = null;
 		try {
 			List<Schedule> s = scheduleService.getSchedulesByLibrarian(librarianId);
-			sdtos = ScheduleDto.convertToDto(s);
+			sdtos = ScheduleDto.convertToDtos(s);
 			return ResponseEntity.status(HttpStatus.OK).body(sdtos);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
@@ -125,7 +125,7 @@ public class ScheduleController {
 	@GetMapping(value = {BASE_URL + "", BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/"})
 	public ResponseEntity<?> getAllSchedules() {
 		try {
-			List<ScheduleDto> s = ScheduleDto.convertToDto(scheduleService.getAllSchedules());
+			List<ScheduleDto> s = ScheduleDto.convertToDtos(scheduleService.getAllSchedules());
 			return ResponseEntity.status(HttpStatus.OK).body(s);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
