@@ -2,10 +2,11 @@ package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.sql.Time;
 import java.time.DayOfWeek;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import ca.mcgill.ecse321.projectgroup09.models.Library;
+import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule;
-import java.util.*;
 /**
  * Data Transfer Object class for Schedule model class.
  * Holds all attributes of Schedule class.
@@ -35,12 +36,13 @@ public class ScheduleDto {
 	 * @param aDayofWeek
 	 * @param aLibrarian
 	 */
-	public ScheduleDto(Long aScheduleId, Time aOpeningTime, Time aClosingTime, DayOfWeek aDayofWeek, LibrarianDto aLibrarian) {
+	public ScheduleDto(Long aScheduleId, Time aOpeningTime, Time aClosingTime, DayOfWeek aDayofWeek, Librarian aLibrarian) {
 		this.scheduleID = aScheduleId;
 		this.openingTime = aOpeningTime;
 		this.closingTime = aClosingTime;
 		this.dayOfWeek = aDayofWeek;
-		this.librarian = aLibrarian;
+		LibrarianDto ldto = LibrarianDto.convertToDto(aLibrarian);
+		this.librarian = ldto;
 	}
 
 	/**
@@ -113,12 +115,29 @@ public class ScheduleDto {
 		this.librarian = librarian;
 	}
 	
+	/**
+	 * Return a schedule dto object representing the schedule object.
+	 * @param schedule
+	 * @return
+	 */
 	public static ScheduleDto convertToDto(Schedule schedule) {
-		return new ScheduleDto();
+		ScheduleDto s = new ScheduleDto(
+				schedule.getscheduleID(),
+				schedule.getOpeningTime(),
+				schedule.getClosingTime(),
+				schedule.getDayofWeek(),
+				schedule.getLibrarian()
+				);
+		return s;
 	}
 	
-	public static List<ScheduleDto> convertToDto(List<Schedule> schedule) {
-		List<ScheduleDto> scheduleDto = new ArrayList<ScheduleDto>();
+	/**
+	 * Convert a List of schedules into a list of dtos
+	 * @param schedule
+	 * @return
+	 */
+	public static List<ScheduleDto> convertToDtos(List<Schedule> schedules) {
+		List<ScheduleDto> scheduleDto = schedules.stream().map(s -> ScheduleDto.convertToDto(s)).collect(Collectors.toList());
 		return scheduleDto;
 	}
 	

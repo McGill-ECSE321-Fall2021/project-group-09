@@ -71,6 +71,9 @@ public class LibraryItemService {
 	 */
 	@Transactional
 	public List<LibraryItem> getLibraryItemsByTitle(String title) {
+		if (title == null) {
+			throw new IllegalArgumentException("Argument must not be null.");
+		}
 		List<LibraryItem> lis = libraryItemRepo.findLibraryItemByTitle(title);
 		return lis;
 	}
@@ -82,6 +85,19 @@ public class LibraryItemService {
 	@Transactional
 	public List<LibraryItem> getAllReservedLibraryItems() {
 		return libraryItemRepo.findLibraryItemByItemStatus(ItemStatus.Reserved);
+	}
+	
+	/**
+	 * Get library items by status.
+	 * @param itemStatus
+	 * @return
+	 */
+	@Transactional
+	public List<LibraryItem> getLibraryItemsByStatus(ItemStatus itemStatus) {
+		if (itemStatus == null) {
+			throw new IllegalArgumentException("Argument must not be null.");
+		}
+		return libraryItemRepo.findLibraryItemByItemStatus(itemStatus);
 	}
 	
 	/**
@@ -311,8 +327,8 @@ public class LibraryItemService {
 	 * Allows member to renew their current loan for a library item.
 	 * Cannot renew overdue loan.
 	 * Reset borrowed day and returned day for loan.
-	 * @param m Member attempting to renew their loan.
-	 * @param li LibraryItem that member wants to renew.
+	 * @param memberId library card number of member
+	 * @param libraryItemId ID of library item that member wants to renew.
 	 * @return loan Updated loan object.
 	 */
 	@Transactional
@@ -385,21 +401,20 @@ public class LibraryItemService {
 	 * Allows a librarian to return a book for a member. If todays date is after the due date for the library item
 	 * then late fees will be applied to the loan. If the library item is successfully returned, the loan status
 	 * will be set to Closed.
-	 * @param librarianId not actually needed?
 	 * @param memberId Id of member returning an item
 	 * @param libraryItemId Id of library item member is returning
 	 * @return updated loan object
 	 */
 	@Transactional
-	public Loan returnLibraryItem(Long librarianId, Long memberId, Long libraryItemId) {
-		if (librarianId == null || memberId == null || libraryItemId == null) {
+	public Loan returnLibraryItem(/*Long librarianId,*/ Long memberId, Long libraryItemId) {
+		if (/*librarianId == null ||*/ memberId == null || libraryItemId == null) {
 			throw new IllegalArgumentException("Arguments must not be null.");
 		}
-		// find in repo
-		Librarian l = librarianRepo.findLibrarianByEmployeeIDNum(librarianId);
-		if (l == null) {
-			throw new IllegalStateException("Could not find librarian in repository.");
-		}
+			// find in repo
+			//Librarian l = librarianRepo.findLibrarianByEmployeeIDNum(librarianId);
+			//if (l == null) {
+			//	throw new IllegalStateException("Could not find librarian in repository.");
+			//}
 		Member m = memberRepo.findMemberByLibCardNumber(memberId);
 		if (m == null) {
 			throw new IllegalStateException("Could not find member in repository.");

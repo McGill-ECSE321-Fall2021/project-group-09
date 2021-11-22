@@ -24,7 +24,7 @@ public class BookingController {
 
 	
 	@Autowired 
-	private BookingService bookingService; 
+	private BookingService bookingService;  
 
 	@GetMapping(value = {"/bookings", "/bookings/"})
 	public List<BookingDto> getAllBookings() {

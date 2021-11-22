@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
+import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
 import ca.mcgill.ecse321.projectgroup09.models.Library;
 
 public class HeadLibrarianDto extends LibrarianDto{
@@ -27,5 +28,14 @@ public class HeadLibrarianDto extends LibrarianDto{
 	
 	public void setLibrary(LibraryDto library) {
 		this.library = library;
+	}
+	
+	public static HeadLibrarianDto convertToDto(HeadLibrarian headLibrarian) {
+		HeadLibrarianDto headLibrarianDto = new HeadLibrarianDto(
+				headLibrarian.getmanagerIDNum(),
+				headLibrarian.getLibrary()
+				);
+		
+		return headLibrarianDto; 
 	}
 }

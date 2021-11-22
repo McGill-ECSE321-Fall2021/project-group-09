@@ -41,13 +41,18 @@ public class ScheduleService {
 	 * @return
 	 */
 	@Transactional
-	public Schedule createSchedule(Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek, Librarian aLibrarian) {
+	public Schedule createSchedule(Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek, Long librarianId) {
 		// make sure input parameters not null
-		if (aOpeningTime == null || aClosingTime == null || aDayOfWeek == null || aLibrarian == null) {
+		if (aOpeningTime == null || aClosingTime == null || aDayOfWeek == null || librarianId == null) {
 			throw new IllegalArgumentException("Arguments must not be null.");
 		}
+		// make sure librarian exists
+		Librarian aLibrarian = lRepo.findLibrarianByEmployeeIDNum(librarianId);
+		if (aLibrarian == null) {
+			throw new IllegalStateException("Could not find librarian with id " + librarianId + "in repository.");
+		}
 		// make sure opening time before closing time
-		if (!timeBefore(aOpeningTime, aClosingTime)) {
+		if (!aOpeningTime.before(aClosingTime)) {
 			throw new IllegalArgumentException("Cannot create a schedule with closing time before opening time.");
 		}
 		// make sure librarian exists
@@ -102,13 +107,17 @@ public class ScheduleService {
 	
 	/**
 	 * Get all schedules corresponding to a librarian. Does not include library hour schedules.
-	 * @param librarian
+	 * @param librarianId
 	 * @return
 	 */
 	@Transactional
-	public List<Schedule> getSchedulesByLibrarian(Librarian librarian) {
-		if (librarian == null) {
+	public List<Schedule> getSchedulesByLibrarian(Long librarianId) {
+		if (librarianId == null) {
 			throw new IllegalArgumentException("Argument must not be null.");
+		}
+		Librarian librarian = lRepo.findLibrarianByEmployeeIDNum(librarianId);
+		if (librarian == null) {
+			throw new IllegalStateException("Could not find librarian with id " + librarianId + "in repository.");
 		}
 		List<Schedule> sList = scheduleRepo.findScheduleByLibrarian(librarian);
 		if (sList != null) {
@@ -151,7 +160,7 @@ public class ScheduleService {
 	 * @return The updated schedule object.
 	 */
 	@Transactional
-	public Schedule updateSchedule(Long scheduleId, Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek, Librarian aLibrarian) {
+	public Schedule updateSchedule(Long scheduleId, Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek, Long librarianId) {
 		if (scheduleId == null) {
 			throw new IllegalArgumentException("Schedule ID must not be null.");
 		}
@@ -159,25 +168,31 @@ public class ScheduleService {
 		if (s == null) {
 			throw new IllegalStateException("Could not find a schedule with the specified id (id: " + scheduleId + ").");
 		}
-		// make sure closing time after opening time
-		if (!timeBefore(aOpeningTime, aClosingTime)) {
-			throw new IllegalStateException("Could not update schedule with closing time before opening time.");
-		}
-		// make sure librarian exists?
-		if (lRepo.findLibrarianByEmployeeIDNum(aLibrarian.getemployeeIDNum()) == null) {
-			throw new IllegalStateException("Could not update schedule with librarian that does not exist.");
-		}
 		// update attributes of schedule that are not null
 		if (aOpeningTime != null) {
+			// make sure new opening time is before closing time
+			if (aOpeningTime.after(s.getClosingTime())) {
+				throw new IllegalStateException("Could not update schedule with a new opening time (" + aOpeningTime + ") that is after current closing time (" + s.getClosingTime() + ").");
+			}
 			s.setOpeningTime(aOpeningTime);
 		}
 		if (aClosingTime != null) {
+			// make sure new closing time is after opening time
+			if (aClosingTime.before(s.getOpeningTime())) {
+				throw new IllegalStateException("Could not update schedule with a new closing time (" + aClosingTime + ") that is after current opening time (" + s.getOpeningTime() + ").");
+			}
 			s.setClosingTime(aClosingTime);
 		}
 		if (aDayOfWeek !=  null) {
 			s.setDayofWeek(aDayOfWeek);
 		}
-		if (aLibrarian != null) {
+		if (librarianId != null) {
+			// get librarian
+			Librarian aLibrarian = lRepo.findLibrarianByEmployeeIDNum(librarianId);
+			// make sure librarian exists?
+			if (aLibrarian == null) {
+				throw new IllegalStateException("Could not update schedule with librarian that does not exist.");
+			}
 			s.setLibrarian(aLibrarian);
 		}
 		// save schedule and return it
@@ -419,6 +434,7 @@ public class ScheduleService {
 	}
 	
 	/**
+	 * TODO unneeded: just use Date.before(Date)
 	 * Determines if Time t1 is before Time t2.
 	 * @return {@code true} if t1 is before t2, {@code false} otherwise.
 	 */

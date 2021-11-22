@@ -36,7 +36,7 @@ public class LibraryDto {
 		
 		List<LibraryItemDto> libraryItemDto = libraryItems.stream().map(libraryItem -> LibraryItemDto.convertToDto(libraryItem)).collect(Collectors.toList());
 		this.libraryItems = libraryItemDto;
-	}
+	} 
 	
 	public String getLibraryName()
 	{

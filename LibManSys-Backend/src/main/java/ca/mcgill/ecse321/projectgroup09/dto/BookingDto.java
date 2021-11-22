@@ -74,5 +74,5 @@ public class BookingDto {
 
 	public static BookingDto convertToDto(Booking booking) {
 		return new BookingDto();
-	}
+	} 
 }

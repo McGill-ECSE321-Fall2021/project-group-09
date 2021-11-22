@@ -1,27 +1,13 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import ca.mcgill.ecse321.projectgroup09.models.*;
-import ca.mcgill.ecse321.projectgroup09.models.Newspaper;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
+import ca.mcgill.ecse321.projectgroup09.models.Newspaper;
 
-public class NewspaperDto{
-	
-	private Long libraryItemID;
-	private String title;
-	private int publishedYear;
-	private int loanablePeriod;
-	private double dailyOverdueFee;
-	private ItemStatus itemStatus;
-	
-
-	private MemberDto member;
-	private List<LoanDto> loans;
-	
+public class NewspaperDto extends LibraryItemDto {
 
 	private String journalName;
 	private String edition;
@@ -33,23 +19,7 @@ public class NewspaperDto{
 	
 	public NewspaperDto(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee,
 			ItemStatus aItemStatus, Member aMember, List<Loan> aLoans, String journalName, String edition, String chiefEditor) {
-		
-		this.libraryItemID = aLibraryItemId;
-		this.title = aTitle;
-		this.publishedYear = aPublishedYear;
-		this.loanablePeriod = aLoanablePeriod;
-		this.dailyOverdueFee = aDailyOverdueFee;
-		this.itemStatus = aItemStatus;
-
-		if (member != null) {
-			MemberDto aMemberDto = MemberDto.convertToDto(aMember);
-			this.member = aMemberDto;
-		} else {
-
-			this.member = null;
-		}
-
-		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans);
 		this.journalName=journalName;
 		this.edition=edition;
 		this.chiefEditor=chiefEditor;
@@ -78,70 +48,6 @@ public class NewspaperDto{
 				
 		);
 		return newspaperDto;
-	}
-	
-	public Long getLibraryItemID() {
-		return libraryItemID;
-	}
-	
-	public void setLibraryItemID(Long libraryItemID) {
-		this.libraryItemID = libraryItemID;
-	}
-	
-	public String getTitle() {
-		return title;
-	}
-	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public int getPublishedYear() {
-		return publishedYear;
-	}
-	
-	public void setPublishedYear(int publishedYear) {
-		this.publishedYear = publishedYear;
-	}
-	
-	public int getLoanablePeriod() {
-		return loanablePeriod;
-	}
-	
-	public void setLoanablePeriod(int loanablePeriod) {
-		this.loanablePeriod = loanablePeriod;
-	}
-	
-	public double getDailyOverdueFee() {
-		return dailyOverdueFee;
-	}
-	
-	public void setDailyOverdueFee(double dailyOverdueFee) {
-		this.dailyOverdueFee = dailyOverdueFee;
-	}
-	
-	public ItemStatus getItemStatus() {
-		return itemStatus;
-	}
-	
-	public void setItemStatus(ItemStatus itemStatus) {
-		this.itemStatus = itemStatus;
-	}
-	
-	public MemberDto getMember() {
-		return member;
-	}
-	
-	public void setMember(MemberDto member) {
-		this.member = member;
-	}
-	
-	public List<LoanDto> getLoans() {
-		return loans;
-	}
-	
-	public void setLoans(List<LoanDto> loans) {
-		this.loans = loans;
 	}
 	
 	public String getjournalName() {
