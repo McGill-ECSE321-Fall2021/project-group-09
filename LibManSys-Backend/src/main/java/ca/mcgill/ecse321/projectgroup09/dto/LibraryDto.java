@@ -31,8 +31,8 @@ public class LibraryDto {
 		List<ScheduleDto> scheduleDto = schedules.stream().map(schedule -> ScheduleDto.convertToDto(schedule)).collect(Collectors.toList());
 		this.schedules = scheduleDto;
 		
-//		List<AccountDto> accountDto = accounts.stream().map(account -> AccountDto.convertToDto(account)).collect(Collectors.toList());
-//		this.accounts = accountDto;
+		List<AccountDto> accountDto = accounts.stream().map(account -> AccountDto.convertToDto(account)).collect(Collectors.toList());
+		this.accounts = accountDto;
 		
 		List<LibraryItemDto> libraryItemDto = libraryItems.stream().map(libraryItem -> LibraryItemDto.convertToDto(libraryItem)).collect(Collectors.toList());
 		this.libraryItems = libraryItemDto;

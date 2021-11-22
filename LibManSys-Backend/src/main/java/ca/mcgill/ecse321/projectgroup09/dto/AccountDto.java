@@ -23,7 +23,7 @@ public class AccountDto {
 			accountDto = MemberDto.convertToDto(account);
 		}
 		else if ((account instanceof Librarian) && (account instanceof HeadLibrarian)) {
-			//accountDto = HeadLibrarianDto.convertToDto(account);
+			accountDto = HeadLibrarianDto.convertToDto(account);
 		}
 		else if ((account instanceof Librarian) && !(account instanceof HeadLibrarian)) {
 			accountDto = LibrarianDto.convertToDto(account);
