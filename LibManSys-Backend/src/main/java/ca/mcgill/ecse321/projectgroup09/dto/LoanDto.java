@@ -1,6 +1,8 @@
 package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
@@ -31,8 +33,6 @@ public class LoanDto {
 	
 	  public LoanDto(Date borrowedDate, Date returnDate, Double lateFees, LoanStatus loanStatus, Long loanId,
 				LibraryItem libraryItem, Member member, Librarian librarian) {
-  
-	        
 		  this.borrowedDate = borrowedDate;
 			this.returnDate = returnDate;
 			this.lateFees = lateFees;
@@ -49,18 +49,32 @@ public class LoanDto {
 		}
 	
 	/**
-	 * TODO implement
 	 * @param loan
 	 * @return
 	 */
 	public static LoanDto convertToDto(Loan loan) {
-		return new LoanDto();
+		LoanDto loanDto = new LoanDto(
+				loan.getBorrowedDate(),
+				loan.getReturnDate(),
+				loan.getLateFees(),
+				loan.getLoanStatus(),
+				loan.getLoanID(),
+				loan.getLibraryItem(),
+				loan.getMember(),
+				loan.getLibrarian()
+				);
+		return loanDto;
 	}
 	
-	/*public List <LoanDto> convertToDtoList(List<Loan> loans) {
-
-		return new List <LoanDto()>;
-	}*/
+	/**
+	 * Convert a list of Loan objects to a list of loan dtos.
+	 * @param loans
+	 * @return
+	 */
+	public static List<LoanDto> convertToDtos(List<Loan> loans) {
+		List<LoanDto> loanDtos = loans.stream().map(l -> LoanDto.convertToDto(l)).collect(Collectors.toList());
+		return loanDtos;
+	}
 
 	public Date getBorrowedDate() {
 		return borrowedDate;
