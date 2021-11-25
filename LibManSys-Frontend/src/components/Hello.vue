@@ -81,8 +81,8 @@
       </searchbar>
      
     </section>
-  <td>   <button v-on:click="goToUserPage()">User Page</button>   </td>
-    <td>   <button v-on:click="goToLibrarianPage()">Librarian Page</button>   </td>
+  <td>   <button v-on:click="goToUserPage()">User Page</button>   </td> <!--! On user loged in = member -->
+    <td>   <button v-on:click="goToLibrarianPage()">Librarian Page</button>   </td> <!--! On user loged in = librarian -->
     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
       <b> blah blah blah some copyright bs </b>
       <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
