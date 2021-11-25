@@ -48,7 +48,9 @@
           <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
             >Sign Up
           </b>
+             
         </li>
+        
       </ul>
     </nav>
 
@@ -77,8 +79,10 @@
           </findbutton>
         </searchbar>
       </searchbar>
+     
     </section>
-
+  <td>   <button v-on:click="goToUserPage()">User Page</button>   </td>
+    <td>   <button v-on:click="goToLibrarianPage()">Librarian Page</button>   </td>
     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
       <b> blah blah blah some copyright bs </b>
       <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
@@ -139,6 +143,8 @@ import Register from "../components/Register";
 import MemberLogin from "../components/MemberLogin";
 import SearchLibItems from "../components/SearchLibItems";
 import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
+import LibrarianDashboard from "../components/LibrarianDashboard";
+import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import Router from "../router/index";
 
 export default {
@@ -153,33 +159,46 @@ export default {
   components: {
     Register,
   },
-  methods: {
-    goToRegisterPage: function () {
-      Router.push({
-        path: "/Register",
-        name: "Register",
-      });
-    },
-    goToLoginPage: function () {
-      Router.push({
-        path: "/MemberLogin",
-        name: "MemberLogin",
-      });
-    },
-    goToSearchPage: function () {
-      Router.push({
-        path: "/SearchLibItems",
-        name: "SearchLibItems",
-      });
-    },
-    goToLibManagmentPage: function () {
-      Router.push({
-        path: "/LibraryManagementDashboard",
-        name: "LibraryManagementDashboard",
-      });
-    },
-  },
-};
+
+   methods: {
+        goToRegisterPage: function (){
+            Router.push({
+                path: "/Register",
+                name: "Register"
+            })
+        },
+        goToLoginPage: function (){
+            Router.push({
+                path: "/MemberLogin",
+                name: "MemberLogin"
+            })
+        },
+        goToSearchPage: function (){
+            Router.push({
+                path: "/SearchLibItems",
+                name: "SearchLibItems"
+            })
+        },
+        goToLibManagmentPage: function (){
+            Router.push({
+                path: "/LibraryManagementDashboard",
+                name: "LibraryManagementDashboard"
+            })
+        },
+        goToUserPage: function (){
+            Router.push({
+                path: "/OnlineMemberDashboard",
+                name: "OnlineMemberDashboard"
+            })
+        },
+        goToLibrarianPage: function (){
+            Router.push({
+                path: "/LibrarianDashboard",
+                name: "LibrarianDashboard"
+            })
+        }
+        }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

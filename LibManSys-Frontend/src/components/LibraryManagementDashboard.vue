@@ -16,6 +16,8 @@ Head Librarian:
     
     <h1></h1>
     <h2>Library Managment Services</h2>
+    <td>   <button v-on:click="goToReturnPage()">Return</button>   </td>
+    <td>   <button v-on:click="goToCheckoutPage()">Checkout</button>   </td>
 
    
     <ul>
@@ -31,8 +33,11 @@ Head Librarian:
 
 <script>
 
+import Register from "../components/Register";
+import Return from "../components/Return";
+import Checkout from "../components/Checkout";
+import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
 import Router from "../router/index";
-
 
 export default {
   name: 'hello',
@@ -40,7 +45,20 @@ export default {
     return {
       msg: 'Welcome to the Library'
     }
-  }
+  },
+   methods: {
+        goToReturnPage: function (){
+            Router.push({
+                path: "/Return",
+                name: "Return"
+            })
+        },
+        goToCheckoutPage: function (){
+            Router.push({
+                path: "/Checkout",
+                name: "Checkout"
+            })
+        }}
 }
 </script>
 
