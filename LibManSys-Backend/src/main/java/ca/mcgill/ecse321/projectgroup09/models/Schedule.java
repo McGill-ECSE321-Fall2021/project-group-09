@@ -15,7 +15,8 @@ public class Schedule {
 	 *  No other schedules should be created with these ID's. */
 	public static List<Long> RESERVED_IDS = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L);
 
-	// automatically generate schedule ID's
+	// automatically generate schedule ID's, keep this one generating ID's the manual
+	// way so that we can keep reserved ids for library hours.
 	/** Schedule ID's start at 8, because first 7 are reserved for library hours. */
 	private static Long nextScheduleId = 8L;
 	private static Long getNextScheduleId() {
