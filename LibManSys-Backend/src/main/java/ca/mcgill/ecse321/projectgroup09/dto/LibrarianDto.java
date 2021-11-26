@@ -2,11 +2,9 @@ package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
-
-import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 
 import ca.mcgill.ecse321.projectgroup09.models.Booking;
+import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.Schedule;
 
@@ -97,9 +95,8 @@ public class LibrarianDto extends AccountDto {
 		return ldto;
 	}
 
-	public static List<LibrarianDto> convertToDtos(List<LibrarianDto> librarians) {
-		List<LibrarianDto> librarianDtos = new ArrayList<LibrarianDto>();
-
+	public static List<LibrarianDto> convertToDtos(List<Librarian> librarians) {
+		List<LibrarianDto> librarianDtos = librarians.stream().map(l -> LibrarianDto.convertToDto(l)).collect(Collectors.toList());
 		return librarianDtos;
 	}
 

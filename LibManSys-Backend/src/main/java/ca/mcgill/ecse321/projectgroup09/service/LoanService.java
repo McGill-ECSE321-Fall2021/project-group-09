@@ -1,8 +1,10 @@
 package ca.mcgill.ecse321.projectgroup09.service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import static ca.mcgill.ecse321.projectgroup09.utils.DateTimeUtil.addDaysToDate;
+import static ca.mcgill.ecse321.projectgroup09.utils.MiscUtil.toList;
+
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -87,56 +89,139 @@ public class LoanService {
 		loanRepository.save(loan);
 		return loan;
 	}
+	
+	/**
+	 * Return a list of all loans present in the loan repository.
+	 * @return
+	 */
+	@Transactional
+	public List<Loan> getAllLoans() {
+		return toList(loanRepository.findAll());
+	}
 
+	/**
+	 * Get a list of loans for a member using the member library card number.
+	 * @param libCard Member library card number.
+	 * @return List of loans for member.
+	 */
+	@Transactional
+	public List<Loan> getLoansbyMember(Long libCard) {
+		if (libCard == null) {
+			throw new IllegalArgumentException("Id must not be null.");
+		}
+		Member member = memberRepository.findMemberByLibCardNumber(libCard);
+		if (member == null) {
+			throw new IllegalArgumentException("Could not find member with that id in repository.");
+		}
+		List<Loan> loansByMember = new ArrayList<Loan>();
+		for (Loan loan : loanRepository.findLoanByMember(member)) {
+			loansByMember.add(loan);
+		}
+		return loansByMember;
+	}
+	
+	/**
+	 * Get a loan by its ID. Throws exception is loan with specified ID is
+	 * not found in repository.
+	 * @param loanId
+	 * @return loan object with ID = 'loadId'
+	 */
+	public Loan getLoanbyId(Long loanId) {
+		if (loanId == null || loanId < 0) {
+			throw new IllegalArgumentException("Id must not be null.");
+		}
+		Loan loan = loanRepository.findLoanByLoanID(loanId);
+		if (loan == null) {
+			throw new IllegalArgumentException("Cannot find loan with id " + loanId + " in repository.");
+		}
+		return loan;
+	}
+
+	/**
+	 * Update loan specified by 'loanId'. Not allowed to set fields to null. If null
+	 * is inputted for any param (except loanId, must be non-null), then that field
+	 * will retain its current value.
+	 * @param borrowedDate
+	 * @param returnDate
+	 * @param lateFees
+	 * @param loanStatus
+	 * @param loanId must not be null, id of loan object to update.
+	 * @return the updated loan object.
+	 */
 	@Transactional
 	public Loan updateLoan(Date borrowedDate,Date returnDate, Double lateFees, LoanStatus loanStatus,Long loanId){
-		
-
+		if (loanId == null) {
+			throw new IllegalArgumentException("No LoanId");
+		}
+		// try and find loan to update
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
-		//Member member = memberRepository.findMemberByLibCardNumber(memberId);
-		//LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
-		//Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianId);
-
 		if (loanRepository.findLoanByLoanID(loanId) == null) {
 			throw new IllegalArgumentException("Loan does not exist");
 		}
 		
-		
-		//if (borrowedDate == null) {
-		//loan.setBorrowedDate(borrowedDate);
-		//}
-		
-		if (returnDate.before(borrowedDate)) {
-			throw new IllegalArgumentException("Return date is before Borrowed Date");
+		// update associations as well? TODO
+		//Member member = memberRepository.findMemberByLibCardNumber(memberId);
+		//LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
+		//Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianId);
+
+		// check if BORROWED DATE and/or RETURN DATE are being updated
+		if (borrowedDate != null && returnDate != null) {
+			// make sure new returnDate is after borrowDate
+			if (borrowedDate.after(returnDate)) {
+				throw new IllegalArgumentException("Cannot update borrowed date because it is after return date.");
+			} else {			
+				loan.setBorrowedDate(borrowedDate);
+				loan.setReturnDate(returnDate);
 			}
-		if (lateFees<0) {
-			throw new IllegalArgumentException("Late Fees Negative");
+		}
+		// else if only borrowedDate is being updated
+		else if (borrowedDate != null) {
+			if (borrowedDate.after(loan.getReturnDate())) {
+				throw new IllegalArgumentException("Cannot update borrowed date because it is after return date.");
+			} else {
+				loan.setBorrowedDate(borrowedDate);	
 			}
-		if (loanId == null) {
-			throw new IllegalArgumentException("No LoanId");
+		}
+		// else if only returnDate is being updated
+		else if (returnDate != null) {
+			if (returnDate.before(loan.getBorrowedDate())) {
+				throw new IllegalArgumentException("Cannot update return date because it is before borrowed date.");
+			} else {
+				loan.setReturnDate(returnDate);
+			}
+		}
+		
+		// check if LATE FEES being updated
+		if (lateFees != null) {
+			if (lateFees < 0) {
+				throw new IllegalArgumentException("Late Fees Negative");
+			} else {
+				loan.setLateFees(lateFees);
+			}
+		}
+		// check if LOAN STATUS being updated
+		if (loanStatus != null) {
+			loan.setLoanStatus(loanStatus);
 		}
 
-		// Convert Date from util.Date to sql.Date
-		java.sql.Date sqlBorrowedDate = new java.sql.Date(borrowedDate.getTime());
-		java.sql.Date sqlReturnDate = new java.sql.Date(returnDate.getTime());
-		loan.setBorrowedDate(sqlBorrowedDate);
-		loan.setReturnDate(sqlReturnDate);
-		
-		loan.setLateFees(lateFees);
-		loan.setLoanStatus(loanStatus);
-		// loan.setloanID(loanId);
+		// save updated loan and return it
 		loanRepository.save(loan);
 		return loan;
 	}
 
-	public boolean deleteLoan(Long loanId) {
+	/**
+	 * Delete loan by id.
+	 * Throws exception if loan specified by loanId does not exist.
+	 * @param loanId
+	 * @return The loan object if deleted successfully
+	 */
+	public Loan deleteLoan(Long loanId) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
 		if (loan == null) {
 			throw new IllegalArgumentException("Loan does not exist");
 		}
 		loanRepository.delete(loan);
-		return true;
-
+		return loan;
 	}
 
 
@@ -146,7 +231,7 @@ public class LoanService {
 	private long getLateDays(Date borrowedDate, Date returnDate, Integer loanablePeriod) {
 		// maybe I should call loan here, if a user wants to see the lateDays without
 		// the fee?
-		Date returnedDate = addDate(borrowedDate, loanablePeriod);
+		Date returnedDate = addDaysToDate(borrowedDate, loanablePeriod);
 		// LocalDate borrowedDateTrans = convertToLocalDateViaInstant(borrowedDate);
 		long diffInMillies = Math.abs(returnedDate.getTime() - borrowedDate.getTime());
 		long lateDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
@@ -164,6 +249,13 @@ public class LoanService {
 		return lateFees;
 	}*/
 
+	/**
+	 * This logic will happen in LibraryItemService.returnLibraryItem() instead.
+	 * In theory, returnLibraryitem() could call this method, but services calling other services
+	 * is too complicated for now.
+	 * 
+	 * @deprecated
+	 */
 	@Transactional
 	public Loan addLateFee(Long libraryItemId, Long loanId, Double overdueFee, LoanStatus loanStatus) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
@@ -173,7 +265,7 @@ public class LoanService {
 		//LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
 		//double lateFees = calculateLateFee(borrowedDate, returnDate, libraryItemId, loanablePeriod);
 		long lateDays = getLateDays(borrowedDate, returnDate, loanablePeriod);
-		LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
+		//LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
 		
 		
 		//double overdueFee = libraryItem.getDailyOverdueFee();
@@ -191,6 +283,10 @@ public class LoanService {
 		return loan;
 	}
 
+	/**
+	 * Don't need this method, just use updateLoan instead.
+	 * @deprecated
+	 */
 	@Transactional
 	public Loan changeLateFee(Long loanId, Double newLateFee) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
@@ -199,12 +295,16 @@ public class LoanService {
 		return loan;
 	}
 
+	/**
+	 * dont need this method, can just use updateLoan()
+	 * @deprecated
+	 */
 	@Transactional
 	public Loan changeLoanStatus(Long loanId, Long libraryItemId, LoanStatus loanStatus) {
 		Loan loan = loanRepository.findLoanByLoanID(loanId);
-		Date returnDate = loan.getReturnDate();
-		Date borrowedDate = loan.getBorrowedDate();
-		Integer loanablePeriod = loan.getLibraryItem().getLoanablePeriod();
+		//Date returnDate = loan.getReturnDate();
+		//Date borrowedDate = loan.getBorrowedDate();
+		//Integer loanablePeriod = loan.getLibraryItem().getLoanablePeriod();
 		
 		
 		if (loanId == null) {
@@ -219,54 +319,18 @@ public class LoanService {
 
 		loan.setLoanStatus(loanStatus);
 		loanRepository.save(loan);
-		return loan;
-	/*	if (calculateLateFee(borrowedDate, returnDate, libraryItemId, loanablePeriod) > 0) {
-			loan.setLoanStatus(LoanStatus.Overdue);
-		}*/
-	//	if (calculateLateFee(borrowedDate, returnDate, libraryItem, loanablePeriod) == 0 // && renewal false */) {
-		//	loan.setLoanStatus(LoanStatus.Active);
-	//	}
-		
-		/*if (loanablePeriod == null) {
-			throw new IllegalArgumentException("No loanable  Date");
-
-		}*/
-		// if renewal method (in libraryItem) set as renewal
-
-		// if returned method in libraryItem set as closed
-		
-		
-		
-	}
-
-	@Transactional
-	public List<Loan> getAllLoans() {
-		return toList(loanRepository.findAll());
-	}
-
-	@Transactional
-	public List<Loan> getLoansbyMember(Long libCard) {
-		Member member = memberRepository.findMemberByLibCardNumber(libCard);
-		List<Loan> loansByMember = new ArrayList<>();
-		for (Loan loan : loanRepository.findLoanByMember(member)) {
-			loansByMember.add(loan);
-		}
-		if (libCard ==null) {
-			throw new IllegalArgumentException("Id must not be null.");
-
-		}
-		return loansByMember;
+		return loan;		
 	}
 	
-	public Loan getLoanbyId(Long loanId) {
-		if (loanId == null || loanId <0) {
-			throw new IllegalArgumentException("Id must not be null.");
-		}
-		Loan loan = loanRepository.findLoanByLoanID(loanId);
-		return loan;
-	}
-	
-
+	/**
+	 * I think we don't need this method, because the logic to add loan fees to
+	 * member amount owed will happen in libraryItemService.returnLibraryItem()
+	 * instead. If the loan is overdue when the item is returned using returnLibraryItem()
+	 * then that method will add the late fee to the member amount owed.
+	 * If we want to get total $ owed by member, use MemberService.getMember().getAmountOwed()
+	 *
+	 * @deprecated
+	 */
 	@Transactional
 	public double getLoanFeesbyMember(Long memberLib) {
 		double fee = 0;
@@ -283,27 +347,6 @@ public class LoanService {
 		member.setAmountOwed(fee);
 		return fee; // maybe void method ie return nothing
 	}
+	
 
-	/*
-	 * public LocalDate convertToLocalDateViaInstant(Date dateToConvert) { return
-	 * dateToConvert.toInstant() .atZone(ZoneId.systemDefault()) .toLocalDate(); }
-	 */
-
-							// HELPER METHODS //
-
-	private Date addDate(Date borrowedDate, Integer loanablePeriod) {
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DATE, loanablePeriod);
-		Date modifiedDate = new Date(cal.getTimeInMillis());
-		return modifiedDate;
-	}
-
-	// from tutorials
-	private <T> List<T> toList(Iterable<T> iterable) {
-		List<T> resultList = new ArrayList<T>();
-		for (T t : iterable) {
-			resultList.add(t);
-		}
-		return resultList;
-	}
 }

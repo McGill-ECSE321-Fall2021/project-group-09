@@ -15,6 +15,7 @@ public interface MemberRepository extends CrudRepository<Member, Long> {
 	Member findMemberByLibCardNumber(Long libCardNumber);
 	Member findMemberByBookings(Booking booking);
 	Member findMemberByLoans(Loan loan);
+	List<Member> findAll();
 	List<Member> findMemberByisVerifiedResident(boolean isVerified);
 	List<Member> findMemberByFullName(String fullName);
 }

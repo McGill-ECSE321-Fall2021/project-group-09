@@ -53,7 +53,7 @@ public class LibraryItemService {
 	 * Read - Returns the library item object specified by the library item ID
 	 * if it is present in the library item repository.
 	 * @param libraryItemId {@code long} library item id
-	 * @return {@code LibraryItem} matching {@code libraryItemId} if found in repository, {@code null} otherwise.
+	 * @return {@code LibraryItem} matching {@code libraryItemId} if found in repository.
 	 */
 	@Transactional
 	public LibraryItem getLibraryItemById(Long libraryItemId) {
@@ -61,6 +61,9 @@ public class LibraryItemService {
 			throw new IllegalArgumentException("libraryItemId must not be null.");
 		}
 		LibraryItem li = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
+		if (li == null) {
+			throw new IllegalArgumentException("Library item with id " + libraryItemId + " does not exist.");
+		}
 		return li;
 	}
 	
@@ -476,8 +479,8 @@ public class LibraryItemService {
 			lateFee = ((double) daysLate) * li.getDailyOverdueFee();
 		}
 		loan.setLateFees(lateFee);
-		// Not sure if I should add fee to member account here, or have them call LoanService.getLoanFeesByMember
-		//m.setAmountOwed(m.getAmountOwed() + lateFee);
+		// Add fee to member account here // or have them call LoanService.getLoanFeesByMember
+		m.setAmountOwed(m.getAmountOwed() + lateFee);
 		
 		// set loan status to closed when item is returned
 		loan.setLoanStatus(LoanStatus.Closed);
@@ -487,6 +490,11 @@ public class LibraryItemService {
 		
 		// update member attributes
 		m.setActiveLoans(m.getActiveLoans() - 1);
+		
+		// save updated member, library item and loan
+		memberRepo.save(m);
+		libraryItemRepo.save(li);
+		loanRepo.save(loan);
 		
 		return loan;
 	}

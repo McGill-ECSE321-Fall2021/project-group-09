@@ -1,9 +1,10 @@
 package ca.mcgill.ecse321.projectgroup09.controller;
 
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailure;
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.projectgroup09.dto.LoanDto;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
+import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
 import ca.mcgill.ecse321.projectgroup09.service.LoanService;
 
 @CrossOrigin(origins = "*")
@@ -39,12 +41,27 @@ public class LoanController {
 	 * @return
 	 */
 	@PostMapping(value = { BASE_URL + "/create", BASE_URL + "/create/" })
-	public ResponseEntity<?> createLoan(@RequestParam("borrowedDate") Date borrowedDate, 
-			@RequestParam("loanId") Long loanId, @RequestParam("memberId") Long memberId,
-			@RequestParam("librarianId") Long librarianId, @RequestParam("libraryItemId") Long libraryItemId)  {	
+	public ResponseEntity<?> createLoan(@RequestParam("borrowedDate") String borrowedDateString, 
+			@RequestParam("loanStatus") String loanStatusString, 
+			@RequestParam("memberLibCardNumber") Long memberId,
+			@RequestParam("librarianEmployeeId") Long librarianId, 
+			@RequestParam("libraryItemId") Long libraryItemId)  {	
+		// get params
+		Date borrowedDate = null;
 		try {
-			//Loan loan = loanService.createLoan(borrowedDate, loanId, librarianId, memberId, libraryItemId);
-			Loan loan = null;
+			borrowedDate = Date.valueOf(borrowedDateString);
+		} catch (Exception e) {
+			httpFailureMessage(e.getMessage());
+		}
+		LoanStatus loanStatus = null;
+		try {
+			loanStatus = LoanStatus.valueOf(loanStatusString);
+		} catch (Exception e) {
+			httpFailureMessage(e.getMessage());
+		}
+		// Create loan object
+		try {
+			Loan loan = loanService.createLoan(borrowedDate, loanStatus, memberId, librarianId, libraryItemId);
 			return httpSuccess(LoanDto.convertToDto(loan));
 		} catch (Exception e) {
 			return httpFailure("Error: " + e.getMessage());
@@ -67,14 +84,14 @@ public class LoanController {
 	}
 	
 	/**
-	 * Get loans for a member using the member id.
-	 * @param memberId
+	 * Get loans for a member using the member libCardNumber.
+	 * @param libCardNumber
 	 * @return
 	 */
-	@GetMapping(value = { BASE_URL + "/get-by-member/{id}", BASE_URL + "/get-by-member/{id}/" })
-	public ResponseEntity<?> getAllLoansbyMember(@PathVariable("id") Long memberId)  {
+	@GetMapping(value = { BASE_URL + "/get-by-member/{libCardNumber}", BASE_URL + "/get-by-member/{libCardNumber}/" })
+	public ResponseEntity<?> getAllLoansByMember(@PathVariable("libCardNumber") Long memberLibCardNumber)  {
 		try {
-			List<Loan> loans = loanService.getLoansbyMember(memberId);
+			List<Loan> loans = loanService.getLoansbyMember(memberLibCardNumber);
 			return httpSuccess(LoanDto.convertToDtos(loans));
 		} catch (Exception e) {
 			return httpFailure("Error: " + e.getMessage());
@@ -82,29 +99,49 @@ public class LoanController {
 	}
 	
 	/**
-	 * Get total late fees for a member.
-	 * @param memberId
+	 * Get total late fees for a member by library card number.
+	 * TODO implement
+	 * @param libCardNumber
 	 * @return
 	 */
-	@PostMapping(value = { BASE_URL + "/get-member-late-fees/{id}", BASE_URL + "/get-member-late-fees/{id}/" })
-	public ResponseEntity<?> getLoanFeesbyMember(@PathVariable("id") Long memberId)  {
+	@PostMapping(value = { BASE_URL + "/get-member-late-fees/{libCardNumber}", BASE_URL + "/get-member-late-fees/{libCardNumber}/" })
+	public ResponseEntity<?> getLoanFeesbyMember(@PathVariable("libCardNumber") Long memberLibCardNumber)  {
 		//Loan loan = loanService.getLoanbyId(loanId);
 		//return LoanDto.convertToDto(loan);
 		return null;
 	}
 	
-	@PostMapping(value = { "/Loan/Delete/Id", "/Loan/Delete/Id/" })
-	public void deleteLoan(@PathVariable("loanId") Long loanId)  {
-		//Loan loan = loanService.getLoanbyId(loanId);
-		loanService.deleteLoan(loanId);
-		//return true;
+	/**
+	 * Delete the specified loan from the loan repository.
+	 * @param loanId
+	 * @return message indicating if loan was deleted or not.
+	 */
+	@PostMapping(value = { BASE_URL + "/delete/{id}", BASE_URL + "/delete/{id}/" })
+	public ResponseEntity<?> deleteLoan(@PathVariable("loanId") Long loanId)  {
+		// try to delete loan
+		try {
+			loanService.deleteLoan(loanId);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		return httpSuccess("Deleted loan successfully.");
 	}
 	
 	
-	@GetMapping(value = { "/Loan/All", "/Loan/All/" })
-	public List<LoanDto> getAllLoans() {
+	/**
+	 * Get all loans. This is the endpoint for the base url for loan controller (www.site.com/loan)
+	 * @return
+	 */
+	@GetMapping(value = { BASE_URL, BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/" })
+	public ResponseEntity<?> getAllLoans() {
 		// Create list of all books, converted to Dto's
-		return loanService.getAllLoans().stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+		List<LoanDto> loans = null;
+		try {
+			loans = loanService.getAllLoans().stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		return httpSuccess(loans);
 	}
 	
 	

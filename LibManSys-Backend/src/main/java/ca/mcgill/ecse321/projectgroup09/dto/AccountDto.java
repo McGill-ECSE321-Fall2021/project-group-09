@@ -16,20 +16,38 @@ public class AccountDto {
 		this.fullName = fullName;
 	}
 	
+	/**
+	 * Returns an account dto object representing the account inputted. The return value
+	 * is also an account, so you must cast the result back to the desired account type
+	 * in order to use the subclass methods.
+	 * @param account
+	 * @return
+	 */
 	public static AccountDto convertToDto(Account account) {
 		AccountDto accountDto = null; 
+		// need to cast account to proper type before calling convertToDto, or else
+		// it will call convertToDto(Account account), which is this method -> endless loop
 		
-		if ((account instanceof Member) && !(account instanceof OnlineMember)) {
-			accountDto = MemberDto.convertToDto(account);
+		// if account is Member and online member
+		if (account instanceof OnlineMember) {
+			OnlineMember om = (OnlineMember) account;
+			accountDto = OnlineMemberDto.convertToDto(om);
 		}
-		else if ((account instanceof Librarian) && (account instanceof HeadLibrarian)) {
-			accountDto = HeadLibrarianDto.convertToDto(account);
+		// else if account is Member and not online member
+		// (already know it is not an online member because of above)
+		else if (account instanceof Member) {
+			Member m = (Member) account;
+			accountDto = MemberDto.convertToDto(m);
 		}
-		else if ((account instanceof Librarian) && !(account instanceof HeadLibrarian)) {
-			accountDto = LibrarianDto.convertToDto(account);
+		// else if account is a librarian AND head librarian
+		else if (account instanceof HeadLibrarian) {
+			HeadLibrarian hl = (HeadLibrarian) account;
+			accountDto = HeadLibrarianDto.convertToDto(hl);
 		}
-		else if ((account instanceof Member) && !(account instanceof OnlineMember)) {
-			accountDto = OnlineMemberDto.convertToDto(account);
+		// else if account is just librarian and not head librarian
+		else if (account instanceof Librarian) {
+			Librarian l = (Librarian) account;
+			accountDto = LibrarianDto.convertToDto(l);
 		}
 		
 		return accountDto;

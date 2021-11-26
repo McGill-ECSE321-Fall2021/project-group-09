@@ -103,20 +103,20 @@ public class TestLibraryItemService {
 	
 	
 	/** Loan 5 - for test renew  - corresponds with member 5 and li5 */
-	private static final Long LOAN5_ID = 705L;
+	//private static final Long LOAN5_ID = 705L;
 	private static final LoanStatus LOAN5_STATUS = LoanStatus.Active;
 	
 	/** Loan 6 - for test renew with overdue loan */
-	private static final Long LOAN6_ID = 706L;
+	//private static final Long LOAN6_ID = 706L;
 	private static final LoanStatus LOAN6_STATUS = LoanStatus.Overdue;
 	private static final Date LOAN6_BORROWED_DATE = Date.valueOf("2021-10-1");
 	
 	/** Loan 7 - see LI7 */
-	private static final Long LOAN7_ID = 707L;
+	//private static final Long LOAN7_ID = 707L;
 	private static final LoanStatus LOAN7_STATUS = LoanStatus.Active;
 	
 	/** Loan 8 - see LI8 */
-	private static final Long LOAN8_ID = 708L;
+	//private static final Long LOAN8_ID = 708L;
 	private static final LoanStatus LOAN8_STATUS = LoanStatus.Overdue; // active would work too I think
 	private static final Date LOAN8_BORROWED_DATE = Date.valueOf("2021-11-1");
 	
@@ -172,7 +172,7 @@ public class TestLibraryItemService {
     	li5.setItemStatus(LI5_STATUS);
     	//li.setMember(null);
     	Loan loan5 = new Loan();
-    	loan5.setloanID(LOAN5_ID);
+    	//loan5.setloanID(LOAN5_ID);
     	loan5.setLoanStatus(LOAN5_STATUS);
     	loan5.setBorrowedDate(YESTERDAY);
     	loan5.setLibraryItem(li5);
@@ -191,7 +191,7 @@ public class TestLibraryItemService {
     	li6.setTitle(LI6_TITLE);
     	li6.setItemStatus(LI6_STATUS);
     	Loan loan6 = new Loan();
-    	loan6.setloanID(LOAN6_ID);
+    	//loan6.setloanID(LOAN6_ID);
     	loan6.setLoanStatus(LOAN6_STATUS);
     	loan6.setBorrowedDate(LOAN6_BORROWED_DATE);
     	loan6.setLibraryItem(li6);
@@ -211,7 +211,7 @@ public class TestLibraryItemService {
     	li7.setTitle(LI7_TITLE);
     	li7.setItemStatus(LI7_STATUS);
     	Loan loan7 = new Loan();
-    	loan7.setloanID(LOAN7_ID);
+    	//loan7.setloanID(LOAN7_ID);
     	loan7.setLoanStatus(LOAN7_STATUS);
     	loan7.setBorrowedDate(YESTERDAY);
     	loan7.setLibraryItem(li7);
@@ -230,7 +230,7 @@ public class TestLibraryItemService {
     	li8.setTitle(LI8_TITLE);
     	li8.setItemStatus(LI8_STATUS);
     	Loan loan8 = new Loan();
-    	loan8.setloanID(LOAN8_ID);
+    	//loan8.setloanID(LOAN8_ID);
     	loan8.setLoanStatus(LOAN8_STATUS);
     	loan8.setBorrowedDate(LOAN8_BORROWED_DATE);
     	loan8.setLibraryItem(li8);
@@ -356,8 +356,16 @@ public class TestLibraryItemService {
 	
 	@Test
 	public void testGetLibraryItemById_NotExisting() {
-		Book book = (Book) libraryItemService.getLibraryItemById(NAN_ID);
+		String error = null;
+		Book book = null;
+		try {
+			book = (Book) libraryItemService.getLibraryItemById(NAN_ID);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
 		assertNull(book);
+		assertNotNull(error);
+		assertEquals(error,"Library item with id " + NAN_ID + " does not exist.");
 	}
 	
 	@Test

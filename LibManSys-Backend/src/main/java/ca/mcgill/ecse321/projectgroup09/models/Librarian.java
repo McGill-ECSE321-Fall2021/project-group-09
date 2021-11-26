@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -39,6 +40,33 @@ public class Librarian extends Account {
 		this.schedules = new ArrayList<Schedule>();
 		this.loans = new ArrayList<Loan>();
 		this.bookings = new ArrayList<Booking>();
+	}
+	
+	/**
+	 * All argument constructor.
+	 * This inializes a Librarian object with fields equal to input parameters, as well
+	 * as a randomly generated employee ID number.
+	 * @param aFullName
+	 * @param aLibrarianEmail
+	 * @param aLibrarianPassword
+	 * @param aLibrarianUsername
+	 * @param aSchedules if null is passed as input, then a empty list is created for schedules
+	 * @param aLoans if null is passed as input, then a empty list is created for loan
+	 * @param aBookings if null is passed as input, then a empty list is created for bookings
+	 */
+	public Librarian(String aFullName, String aLibrarianEmail, String aLibrarianPassword,
+			String aLibrarianUsername, List<Schedule> aSchedules, List<Loan> aLoans, List<Booking> aBookings) {
+		// generate employee id number
+		final Long employeeIdNumber = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+		// set fields
+		this.setFullName(aFullName);
+		this.setLibrarianEmail(aLibrarianEmail);
+		this.setLibrarianPassword(aLibrarianPassword);
+		this.setLibrarianUsername(aLibrarianUsername);
+		this.setemployeeIDNum(employeeIdNumber);
+		this.setSchedules(aSchedules == null ? new ArrayList<Schedule>() : aSchedules);
+		this.setLoans(aLoans == null ? new ArrayList<Loan>() : aLoans);
+		this.setBookings(aBookings == null ? new ArrayList<Booking>() : aBookings);
 	}
 	
 	@Override

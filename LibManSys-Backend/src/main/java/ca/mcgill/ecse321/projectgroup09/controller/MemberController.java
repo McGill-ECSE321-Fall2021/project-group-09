@@ -38,7 +38,8 @@ public class MemberController {
 
 	@GetMapping(value = { "/member/{libCardNumber}", "/member/{libCardNumber}/" })
 	public MemberDto getMemberById(@PathVariable("libCardNumber") Long libCardNumber) throws IllegalArgumentException {
-		return MemberDto.convertToDto(memberService.getMemberByLibCardNumber(libCardNumber));
+		MemberDto mdto = MemberDto.convertToDto(memberService.getMemberByLibCardNumber(libCardNumber));
+		return mdto;
 	}
 	
 	@GetMapping(value = {"/members/{fullName}", "/members/{fullName}/"})

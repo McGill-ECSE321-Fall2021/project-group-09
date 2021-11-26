@@ -140,9 +140,16 @@ public class BookController {
 	 * @return
 	 */
 	@PostMapping(value = {BASE_URL + "/update/{id}", BASE_URL + "/update/{id}/"})
-	public ResponseEntity<?> updateBook(@PathVariable("id") Long bookId, @RequestParam(value = "title", required = false) String title, @RequestParam(value = "publisherYear", required = false) Integer publisherYear,
-			@RequestParam(value = "loanablePeriod", required = false) Integer loanablePeriod, @RequestParam(value = "dailyOverdueFee", required = false) Double dailyOverdueFee, @RequestParam(value = "itemStatus", required = false) String itemStatus,
-			@RequestParam(value = "author", required = false) String author, @RequestParam(value = "publisher", required = false) String publisher, @RequestParam(value = "ISBN", required = false) String ISBN, @RequestParam(value = "numPages", required = false) Integer numPages) {
+	public ResponseEntity<?> updateBook(@PathVariable("id") Long bookId, 
+			@RequestParam(value = "title", required = false) String title, 
+			@RequestParam(value = "publisherYear", required = false) Integer publisherYear,
+			@RequestParam(value = "loanablePeriod", required = false) Integer loanablePeriod, 
+			@RequestParam(value = "dailyOverdueFee", required = false) Double dailyOverdueFee, 
+			@RequestParam(value = "itemStatus", required = false) String itemStatus,
+			@RequestParam(value = "author", required = false) String author, 
+			@RequestParam(value = "publisher", required = false) String publisher,
+			@RequestParam(value = "ISBN", required = false) String ISBN, 
+			@RequestParam(value = "numPages", required = false) Integer numPages) {
 		try {
 			ItemStatus iS = ItemStatus.valueOf(itemStatus);
 			BookDto bookDto = BookDto.convertToDto(bookService.updateBook(bookId, title, publisherYear, loanablePeriod, dailyOverdueFee, iS, author, publisher, ISBN, numPages));

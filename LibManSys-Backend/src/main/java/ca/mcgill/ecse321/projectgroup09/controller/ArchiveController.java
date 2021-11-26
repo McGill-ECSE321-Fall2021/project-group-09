@@ -41,7 +41,9 @@ public class ArchiveController {
 	
 	@PostMapping(value = { BASE_URL + "/create/{title}/{publishedYear}/{institution}", BASE_URL + "/create/{title}/{publishedYear}/{institution}/"})
 	
-	public ArchiveDto createArchive(@PathVariable("title") String title, @PathVariable("publishedYear") String publishedYear, @PathVariable("institution") String institution) 
+	public ArchiveDto createArchive(@PathVariable("title") String title, 
+			@PathVariable("publishedYear") String publishedYear, 
+			@PathVariable("institution") String institution) 
 			throws IllegalArgumentException {
 		int pubYear;
 		try {

@@ -17,37 +17,77 @@ public class LibrarianService {
 	@Autowired
 	private LibrarianRepository librarianRepository;
 	
+	/**
+	 * Creates a new librarian and saves it to the librarian repository.
+	 * Creates librarian with no (schedule, loan or booking) associations.
+	 * @param fullName
+	 * @param email
+	 * @param password
+	 * @param username
+	 * @return newly created Librarian object.
+	 */
 	@Transactional
-	public Librarian createLibrarian(String librarianEmail, String librarianPassword, String librarianUsername, Long employeeIDNum) {
-		
-		if (employeeIDNum == null) {
-			throw new IllegalArgumentException("Please enter an ID.");
+	public Librarian createLibrarian(String fullName, String email, String password, String username) {
+		if (fullName == null || email == null || password == null || username == null) {
+			throw new IllegalArgumentException("Arguments cannot be null when creating a new librarian.");
 		}
+		// TODO check if email is a valid email
 		
-		Librarian librarian = new Librarian();
-		//librarian.setAccountId(employeeIDNum);
-		librarian.setemployeeIDNum(employeeIDNum);
-		librarian.setLibrarianEmail(librarianEmail);
-		librarian.setLibrarianPassword(librarianPassword);
-		librarian.setFullName(librarianUsername);
+		// create new librarian with input parameters and empty associations
+		Librarian librarian = new Librarian(fullName, email, password, username, null, null, null);
+		
+		// save new librarian and return it
+		librarianRepository.save(librarian);
 		return librarian;
 	}
 	
-	public void setLibrarianHours(Long employeeIDNum, List<Schedule> schedules) {
-		Librarian l1 = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
-		l1.setSchedules(schedules);
+	@Transactional
+	public List<Librarian> getAll() {
+		return librarianRepository.findAll();
 	}
 	
+	@Transactional
+	public Librarian setLibrarianHours(Long employeeIDNum, List<Schedule> schedules) {
+		if (schedules == null || schedules.isEmpty()) {
+			throw new IllegalArgumentException("'schedules' input parameter cannot be null or empty list.");
+		}
+		Librarian l = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		if (l == null) {
+			throw new IllegalArgumentException("Could not find librarian with employee id " + employeeIDNum + " in repository.");
+		}
+		l.setSchedules(schedules);
+		librarianRepository.save(l);
+		return l;
+	}
+	
+	@Transactional
 	public List<Schedule> getLibrarianHours(Long employeeIDNum) {
-		return librarianRepository
-				.findLibrarianByEmployeeIDNum(employeeIDNum)
-				.getSchedules();
+		if (employeeIDNum == null) {
+			throw new IllegalArgumentException("'employeeIDNum' input parameter cannot be null");
+		}
+		Librarian l = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		if (l == null) {
+			throw new IllegalArgumentException("Could not find librarian with employee id " + employeeIDNum + " in repository.");
+		}
+		return l.getSchedules();
 	}
 	
+	/**
+	 * Return deleted librarian if successful.
+	 * @param employeeIDNum
+	 * @return
+	 */
+	@Transactional
 	public Librarian deleteLibrarian(Long employeeIDNum) {
+		if (employeeIDNum == null) {
+			throw new IllegalArgumentException("'employeeIDNum' input parameter cannot be null");
+		}
 		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		if (librarian == null) {
+			throw new IllegalArgumentException("Could not find librarian with employee id " + employeeIDNum + " in repository.");
+		}
 		librarianRepository.delete(librarian);
-		librarian = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		//??? librarian = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
 		return librarian;
 	}
 	

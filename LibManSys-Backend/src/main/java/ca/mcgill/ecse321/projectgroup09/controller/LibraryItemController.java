@@ -32,8 +32,10 @@ public class LibraryItemController {
 	@Autowired
 	private LibraryItemService libraryItemService;
 	
+	// testing only
 	@Autowired
 	private BookService bookService;
+	// testing only
 	@Autowired
 	private BookRepository bookRepo;
 	
@@ -67,9 +69,6 @@ public class LibraryItemController {
 			li = libraryItemService.getLibraryItemById(libraryItemId);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
-		}
-		if (li == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: library item with id " + libraryItemId + " does not exist.");
 		}
 		LibraryItemDto lidto = LibraryItemDto.convertToDto(li);
 		return ResponseEntity.status(HttpStatus.OK).body(lidto);
@@ -158,7 +157,8 @@ public class LibraryItemController {
 	 * @return
 	 */
 	@PostMapping(value = {BASE_URL + "/reserve", BASE_URL + "/reserve/"})
-	public ResponseEntity<?> reserveLibraryItemItem(@RequestParam("memberId") Long memberId, @RequestParam("libraryItemId") Long libraryItemId) {
+	public ResponseEntity<?> reserveLibraryItemItem(@RequestParam("memberId") Long memberId, 
+			@RequestParam("libraryItemId") Long libraryItemId) {
 		LibraryItem li = null;
 		try {
 			li = libraryItemService.reserveLibraryItem(memberId, libraryItemId);
@@ -176,7 +176,8 @@ public class LibraryItemController {
 	 * @return
 	 */
 	@PostMapping(value = {BASE_URL + "/cancel-reservation", BASE_URL + "/cancel-reservation/"})
-	public ResponseEntity<?> cancelReservation(@RequestParam("memberId") Long memberId, @RequestParam("libraryItemId") Long libraryItemId) {
+	public ResponseEntity<?> cancelReservation(@RequestParam("memberId") Long memberId, 
+			@RequestParam("libraryItemId") Long libraryItemId) {
 		LibraryItem li = null;
 		try {
 			li = libraryItemService.cancelReservation(memberId, libraryItemId);
@@ -196,7 +197,8 @@ public class LibraryItemController {
 	 */
 	@PostMapping(value = {BASE_URL + "/checkout", BASE_URL + "/checkout/"})
 	public ResponseEntity<?> checkoutLibraryItem(@RequestParam("librarianId") Long librarianId,
-			@RequestParam("memberId") Long memberId, @RequestParam("libraryItemId") Long libraryItemId) {
+			@RequestParam("memberId") Long memberId, 
+			@RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
 		try {
 			l = libraryItemService.checkoutLibraryItem(librarianId, memberId, libraryItemId);
@@ -214,7 +216,8 @@ public class LibraryItemController {
 	 * @return Updated loan object if successful, otherwise error message.
 	 */
 	@PostMapping(value = {BASE_URL + "/renew", BASE_URL + "/renew/"})
-	public ResponseEntity<?> renewLibraryItem(@RequestParam("memberId") Long memberId, @RequestParam("libraryItemId") Long libraryItemId) {
+	public ResponseEntity<?> renewLibraryItem(@RequestParam("memberId") Long memberId, 
+			@RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
 		try {
 			l = libraryItemService.renewLibraryItem(memberId, libraryItemId);
@@ -232,7 +235,8 @@ public class LibraryItemController {
 	 * @return Updated loan object if successful, otherwise error message.
 	 */
 	@PostMapping(value = {BASE_URL + "/return", BASE_URL + "/return/"})
-	public ResponseEntity<?> returnLibraryItem(@RequestParam("memberId") Long memberId, @RequestParam("libraryItemId") Long libraryItemId) {
+	public ResponseEntity<?> returnLibraryItem(@RequestParam("memberId") Long memberId,
+			@RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
 		try {
 			l = libraryItemService.returnLibraryItem(memberId, libraryItemId);

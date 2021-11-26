@@ -29,6 +29,16 @@ public class HttpUtil {
 	}
 	
 	/**
+	 * Returns a ResponseEntity object with status code 400 and body which is a
+	 * String of the form ("Error: " + {@code eMsg}).
+	 * @param errorMessage error message to display.
+	 * @return
+	 */
+	public static ResponseEntity<?> httpFailureMessage(String errorMessage) {
+		return httpFailure("Error: " + errorMessage);
+	}
+	
+	/**
 	 * This doesn't work like I thought it would...
 	 * Returns an array containing the input string as well as the input string
 	 * with an extra '/' appended. Use for controller methods to map endpoint to 
