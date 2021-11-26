@@ -127,13 +127,16 @@ public class TestPersistenceOnlineMember {
 		loan.setLateFees(10);
 		loan.setLibrarian(librarian);
 		loan.setLibraryItem(book);
-		loan.setloanID(12312L);
+		//loan.setloanID(12312L);
+		// loans id's are generated when loan object is first saved to repo, 
+		// so just get the value after saving it
 		loan.setLoanStatus(LoanStatus.Active);
 		loan.setBorrowedDate(Date.valueOf(LocalDate.of(2021, 10, 11)));
 		loan.setReturnDate(Date.valueOf(LocalDate.of(2021, 10, 11)));
 		om.setLoans(List.of(loan));
 		om.setPhoneNumber("5141234567");
 		loanRepository.save(loan);
+		Long loanId = loan.getLoanID();
 		
 		om = null; 
 		om = onlineMemberRepository.findOnlineMemberByLibCardNumber(1000101002L);
@@ -145,7 +148,7 @@ public class TestPersistenceOnlineMember {
 		librarian = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
 
 		loan = null;
-		loan = loanRepository.findLoanByLoanID(12312L);
+		loan = loanRepository.findLoanByLoanID(loanId);
 
 		assertNotNull(om);
 		assertNotNull(book); 

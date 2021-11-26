@@ -58,7 +58,11 @@ public abstract class LibraryItem {
 		this.publishedYear = aPublishedYear;
 	}
 	
-	// Constructor to inialize item with ID
+	/** 
+	 * Don't use this...
+	 * Constructor to inialize item with ID
+	 * @param aLibraryItemID
+	 */
 	public LibraryItem(Long aLibraryItemID) {
 		this.libraryItemID = aLibraryItemID;
 	}

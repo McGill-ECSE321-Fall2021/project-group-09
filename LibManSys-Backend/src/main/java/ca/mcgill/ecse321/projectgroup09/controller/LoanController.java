@@ -43,7 +43,8 @@ public class LoanController {
 			@RequestParam("loanId") Long loanId, @RequestParam("memberId") Long memberId,
 			@RequestParam("librarianId") Long librarianId, @RequestParam("libraryItemId") Long libraryItemId)  {	
 		try {
-			Loan loan = loanService.createLoan(borrowedDate, loanId, librarianId, memberId, libraryItemId);
+			//Loan loan = loanService.createLoan(borrowedDate, loanId, librarianId, memberId, libraryItemId);
+			Loan loan = null;
 			return httpSuccess(LoanDto.convertToDto(loan));
 		} catch (Exception e) {
 			return httpFailure("Error: " + e.getMessage());

@@ -70,7 +70,9 @@ public class TestPersistenceMember {
 
 		Loan loan = new Loan();
 		loan.setLateFees(lateFees);
-		loan.setloanID(loanID);
+		//loan.setloanID(loanID);
+		// loans id's are generated when loan object is first saved to repo, 
+		// so just get the value after saving it
 		loan.setBorrowedDate(borrowdDate);
 		loan.setReturnDate(returnDate);
 		loan.setLoanStatus(loanStatus);
@@ -78,6 +80,7 @@ public class TestPersistenceMember {
 		loan.setMember(member);
 
 		loanRepository.save(loan);
+		loanID = loan.getLoanID();
 
 		member = null;
 		member = memberRepository.findMemberByLibCardNumber(LibCardNumber);

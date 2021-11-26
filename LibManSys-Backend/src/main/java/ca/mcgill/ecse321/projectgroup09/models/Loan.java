@@ -7,17 +7,15 @@ import java.sql.Date;
 @Entity
 public class Loan {
 
-	
-
 	public enum LoanStatus {
 		Active, Renewed, Overdue, Closed
 	}
-
 
 	// Loan Attributes
 	private Date borrowedDate;
 	private Date returnDate;
 	private double lateFees;
+	private boolean feesPaid;
 	private LoanStatus loanStatus;
 	private Long loanID;
 
@@ -26,7 +24,21 @@ public class Loan {
 	private Member member;
 	private Librarian librarian;
 
+	public Loan() {}
 	
+	public Loan(Date aBorrowedDate, Date aReturnDate, double aLateFees,
+			boolean aFeesPaid, LoanStatus aLoanStatus,
+			LibraryItem aLibraryItem, Member aMember, Librarian aLibrarian) {
+		this.borrowedDate = aBorrowedDate;
+		this.returnDate = aReturnDate;
+		this.lateFees = aLateFees;
+		this.feesPaid = aFeesPaid;
+		this.loanStatus = aLoanStatus;
+		
+		this.libraryItem = aLibraryItem;
+		this.member = aMember;
+		this.librarian = aLibrarian;
+	}
 
 	public void setBorrowedDate(Date aBorrowedDate) {
 		this.borrowedDate = aBorrowedDate;
@@ -44,11 +56,16 @@ public class Loan {
 		this.loanStatus = aLoanStatus;
 	}
 
+	/**
+	 * @deprecated
+	 * @param aloanID
+	 */
 	public void setloanID(Long aloanID) {
 		this.loanID = aloanID; 
 	}
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getLoanID() {
 		return loanID;
 	}
@@ -99,6 +116,20 @@ public class Loan {
 
 	public void setLibrarian(Librarian aLibrarian) {
 		this.librarian = aLibrarian;
+	}
+
+	/**
+	 * @return the areFeesPaid
+	 */
+	public boolean isAreFeesPaid() {
+		return feesPaid;
+	}
+
+	/**
+	 * @param areFeesPaid the areFeesPaid to set
+	 */
+	public void setAreFeesPaid(boolean areFeesPaid) {
+		this.feesPaid = areFeesPaid;
 	}
 
 	

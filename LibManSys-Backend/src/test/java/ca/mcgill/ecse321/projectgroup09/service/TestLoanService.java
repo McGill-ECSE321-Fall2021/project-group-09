@@ -9,10 +9,6 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.lenient;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,20 +19,20 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.util.ReflectionUtils;
 
-import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
-import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.BookRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LibrarianRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
-import ca.mcgill.ecse321.projectgroup09.models.Loan;
-import ca.mcgill.ecse321.projectgroup09.models.Member;
-import ca.mcgill.ecse321.projectgroup09.models.Movie;
-import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
-import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
+import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
+import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
 import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
+import ca.mcgill.ecse321.projectgroup09.models.Loan;
+import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
+import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 /**
  * author: Rajaa
@@ -71,11 +67,12 @@ public class TestLoanService {
 	 private static final Double OVERDUEFEE = 0.20;
 
 	 private static final Long LOANID = (long) 9999999;
+	 private static final LoanStatus LOANSTATUS_ACTIVE = LoanStatus.Active;
 	 private static final Long LIBRARYITEMID = (long) 9999999;
 
 	 private static final Long MEMBERID = (long) 11111;
 	 private static final Long LIBRARIANID = (long) 22222;
-	 private static final Long LIBRARIANITEMID = (long) 333333;
+	 //private static final Long LIBRARIANITEMID = (long) 333333;
 	 private static final	LoanStatus LOANSTATUS = LoanStatus.Overdue;
 	 
 		private static final long EMPLOYEE_ID = 123456789; //librarian ID
@@ -112,7 +109,8 @@ public class TestLoanService {
 		            loan.setBorrowedDate(BORROWEDDATE);
 		            loan.setLibrarian(librarian);
 		            loan.setLibraryItem(book);
-		            loan.setloanID(LOANID);
+		            //loan.setloanID(LOANID);
+		            ReflectionTestUtils.setField(loan, "loanID", LOANID);
 		            loan.setMember(member);
 		            return loan;
 	        	}
@@ -120,44 +118,56 @@ public class TestLoanService {
 	        	}
 	        	});
 	        	
-	    	/*	lenient().when(librarianRepository.findLibrarianByEmployeeIDNum(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
-	    			if (invocation.getArgument(0).equals(EMPLOYEE_ID)) {
-	    				Librarian librarian = new Librarian(); 
-	    				librarian.setemployeeIDNum(EMPLOYEE_ID);
-	    				librarian.setFullName(LIBRARIAN_FULLNAME); 
-	    				librarian.setLibrarianEmail(LIBRARIAN_EMAIL);
-	    				librarian.setLibrarianPassword(LIBRARIAN_PASSWORD);
-	    				librarian.setLibrarianUsername(LIBRARIAN_USERNAME);
-	    				return librarian;
-	    			}
-	    			else {
-	    				return null;
-	    			}
+	    	lenient().when(librarianRepository.findLibrarianByEmployeeIDNum(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+    			if (invocation.getArgument(0).equals(EMPLOYEE_ID)) {
+    				Librarian librarian = new Librarian(); 
+    				librarian.setemployeeIDNum(EMPLOYEE_ID);
+    				librarian.setFullName(LIBRARIAN_FULLNAME); 
+    				librarian.setLibrarianEmail(LIBRARIAN_EMAIL);
+    				librarian.setLibrarianPassword(LIBRARIAN_PASSWORD);
+    				librarian.setLibrarianUsername(LIBRARIAN_USERNAME);
+    				return librarian;
+    			}
+    			else {
+    				return null;
+    			}
 
-	    		});
-	    		lenient().when(memberRepository.findMemberByLibCardNumber(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
-	    			if (invocation.getArgument(0).equals(LIB_CARD_NO)) {
-	    				Member member = new Member();
-	    				member.setLibCardNumber(LIB_CARD_NO);
-	    				member.setAddress(MEM_ADDRESS);
-	    				member.setActiveLoans(ACTIVE_LOANS);
-	    				member.setAmountOwed(AMOUNT_OWED);
-	    				member.setFullName(FULL_NAME);
-	    				member.setIsVerifiedResident(IS_VERIFIED_RESIDENT);
-	    				member.setPhoneNumber(PHONE_NO);
-	    				return member;
-	    			}
-	    			else {
-	    				return null; 
-	    			}
+    		});
+    		
+    		lenient().when(memberRepository.findMemberByLibCardNumber(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+    			if (invocation.getArgument(0).equals(LIB_CARD_NO)) {
+    				Member member = new Member();
+    				member.setLibCardNumber(LIB_CARD_NO);
+    				member.setAddress(MEM_ADDRESS);
+    				member.setActiveLoans(ACTIVE_LOANS);
+    				member.setAmountOwed(AMOUNT_OWED);
+    				member.setFullName(FULL_NAME);
+    				member.setIsVerifiedResident(IS_VERIFIED_RESIDENT);
+    				member.setPhoneNumber(PHONE_NO);
+    				return member;
+    			}
+    			else {
+    				return null; 
+    			}
 
-	    		});*/
+    		});
+    		
+    		lenient().when(libraryItemRepository.findLibraryItemByLibraryItemID(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+    			if (invocation.getArgument(0).equals(LIBRARYITEMID)) {
+    				LibraryItem li = new Book();
+    				ReflectionTestUtils.setField(li, "libraryItemID", LIBRARYITEMID);
+    				return li;
+    			}
+    			else {
+    				return null; 
+    			}
 
-		      
+    		});
 		 
 			Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
 				return invocation.getArgument(0);
 			};
+			lenient().when(loanRepository.save(any(Loan.class))).thenAnswer(returnParameterAsAnswer);
 	        lenient().when(libraryItemRepository.save(any(LibraryItem.class))).thenAnswer(returnParameterAsAnswer);
 			lenient().when(memberRepository.save(any(Member.class))).thenAnswer(returnParameterAsAnswer);
 			lenient().when(librarianRepository.save(any(Librarian.class))).thenAnswer(returnParameterAsAnswer);
@@ -170,14 +180,14 @@ public void testCreateLoan() {
 
 	try {
 	 
-		loan1 = loanService.createLoan(BORROWEDDATE, LOANID, MEMBERID, LIBRARIANID, LIBRARIANITEMID);
+		loan1 = loanService.createLoan(BORROWEDDATE, LOANSTATUS_ACTIVE, LIB_CARD_NO, EMPLOYEE_ID, LIBRARYITEMID);
 	}
 	catch (Exception e) {
 		fail(e.getMessage());
 	}
 	assertNotNull(loan1);
 	assertEquals(BORROWEDDATE, loan1.getBorrowedDate());
-	assertEquals(LOANID, loan1.getLoanID());
+	assertEquals(LIB_CARD_NO, loan1.getMember().getLibCardNumber());
 }
 
 @Test
@@ -188,7 +198,7 @@ public void testCreateLoanWithNoBorrowedDate() {
 	Date borrowedDate = null;
 	try {
 	 
-		loan1 = loanService.createLoan(borrowedDate, LOANID, MEMBERID, LIBRARIANID, LIBRARIANITEMID);
+		loan1 = loanService.createLoan(borrowedDate, LOANSTATUS_ACTIVE, LIB_CARD_NO, EMPLOYEE_ID, LIBRARYITEMID);
 	}
 	catch (Exception e) {
 		error = (e.getMessage());
@@ -205,7 +215,7 @@ public void testCreateLoanWithNoMember() {
 	Long memberId = null;
 	try {
 	 
-		loan1 = loanService.createLoan(BORROWEDDATE, LOANID, memberId, LIBRARIANID, LIBRARIANITEMID);
+		loan1 = loanService.createLoan(BORROWEDDATE, LOANSTATUS_ACTIVE, memberId, EMPLOYEE_ID, LIBRARYITEMID);
 	}
 	catch (Exception e) {
 		error = (e.getMessage());
@@ -222,7 +232,7 @@ public void testCreateLoanWithNoLibrarian() {
 	Long Librarian = null;
 	try {
 	 
-		loan1 = loanService.createLoan(BORROWEDDATE, LOANID, MEMBERID, Librarian, LIBRARIANITEMID);}
+		loan1 = loanService.createLoan(BORROWEDDATE, LOANSTATUS_ACTIVE, LIB_CARD_NO, Librarian, LIBRARYITEMID);}
 	catch (Exception e) {
 		error = (e.getMessage());
 	}
@@ -232,13 +242,13 @@ public void testCreateLoanWithNoLibrarian() {
 }
 
 @Test
-public void testCreateLoanWithNoID() {
+public void testCreateLoanWithNoStatus() {
 	String error = null;
 	Loan loan1 = null;
-	Long loanId = null;
+	LoanStatus status = null;
 	try {
 	 
-		loan1 = loanService.createLoan(BORROWEDDATE, loanId, MEMBERID, LIBRARIANID, LIBRARIANITEMID);}
+		loan1 = loanService.createLoan(BORROWEDDATE, status, LIB_CARD_NO, EMPLOYEE_ID, LIBRARYITEMID);}
 	catch (Exception e) {
 		error = (e.getMessage());
 	}
@@ -254,7 +264,7 @@ public void testCreateLoanWithNoLibraryItemID() {
 	Long libraryItemId = null;
 	try {
 	 
-		loan1 = loanService.createLoan(BORROWEDDATE, LOANID, MEMBERID, LIBRARIANID, libraryItemId);}
+		loan1 = loanService.createLoan(BORROWEDDATE, LOANSTATUS_ACTIVE, LIB_CARD_NO, EMPLOYEE_ID, libraryItemId);}
 	catch (Exception e) {
 		error = (e.getMessage());
 	}

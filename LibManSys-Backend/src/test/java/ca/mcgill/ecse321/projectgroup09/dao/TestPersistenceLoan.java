@@ -146,7 +146,9 @@ public class TestPersistenceLoan {
 		
 		Loan loan = new Loan();
 		loan.setLateFees(lateFees);
-		loan.setloanID(loanID);
+		//loan.setloanID(loanID); 
+		// loans id's are generated when loan object is first saved to repo, 
+		// so just get the value after saving it
 		loan.setBorrowedDate(borrowdDate);
 		loan.setReturnDate(returnDate);
 		loan.setLoanStatus(loanStatus);
@@ -155,6 +157,7 @@ public class TestPersistenceLoan {
 		loan.setLibraryItem(book);
 		
 		loanRepository.save(loan);
+		loanID = loan.getLoanID();
 		
 		
 		//Assertions
