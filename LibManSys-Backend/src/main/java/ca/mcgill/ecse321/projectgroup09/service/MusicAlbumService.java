@@ -6,14 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.projectgroup09.dao.BookRepository;
-import ca.mcgill.ecse321.projectgroup09.dao.MusicAlbumRepository; 
-import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
-import ca.mcgill.ecse321.projectgroup09.models.Book;
-import ca.mcgill.ecse321.projectgroup09.models.Archive;
-import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
+import ca.mcgill.ecse321.projectgroup09.dao.MusicAlbumRepository;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
-import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.models.MusicAlbum;
 
 @Service
@@ -22,11 +16,9 @@ public class MusicAlbumService {
 		@Autowired
 		private MusicAlbumRepository musicAlbumRepo;
 		
-		@Autowired
-		private MemberRepository memberRepo;
-		
 		@Transactional
-		public MusicAlbum createMusicAlbum(String title, int publishedYear, String genre, String artist, int numSongs, int albumLengthInMinutes) {
+		public MusicAlbum createMusicAlbum(String title, int publishedYear,
+				String genre, String artist, int numSongs, int albumLengthInMinutes) {
 			if (title == null || genre == null || artist==null) {
 				throw new IllegalArgumentException("Parameters to create a new music album must not be null.");
 			}
@@ -65,9 +57,9 @@ public class MusicAlbumService {
 		}
 		
 		@Transactional
-		
-		public MusicAlbum updateMusicAlbum(Long libraryItemId, String title, Integer publishedYear, Integer loanablePeriod, Double dailyOverdueFee, 
-				ItemStatus itemStatus, String genre, String artist, Integer numSongs, Integer albumLengthInMinutes) {
+		public MusicAlbum updateMusicAlbum(Long libraryItemId, String title, Integer publishedYear, 
+				Integer loanablePeriod, Double dailyOverdueFee, ItemStatus itemStatus,
+				String genre, String artist, Integer numSongs, Integer albumLengthInMinutes) {
 		
 			if (libraryItemId == null) {
 				throw new IllegalArgumentException("Library item ID not be null.");
@@ -130,19 +122,5 @@ public class MusicAlbumService {
 			MusicAlbum musicAlbum = musicAlbumRepo.findMusicAlbumBylibraryItemID(libraryItemId);
 			return deleteMusicAlbum(musicAlbum);
 		}	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 }

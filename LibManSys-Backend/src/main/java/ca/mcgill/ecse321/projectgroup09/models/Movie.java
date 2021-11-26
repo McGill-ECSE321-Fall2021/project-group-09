@@ -15,8 +15,10 @@ public class Movie extends LibraryItem{
 	  private int runtime;
 	  private String genre;
 
+	  /**
+	   * Sets daily overdue fee, item status and loanable period to default values.
+	   */
 	  public Movie() {
-			
 			this.setDailyOverdueFee(DAILYFEE);
 			this.setItemStatus(LIBRARY_ITEM_STATUS);
 			this.setLoanablePeriod(LOANABLE_PERIOD);

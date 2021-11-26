@@ -82,7 +82,7 @@ public class LibraryItemDto {
 		} else if (libraryItem instanceof MusicAlbum) {
 			lidto = (LibraryItemDto) MusicAlbumDto.convertToDto((MusicAlbum) libraryItem);
 		} else if (libraryItem instanceof Newspaper) {
-			lidto = (NewspaperDto) NewspaperDto.convertToDto((Newspaper) libraryItem);
+			lidto = (LibraryItemDto) NewspaperDto.convertToDto((Newspaper) libraryItem);
 		} else {
 			throw new IllegalStateException("invalid type of library item.");
 		}
@@ -94,7 +94,7 @@ public class LibraryItemDto {
 	 * @param libraryItems
 	 * @return
 	 */
-	public static List<LibraryItemDto> convertToDtos(List<? extends LibraryItem> libraryItems) {
+	public static List<LibraryItemDto> convertToDto(List<? extends LibraryItem> libraryItems) {
 		return libraryItems.stream().map(li -> LibraryItemDto.convertToDto(li)).collect(Collectors.toList());
 	}
 

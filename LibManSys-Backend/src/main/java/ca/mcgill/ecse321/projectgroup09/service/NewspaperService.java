@@ -10,17 +10,27 @@ import ca.mcgill.ecse321.projectgroup09.dao.*;
 import ca.mcgill.ecse321.projectgroup09.models.*;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 
+/**
+ * Newspaper service.
+ */
 @Service
 public class NewspaperService {
 	
 	@Autowired
 	private NewspaperRepository NewspaperRepo;
 	
-	@Autowired
-	private MemberRepository memberRepo;
-	
+	/**
+	 * Create new newspaper object.
+	 * @param title
+	 * @param publishedYear
+	 * @param journalName
+	 * @param edition
+	 * @param chiefEditor
+	 * @return
+	 */
 	@Transactional
-	public Newspaper createNewspaper(String title, int publishedYear, String journalName, String edition, String chiefEditor) {
+	public Newspaper createNewspaper(String title, int publishedYear, 
+			String journalName, String edition, String chiefEditor) {
 		if (title == null || journalName == null || edition==null || chiefEditor==null) {
 			throw new IllegalArgumentException("Parameters to create a new newspaper must not be null.");
 		}

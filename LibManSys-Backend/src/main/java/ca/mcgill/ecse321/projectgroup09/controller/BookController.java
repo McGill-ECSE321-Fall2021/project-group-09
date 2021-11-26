@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.projectgroup09.controller;
 
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
+
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +49,8 @@ public class BookController {
 	@GetMapping(value = {BASE_URL + "", BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/"})
 	public ResponseEntity<?> getAllBooks() {
 		// Create list of all books, converted to Dto's
-		List<LibraryItemDto> books = LibraryItemDto.convertToDtos(bookService.getAllBooks());
-		return ResponseEntity.status(HttpStatus.OK).body(books);
+		List<LibraryItemDto> books = LibraryItemDto.convertToDto(bookService.getAllBooks());
+		return httpSuccess(books);
 	}
 	
 	/**
@@ -62,36 +65,38 @@ public class BookController {
 	 * @throws IllegalArgumentException
 	 */
 	@PostMapping(value = { BASE_URL + "/create", BASE_URL + "/create/"})
-	public ResponseEntity<?> createBook(@RequestParam("title") String title, @RequestParam("publishedYear") String publishedYear, @RequestParam("author") String author,
-			@RequestParam("publisher") String publisher, @RequestParam("ISBN") String ISBN, @RequestParam("numPages") String numPages) throws IllegalArgumentException {
+	public ResponseEntity<?> createBook(@RequestParam("title") String title, 
+			@RequestParam("publishedYear") String publishedYear,
+			@RequestParam("author") String author,
+			@RequestParam("publisher") String publisher,
+			@RequestParam("ISBN") String ISBN,
+			@RequestParam("numPages") String numPages) throws IllegalArgumentException {
 		
 		int pubYear;
 		int nPages;
 		try {
 			pubYear = Integer.valueOf(publishedYear);
 		} catch(Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("publishedYear must be valid integer. Error: " + e.getMessage());
+			return httpFailureMessage("publishedYear must be valid integer. Error: " + e.getMessage());
 		}
 		try {
 			nPages = Integer.valueOf(numPages);
 		} catch (Exception e) {
-			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("numPages must be a valid integer. Error: " + e.getMessage());
+			return httpFailureMessage("numPages must be a valid integer. Error: " + e.getMessage());
 		}
 		Book book;
 		try {
 			book = bookService.createBook(title, pubYear, author, publisher, ISBN, nPages);
 		} catch(Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+			return httpFailureMessage(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(BookDto.convertToDto(book));
+		return httpSuccess(BookDto.convertToDto(book));
 	}
 	
 	/**
+	 * Test
 	 * Creates a new book. Use json input instead of PathVariable / request param
-	 * @param jsonInput
-	 * @param request
-	 * @param response
-	 * @return
+	 * @deprecated
 	 */
 	@PostMapping(value = { BASE_URL + "/createJson", BASE_URL + "/createJson/"})
 	public BookDto createBookJson(@RequestBody Map<String, Object> jsonInput,

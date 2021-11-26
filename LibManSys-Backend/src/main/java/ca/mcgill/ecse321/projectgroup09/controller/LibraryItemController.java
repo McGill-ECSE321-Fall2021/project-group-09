@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.projectgroup09.controller;
 
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +90,7 @@ public class LibraryItemController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
-		List<LibraryItemDto> lidtos = LibraryItemDto.convertToDtos(lis);
+		List<LibraryItemDto> lidtos = LibraryItemDto.convertToDto(lis);
 		return ResponseEntity.status(HttpStatus.OK).body(lidtos);
 	}
 
@@ -108,7 +111,7 @@ public class LibraryItemController {
 		List<LibraryItemDto> lidtos = null;
 		try {
 			List<LibraryItem> lis = libraryItemService.getLibraryItemsByStatus(itemStatus);
-			lidtos = LibraryItemDto.convertToDtos(lis);
+			lidtos = LibraryItemDto.convertToDto(lis);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
@@ -116,14 +119,15 @@ public class LibraryItemController {
 	}
 	
 	/**
-	 * Return list of all library items.
-	 * @return
+	 * Return list of all library items. This is the endpoint for the base url of 
+	 * library item controller, aka: www.site.com/library-item
+	 * @return list of all library items
 	 */
 	@GetMapping(value = {BASE_URL + "", BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/"})
 	public ResponseEntity<?> getAllLibraryItems() {
 		try {
 			List<LibraryItem> lis = libraryItemService.getAllLibraryItems();
-			List<LibraryItemDto> lidtos = LibraryItemDto.convertToDtos(lis);
+			List<LibraryItemDto> lidtos = LibraryItemDto.convertToDto(lis);
 			return ResponseEntity.status(HttpStatus.OK).body(lidtos);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
@@ -133,7 +137,7 @@ public class LibraryItemController {
 	/**
 	 * Delete library item from repository.
 	 * @param libraryItemId
-	 * @return
+	 * @return Message indicating if library item was successfull deleted or not.
 	 */
 	@PostMapping(value = {BASE_URL + "/delete/{id}", BASE_URL + "/delete/{id}/"})
 	public ResponseEntity<?> deleteLibraryItem(@PathVariable("id") Long libraryItemId) {
@@ -144,43 +148,46 @@ public class LibraryItemController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
 		if (deleted) {
-			return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted book " + libraryItemId + " from repository.");
+			return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted library item with ID = " + libraryItemId + " from repository.");
 		}
 		// else
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to delete library item because no library item with id " + libraryItemId + " exists.");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unable to delete library item because no library item with ID " + libraryItemId + " exists.");
 	}
 
 	/**
+	 * Reserve a library item for a member. Reserving means that no one other than the
+	 * member placing the reservation can checkout the reserved item.
+	 * Members can only have a max of 10 library items reserved at a time.
 	 * 
-	 * @param memberId
-	 * @param libraryItemId
-	 * @return
+	 * @param libCardNumber Library card number of member making reservation.
+	 * @param libraryItemId ID of library item member is attemping to reserve.
+	 * @return Library item that was reserved if successful, error message otherwise.
 	 */
 	@PostMapping(value = {BASE_URL + "/reserve", BASE_URL + "/reserve/"})
-	public ResponseEntity<?> reserveLibraryItemItem(@RequestParam("memberId") Long memberId, 
+	public ResponseEntity<?> reserveLibraryItemItem(@RequestParam("libCardNumber") Long libCardNumber, 
 			@RequestParam("libraryItemId") Long libraryItemId) {
 		LibraryItem li = null;
 		try {
-			li = libraryItemService.reserveLibraryItem(memberId, libraryItemId);
+			li = libraryItemService.reserveLibraryItem(libCardNumber, libraryItemId);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
 		LibraryItemDto lidto = LibraryItemDto.convertToDto(li);
-		return ResponseEntity.status(HttpStatus.OK).body(lidto);
+		return httpSuccess(lidto);
 	}
 	
 	/**
-	 * 
-	 * @param memberId
-	 * @param libraryItemId
+	 * Cancel reservation.
+	 * @param libCardNumber Library card number of member attemping to cancel reservation.
+	 * @param libraryItemId ID of library item for which to cancel member's reservation for.
 	 * @return
 	 */
 	@PostMapping(value = {BASE_URL + "/cancel-reservation", BASE_URL + "/cancel-reservation/"})
-	public ResponseEntity<?> cancelReservation(@RequestParam("memberId") Long memberId, 
+	public ResponseEntity<?> cancelReservation(@RequestParam("libCardNumber") Long libCardNumber, 
 			@RequestParam("libraryItemId") Long libraryItemId) {
 		LibraryItem li = null;
 		try {
-			li = libraryItemService.cancelReservation(memberId, libraryItemId);
+			li = libraryItemService.cancelReservation(libCardNumber, libraryItemId);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
@@ -190,18 +197,18 @@ public class LibraryItemController {
 
 	/**
 	 * Checkout a library item.
-	 * @param librarianId
-	 * @param memberId
+	 * @param employeeId Employee ID number of librarian authorizing checkout.
+	 * @param libCardNumber Library card number of member attempting to checkout library item.
 	 * @param libraryItemId
 	 * @return
 	 */
 	@PostMapping(value = {BASE_URL + "/checkout", BASE_URL + "/checkout/"})
-	public ResponseEntity<?> checkoutLibraryItem(@RequestParam("librarianId") Long librarianId,
-			@RequestParam("memberId") Long memberId, 
+	public ResponseEntity<?> checkoutLibraryItem(@RequestParam("employeeId") Long employeeId,
+			@RequestParam("libCardNumber") Long libCardNumber, 
 			@RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
 		try {
-			l = libraryItemService.checkoutLibraryItem(librarianId, memberId, libraryItemId);
+			l = libraryItemService.checkoutLibraryItem(employeeId, libCardNumber, libraryItemId);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
@@ -210,17 +217,17 @@ public class LibraryItemController {
 	}
 	
 	/**
-	 * Renew library item.
-	 * @param memberId
+	 * Renew library item. Doesn't require librarian approval?
+	 * @param libCardNumber Library card number of member attempting renewal.
 	 * @param libraryItemId
 	 * @return Updated loan object if successful, otherwise error message.
 	 */
 	@PostMapping(value = {BASE_URL + "/renew", BASE_URL + "/renew/"})
-	public ResponseEntity<?> renewLibraryItem(@RequestParam("memberId") Long memberId, 
+	public ResponseEntity<?> renewLibraryItem(@RequestParam("libCardNumber") Long libCardNumber, 
 			@RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
 		try {
-			l = libraryItemService.renewLibraryItem(memberId, libraryItemId);
+			l = libraryItemService.renewLibraryItem(libCardNumber, libraryItemId);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
@@ -229,21 +236,22 @@ public class LibraryItemController {
 	}
 	
 	/**
-	 * Return library item
-	 * @param memberId
+	 * Return library item. Also calculates late fees if applicable and adds any fees
+	 * accrued to the member total fees owed.
+	 * @param libCardNumber Library card number of member attempting to return library item.
 	 * @param libraryItemId
 	 * @return Updated loan object if successful, otherwise error message.
 	 */
 	@PostMapping(value = {BASE_URL + "/return", BASE_URL + "/return/"})
-	public ResponseEntity<?> returnLibraryItem(@RequestParam("memberId") Long memberId,
+	public ResponseEntity<?> returnLibraryItem(@RequestParam("libCardNumber") Long libCardNumber,
 			@RequestParam("libraryItemId") Long libraryItemId) {
 		Loan l = null;
 		try {
-			l = libraryItemService.returnLibraryItem(memberId, libraryItemId);
+			l = libraryItemService.returnLibraryItem(libCardNumber, libraryItemId);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+			return httpFailureMessage("Error: " + e.getMessage());
 		}
 		LoanDto ldto = LoanDto.convertToDto(l);
-		return ResponseEntity.status(HttpStatus.OK).body(ldto);
+		return httpSuccess(ldto);
 	}
 }

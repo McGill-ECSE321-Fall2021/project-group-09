@@ -8,12 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.projectgroup09.dto.HeadLibrarianDto;
-import ca.mcgill.ecse321.projectgroup09.dto.LibraryDto;
 import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
-import ca.mcgill.ecse321.projectgroup09.models.Library;
 import ca.mcgill.ecse321.projectgroup09.service.HeadLibrarianService;
-import ca.mcgill.ecse321.projectgroup09.service.LibrarianService;
-import ca.mcgill.ecse321.projectgroup09.service.LibraryService;
 
 @CrossOrigin(origins = "*")
 @RestController

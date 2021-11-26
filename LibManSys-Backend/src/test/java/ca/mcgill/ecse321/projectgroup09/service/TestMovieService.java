@@ -5,16 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.lenient;
-
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.Calendar;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,12 +21,10 @@ import org.springframework.test.util.ReflectionTestUtils;
 import ca.mcgill.ecse321.projectgroup09.dao.LibraryItemRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MovieRepository;
-import ca.mcgill.ecse321.projectgroup09.models.Movie;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
-import ca.mcgill.ecse321.projectgroup09.models.Loan;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
-import ca.mcgill.ecse321.projectgroup09.models.Loan.LoanStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
+import ca.mcgill.ecse321.projectgroup09.models.Movie;
 
 
 /**
@@ -107,13 +97,13 @@ public class TestMovieService {
 		//double Fees = 0.10;
 		try {
 			
-			movie1 = movieService.createMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
+			movie1 = movieService.createMovie(TITLE, PUBLISHEDYEAR, DIRECTOR, RUNTIME, GENRE);
 		}
 		catch (Exception e) {
 			error = (e.getMessage());
 		}
 		assertNotNull(movie1);
-
+		assertNull(error);
 	}
 	
 	@Test
@@ -126,7 +116,7 @@ public class TestMovieService {
 		//double Fees = 0.10;
 		try {
 			
-			movie1 = movieService.createMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, director, RUNTIME, GENRE);
+			movie1 = movieService.createMovie(TITLE, PUBLISHEDYEAR, director, RUNTIME, GENRE);
 		}
 		catch (Exception e) {
 			error = (e.getMessage());
@@ -146,7 +136,7 @@ public class TestMovieService {
 		//double Fees = 0.10;
 		try {
 			
-			movie1 = movieService.createMovie(MOVIEID, TITLE, PUBLISHEDYEAR, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, genre);
+			movie1 = movieService.createMovie(TITLE, PUBLISHEDYEAR, DIRECTOR, RUNTIME, genre);
 		}
 		catch (Exception e) {
 			error = (e.getMessage());
@@ -166,7 +156,7 @@ public class TestMovieService {
 		//double Fees = 0.10;
 		try {
 			
-			movie1 = movieService.createMovie(MOVIEID, TITLE, publishedYear, LOANABLEPERIOD, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
+			movie1 = movieService.createMovie(TITLE, publishedYear, DIRECTOR, RUNTIME, GENRE);
 		}
 		catch (Exception e) {
 			error = (e.getMessage());
@@ -174,28 +164,7 @@ public class TestMovieService {
 		assertNull(movie1);
 		assertNotNull(error);
 
-	}
-	
-	@Test
-	public void testCreateMovieNoLoanablePeriod() {
-		
-		Movie movie1 = null;
-		String error = null;
-		Integer loanablePeriod = null;
-
-		//double Fees = 0.10;
-		try {
-			
-			movie1 = movieService.createMovie(MOVIEID, TITLE, PUBLISHEDYEAR, loanablePeriod, FEES, ITEMSTATUS, DIRECTOR, RUNTIME, GENRE);
-		}
-		catch (Exception e) {
-			error = (e.getMessage());
-		}
-		assertNull(movie1);
-		assertNotNull(error);
-
-	}
-	
+	}	
 
 	@Test
 	public void testUpdateMovie() {

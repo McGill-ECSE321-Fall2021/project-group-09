@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.projectgroup09.dao.HeadLibrarianRepository;
-import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.HeadLibrarian;
 
 @Service

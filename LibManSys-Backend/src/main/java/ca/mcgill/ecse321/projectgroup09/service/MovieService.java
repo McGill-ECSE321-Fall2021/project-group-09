@@ -19,10 +19,18 @@ public class MovieService {
 	@Autowired
 	private MovieRepository  movieRepository;
 	
+	/**
+	 * 
+	 * @param title
+	 * @param publishedYear
+	 * @param director
+	 * @param runtime
+	 * @param genre
+	 * @return
+	 */
 	@Transactional
-	public Movie createMovie(Long libraryItemId, String title, Integer publishedYear,
-			Integer loanablePeriod, Double dailyOverdueFee, ItemStatus itemStatus, String director,
-			Integer runtime, String genre) {
+	public Movie createMovie(String title, Integer publishedYear,
+			String director, Integer runtime, String genre) {
 
         if (movieRepository.findMoviesByDirector(director)== null ||
         		movieRepository.findMoviesByGenre(genre)== null  ||
@@ -33,9 +41,6 @@ public class MovieService {
         if(genre == null) {
             throw new IllegalArgumentException ("Movies doe not have a grenre");
         }
-        if(loanablePeriod == null) {
-            throw new IllegalArgumentException ("Movies doe not have a loablePeriod");
-        }
         if(publishedYear == null) {
             throw new IllegalArgumentException ("Movies doe not have a publishedYear");
         }
@@ -45,12 +50,12 @@ public class MovieService {
         
         
 		Movie movie = new Movie();
-		movie.setlibraryItemID(libraryItemId); //do we set ids?
+		//movie.setlibraryItemID(libraryItemId); //do we set ids? no
 		movie.setTitle(title);
 		movie.setPublishedYear(publishedYear);
-		movie.setLoanablePeriod(loanablePeriod);
-		movie.setDailyOverdueFee(dailyOverdueFee);
-		movie.setItemStatus(itemStatus);
+		//movie.setLoanablePeriod(loanablePeriod);
+		//movie.setDailyOverdueFee(dailyOverdueFee);
+		//movie.setItemStatus(itemStatus);
 		movie.setDirector(director);
 		movie.setRuntime(runtime);
 		movie.setGenre(genre);
@@ -58,17 +63,40 @@ public class MovieService {
 		return movie;
 	}
 	
+	/**
+	 * 
+	 * @param libraryItemId
+	 * @return
+	 */
+	@Transactional
+	public Movie getMovieById(Long libraryItemId) {
+		if (libraryItemId == null) {
+			throw new IllegalArgumentException("Argument cannot be null.");
+		}
+		Movie m = movieRepository.findMovieBylibraryItemID(libraryItemId);
+		if (m == null) {
+			throw new IllegalArgumentException("Cannot find movie with id = " + libraryItemId);
+		}
+		return m;
+	}
+	
+	/**
+	 * Fields left null will not be updated.
+	 * @param libraryItemId
+	 * @param title
+	 * @param publishedYear
+	 * @param loanablePeriod
+	 * @param dailyOverdueFee
+	 * @param itemStatus
+	 * @param director
+	 * @param runtime
+	 * @param genre
+	 * @return
+	 */
 	@Transactional
 	public Movie updateMovie(Long libraryItemId, String title, Integer publishedYear,
-			Integer loanablePeriod, Double dailyOverdueFee, ItemStatus itemStatus, String director,
-			Integer runtime, String genre) {
-
-        if (movieRepository.findMoviesByDirector(director)== null ||
-        		movieRepository.findMoviesByGenre(genre)== null  ||
-        		movieRepository.findMoviesByPublishedYear(publishedYear)== null
-               ){
-            throw new IllegalArgumentException ("Movie does not exist");
-        }
+			Integer loanablePeriod, Double dailyOverdueFee, ItemStatus itemStatus, 
+			String director, Integer runtime, String genre) {
         if(genre == null) {
             throw new IllegalArgumentException ("Movies doe not have a grenre");
         }
@@ -83,6 +111,9 @@ public class MovieService {
         }
         
 		Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
+		if (movie == null) {
+			throw new IllegalArgumentException("Could not find movie with that ID.");
+		}
 		//movie.setlibraryItemID(libraryItemId); don't set id since we know it here
 		movie.setTitle(title);
 		movie.setPublishedYear(publishedYear);
@@ -95,6 +126,12 @@ public class MovieService {
 		movieRepository.save(movie);
 		return movie;
 	}
+	
+	/**
+	 * 
+	 * @param libraryItemId
+	 * @return
+	 */
 	@Transactional
 	public boolean deleteMovie(Long libraryItemId) {
 		
@@ -105,6 +142,20 @@ public class MovieService {
 	      movieRepository.delete(movie);
 	      return true;
 		}
+	
+	/**
+	 * wrapper
+	 */
+	@Transactional
+	public boolean deleteMovieById(Long libraryItemId) {
+		return deleteMovie(libraryItemId);
+	}
+	
+	/**
+	 * 
+	 * @param libraryItemId
+	 * @return
+	 */
 	@Transactional
 		public Movie readMovie(Long libraryItemId) {
 		 Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);

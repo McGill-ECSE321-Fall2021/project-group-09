@@ -6,7 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
-import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 /**
  * 
