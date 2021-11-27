@@ -33,7 +33,7 @@
             <br />
     
             <b-container fluid>
-                <h2> Checkout Library Item </h2>
+                <h2> Reserve Library Item </h2>
     <br>
                 <b-row class="my-1" color="#00000">
                     <b-col sm="2" color="#00000">
@@ -46,10 +46,10 @@
     
                 <b-row class="my-1">
                     <b-col sm="2">
-                        <label for="input-large">Return Date:</label>
+                        <label for="input-large">Borrowing Date:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-large" placeholder="Enter the Return Date"></b-form-input>
+                        <b-form-input id="input-large" placeholder="Enter the Borrowing Date"></b-form-input>
                     </b-col>
                 </b-row>
     
@@ -66,7 +66,7 @@
             </b-container>
     
          <br>
-         <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Managment</b-button>
+         <b-button v-row justify="center" v-on:click="goToSubmitPage()">Reserve Item</b-button>
 
     
         </section>

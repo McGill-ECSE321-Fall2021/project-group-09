@@ -1,15 +1,4 @@
-<!-- Only accessible by Librarians and Head Librarians
 
-Librarians: 
-- Create new Library Item 
-
-Head Librarian:
-- View all librarians (and create/fire librarians)
-- Set library schedule 
-- Set library hours 
-- Update library phone number and email address
-
--->
 <template>
   <div class="header">
 
@@ -45,8 +34,8 @@ Head Librarian:
       <br />
            <br />
 
-      <h1>  Log In </h1>
    <b-container fluid>
+      <h2>  Log In </h2>
 
 
   <b-row class="my-1" color="#00000">
@@ -54,7 +43,7 @@ Head Librarian:
       <label for="input-default" color="#00000">Email:</label>
     </b-col>
     <b-col sm="10" >
-      <b-form-input id="input-default" color="#00000"placeholder="Enter your name"></b-form-input>
+      <b-form-input id="input-default" color="#00000"placeholder="Enter your email"></b-form-input>
     </b-col>
   </b-row>
 
@@ -63,14 +52,14 @@ Head Librarian:
       <label for="input-large" >Password:</label>
     </b-col>
     <b-col sm="10">
-      <b-form-input id="input-large" size="lg" placeholder="Enter your name"></b-form-input>
+      <b-form-input id="input-large"  placeholder="Enter your password"></b-form-input>
     </b-col>
   </b-row>
   
 </b-container>
 
 <b class="nav-link" href="#" v-on:click="goToSubmitPage()"
-            >Catalogue
+            >Submit
           </b>
      
     </section>
@@ -86,11 +75,13 @@ Head Librarian:
 
 <script>
 
+import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
+import SearchLibItems from "../components/SearchLibItems";
+import Hello from "../components/Hello";
 import Register from "../components/Register";
 import Router from "../router/index";
 
 export default {
-  name: 'hello',
   data () {
    return {
         types: [
@@ -100,10 +91,22 @@ export default {
    methods: {
        goToSubmitPage: function (){
             Router.push({
+                path: "/OnlineMemberDashboard",
+                name: "OnlineMemberDashboard"
+            })
+        },
+        goToSearchPage: function (){
+            Router.push({
+                path: "/SearchLibItems",
+                name: "SearchLibItems"
+            })
+        },
+        goToRegisterPage: function (){
+            Router.push({
                 path: "/Register",
                 name: "Register"
             })
-        }
+        },
    }
 }
 </script>
@@ -115,7 +118,7 @@ export default {
 header {
   color: #42b983;
 }
-
+<!-- 
 .bg-custom-1 {
   background: linear-gradient(
     200deg,
@@ -124,7 +127,7 @@ header {
     rgba(0, 0, 0, 0)
   );
 }
-
+-->
 .bg-custom-2 {
   background: linear-gradient(
     90deg,
@@ -132,7 +135,8 @@ header {
     rgba(0, 0, 0, 0.8),
     rgba(0, 0, 0, 0)
   );
-}
+} 
+
 
 nav.navbar {
   height: 60px;
@@ -173,8 +177,10 @@ a.normal {
   font-weight: 400;
 }
 h1, h2 {
-  font-weight: normal;
+ 
   color: black;
+  font-size: 40px;
+  font-weight: normal;
 
 }
 ul {
@@ -237,6 +243,5 @@ input,
   font-family: "Lato", sans-serif;
   font-size: 18px;
   font-weight: 600;
-  color: #ffffff;
 }
 </style>

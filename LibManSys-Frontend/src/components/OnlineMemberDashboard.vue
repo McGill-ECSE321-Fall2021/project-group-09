@@ -28,7 +28,7 @@ Head Librarian:
       </ul>
       <ul class="nav-right ml-auto">
         <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
+          <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
         </li>
         <li class="nav-item">
           <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
@@ -92,7 +92,9 @@ Head Librarian:
 <script>
 
 import MemberLogin from "../components/MemberLogin";
+import SearchLibItems from "../components/SearchLibItems";
 import Router from "../router/index";
+import Register from "../components/Register";
 
 export default {
   name: 'hello',
@@ -107,6 +109,18 @@ export default {
             Router.push({
                 path: "/MemberLogin",
                 name: "MemberLogin"
+            })
+        },
+        goToRegisterPage: function (){
+            Router.push({
+                path: "/Register",
+                name: "Register"
+            })
+        },
+         goToSearchPage: function (){
+            Router.push({
+                path: "/SearchLibItems",
+                name: "SearchLibItems"
             })
         }
    }
@@ -130,14 +144,7 @@ header {
   );
 }
 
-.bg-custom-2 {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-}
+
 
 nav.navbar {
   height: 60px;

@@ -13,6 +13,10 @@ import OnlineMemberDashboard from '@/components/OnlineMemberDashboard'
 import Return from '@/components/Return'
 import Register from '@/components/Register'
 import SearchLibItems from '@/components/SearchLibItems'
+import ItemPage from '@/components/ItemPage'
+import Reserve from '@/components/Reserve'
+import CreateLibItem from '@/components/CreateLibItem'
+
 
 
 Vue.use(Router)
@@ -93,6 +97,20 @@ export default new Router({
       path: '/SearchLibItems',
       name: 'SearchLibItems',
       component: SearchLibItems
+    },{
+      path: '/ItemPage',
+      name: 'ItemPage',
+      component: ItemPage
+    }
+    ,{
+      path: '/Reserve',
+      name: 'Reserve',
+      component: Reserve
+    }
+    ,{
+      path: '/CreateLibItem',
+      name: 'CreateLibItem',
+      component: CreateLibItem
     }
   ]
 })

@@ -83,7 +83,8 @@
     </section>
   <td>   <button v-on:click="goToUserPage()">User Page</button>   </td> <!--! On user loged in = member -->
     <td>   <button v-on:click="goToLibrarianPage()">Librarian Page</button>   </td> <!--! On user loged in = librarian -->
-    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
+         <td>   <button v-on:click="goToItemPage()">Test Item Page</button>   </td> 
+<footer class="navbar navbar-dark bg-custom-1 center-collapsed">
       <b> blah blah blah some copyright bs </b>
       <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
       <!-- <ul class="nav-left mr-auto">
@@ -144,6 +145,7 @@ import MemberLogin from "../components/MemberLogin";
 import SearchLibItems from "../components/SearchLibItems";
 import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
 import LibrarianDashboard from "../components/LibrarianDashboard";
+import ItemPage from "../components/ItemPage";
 import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import Router from "../router/index";
 
@@ -195,6 +197,12 @@ export default {
             Router.push({
                 path: "/LibrarianDashboard",
                 name: "LibrarianDashboard"
+            })
+        },
+        goToItemPage: function (){
+            Router.push({
+                path: "/ItemPage",
+                name: "ItemPage"
             })
         }
         }
@@ -333,17 +341,7 @@ b-nav-item:hover {
   width: 65%;
   margin: 0 auto;
 }
-smallButton {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 16px 32px;
-  background-color: #a85f32;
-  border-radius: 10px;
-  font-size: 12px;
-  color: #000;
-  background: #a85f32;
-  border: 0;
-  font-weight: 200;
-}
+
 button {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   /* padding: 16px 32px; */
