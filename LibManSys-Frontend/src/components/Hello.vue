@@ -39,6 +39,11 @@
             >Catalogue
           </b>
         </li>
+        <li class="nav-item">
+          <b class="nav-link" href="#" v-on:click="goToContactUsPage()"
+            >Contact Us
+          </b>
+        </li>
       </ul>
       <ul class="nav-right ml-auto">
         <li class="nav-item">
@@ -48,9 +53,7 @@
           <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
             >Sign Up
           </b>
-             
         </li>
-        
       </ul>
     </nav>
 
@@ -79,12 +82,13 @@
           </findbutton>
         </searchbar>
       </searchbar>
-     
     </section>
-  <td>   <button v-on:click="goToUserPage()">User Page</button>   </td> <!--! On user loged in = member -->
-    <td>   <button v-on:click="goToLibrarianPage()">Librarian Page</button>   </td> <!--! On user loged in = librarian -->
-         <td>   <button v-on:click="goToItemPage()">Test Item Page</button>   </td> 
-<footer class="navbar navbar-dark bg-custom-1 center-collapsed">
+    <td><button v-on:click="goToUserPage()">User Page</button></td>
+    <!--! On user loged in = member -->
+    <td><button v-on:click="goToLibrarianPage()">Librarian Page</button></td>
+    <!--! On user loged in = librarian -->
+    <td><button v-on:click="goToItemPage()">Test Item Page</button></td>
+    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
       <b> blah blah blah some copyright bs </b>
       <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
       <!-- <ul class="nav-left mr-auto">
@@ -204,6 +208,12 @@ export default {
                 path: "/ItemPage",
                 name: "ItemPage"
             })
+        },
+           goToContactUsPage: function (){
+            Router.push({
+                path: "/ContactUs",
+                name: "ContactUs"
+            })
         }
         }
 }
@@ -262,7 +272,6 @@ div {
   background-size: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  
 }
 
 ::-webkit-scrollbar {

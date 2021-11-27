@@ -16,8 +16,21 @@ import SearchLibItems from '@/components/SearchLibItems'
 import ItemPage from '@/components/ItemPage'
 import Reserve from '@/components/Reserve'
 import CreateLibItem from '@/components/CreateLibItem'
+import ContactUs from '@/components/ContactUs'
+// import * as VueGoogleMaps from "vue2-google-maps" // Import package
 
+// Vue.config.productionTip = false
 
+// Vue.use(VueGoogleMaps, {
+//   load: {
+//     key: "GOOGLE MAP API KEY GOES HERE",
+//     libraries: "places"
+//   }
+// });
+
+// new Vue({
+//   render: h => h(App),
+// }).$mount('#app')
 
 Vue.use(Router)
 
@@ -111,6 +124,11 @@ export default new Router({
       path: '/CreateLibItem',
       name: 'CreateLibItem',
       component: CreateLibItem
+    }
+    ,{
+      path: '/ContactUs',
+      name: 'ContactUs',
+      component: ContactUs
     }
   ]
 })
