@@ -35,11 +35,38 @@
            <br />
 
    <b-container fluid>
-      <h2>  Registration </h2>
+      <h2>  ONLINE MEMBER REGISTRATION </h2>
+
+  <b-row class="my-1" >
+    <b-col sm="2" > 
+      <label for="name" >Full Name:</label>
+    </b-col>
+    <b-col sm="10">
+      <b-form-input id="name" placeholder="Enter your Full Name"></b-form-input>
+    </b-col>
+  </b-row> 
+
+  <b-row class="my-1" >
+    <b-col sm="2" > 
+      <label for="address" >Address:</label>
+    </b-col>
+    <b-col sm="10">
+      <b-form-input id="address" placeholder="Enter your Address"></b-form-input>
+    </b-col>
+  </b-row>
+
+  <b-row class="my-1" >
+    <b-col sm="2" > 
+      <label for="Blabla" >Phone Number:</label>
+    </b-col>
+    <b-col sm="10">
+      <b-form-input id="Blabla"  placeholder="Enter your phone number"></b-form-input>
+    </b-col>
+  </b-row>
 
   <b-row class="my-1" color="#00000">
     <b-col sm="2" color="#00000">
-      <label for="input-default" color="#00000">Email:</label>
+      <label for="input-default" color="#00000">Member Email:</label>
     </b-col>
     <b-col sm="10" >
       <b-form-input id="input-default" color="#FFFFF" placeholder="Enter your Email"></b-form-input>
@@ -57,30 +84,13 @@
 
   <b-row class="my-1" >
     <b-col sm="2" > 
-      <label for="name" >Full Name:</label>
+      <label for="name" >Username:</label>
     </b-col>
     <b-col sm="10">
-      <b-form-input id="name" placeholder="Enter your Full Name"></b-form-input>
+      <b-form-input id="name" placeholder="Enter your username"></b-form-input>
     </b-col>
   </b-row>
 
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="address" >Address:</label>
-    </b-col>
-    <b-col sm="10">
-      <b-form-input id="address" placeholder="Enter your Address"></b-form-input>
-    </b-col>
-  </b-row>
-
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="Blabla" >Blabla:</label>
-    </b-col>
-    <b-col sm="10">
-      <b-form-input id="Blabla"  placeholder="Enter your Blablabla"></b-form-input>
-    </b-col>
-  </b-row>
   
 </b-container>
 
@@ -100,14 +110,12 @@
 
 
 <script>
-
 import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import SearchLibItems from "../components/SearchLibItems";
 import Hello from "../components/Hello";
 import Register from "../components/Register";
 import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
-
 export default {
   data () {
    return {
@@ -134,7 +142,6 @@ export default {
                 name: "Register"
             })
         },
-
         goToLoginPage: function (){
             Router.push({
                 path: "/MemberLogin",
@@ -185,14 +192,14 @@ b-navbar {
 
 div {
   color: #000000;
- 
-
+  background-color: bisque;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  
+  align-items: center;
+  align-content: center;
 }
 
 ::-webkit-scrollbar {
@@ -203,6 +210,7 @@ section {
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
+  align-content: center;
 }
 
 a.normal {
@@ -210,9 +218,12 @@ a.normal {
 }
 h1, h2 {
  
-  color: black;
+  color: coral;
   font-size: 40px;
   font-weight: normal;
+  background-color: firebrick;
+  width: 100%;
+  
 
 }
 ul {
@@ -246,10 +257,11 @@ button {
   /* border-radius: 10px; */
   /* font-size: 15px; */
   color: #000;
-  /* background: a85f32; */
+  /* background: a85f32 */
   /* border: 0; */
   /* font-weight: 200; */
 }
 
 
 </style>
+
