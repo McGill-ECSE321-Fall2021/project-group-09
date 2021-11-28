@@ -350,7 +350,17 @@ b-nav-item:hover {
   width: 65%;
   margin: 0 auto;
 }
-
+smallButton {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 16px 32px;
+  background-color: #a85f32;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #000;
+  background: #a85f32;
+  border: 0;
+  font-weight: 200;
+}
 button {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   /* padding: 16px 32px; */

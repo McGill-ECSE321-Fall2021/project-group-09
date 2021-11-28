@@ -17,7 +17,7 @@
       </ul>
       <ul class="nav-right ml-auto">
         <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
+          <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
         </li>
         <li class="nav-item">
           <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
@@ -35,69 +35,34 @@
            <br />
 
    <b-container fluid>
-      <h2>  ONLINE MEMBER REGISTRATION </h2>
-
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="name" >Full Name:</label>
-    </b-col>
-    <b-col sm="10">
-      <b-form-input id="name" placeholder="Enter your Full Name"></b-form-input>
-    </b-col>
-  </b-row> 
-
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="address" >Address:</label>
-    </b-col>
-    <b-col sm="10">
-      <b-form-input id="address" placeholder="Enter your Address"></b-form-input>
-    </b-col>
-  </b-row>
-
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="Blabla" >Phone Number:</label>
-    </b-col>
-    <b-col sm="10">
-      <b-form-input id="Blabla"  placeholder="Enter your phone number"></b-form-input>
-    </b-col>
-  </b-row>
+      <myText>  Search Results </myText>
 
   <b-row class="my-1" color="#00000">
     <b-col sm="2" color="#00000">
-      <label for="input-default" color="#00000">Member Email:</label>
+      <label for="input-default" color="#00000">Name:</label>
     </b-col>
-    <b-col sm="10" >
-      <b-form-input id="input-default" color="#FFFFF" placeholder="Enter your Email"></b-form-input>
-    </b-col>
+   
   </b-row>
 
   <b-row class="my-1" >
     <b-col sm="2" > 
-      <label for="input-large" >Password:</label>
-    </b-col>
-    <b-col sm="10">
-      <b-form-input id="input-large" placeholder="Enter your Password"></b-form-input>
+      <label for="input-large" >Item Name:</label>
     </b-col>
   </b-row>
-
   <b-row class="my-1" >
     <b-col sm="2" > 
-      <label for="name" >Username:</label>
-    </b-col>
-    <b-col sm="10">
-      <b-form-input id="name" placeholder="Enter your username"></b-form-input>
+      <label for="input-large" >ISBN:</label>
     </b-col>
   </b-row>
+  <b-row class="my-1" >
+    <b-col sm="2" > 
+      <label for="input-large" >Published Year:</label>
+    </b-col>
+  </b-row>
+ <b-table dense :headers="headers" :items="myTable" item-key="name" class="elevation-1"></b-table>
 
-  
 </b-container>
 
-<b class="nav-link" href="#" v-on:click="goToSubmitPage()"
-            >Submit
-          </b>
-     
     </section>
      <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
       <b> blah blah blah some copyright bs </b>
@@ -110,30 +75,56 @@
 
 
 <script>
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-import SearchLibItems from "../components/SearchLibItems";
-import Hello from "../components/Hello";
-import Register from "../components/Register";
+
 import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
+import SearchLibItems from "../components/SearchLibItems";
+import Register from "../components/Register";
+
 export default {
+  name: 'hello',
   data () {
    return {
         types: [
-        ]
+        ],
+         headers: [{
+                    text: 'Loans',
+                    align: 'start',
+                    sortable: false,
+                    value: 'name',
+                },
+                { text: 'Item Type', value: 'itemType' },
+                { text: 'Title', value: 'title' },
+                { text: 'ISBN ', value: 'isbn' },
+                { text: 'Author', value: 'author' },
+                { text: 'Published Year ', value: 'publishedYear' },
+                { text: 'Item ID', value: 'libraryItemId' },
+
+            ],
+            myTable: [{
+                    itemType: 'Book',
+                    title: 'Test1',
+                    isbn: '2/2/2021',
+                    author: '3/2/2021',
+                    publishedYear: 2,
+                    libraryItemId: '1'
+                },
+                {
+                     itemType: 'Book',
+                    title: 'Test2',
+                    isbn: '2/3/2021',
+                    author: '3/3/2021',
+                    publishedYear: 4,
+                    libraryItemId: '2'                    
+                }
+            ]
       }
   },
    methods: {
        goToSubmitPage: function (){
             Router.push({
-                path: "/OnlineMemberDashboard",
-                name: "OnlineMemberDashboard"
-            })
-        },
-        goToSearchPage: function (){
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
+                path: "/MemberLogin",
+                name: "MemberLogin"
             })
         },
         goToRegisterPage: function (){
@@ -141,11 +132,10 @@ export default {
                 path: "/Register",
                 name: "Register"
             })
-        },
-        goToLoginPage: function (){
+        }, goToSearchPage: function (){
             Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
+                path: "/SearchLibItems",
+                name: "SearchLibItems"
             })
         }
    }
@@ -155,18 +145,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 
 header {
   color: #42b983;
 }
-myText{
-  color:#a85f32;
-  font: "Times";
-  font-size: 36px;
-  font-weight: 100;
 
-}
-/*
 .bg-custom-1 {
   background: linear-gradient(
     200deg,
@@ -175,15 +159,7 @@ myText{
     rgba(0, 0, 0, 0)
   );
 }
--->
-.bg-custom-2 {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-} */
+
 
 
 nav.navbar {
@@ -198,40 +174,36 @@ b-navbar {
 }
 
 div {
+ /*font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;*/
   color: #000000;
-   /*  background: #f0dbce;*/
+ 
 
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  align-items: center;
-  align-content: center;
+  
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
 section {
+  /*font-family: "Lato", sans-serif;*/
   height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
-  align-content: center;
 }
 
 a.normal {
   font-weight: 400;
 }
 h1, h2 {
- 
-  color: coral;
-  font-size: 40px;
-  font-weight: normal;
-  background-color: firebrick;
-  width: 100%;
-  
+    font: "Lato";
+  font-weight: 100;
+  color: black;
 
 }
 ul {
@@ -253,6 +225,23 @@ b {
   color: #ffffff;
   font-size: 18px;
 }
+b-nav-item {
+  color: #efecf2;
+  font-size: 18px;
+}
+myText{
+  color:#a85f32;
+  font: "Times";
+  font-size: 30px;
+  font-weight: 100;
+
+}
+.nav-left {
+  display: flex;
+}
+.nav-right {
+  display: flex;
+}
 
 #container{
     width: 65%;
@@ -265,11 +254,25 @@ button {
   /* border-radius: 10px; */
   /* font-size: 15px; */
   color: #000;
-  /* background: a85f32 */
+  /* background: a85f32; */
   /* border: 0; */
   /* font-weight: 200; */
 }
 
 
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+  width: 40%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+input,
+::placeholder {
+  font-family: "Lato", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
 </style>
-

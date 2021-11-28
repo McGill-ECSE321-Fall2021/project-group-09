@@ -340,6 +340,7 @@ b-navbar {
 }
 
 div {
+      /*  background: #f0dbce;*/
     color: #000000;
     background-size: contain;
     background-repeat: no-repeat;

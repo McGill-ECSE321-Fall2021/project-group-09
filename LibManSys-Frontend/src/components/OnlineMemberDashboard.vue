@@ -45,22 +45,30 @@ Head Librarian:
       <br />
            <br />
 
-      <h1>  Member Profile </h1>
+     
    <b-container fluid>
+ <myText>  Member Profile </myText>
 
 
-  <b-row class="my-1" color="#00000">
-    <b-col sm="2" color="#00000">
-      <label for="input-default" color="#00000">Name:</label>
-    </b-col>
-   
-  </b-row>
 
   <b-row class="my-1" >
     <b-col sm="2" > 
       <label for="input-large" >Email:</label>
     </b-col>
   </b-row>
+    </b-row>
+    <b-row class="my-1" >
+    <b-col sm="2" > 
+      <label for="input-large" >Username:</label>
+    </b-col>
+  </b-row>
+    <b-row class="my-1" color="#00000">
+    <b-col sm="2" color="#00000">
+      <label for="input-default" color="#00000">Full Name:</label>
+    </b-col>
+     </b-row>
+
+
   <b-row class="my-1" >
     <b-col sm="2" > 
       <label for="input-large" >Address:</label>
@@ -68,15 +76,35 @@ Head Librarian:
   </b-row>
   <b-row class="my-1" >
     <b-col sm="2" > 
-      <label for="input-large" >Something else:</label>
+      <label for="input-large" >Phone Number:</label>
+    </b-col>
+  </b-row>
+   <b-row class="my-1" >
+    <b-col sm="2" > 
+      <label for="input-large" >Fees: </label>
+    </b-col>
+      <b-col sm="2" > 
+      <label for="input-large" >$ </label>
+    </b-col>
+  </b-row>
+   </b-row>
+   <b-row class="my-1" >
+    <b-col sm="2" > 
+      <label for="input-large" >Verification Status: </label>
+    </b-col>
+    <b-col sm="2" > 
+      <label for="input-large" >Verified or Not </label>
     </b-col>
   </b-row>
   
 </b-container>
-
-<b class="nav-link" href="#" v-on:click="goToSubmitPage()"
-            >Submit and log in
-          </b>
+      <b-col class="myColumn">
+    
+                <td>
+                    <b-button v-row justify="center" v-on:click="goToLoansPage()">Loans</b-button>
+                </td>
+    
+            </b-col>
      
     </section>
      <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
@@ -93,6 +121,8 @@ Head Librarian:
 
 import MemberLogin from "../components/MemberLogin";
 import SearchLibItems from "../components/SearchLibItems";
+import MemberLoans from "../components/MemberLoans";
+
 import Router from "../router/index";
 import Register from "../components/Register";
 
@@ -121,6 +151,12 @@ export default {
             Router.push({
                 path: "/SearchLibItems",
                 name: "SearchLibItems"
+            })
+        },
+        goToLoansPage: function (){
+            Router.push({
+                path: "/MemberLoans",
+                name: "MemberLoans"
             })
         }
    }
@@ -156,8 +192,15 @@ b.nav-link {
 b-navbar {
   background-color: #4e1d04;
 }
+.myColumn {
+    display: flex;
+    flex-direction: column;
+    height: calc(10%);
+    justify-content: space-around;
+}
 
 div {
+    /*  background: #f0dbce;*/
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #000000;
  
@@ -202,6 +245,13 @@ li {
 a {
   color: #42b983;
 }
+myText{
+  color:#a85f32;
+  font: "Times";
+  font-size: 30px;
+  font-weight: 100;
+
+}
 b {
   font: "Lato", sans-serif;
   font-weight: 100;
@@ -224,15 +274,10 @@ b-nav-item {
     margin: 0 auto;
 }
 button {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* padding: 16px 32px; */
-  /* background-color: a85f32; */
-  /* border-radius: 10px; */
-  /* font-size: 15px; */
-  color: #000;
-  /* background: a85f32; */
-  /* border: 0; */
-  /* font-weight: 200; */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 16px 32px;
+    background-color: #0000;
+    color: #a85f32;
 }
 
 

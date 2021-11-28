@@ -45,7 +45,7 @@ Head Librarian:
     
        
             <b-container fluid>
-         <h1> Librarian Profile </h1>
+         <myText> Librarian Profile </myText>
     
                 <b-row class="my-1" color="#00000">
                     <b-col sm="2" color="#00000">
@@ -156,6 +156,7 @@ b-navbar {
 }
 
 div {
+     /* background: #f0dbce;*/
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #000000;
     background-size: contain;
@@ -242,6 +243,14 @@ button {
     height: calc(59%);
     padding-top: 10;
     padding-bottom: 10;
+}
+
+myText{
+  color:#a85f32;
+  font: "Times";
+  font-size: 30px;
+  font-weight: 100;
+
 }
 
 .myColumn {
