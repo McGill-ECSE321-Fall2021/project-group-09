@@ -42,7 +42,7 @@
       <label for="input-default" color="#00000">Email:</label>
     </b-col>
     <b-col sm="10" >
-      <b-form-input id="input-default" color="#FFFFF"placeholder="Enter your Email"></b-form-input>
+      <b-form-input id="input-default" color="#FFFFF" placeholder="Enter your Email"></b-form-input>
     </b-col>
   </b-row>
 
