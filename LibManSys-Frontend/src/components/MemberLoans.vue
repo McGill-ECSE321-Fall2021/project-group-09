@@ -59,12 +59,12 @@ Head Librarian:
       </tr>
       <tr v-for="loan in loans">
           <td >  
-          <myText2> {{loan.name}}</myText2></td> </b-row>
+          <myText2> {{loan.loanId}}</myText2></td> </b-row>
 
                      <td> <myText2> {{loan.borrowedDate}}</myText2></td> 
               
                 <td>
-            <myText2>  {{loan.libraryItem}}</myText2> </td> 
+            <myText2>  {{loan.libraryItem.libraryItemID}}</myText2> </td> 
               <td>
              <myText2> {{loan.loanStatus}}</myText2> </td> 
               <td>

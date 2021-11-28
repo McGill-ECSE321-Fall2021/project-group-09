@@ -8,8 +8,8 @@ var AXIOS = axios.create({
   baseURL: backendUrl,
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
-function LoanDto(name,borrowedDate,returnedDate,lateFees, loanStatus,libraryItem, member, librarian) {
-	this.name = name;
+function LoanDto(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian) {
+	this.name = loanId;
 	this.borrowedDate = borrowedDate;
 	this.returnedDate = returnedDate;
 	this.lateFees = lateFees;
@@ -36,7 +36,7 @@ export default {
 	},
 	created: function () {
     // Initializing persons from backend
-    AXIOS.get('/loans/get-all')
+    AXIOS.get('/loan/get-all')
     .then(response => {
       // JSON responses are automatically parsed.
       this.loans = response.data;
@@ -49,8 +49,8 @@ export default {
   }
 ,
 	methods: {
-	createLoan: function(name,borrowedDate,returnedDate,lateFees, loanStatus,libraryItem, member, librarian){
-		var p = new LoanDto(name,borrowedDate,returnedDate,lateFees, loanStatus,libraryItem, member, librarian);
+	createLoan: function(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian){
+		var p = new LoanDto(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian);
 		this.loans.push(p);
 		this.newLoan = '';
 	},
