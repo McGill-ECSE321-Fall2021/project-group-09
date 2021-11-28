@@ -60,12 +60,13 @@ export default {
             // reset the name field for new loans
             this.newLoan = ''
         },
-        checkoutItem: function (employeeId1, libCardNumber1, libraryItemId1) {
+        checkoutItem: function (employeeId, libCardNumber, libraryItemId) {
+            //console.log("eid: " + employeeId)
             AXIOS.post('/library-item/checkout', {}, { 
                  params: {
-                     employeeId: '123',
-                     libCardNumber: '456',
-                     libraryItemId: '3'
+                     employeeId: employeeId,
+                     libCardNumber: libCardNumber,
+                     libraryItemId: libraryItemId
                  }
             })
             .then(response => {
