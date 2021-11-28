@@ -37,28 +37,28 @@
     <br>
                 <b-row class="my-1" color="#00000">
                     <b-col sm="2" color="#00000">
-                        <label for="input-default" color="#00000">Library Item ID:</label>
+                        <label for="input-default" color="#00000">Librarian ID:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-default" color="#FFFFF" placeholder="Enter the Library Item ID"></b-form-input>
+                        <b-form-input id="input-default" color="#FFFFF" type="text" v-model="employeeId" placeholder="Enter Librarian ID"></b-form-input>
                     </b-col>
                 </b-row>
     
                 <b-row class="my-1">
                     <b-col sm="2">
-                        <label for="input-large">Return Date:</label>
+                        <label for="input-large">Member Id:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-large" placeholder="Enter the Return Date"></b-form-input>
+                        <b-form-input id="input-large" type="text" v-model="libCardNumber" placeholder="Enter Member Id"></b-form-input>
                     </b-col>
                 </b-row>
     
                 <b-row class="my-1">
                     <b-col sm="2">
-                        <label for="name">Library Card ID:</label>
+                        <label for="name">Library Item ID:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="name" placeholder="Enter the Library Card ID"></b-form-input>
+                        <b-form-input id="name" type="text" v-model="libraryItemId" placeholder="Enter Library Item ID"></b-form-input>
                     </b-col>
                 </b-row>
     
@@ -66,7 +66,14 @@
             </b-container>
     
          <br>
-         <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Managment</b-button>
+         
+         <span v-if="errorCheckout" style="color:red">{{errorCheckout}} </span>
+         
+         <br>
+         <br>
+         
+         <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="checkoutItem()">Checkout Item</b-button>
+         <b-button b-row justify="center" v-on:click="goToSubmitPage()">Library Managment</b-button>
 
     
         </section>
@@ -79,52 +86,7 @@
     </div>
 </template>
 
-
-<script>
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-import SearchLibItems from "../components/SearchLibItems";
-import Hello from "../components/Hello";
-import Register from "../components/Register";
-import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-import MemberLogin from "../components/MemberLogin";
-import Router from "../router/index";
-
-export default {
-    data() {
-        return {
-            types: []
-        }
-    },
-    methods: {
-        goToSubmitPage: function() {
-            Router.push({
-                path: "/LibraryManagementDashboard",
-                name: "LibraryManagementDashboard"
-            })
-        },
-        goToSearchPage: function() {
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        },
-        goToRegisterPage: function() {
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-
-        goToLoginPage: function() {
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        }
-    }
-}
-</script>
-
+<script src="./Checkout.js"></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
