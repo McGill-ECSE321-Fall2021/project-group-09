@@ -3,7 +3,7 @@
   <div class="header">
 
 
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
+    <nav class="navbar navbar-dark bg-custom-2 center-collapsed color : ##d9b086">
       <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
       <ul class="nav-left mr-auto">
         <li class="nav-item">
@@ -35,7 +35,7 @@
            <br />
 
    <b-container fluid>
-      <h2>  Log In </h2>
+      <myText>  Log In </myText>
 
 
   <b-row class="my-1" color="#00000">
@@ -118,24 +118,12 @@ export default {
 header {
   color: #42b983;
 }
-<!-- 
+
 .bg-custom-1 {
-  background: linear-gradient(
-    200deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
+background : ##d9b086;
+
 }
--->
-.bg-custom-2 {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-} 
+
 
 
 nav.navbar {
@@ -151,9 +139,7 @@ b-navbar {
 
 div {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #000000;
- 
-
+ /*   background: #f0dbce;*/
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -166,6 +152,7 @@ div {
   display: none;
 }
 section {
+  color : ##d9b086;
   font-family: "Lato", sans-serif;
   height: 100vh;
   background-size: contain;
@@ -228,7 +215,13 @@ button {
   /* border: 0; */
   /* font-weight: 200; */
 }
+myText{
+  color:#a85f32;
+  font: "Times";
+  font-size: 30px;
+  font-weight: 100;
 
+}
 
 /*Resize the wrap to see the search bar change!*/
 .wrap {

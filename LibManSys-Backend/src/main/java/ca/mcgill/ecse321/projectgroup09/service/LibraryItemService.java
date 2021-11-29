@@ -305,7 +305,8 @@ public class LibraryItemService {
 		loan.setLibrarian(l);
 		loan.setMember(m);
 		loan.setLibraryItem(li);
-		
+		loanRepo.save(loan);
+
 		// update loan associations
 		l.getLoans().add(loan);
 		m.getLoans().add(loan);
@@ -321,7 +322,6 @@ public class LibraryItemService {
 		librarianRepo.save(l);
 		memberRepo.save(m);
 		libraryItemRepo.save(li);
-		loanRepo.save(loan);
 		
 		return loan;
 	}

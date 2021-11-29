@@ -57,7 +57,11 @@ public class Librarian extends Account {
 	public Librarian(String aFullName, String aLibrarianEmail, String aLibrarianPassword,
 			String aLibrarianUsername, List<Schedule> aSchedules, List<Loan> aLoans, List<Booking> aBookings) {
 		// generate employee id number
-		final Long employeeIdNumber = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+		  int max = 999999;
+	        int min = 1;
+	        int range = max - min + 1;
+	        final Long employeeIdNumber = (long) ((Math.random() * range) + min);
+	//	final Long employeeIdNumber = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 		// set fields
 		this.setFullName(aFullName);
 		this.setLibrarianEmail(aLibrarianEmail);

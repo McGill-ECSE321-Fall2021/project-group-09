@@ -41,11 +41,15 @@ public class LoanDto {
 			
 			// safe to assume Loan must always have valid LibraryItem, Member and Librarian
 			LibraryItemDto lidto = LibraryItemDto.convertToDto(libraryItem);
+			
 			this.libraryItem = lidto;
 			MemberDto mdto = MemberDto.convertToDto(member);
 			this.member = mdto;
 			LibrarianDto ldto = LibrarianDto.convertToDto(librarian);
 			this.librarian = ldto;
+			if (lidto == null) {
+	throw new IllegalStateException("invalid type of library item in LOANDTO");
+			}
 		}
 	
 	/**

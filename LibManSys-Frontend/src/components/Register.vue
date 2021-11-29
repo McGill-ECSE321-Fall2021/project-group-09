@@ -201,6 +201,13 @@ export default {
 Register {
   color: #42b983;
 }
+myText{
+  color:#a85f32;
+  font: "Times";
+  font-size: 36px;
+  font-weight: 100;
+
+}
 /*
 .bg-custom-1 {
   background: linear-gradient(
