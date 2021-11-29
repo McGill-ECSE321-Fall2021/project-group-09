@@ -15,7 +15,7 @@ public class Librarian extends Account {
 	private String librarianEmail;
 	private String librarianPassword;
 	private String librarianUsername;
-	private Long employeeIDNum;
+	private Long employeeIDNumber;
 
 	// Librarian Associations
 	@ElementCollection
@@ -62,7 +62,7 @@ public class Librarian extends Account {
 		this.setLibrarianEmail(aLibrarianEmail);
 		this.setLibrarianPassword(aLibrarianPassword);
 		this.setLibrarianUsername(aLibrarianUsername);
-		this.setemployeeIDNum(employeeIdNumber);
+		this.setemployeeIDNumber(employeeIdNumber);
 		this.setSchedules(aSchedules == null ? new ArrayList<Schedule>() : aSchedules);
 		this.setLoans(aLoans == null ? new ArrayList<Loan>() : aLoans);
 		this.setBookings(aBookings == null ? new ArrayList<Booking>() : aBookings);
@@ -90,8 +90,8 @@ public class Librarian extends Account {
 		this.librarianUsername = aLibrarianUsername;
 	}
 
-	public void setemployeeIDNum(Long anEmployeeIDNum) {
-		this.employeeIDNum = anEmployeeIDNum;
+	public void setemployeeIDNumber(Long anEmployeeIDNum) {
+		this.employeeIDNumber = anEmployeeIDNum;
 	}
 
 	public String getLibrarianEmail() {
@@ -108,8 +108,8 @@ public class Librarian extends Account {
 	
 	// See accountId
 	//@Id
-	public Long getemployeeIDNum() {
-		return this.employeeIDNum;
+	public Long getemployeeIDNumber() {
+		return this.employeeIDNumber;
 	}
 
 //	@OneToMany
