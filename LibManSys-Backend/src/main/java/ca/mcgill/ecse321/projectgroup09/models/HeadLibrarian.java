@@ -29,8 +29,8 @@ public class HeadLibrarian extends Librarian {
 	}
 
 	@Override
-	public void setemployeeIDNum(Long anEmployeeIDNum) {
-		super.setemployeeIDNum(anEmployeeIDNum);
+	public void setemployeeIDNumber(Long anEmployeeIDNum) {
+		super.setemployeeIDNumber(anEmployeeIDNum);
 	}
 
 	@Override
@@ -49,8 +49,8 @@ public class HeadLibrarian extends Librarian {
 	}
 	
 	@Override
-	public Long getemployeeIDNum() {
-		return super.getemployeeIDNum();
+	public Long getemployeeIDNumber() {
+		return super.getemployeeIDNumber();
 	}
 	
 	public void setmanagerIDNum(Long aManagerIDNum) {
