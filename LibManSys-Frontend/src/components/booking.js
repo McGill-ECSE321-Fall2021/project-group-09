@@ -9,6 +9,19 @@ import ItemPage from "../components/ItemPage";
 import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import Router from "../router/index";
 
+import Router from "../router/index"
+
+import axios from 'axios'
+var config = require('../../config')
+
+var frontendUrl =   'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
+
 function BookingDto(bookingStartTime, bookingEndTime, bookingID, bookingDate, member, librarian) {
     this.bookingStartTime = bookingStartTime
     this.bookingEndTime = bookingEndTime

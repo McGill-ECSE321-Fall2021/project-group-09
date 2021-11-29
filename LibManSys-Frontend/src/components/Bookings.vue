@@ -42,88 +42,88 @@
   </div>
 </template>
 
-<script >
-import Register from "../components/Register";
-import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
-import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-import LibrarianDashboard from "../components/LibrarianDashboard";
-import SearchResults from "../components/SearchResults";
+<script src="./booking.js">
+// import Register from "../components/Register";
+// import MemberLogin from "../components/MemberLogin";
+// import SearchLibItems from "../components/SearchLibItems";
+// import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
+// import LibrarianDashboard from "../components/LibrarianDashboard";
+// import SearchResults from "../components/SearchResults";
 
-import ItemPage from "../components/ItemPage";
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-import Router from "../router/index";
+// import ItemPage from "../components/ItemPage";
+// import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
+// import Router from "../router/index";
 
-export default {
-  name: "hello",
-  data() {
-    return {
-      hover: false,
-      msg: "Welcome to the Library",
-    };
-  },
+// export default {
+//   name: "hello",
+//   data() {
+//     return {
+//       hover: false,
+//       msg: "Welcome to the Library",
+//     };
+//   },
 
-  components: {
-    Register,
-  },
+//   components: {
+//     Register,
+//   },
 
-  methods: {
-    goToRegisterPage: function () {
-      Router.push({
-        path: "/Register",
-        name: "Register",
-      });
-    },
-    goToLoginPage: function () {
-      Router.push({
-        path: "/MemberLogin",
-        name: "MemberLogin",
-      });
-    },
-    goToSearchPage: function () {
-      Router.push({
-        path: "/SearchResults",
-        name: "SearchResults",
-      });
-    },
-    goToLibManagmentPage: function () {
-      Router.push({
-        path: "/LibraryManagementDashboard",
-        name: "LibraryManagementDashboard",
-      });
-    },
-    goToUserPage: function () {
-      Router.push({
-        path: "/OnlineMemberDashboard",
-        name: "OnlineMemberDashboard",
-      });
-    },
-    goToLibrarianPage: function () {
-      Router.push({
-        path: "/LibrarianDashboard",
-        name: "LibrarianDashboard",
-      });
-    },
-    goToItemPage: function () {
-      Router.push({
-        path: "/ItemPage",
-        name: "ItemPage",
-      });
-    },
-    goToContactUsPage: function () {
-      Router.push({
-        path: "/ContactUs",
-        name: "ContactUs",
-      });
-    },
-    goToBookingsPage: function () {
-      Router.push({
-        path: "/Bookings",
-        name: "Bookings",
-      });
-    },
-  },
-};
+//   methods: {
+//     goToRegisterPage: function () {
+//       Router.push({
+//         path: "/Register",
+//         name: "Register",
+//       });
+//     },
+//     goToLoginPage: function () {
+//       Router.push({
+//         path: "/MemberLogin",
+//         name: "MemberLogin",
+//       });
+//     },
+//     goToSearchPage: function () {
+//       Router.push({
+//         path: "/SearchResults",
+//         name: "SearchResults",
+//       });
+//     },
+//     goToLibManagmentPage: function () {
+//       Router.push({
+//         path: "/LibraryManagementDashboard",
+//         name: "LibraryManagementDashboard",
+//       });
+//     },
+//     goToUserPage: function () {
+//       Router.push({
+//         path: "/OnlineMemberDashboard",
+//         name: "OnlineMemberDashboard",
+//       });
+//     },
+//     goToLibrarianPage: function () {
+//       Router.push({
+//         path: "/LibrarianDashboard",
+//         name: "LibrarianDashboard",
+//       });
+//     },
+//     goToItemPage: function () {
+//       Router.push({
+//         path: "/ItemPage",
+//         name: "ItemPage",
+//       });
+//     },
+//     goToContactUsPage: function () {
+//       Router.push({
+//         path: "/ContactUs",
+//         name: "ContactUs",
+//       });
+//     },
+//     goToBookingsPage: function () {
+//       Router.push({
+//         path: "/Bookings",
+//         name: "Bookings",
+//       });
+//     },
+//   },
+// };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
