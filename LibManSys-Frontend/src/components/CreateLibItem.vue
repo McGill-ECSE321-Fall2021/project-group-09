@@ -174,7 +174,7 @@
                             <label for="input-large"> Published Year:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" type="text"  placeholder="Enter the Published Year"></b-form-input>
+                            <b-form-input id="input-large" type="text" v-model="publishedYear" placeholder="Enter the Published Year"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -185,7 +185,7 @@
                             <label for="input-large"> Director :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" type="text" placeholder="Enter the Director"></b-form-input>
+                            <b-form-input id="input-large" type="text" v-model="director" placeholder="Enter the Director"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -196,7 +196,7 @@
                             <label for="input-large"> Runtime :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large"type="text"  placeholder="Enter the Runtime"></b-form-input>
+                            <b-form-input id="input-large"type="text" v-model="runtime" placeholder="Enter the Runtime"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -209,7 +209,7 @@
                             <label for="input-large"> Genre :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" type="text"   placeholder="Enter the Genre"></b-form-input>
+                            <b-form-input id="input-large" type="text"  v-model="genre" placeholder="Enter the Genre"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -258,7 +258,7 @@
                 
     
             </b-container>
-                 <span v-if="errorResult" style="color:red">{{errorResult}} </span>
+             <span v-if="errorResult" style="color:red">{{errorResult}} </span>
 
             <br>
             <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="createMovie(title,publishedYear,director,runtime,genre)">Create Item</b-button>

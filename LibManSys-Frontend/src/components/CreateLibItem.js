@@ -131,31 +131,7 @@ export default {
             })
         }
 	}
-,
-	methods: {
-	createLibItems: function(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian){
-		var p = new LibItems(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian);
-		this.results.push(p);
-		this.newResult = '';
-	},
-	 goToSubmitPage: function (){
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
-        goToRegisterPage: function (){
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        }, goToSearchPage: function (){
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        }
-	}
+
 	
 	
 }
