@@ -39,8 +39,6 @@ public class BookingController {
 		return bookingService.getAllBookings().stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	}
 	
-	
-	
 
 	@PutMapping(value = {"/bookings/update", "bookings/update/"})
 	public BookingDto updateBooking (@RequestParam("id") Long id, @RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime,
@@ -49,7 +47,7 @@ public class BookingController {
 		return BookingDto.convertToDto(booking);
 	}
 
-	@GetMapping(value = {"/bookings/{bookingID}", "/bookings/{bookingID}/"})
+	@GetMapping(value = {"/bookings/getID/{bookingID}", "/bookings/getID/{bookingID}/"})
 	public BookingDto getBookingById(@PathVariable("Id") Long Id) {
 		return BookingDto.convertToDto(bookingService.getBookingById(Id));
 	}
@@ -64,12 +62,12 @@ public class BookingController {
 		return bookingService.getBookingsByLibrarian(employeeID).stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	}
 
-	@GetMapping(value = {"/bookings/{date]", "/bookings/{date}/"})
+	@GetMapping(value = {"/bookings/get/{date]", "/bookings/get/{date}/"})
 	public List<BookingDto> getBookingsByDate(@PathVariable("date") Date date) {
 		return bookingService.getBookingsByDate(date).stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	}
 	
-	@DeleteMapping(value = {"/bookings/{bookingID}", "/bookings/{bookingID}/"})
+	@DeleteMapping(value = {"/bookings/delete/{bookingID}/", "/bookings/delete/{bookingID}/"})
 	public BookingDto deleteBooking(@PathVariable("Id") long Id) {
 		Booking booking = bookingService.deleteBooking(Id);
 		return BookingDto.convertToDto(booking);
