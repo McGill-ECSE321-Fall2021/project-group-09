@@ -44,6 +44,11 @@
             >Contact Us
           </b>
         </li>
+        <li class="nav-item">
+          <b class="nav-link" href="#" v-on:click="goToBookingsPage()"
+            >Bookings
+          </b>
+        </li>
       </ul>
       <ul class="nav-right ml-auto">
         <li class="nav-item">
@@ -84,10 +89,12 @@
       </searchbar>
     </section>
     <td><button v-on:click="goToUserPage()">User Page</button></td>
+
     <!--! On user loged in = member -->
     <td><button v-on:click="goToLibrarianPage()">Librarian Page</button></td>
     <!--! On user loged in = librarian -->
     <td><button v-on:click="goToItemPage()">Test Item Page</button></td>
+    <td><button v-on:click="goToBookingsPage()">Bookings</button></td>
     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
       <b> blah blah blah some copyright bs </b>
       <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
@@ -168,57 +175,63 @@ export default {
     Register,
   },
 
-   methods: {
-        goToRegisterPage: function (){
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-        goToLoginPage: function (){
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
-        goToSearchPage: function (){
-            Router.push({
-                path: "/SearchResults",
-                name: "SearchResults"
-            })
-        },
-        goToLibManagmentPage: function (){
-            Router.push({
-                path: "/LibraryManagementDashboard",
-                name: "LibraryManagementDashboard"
-            })
-        },
-        goToUserPage: function (){
-            Router.push({
-                path: "/OnlineMemberDashboard",
-                name: "OnlineMemberDashboard"
-            })
-        },
-        goToLibrarianPage: function (){
-            Router.push({
-                path: "/LibrarianDashboard",
-                name: "LibrarianDashboard"
-            })
-        },
-        goToItemPage: function (){
-            Router.push({
-                path: "/ItemPage",
-                name: "ItemPage"
-            })
-        },
-           goToContactUsPage: function (){
-            Router.push({
-                path: "/ContactUs",
-                name: "ContactUs"
-            })
-        }
-        }
-}
+  methods: {
+    goToRegisterPage: function () {
+      Router.push({
+        path: "/Register",
+        name: "Register",
+      });
+    },
+    goToLoginPage: function () {
+      Router.push({
+        path: "/MemberLogin",
+        name: "MemberLogin",
+      });
+    },
+    goToSearchPage: function () {
+      Router.push({
+        path: "/SearchResults",
+        name: "SearchResults",
+      });
+    },
+    goToLibManagmentPage: function () {
+      Router.push({
+        path: "/LibraryManagementDashboard",
+        name: "LibraryManagementDashboard",
+      });
+    },
+    goToUserPage: function () {
+      Router.push({
+        path: "/OnlineMemberDashboard",
+        name: "OnlineMemberDashboard",
+      });
+    },
+    goToLibrarianPage: function () {
+      Router.push({
+        path: "/LibrarianDashboard",
+        name: "LibrarianDashboard",
+      });
+    },
+    goToItemPage: function () {
+      Router.push({
+        path: "/ItemPage",
+        name: "ItemPage",
+      });
+    },
+    goToContactUsPage: function () {
+      Router.push({
+        path: "/ContactUs",
+        name: "ContactUs",
+      });
+    },
+    goToBookingsPage: function () {
+      Router.push({
+        path: "/Bookings",
+        name: "Bookings",
+      });
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
