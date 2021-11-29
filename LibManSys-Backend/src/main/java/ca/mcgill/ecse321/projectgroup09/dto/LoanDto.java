@@ -17,12 +17,13 @@ public class LoanDto {
 	private double lateFees;
 	private LoanStatus loanStatus;
 	private Long loanId;
-	//private Long librarianId; already stored as part of librarianDto
-	//private Long memberId; already stored as part of MemberDto
+
 	// Loan Associations
-	private LibraryItemDto libraryItem;
-	private MemberDto member;
-	private LibrarianDto librarian;
+	private Long libraryItem;
+	/** Lib card number of associated member. */
+	private Long member;
+	/** Employee Id number of associated librarian */
+	private Long librarian;
 	
 	/**
 	 * Default No-Arg Constructor
@@ -39,21 +40,21 @@ public class LoanDto {
 			this.loanStatus = loanStatus;
 			this.loanId = loanId;
 			// Check if associations present before converting
-			LibraryItemDto lidto = null;
+			Long lidto = null;
 			if (libraryItem != null) {
-				lidto = LibraryItemDto.convertToDto(libraryItem);
+				lidto = libraryItem.getlibraryItemID();
 			}
 			this.libraryItem = lidto;
 			// member
-			MemberDto mdto = null;
+			Long mdto = null;
 			if (member!= null) {
-				mdto = MemberDto.convertToDto(member);
+				mdto = member.getLibCardNumber();
 			}
 			this.member = mdto;
 			// librarian
-			LibrarianDto ldto = null;
+			Long ldto = null;
 			if (librarian != null) {
-				ldto = LibrarianDto.convertToDto(librarian);
+				ldto = librarian.getemployeeIDNumber();
 			}
 			this.librarian = ldto;
 			
@@ -157,37 +158,53 @@ public class LoanDto {
 		this.loanStatus = loanStatus;
 	}
 
-
-
-	public LibraryItemDto getLibraryItem() {
-		return libraryItem;
-	}
-
-	public void setLibraryItem(LibraryItemDto libraryItem) {
-		this.libraryItem = libraryItem;
-	}
-
-	public MemberDto getMember() {
-		return member;
-	}
-
-	public void setMember(MemberDto member) {
-		this.member = member;
-	}
-
-	public LibrarianDto getLibrarian() {
-		return librarian;
-	}
-
-	public void setLibrarian(LibrarianDto librarian) {
-		this.librarian = librarian;
-	}
-
 	public Long getLoanId() {
 		return loanId;
 	}
 
 	public void setLoanId(Long loanId) {
 		this.loanId = loanId;
+	}
+
+	/**
+	 * @return the libraryItem
+	 */
+	public Long getLibraryItem() {
+		return libraryItem;
+	}
+
+	/**
+	 * @param libraryItem the libraryItem to set
+	 */
+	public void setLibraryItem(Long libraryItem) {
+		this.libraryItem = libraryItem;
+	}
+
+	/**
+	 * @return the member
+	 */
+	public Long getMember() {
+		return member;
+	}
+
+	/**
+	 * @param member the member to set
+	 */
+	public void setMember(Long member) {
+		this.member = member;
+	}
+
+	/**
+	 * @return the librarian
+	 */
+	public Long getLibrarian() {
+		return librarian;
+	}
+
+	/**
+	 * @param librarian the librarian to set
+	 */
+	public void setLibrarian(Long librarian) {
+		this.librarian = librarian;
 	}
 }
