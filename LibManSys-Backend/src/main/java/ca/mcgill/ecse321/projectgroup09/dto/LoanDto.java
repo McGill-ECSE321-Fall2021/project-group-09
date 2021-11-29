@@ -56,6 +56,11 @@ public class LoanDto {
 				ldto = LibrarianDto.convertToDto(librarian);
 			}
 			this.librarian = ldto;
+			
+			// if lidto is null, just means loan has no library item associated with 
+			//if (lidto == null) {
+			//	throw new IllegalStateException("invalid type of library item in LOANDTO");
+			//}
 		}
 	
 	/**

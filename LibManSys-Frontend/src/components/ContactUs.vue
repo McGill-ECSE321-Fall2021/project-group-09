@@ -63,11 +63,7 @@
         <h2> Closed </h2>
       </overlayH>
     </section>
-    <td><button v-on:click="goToUserPage()">User Page</button></td>
-    <!--! On user loged in = member -->
-    <td><button v-on:click="goToLibrarianPage()">Librarian Page</button></td>
-    <!--! On user loged in = librarian -->
-    <td><button v-on:click="goToItemPage()">Test Item Page</button></td>
+   
     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
       <b> blah blah blah some copyright bs </b>
     </footer>

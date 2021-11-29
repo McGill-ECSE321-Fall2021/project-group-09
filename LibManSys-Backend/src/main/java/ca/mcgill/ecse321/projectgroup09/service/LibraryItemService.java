@@ -307,7 +307,8 @@ public class LibraryItemService {
 		loan.setLibrarian(l);
 		loan.setMember(m);
 		loan.setLibraryItem(li);
-		
+		loanRepo.save(loan);
+
 		// update loan associations
 		l.getLoans().add(loan);
 		m.getLoans().add(loan);
@@ -327,10 +328,8 @@ public class LibraryItemService {
 		m = memberRepo.save(m);
 		li = libraryItemRepo.save(li);
 		
+		// testing
 		li = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
-		
-		if (true)
-			System.out.println("asdf");
 		
 		return loan;
 	}

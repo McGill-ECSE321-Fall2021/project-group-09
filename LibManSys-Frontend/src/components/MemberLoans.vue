@@ -43,19 +43,52 @@ Head Librarian:
             <br />
             <br />
     
-    
-            <b-container fluid>
-                <myText> Member Loans </myText>
-    
-              <b-table dense :headers="headers" :items="myTable" item-key="name" class="elevation-1">
 
-              </b-table>
+            <b-container class="bv-example-row">
+                <myText> Member Loans </myText>
+              
+            
+  <div  v-if="
+          880707   == 880707  
+          "> 
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  LoanId  |</myText2> </td> </b-col>
+          <td><myText2>|  Borrowed Date |</myText2> </td>
+                    <td><myText2>|  Libcard # |</myText2> </td>
+
+                    <td><myText2>|  Library Item  |</myText2></td>
+                    <td><myText2>|  Loan Status  |</myText2></td>
+                    <td><myText2>|  Late Fees  |</myText2></td>
+      </tr>
+      <tr v-for="loan in loans">
+          <td >  
+          <myText2> {{loan.loanId}}</myText2></td> </b-row>
+                     <td> <myText2> {{loan.borrowedDate}}</myText2></td> 
+                                   <td> <myText2> {{loan.member.libCardNumber
+}}</myText2></td> 
+
+                <td>
+            <myText2>  {{loan.libraryItem.libraryItemID}}</myText2> </td> 
+              <td>
+             <myText2> {{loan.loanStatus}}</myText2> </td> 
+              <td>
+             <myText2> {{loan.lateFees}} </myText2> </td> 
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+    
+           
 
     
     
     
             </b-container>
-            <b-col class="myColumn">
+           
+            
+      <b-col class="myColumn">
     
                 <td>
                     <b-button v-row justify="center" v-on:click="goToMemberPage()">Go Back to Member Profile</b-button>
@@ -63,26 +96,6 @@ Head Librarian:
 
                 
             </b-col>
-             <b-col class="myColumn">
-    <table>
-      <tr>
-          <td>John</td>
-          <td>Event to attend</td>
-      </tr>
-      <tr v-for="loan in loans">
-          <td>  {{loan.borrowedDate}} 
-              <input type="text" placeholder="Person Name">
-          </td>
-          <td>
-               <td>
-                    <td>
-                         <td>
-              <button>Create</button>
-          </td>
-      </tr>
-      
-    </table>
-     </b-col>
         </section>
         <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
             <b> blah blah blah some copyright bs </b>
@@ -93,84 +106,8 @@ Head Librarian:
     </div>
 </template>
 
-<script src="./MemberLoans.js"></script>
+<script src="./MemberLoans.js"></script> 
 
-<script >
-import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-
-import Router from "../router/index";
-import Register from "../components/Register";
-
-export default {
-    name: 'hello',
-    data() {
-
-
-        return {
-            types: [],
-            headers: [{
-                    text: 'Loans',
-                    align: 'start',
-                    sortable: false,
-                    value: 'name',
-                },
-                { text: 'Loan ID', value: 'loanID' },
-                { text: 'Title', value: 'title' },
-                { text: 'Borrowed Date ', value: 'borrowedDate' },
-                { text: 'Due Date', value: 'dueDate' },
-                { text: 'Library Item ID', value: 'libraryItemId' },
-                { text: 'Loan Status', value: 'loanStatus' },
-
-            ],
-            myTable: [{
-                    loanID: '1',
-                    title: 'Test1',
-                    borrowedDate: '2/2/2021',
-                    dueDate: '3/2/2021',
-                    libraryItemId: 2,
-                    loanStatus: 'Active'
-                },
-                {
-                     loanID: '2',
-                    title: 'Test2',
-                    borrowedDate: '2/3/2021',
-                    dueDate: '3/3/2021',
-                    libraryItemId: 4,
-                    loanStatus: 'Late'                    
-                }
-            ]
-        }
-    },
-    methods: {
-        goToSubmitPage: function() {
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
-        goToRegisterPage: function() {
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-        goToSearchPage: function() {
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        },
-        goToMemberPage: function() {
-            Router.push({
-                path: "/OnlineMemberDashboard",
-                name: "OnlineMemberDashboard"
-            })
-        }
-    }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -258,6 +195,14 @@ myText {
     font-weight: 100;
 }
 
+
+myText2 {
+    color: #a85f32;
+    font: "Times";
+    font-size: 18px;
+    font-weight: 100;
+}
+
 b {
     font: "Lato", sans-serif;
     font-weight: 100;
@@ -298,6 +243,9 @@ button {
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.v-data-table > .v-data-table__wrapper > table {
+    border-spacing: 0 0.5rem;
 }
 
 input,

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
-import Bookings from '@/components/Bookings'
+import Bookings from '@/components/Bookings.vue'
 import Checkout from '@/components/Checkout'
 import LibrarianDashboard from '@/components/LibrarianDashboard'
 import LibrarianLogin from '@/components/LibrarianLogin'
@@ -16,6 +16,9 @@ import SearchLibItems from '@/components/SearchLibItems'
 import ItemPage from '@/components/ItemPage'
 import Reserve from '@/components/Reserve'
 import CreateLibItem from '@/components/CreateLibItem'
+import SearchResults from '@/components/SearchResults.vue'
+
+
 import ContactUs from '@/components/ContactUs'
 // import * as VueGoogleMaps from "vue2-google-maps" // Import package
 
@@ -110,6 +113,11 @@ export default new Router({
       path: '/SearchLibItems',
       name: 'SearchLibItems',
       component: SearchLibItems
+    },
+    {
+      path: '/SearchResults',
+      name: 'SearchResults',
+      component: SearchResults
     },{
       path: '/ItemPage',
       name: 'ItemPage',
