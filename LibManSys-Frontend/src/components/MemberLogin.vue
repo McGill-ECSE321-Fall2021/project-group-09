@@ -35,12 +35,13 @@
         <br />
 
         <b-container fluid>
-            <myText>  Log In </myText>
+            <myText> Member Log In </myText>
 
+            <br>
 
             <b-row class="my-1" color="#00000">
                 <b-col sm="2" color="#00000">
-                    <label for="input-default" color="#00000">Email:</label>
+                    <label for="input-default" color="#00000">Username:</label>
                 </b-col>
                 <b-col sm="10" >
                     <b-form-input id="input-default" color="#00000"placeholder="Enter your email"></b-form-input>
@@ -57,9 +58,11 @@
             </b-row>
           
         </b-container>
+        
+        <br>
 
-        <b class="nav-link" href="#" v-on:click="loginMember()">Submit</b>
-        <b class="nav-link" href="#" v-on:click="goToLibrarianLogin()">Go to Librarian Login</b>
+        <b class="button" href="#" v-on:click="loginMember()">Login</b>
+        <b class="button" href="#" v-on:click="goToLibrarianLogin()">Go to Librarian Login</b>
      
     </section>
     
@@ -88,15 +91,15 @@ background : ##d9b086;
 
 }
 
-
-
 nav.navbar {
   height: 60px;
 }
+
 b.nav-link {
   color: #000000;
   font-size: 18px;
 }
+
 b-navbar {
   background-color: #4e1d04;
 }
@@ -168,17 +171,24 @@ b-nav-item {
     width: 65%;
     margin: 0 auto;
 }
-button {
+.button {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* padding: 16px 32px; */
-  /* background-color: a85f32; */
-  /* border-radius: 10px; */
-  /* font-size: 15px; */
+  padding: 16px 32px;
+  background-color: a85f32;
+  border-radius: 10px;
+  font-size: 15px;
   color: #000;
-  /* background: a85f32; */
+  background: a85f32;
   /* border: 0; */
-  /* font-weight: 200; */
+  font-weight: 500;
 }
+
+
+.button:hover {
+    cursor: pointer;
+    background-color: #ffd24d;
+}
+
 myText{
   color:#a85f32;
   font: "Times";
