@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,33 +14,12 @@ public abstract class Account {
 	/**
 	 * Default constructor.
 	 */
-	public Account() {
-		//this.accountId = getNextAccountId();
-	}
-	
-	// Generate account id automatically
-	//private static Long nextAccountId = 1L;
-	
-	/**
-	 * Gets the next unique Id to assign to an account.
-	 * @return {@code long} a unique account ID.
-	 */
-	/*
-	 * private static Long getNextAccountId() { Long nextId = nextAccountId;
-	 * nextAccountId++; return nextId; }
-	 */
-	
-	// Already defined in Member, Librarian (both subclasses of Account)
-	//@ElementCollection
-	//private List<Booking> bookings;
+	public Account() {}
 
 	public void setFullName(String aFullName) {
 		this.fullName = aFullName; 
 	}
 	
-	
-	//@Id
-	@Column(name = "fullName", unique = false)
 	public String getFullName() {
 		return fullName;
 	}
@@ -65,20 +43,6 @@ public abstract class Account {
 	public void setAccountID(Long accountId) {
 		this.accountID = accountId;
 	}
-
-	
-	/* Already defined in Member, Librarian (both subclasses of Account)
-	
-	@OneToMany(cascade = {CascadeType.ALL})
-	public List<Booking> getBookings() {
-		return this.bookings;
-	}
-	
-	@OneToMany(cascade = {CascadeType.ALL})
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
-	}
-	*/
 
 	/**
 	 * Returns true if this Account object is equal to specified object.
