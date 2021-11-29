@@ -62,7 +62,7 @@ public class BookingController {
 		return bookingService.getBookingsByLibrarian(employeeID).stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	}
 
-	@GetMapping(value = {"/bookings/get/{date]", "/bookings/get/{date}/"})
+	@GetMapping(value = {"/bookings/get/{date}", "/bookings/get/{date}/"})
 	public List<BookingDto> getBookingsByDate(@PathVariable("date") Date date) {
 		return bookingService.getBookingsByDate(date).stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	}
