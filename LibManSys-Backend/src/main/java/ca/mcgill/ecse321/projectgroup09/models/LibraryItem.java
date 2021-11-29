@@ -93,6 +93,7 @@ public abstract class LibraryItem {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "libraryItemID", unique = true, nullable = false)
 	public Long getlibraryItemID() {
 		return this.libraryItemID;
 	}
@@ -117,7 +118,7 @@ public abstract class LibraryItem {
 		return this.itemStatus;
 	}
 
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "libraryItem")
 	public List<Loan> getLoans() {
 		return this.loans;
 	}

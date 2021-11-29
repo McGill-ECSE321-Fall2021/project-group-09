@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +41,7 @@ public abstract class Account {
 	
 	
 	//@Id
+	@Column(name = "fullName", unique = false)
 	public String getFullName() {
 		return fullName;
 	}
@@ -51,6 +53,7 @@ public abstract class Account {
 	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "accountId", unique = true, nullable = false)
 	public Long getAccountId() {
 		return accountId;
 	}

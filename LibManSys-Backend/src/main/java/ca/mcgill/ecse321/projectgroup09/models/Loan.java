@@ -87,19 +87,22 @@ public class Loan {
 	}
 
 	
-	@ManyToOne 
+	@ManyToOne(targetEntity = LibraryItem.class, fetch = FetchType.LAZY)
+	//@JoinColumn(name = "libraryItem_id", insertable=false, updatable=false)
 	public LibraryItem getLibraryItem() {
 		return libraryItem;
 	}
 
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
+	//@JoinColumn(name = "account_id", insertable=false, updatable=false)
 	public Member getMember() {
 		return member;
 	}
 
 	
-	@ManyToOne 
+	@ManyToOne(fetch = FetchType.LAZY)
+	//@JoinColumn(name = "account_id", insertable=false, updatable=false)
 	public Librarian getLibrarian() {
 		return librarian;
 	}

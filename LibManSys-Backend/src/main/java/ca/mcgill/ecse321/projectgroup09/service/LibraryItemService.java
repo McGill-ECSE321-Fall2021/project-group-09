@@ -282,6 +282,7 @@ public class LibraryItemService {
 		// set borrowed date to today
 		Date today = Date.valueOf(LocalDate.now());
 		loan.setBorrowedDate(today);
+		loan.setReturnDate(null);
 		
 		// calculate return date based on library item loanable period
 		// wait don't do this, not what return date is for...
@@ -297,6 +298,7 @@ public class LibraryItemService {
 		
 		// start with no late fees
 		loan.setLateFees(0);
+		loan.setAreFeesPaid(false);
 		
 		// set loan status to active initially
 		loan.setLoanStatus(LoanStatus.Active);
@@ -313,15 +315,22 @@ public class LibraryItemService {
 		
 		// update library item attributes
 		li.setItemStatus(ItemStatus.CheckedOut);
-		
+		 
 		// update member attributes
 		m.setActiveLoans(m.getActiveLoans() + 1);
 		
-		// save updated librarian, member, library item and loan
-		librarianRepo.save(l);
-		memberRepo.save(m);
-		libraryItemRepo.save(li);
-		loanRepo.save(loan);
+		// save loan first before updating others with the loan
+		loan = loanRepo.save(loan);
+		
+		// save updated librarian, member, library item
+		l = librarianRepo.save(l);
+		m = memberRepo.save(m);
+		li = libraryItemRepo.save(li);
+		
+		li = libraryItemRepo.findLibraryItemByLibraryItemID(libraryItemId);
+		
+		if (true)
+			System.out.println("asdf");
 		
 		return loan;
 	}

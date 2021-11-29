@@ -115,7 +115,7 @@ public class Member extends Account {
 		return this.isVerifiedResident;
 	}
 
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "member")
 	public List<Loan> getLoans() {
 		return this.loans;
 	}
