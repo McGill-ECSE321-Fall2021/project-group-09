@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 
 public class AccountDto {
 
-	private Long accountId;
+	private Long accountID;
 	private String fullName;
 	
 
 	public AccountDto(long accountID, String fullName) {
-		this.accountId = accountID; 
+		this.accountID = accountID; 
 		this.fullName = fullName;
 	}
 	
@@ -66,23 +66,23 @@ public class AccountDto {
 		return fullName;
 	}
 
-	public Long getAccountId() {
-		return accountId;
+	public Long getAccountID() {
+		return accountID;
 	}
 
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
+	public void setAccountID(Long accountId) {
+		this.accountID = accountId;
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		// if o is not an Account, return false
-		if (! (o instanceof Account)) {
+		if (! (o instanceof AccountDto)) {
 			return false;
 		}
-		Account a = (Account) o;
+		AccountDto a = (AccountDto) o;
 		// if Ids not equal, return false
-		if (!this.getAccountId().equals(a.getAccountId())) {
+		if (!this.getAccountID().equals(a.getAccountID())) {
 			return false;
 		}
 		return true;
