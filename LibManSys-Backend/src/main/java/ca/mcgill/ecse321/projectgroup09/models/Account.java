@@ -9,7 +9,7 @@ import javax.persistence.Id;
 //@MappedSuperclass
 @Entity
 public abstract class Account {
-	private Long accountId;
+	private Long accountID;
 	private String fullName;
 	
 	/**
@@ -53,17 +53,17 @@ public abstract class Account {
 	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "accountId", unique = true, nullable = false)
-	public Long getAccountId() {
-		return accountId;
+	//@Column(name = "accountID", unique = true, nullable = false)
+	public Long getAccountID() {
+		return accountID;
 	}
 
 
 	/**
 	 * @param accountId the accountId to set
 	 */
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
+	public void setAccountID(Long accountId) {
+		this.accountID = accountId;
 	}
 
 	
@@ -92,7 +92,7 @@ public abstract class Account {
 		}
 		Account a = (Account) o;
 		// if Ids not equal, return false
-		if (!this.getAccountId().equals(a.getAccountId())) {
+		if (!this.getAccountID().equals(a.getAccountID())) {
 			return false;
 		}
 		return true;

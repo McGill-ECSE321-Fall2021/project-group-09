@@ -69,7 +69,7 @@ public class TestPersistenceOnlineMember {
 		librarian.setLibrarianEmail(librarianEmail);
 		librarian.setLibrarianPassword(librarianPassword);
 		librarian.setLibrarianUsername(librarianUsername);
-		librarian.setemployeeIDNum(employeeIDNum);
+		librarian.setemployeeIDNumber(employeeIDNum);
 
 		librarianRepository.save(librarian);
 
@@ -145,7 +145,7 @@ public class TestPersistenceOnlineMember {
 		book = bookRepository.findBookByISBN(ISBN);
 
 		librarian = null; 
-		librarian = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		librarian = librarianRepository.findLibrarianByEmployeeIDNumber(employeeIDNum);
 
 		loan = null;
 		loan = loanRepository.findLoanByLoanID(loanId);

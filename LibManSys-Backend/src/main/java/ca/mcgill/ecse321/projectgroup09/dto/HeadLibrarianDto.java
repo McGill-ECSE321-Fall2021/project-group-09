@@ -30,12 +30,12 @@ public class HeadLibrarianDto extends LibrarianDto{
 	
 	public static HeadLibrarianDto convertToDto(HeadLibrarian headLibrarian) {
 		HeadLibrarianDto headLibrarianDto = new HeadLibrarianDto(
-				headLibrarian.getAccountId(),
+				headLibrarian.getAccountID(),
 				headLibrarian.getFullName(),
 				headLibrarian.getLibrarianEmail(),
 				headLibrarian.getLibrarianPassword(),
 				headLibrarian.getLibrarianUsername(), 
-				headLibrarian.getemployeeIDNum(), 
+				headLibrarian.getemployeeIDNumber(), 
 				headLibrarian.getSchedules(),
 				headLibrarian.getLoans(),
 				headLibrarian.getBookings(),

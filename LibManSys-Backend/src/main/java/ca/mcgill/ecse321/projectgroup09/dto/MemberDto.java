@@ -10,8 +10,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 
 public class MemberDto extends AccountDto {
-	// Account attributes
-	private String fullName;	
+	
 	// Member Attributes
 	private Long libCardNumber;
 	private String address;
@@ -19,10 +18,12 @@ public class MemberDto extends AccountDto {
 	private double amountOwed;
 	private int activeLoans;
 	private boolean isVerifiedResident;
+	
 	// Member Associations
-	private List<LoanDto> loans;
-	private List<BookingDto> bookings;
-	private List<LibraryItemDto> reserved;
+	private List<Long> loans;
+	private List<Long> bookings;
+	/** ID's of library items reserved by this member. */
+	private List<Long> reservedLibraryItems;
 	
 //	/**
 //	 * Default No-Arg Constructor
@@ -57,12 +58,12 @@ public class MemberDto extends AccountDto {
 		this.activeLoans = aActiveLoans;
 		this.isVerifiedResident = aIsVerifiedResident;
 		// convert collections to Dto's
-		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan, false)).collect(Collectors.toList());
+		List<Long> aLoansDto = aLoans.stream().map(loan -> loan.getLoanID()).collect(Collectors.toList());
 		this.loans = aLoansDto;
-		List<BookingDto> aBookingsDto = aBookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
+		List<Long> aBookingsDto = aBookings.stream().map(booking -> booking.getBookingID()).collect(Collectors.toList());
 		this.bookings = aBookingsDto;
-		List<LibraryItemDto> aReservedDto = aReserved.stream().map(libraryItem -> LibraryItemDto.convertToDto(libraryItem)).collect(Collectors.toList());
-		this.reserved = aReservedDto;
+		List<Long> aReservedDto = aReserved.stream().map(libraryItem -> libraryItem.getlibraryItemID()).collect(Collectors.toList());
+		this.reservedLibraryItems = aReservedDto;
 	}
 	
 	/**
@@ -72,7 +73,7 @@ public class MemberDto extends AccountDto {
 	 */
 	public static MemberDto convertToDto(Member member) {
 		MemberDto memberDto = new MemberDto(
-				member.getAccountId(),
+				member.getAccountID(),
 				member.getFullName(),
 				member.getLibCardNumber(),
 				member.getAddress(),
@@ -85,20 +86,6 @@ public class MemberDto extends AccountDto {
 				member.getReserved()
 		);
 		return memberDto;
-	}
-
-	/**
-	 * @return the fullName
-	 */
-	public String getFullName() {
-		return fullName;
-	}
-
-	/**
-	 * @param fullName the fullName to set
-	 */
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
 	}
 
 	/**
@@ -188,44 +175,44 @@ public class MemberDto extends AccountDto {
 	/**
 	 * @return the loans
 	 */
-	public List<LoanDto> getLoans() {
+	public List<Long> getLoans() {
 		return loans;
 	}
 
 	/**
 	 * @param loans the loans to set
 	 */
-	public void setLoans(List<LoanDto> loans) {
+	public void setLoans(List<Long> loans) {
 		this.loans = loans;
 	}
 
 	/**
 	 * @return the bookings
 	 */
-	public List<BookingDto> getBookings() {
+	public List<Long> getBookings() {
 		return bookings;
 	}
 
 	/**
 	 * @param bookings the bookings to set
 	 */
-	public void setBookings(List<BookingDto> bookings) {
+	public void setBookings(List<Long> bookings) {
 		this.bookings = bookings;
 	}
 
 	/**
 	 * @return the reserved
 	 */
-	public List<LibraryItemDto> getReserved() {
-		return reserved;
+	public List<Long> getReservedLibraryItems() {
+		return reservedLibraryItems;
 	}
 
 	/**
 	 * @param reserved the reserved to set
 	 */
-	public void setReserved(List<LibraryItemDto> reserved) {
-		this.reserved = reserved;
+	public void setReservedLibraryItems(List<Long> reserved) {
+		this.reservedLibraryItems = reserved;
 	}
-	
+
 	
 }

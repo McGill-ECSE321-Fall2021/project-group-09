@@ -16,9 +16,10 @@ public class LibrarianDto extends AccountDto {
 	private String librarianUsername;
 	private Long employeeIDNum;
 
-	private List<ScheduleDto> schedules;
-	private List<LoanDto> loans;
-	private List<BookingDto> bookings;
+	// associations
+	private List<Long> schedules;
+	private List<Long> loans;
+	private List<Long> bookings;
 
 
 	public LibrarianDto(long accountID, String fullName, String librarianEmail, String librarianPassword, String librarianUsername,
@@ -29,12 +30,12 @@ public class LibrarianDto extends AccountDto {
 		this.librarianUsername = librarianUsername;
 		this.employeeIDNum = employeeIDNum;
 
-		List<ScheduleDto> scheduleDto = schedules.stream().map(schedule -> ScheduleDto.convertToDto(schedule)).collect(Collectors.toList());
-		this.schedules = scheduleDto;
-		List<LoanDto> loanDto = loans.stream().map(loan -> LoanDto.convertToDto(loan, false)).collect(Collectors.toList());
-		this.loans = loanDto;
-		List <BookingDto> bookingDto = bookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
-		this.bookings = bookingDto;
+		List<Long> scheduleIds = schedules.stream().map(schedule -> schedule.getscheduleID()).collect(Collectors.toList());
+		this.schedules = scheduleIds;
+		List<Long> loanIds = loans.stream().map(loan -> loan.getLoanID()).collect(Collectors.toList());
+		this.loans = loanIds;
+		List <Long> bookingIds = bookings.stream().map(booking -> booking.getBookingID()).collect(Collectors.toList());
+		this.bookings = bookingIds;
 	}
 
 	public String getLibrarianEmail() {
@@ -61,33 +62,58 @@ public class LibrarianDto extends AccountDto {
 	public void setEmployeeIDNum(Long employeeIDNum) {
 		this.employeeIDNum = employeeIDNum;
 	}
-	public List<ScheduleDto> getSchedules() {
+
+	/**
+	 * @return the schedules
+	 */
+	public List<Long> getSchedules() {
 		return schedules;
 	}
-	public void setSchedules(List<ScheduleDto> schedules) {
+
+	/**
+	 * @param schedules the schedules to set
+	 */
+	public void setSchedules(List<Long> schedules) {
 		this.schedules = schedules;
 	}
-	public List<LoanDto> getLoans() {
+
+	/**
+	 * @return the loans
+	 */
+	public List<Long> getLoans() {
 		return loans;
 	}
-	public void setLoans(List<LoanDto> loans) {
+
+	/**
+	 * @param loans the loans to set
+	 */
+	public void setLoans(List<Long> loans) {
 		this.loans = loans;
 	}
-	public List<BookingDto> getBookings() {
+
+	/**
+	 * @return the bookings
+	 */
+	public List<Long> getBookings() {
 		return bookings;
 	}
-	public void setBookings(List<BookingDto> bookings) {
-		this.bookings = bookings;
-	}
 
+	/**
+	 * @param bookings the bookings to set
+	 */
+	public void setBookings(List<Long> bookings) {
+		this.bookings = bookings;
+	}	
+	
+	
 	public static LibrarianDto convertToDto(Librarian librarian) {
 		LibrarianDto ldto = new LibrarianDto(
-				librarian.getAccountId(),
+				librarian.getAccountID(),
 				librarian.getFullName(),
 				librarian.getLibrarianEmail(),
 				librarian.getLibrarianPassword(),
 				librarian.getLibrarianUsername(), 
-				librarian.getemployeeIDNum(), 
+				librarian.getemployeeIDNumber(), 
 				librarian.getSchedules(),
 				librarian.getLoans(),
 				librarian.getBookings()
@@ -99,9 +125,5 @@ public class LibrarianDto extends AccountDto {
 		List<LibrarianDto> librarianDtos = librarians.stream().map(l -> LibrarianDto.convertToDto(l)).collect(Collectors.toList());
 		return librarianDtos;
 	}
-
-
-
-
 
 }

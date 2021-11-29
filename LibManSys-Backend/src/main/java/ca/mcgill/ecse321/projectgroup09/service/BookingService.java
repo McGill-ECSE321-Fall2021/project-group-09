@@ -42,7 +42,7 @@ public class BookingService { // service class for booking out the library for e
 	public Booking createBooking (String startTime, String endTime, Long bookingID, String bookingDate, Long memberID, Long librarianID) throws IllegalArgumentException {
 
 		Member member = memberRepository.findMemberByLibCardNumber(memberID);
-		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianID);
+		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNumber(librarianID);
 		
 //		if (member == null) {
 //			throw new IllegalArgumentException("Error: Member is null"); 
@@ -188,7 +188,7 @@ public class BookingService { // service class for booking out the library for e
 
 	@Transactional
 	public List<Booking> getBookingsByLibrarian(long employeeID) {
-		return toList(bookingRepository.findByLibrarian(librarianRepository.findLibrarianByEmployeeIDNum(employeeID)));
+		return toList(bookingRepository.findByLibrarian(librarianRepository.findLibrarianByEmployeeIDNumber(employeeID)));
 	}
 
 	@Transactional 

@@ -14,8 +14,12 @@ public class BookingDto {
 	private Time bookingEndTime;
 	private Long bookingID;
 	private Date bookingDate;
-	private MemberDto member;
-	private LibrarianDto librarian;
+	
+	// Associations
+	/** Lib card number of associated member. */
+	private Long memberLibCardNumber;
+	/** Employee ID number of associated librarian */
+	private Long librarianEmployeeID;
 
 	public BookingDto() {}
 
@@ -24,8 +28,8 @@ public class BookingDto {
 		this.bookingEndTime = bookingEndTime; 
 		this.bookingStartTime = bookingStartTime;
 		this.bookingID = bookingID;
-		this.member = MemberDto.convertToDto(member);
-		this.librarian = LibrarianDto.convertToDto(librarian);
+		this.memberLibCardNumber = member.getLibCardNumber();
+		this.librarianEmployeeID = librarian.getemployeeIDNumber();
 		
 	}
 
@@ -61,22 +65,6 @@ public class BookingDto {
 		return bookingDate;
 	}
 
-	public void setMember(MemberDto member) {
-		this.member = member;
-	}
-
-	public MemberDto getMember() {
-		return member; 
-	}
-
-	public void setLibrarian(LibrarianDto librarian) {
-		this.librarian = librarian;
-	}
-
-	public LibrarianDto getLibrarian() {
-		return librarian;
-	}
-
 	public static BookingDto convertToDto(Booking booking) {
 		BookingDto convertToDto = new BookingDto(
 			booking.getBookingStartTime(),
@@ -88,6 +76,34 @@ public class BookingDto {
 			);
 				
 		return convertToDto;
+	}
+
+	/**
+	 * @return the librarian
+	 */
+	public Long getLibrarianEmployeeID() {
+		return librarianEmployeeID;
+	}
+
+	/**
+	 * @param librarian the librarian to set
+	 */
+	public void setLibrarianEmployeeID(Long librarian) {
+		this.librarianEmployeeID = librarian;
+	}
+
+	/**
+	 * @return the member
+	 */
+	public Long getMemberLibCardNumber() {
+		return memberLibCardNumber;
+	}
+
+	/**
+	 * @param member the member to set
+	 */
+	public void setMemberLibCardNumber(Long member) {
+		this.memberLibCardNumber = member;
 	} 
 	
 

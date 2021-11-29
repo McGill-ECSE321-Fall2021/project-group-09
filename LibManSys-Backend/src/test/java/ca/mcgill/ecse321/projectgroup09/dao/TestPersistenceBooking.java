@@ -50,7 +50,7 @@ public class TestPersistenceBooking {
 		
 		Librarian librarian = new Librarian();
 		librarian.setLibrarianUsername(librarianUsername);
-		librarian.setemployeeIDNum(employeeIDNum);
+		librarian.setemployeeIDNumber(employeeIDNum);
 		librarian.setLibrarianPassword(librarianPassword);
 		librarian.setLibrarianEmail(librarianEmail);
 		librarian.setFullName(fullName);
@@ -77,7 +77,7 @@ public class TestPersistenceBooking {
 		booking = bookingRepository.findBookingByBookingID(bookingID);
 		assertNotNull(booking);
 		assertEquals(bookingID, booking.getBookingID());
-		assertEquals(librarian.getemployeeIDNum(), booking.getLibrarian().getemployeeIDNum());
+		assertEquals(librarian.getemployeeIDNumber(), booking.getLibrarian().getemployeeIDNumber());
 		
 	}
 }

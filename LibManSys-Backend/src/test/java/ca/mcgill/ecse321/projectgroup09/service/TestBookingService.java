@@ -146,10 +146,10 @@ public class TestBookingService {
 			}
 
 		});
-		lenient().when(librarianRepository.findLibrarianByEmployeeIDNum(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
+		lenient().when(librarianRepository.findLibrarianByEmployeeIDNumber(anyLong())).thenAnswer((InvocationOnMock invocation) -> { 
 			if (invocation.getArgument(0).equals(EMPLOYEE_ID)) {
 				Librarian librarian = new Librarian(); 
-				librarian.setemployeeIDNum(EMPLOYEE_ID);
+				librarian.setemployeeIDNumber(EMPLOYEE_ID);
 				librarian.setFullName(LIBRARIAN_FULLNAME); 
 				librarian.setLibrarianEmail(LIBRARIAN_EMAIL);
 				librarian.setLibrarianPassword(LIBRARIAN_PASSWORD);
@@ -452,7 +452,7 @@ public class TestBookingService {
 
 		Librarian librarian = new Librarian();
 		librarian.setFullName(LIBRARIAN_FULLNAME);
-		librarian.setemployeeIDNum(EMPLOYEE_ID);
+		librarian.setemployeeIDNumber(EMPLOYEE_ID);
 		librarian.setLibrarianEmail(LIBRARIAN_EMAIL);
 		librarian.setLibrarianUsername(LIBRARIAN_USERNAME);
 		librarian.setLibrarianPassword(LIBRARIAN_PASSWORD);

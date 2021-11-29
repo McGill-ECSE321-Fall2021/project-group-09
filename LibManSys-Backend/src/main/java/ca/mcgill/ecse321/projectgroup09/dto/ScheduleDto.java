@@ -19,7 +19,8 @@ public class ScheduleDto {
 	private DayOfWeek dayOfWeek;
 
 	// Schedule Associations
-	private LibrarianDto librarian;
+	/** Employee Id number of associated librarian */
+	private Long librarianEmployeeID;
 	
 	/**
 	 * Default No-Arg constructor.
@@ -41,8 +42,12 @@ public class ScheduleDto {
 		this.openingTime = aOpeningTime;
 		this.closingTime = aClosingTime;
 		this.dayOfWeek = aDayofWeek;
-		LibrarianDto ldto = LibrarianDto.convertToDto(aLibrarian);
-		this.librarian = ldto;
+		// get id of librarian if association is present, otherwise just set to null
+		if (aLibrarian != null) {
+			this.librarianEmployeeID = aLibrarian.getemployeeIDNumber();
+		} else {
+			this.librarianEmployeeID = null;
+		}
 	}
 
 	/**
@@ -100,21 +105,21 @@ public class ScheduleDto {
 	public void setDayofWeek(DayOfWeek dayofWeek) {
 		this.dayOfWeek = dayofWeek;
 	}
-
+	
 	/**
 	 * @return the librarian
 	 */
-	public LibrarianDto getLibrarian() {
-		return librarian;
+	public Long getLibrarianEmployeeID() {
+		return librarianEmployeeID;
 	}
 
 	/**
 	 * @param librarian the librarian to set
 	 */
-	public void setLibrarian(LibrarianDto librarian) {
-		this.librarian = librarian;
+	public void setLibrarianEmployeeID(Long librarian) {
+		this.librarianEmployeeID = librarian;
 	}
-	
+
 	/**
 	 * Return a schedule dto object representing the schedule object.
 	 * @param schedule

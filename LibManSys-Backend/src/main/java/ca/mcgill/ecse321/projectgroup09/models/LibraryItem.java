@@ -93,7 +93,7 @@ public abstract class LibraryItem {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "libraryItemID", unique = true, nullable = false)
+	//@Column(name = "libraryItemID", unique = true, nullable = false)
 	public Long getlibraryItemID() {
 		return this.libraryItemID;
 	}

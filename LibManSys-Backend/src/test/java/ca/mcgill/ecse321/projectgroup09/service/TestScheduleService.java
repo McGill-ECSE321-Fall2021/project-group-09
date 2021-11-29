@@ -89,7 +89,7 @@ public class TestScheduleService {
 	        	s.get(0).setDayofWeek(S1_DAY);
 	        	s.get(0).setscheduleID(S1_ID);
 	        	Librarian l = new Librarian();
-	        	l.setemployeeIDNum(L1_ID);
+	        	l.setemployeeIDNumber(L1_ID);
 	        	s.get(0).setLibrarian(l);
 	        	return s;
 	        } else {
@@ -104,7 +104,7 @@ public class TestScheduleService {
 	        	s.get(0).setClosingTime(S1_CT);
 	        	s.get(0).setDayofWeek(S1_DAY);
 	        	Librarian l = new Librarian();
-	        	l.setemployeeIDNum(L1_ID);
+	        	l.setemployeeIDNumber(L1_ID);
 	        	s.get(0).setLibrarian(l);
 	        	return s;
 	        } else {
@@ -118,15 +118,15 @@ public class TestScheduleService {
         	s.get(0).setClosingTime(S1_CT);
         	s.get(0).setDayofWeek(S1_DAY);
         	Librarian l = new Librarian();
-        	l.setemployeeIDNum(L1_ID);
+        	l.setemployeeIDNumber(L1_ID);
         	s.get(0).setLibrarian(l);
         	return s;
 	    });
 		// Setup mock librarian repo
-		lenient().when(lRepo.findLibrarianByEmployeeIDNum(anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
+		lenient().when(lRepo.findLibrarianByEmployeeIDNumber(anyLong())).thenAnswer( (InvocationOnMock invocation) -> {
 	        if(invocation.getArgument(0).equals(L1_ID)) {
 	            Librarian l = new Librarian();
-	            l.setemployeeIDNum(L1_ID);
+	            l.setemployeeIDNumber(L1_ID);
 	            return l;
 	        } else {
 	            return null;
@@ -135,8 +135,8 @@ public class TestScheduleService {
 		lenient().when(hlRepo.findHeadLibrarianByManagerIDNum(HL1_ID)).thenAnswer( (InvocationOnMock invocation) -> {
 	        if(invocation.getArgument(0).equals(HL1_ID)) {
 	            HeadLibrarian hl = new HeadLibrarian();
-	            hl.setemployeeIDNum(HL1_ID);
-	            hl.setAccountId(HL1_ACCOUNT_ID);
+	            hl.setemployeeIDNumber(HL1_ID);
+	            hl.setAccountID(HL1_ACCOUNT_ID);
 	            return hl;
 	        } else {
 	            return null;
@@ -170,7 +170,7 @@ public class TestScheduleService {
 		assertEquals(openingTime, s.getOpeningTime());
 		assertEquals(closingTime, s.getClosingTime());
 		assertEquals(day, s.getDayofWeek());
-		assertEquals(L1_ID, s.getLibrarian().getemployeeIDNum());
+		assertEquals(L1_ID, s.getLibrarian().getemployeeIDNumber());
 	}
 	
 	@Test
@@ -276,7 +276,7 @@ public class TestScheduleService {
 		assertEquals(1, sList.size());
 		assertEquals(S1_DAY, sList.get(0).getDayofWeek());
 		assertEquals(S1_ID, sList.get(0).getscheduleID());
-		assertEquals(L1_ID, sList.get(0).getLibrarian().getemployeeIDNum());
+		assertEquals(L1_ID, sList.get(0).getLibrarian().getemployeeIDNumber());
 	}
 	
 	@Test
@@ -322,7 +322,7 @@ public class TestScheduleService {
 		assertEquals(openingTime, updatedSchedule.getOpeningTime());
 		assertEquals(closingTime, updatedSchedule.getClosingTime());
 		assertEquals(day, updatedSchedule.getDayofWeek());
-		assertEquals(L1_ID, updatedSchedule.getLibrarian().getemployeeIDNum());
+		assertEquals(L1_ID, updatedSchedule.getLibrarian().getemployeeIDNumber());
 	}
 	
 	@Test

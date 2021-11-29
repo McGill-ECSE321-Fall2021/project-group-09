@@ -47,7 +47,7 @@ public class ScheduleService {
 			throw new IllegalArgumentException("Arguments must not be null.");
 		}
 		// make sure librarian exists
-		Librarian aLibrarian = lRepo.findLibrarianByEmployeeIDNum(librarianId);
+		Librarian aLibrarian = lRepo.findLibrarianByEmployeeIDNumber(librarianId);
 		if (aLibrarian == null) {
 			throw new IllegalStateException("Could not find librarian with id " + librarianId + "in repository.");
 		}
@@ -56,7 +56,7 @@ public class ScheduleService {
 			throw new IllegalArgumentException("Cannot create a schedule with closing time before opening time.");
 		}
 		// make sure librarian exists
-		if (lRepo.findLibrarianByEmployeeIDNum(aLibrarian.getemployeeIDNum()) == null) {
+		if (lRepo.findLibrarianByEmployeeIDNumber(aLibrarian.getemployeeIDNumber()) == null) {
 			throw new IllegalArgumentException("Librarian does not exist in librarian repository.");
 		}
 		Schedule s = new Schedule();
@@ -115,7 +115,7 @@ public class ScheduleService {
 		if (librarianId == null) {
 			throw new IllegalArgumentException("Argument must not be null.");
 		}
-		Librarian librarian = lRepo.findLibrarianByEmployeeIDNum(librarianId);
+		Librarian librarian = lRepo.findLibrarianByEmployeeIDNumber(librarianId);
 		if (librarian == null) {
 			throw new IllegalStateException("Could not find librarian with id " + librarianId + "in repository.");
 		}
@@ -188,7 +188,7 @@ public class ScheduleService {
 		}
 		if (librarianId != null) {
 			// get librarian
-			Librarian aLibrarian = lRepo.findLibrarianByEmployeeIDNum(librarianId);
+			Librarian aLibrarian = lRepo.findLibrarianByEmployeeIDNumber(librarianId);
 			// make sure librarian exists?
 			if (aLibrarian == null) {
 				throw new IllegalStateException("Could not update schedule with librarian that does not exist.");

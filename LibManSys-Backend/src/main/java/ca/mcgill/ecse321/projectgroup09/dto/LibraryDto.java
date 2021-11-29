@@ -16,10 +16,11 @@ public class LibraryDto {
 	private String libraryPhone;
 	private String libraryEmail;
 
-
-	private List<AccountDto> accounts;
-	private List<LibraryItemDto> libraryItems;
-	private List<ScheduleDto> schedules;
+	// associations
+	/** Contains account ID's, NOT lib card numbers of employee IDs. */
+	private List<Long> accounts;
+	private List<Long> libraryItems;
+	private List<Long> schedules;
 	
 	public LibraryDto(String libName, String libEmail, String phoneNo, String libAddress, List<Schedule> schedules, List<Account> accounts, List<LibraryItem> libraryItems) {
 		this.libraryAddress = libAddress;
@@ -28,14 +29,14 @@ public class LibraryDto {
 		this.libraryPhone = phoneNo;
 		
 
-		List<ScheduleDto> scheduleDto = schedules.stream().map(schedule -> ScheduleDto.convertToDto(schedule)).collect(Collectors.toList());
-		this.schedules = scheduleDto;
+		List<Long> scheduleIds = schedules.stream().map(schedule -> schedule.getscheduleID()).collect(Collectors.toList());
+		this.schedules = scheduleIds;
 		
-		List<AccountDto> accountDto = accounts.stream().map(account -> AccountDto.convertToDto(account)).collect(Collectors.toList());
-		this.accounts = accountDto;
+		List<Long> accountIds = accounts.stream().map(account -> account.getAccountID()).collect(Collectors.toList());
+		this.accounts = accountIds;
 		
-		List<LibraryItemDto> libraryItemDto = libraryItems.stream().map(libraryItem -> LibraryItemDto.convertToDto(libraryItem)).collect(Collectors.toList());
-		this.libraryItems = libraryItemDto;
+		List<Long> libraryItemIds = libraryItems.stream().map(libraryItem -> libraryItem.getlibraryItemID()).collect(Collectors.toList());
+		this.libraryItems = libraryItemIds;
 	} 
 	
 	public String getLibraryName()
@@ -58,31 +59,48 @@ public class LibraryDto {
 		return libraryEmail;
 	}
 
-	public List<ScheduleDto> getSchedules()
-	{
-		return schedules;
-	}
-
-	public void setSchedules(List<ScheduleDto> schedules)
-	{
-		this.schedules = schedules;
-	}
-
-	public List<AccountDto> getAccounts() {
+	/**
+	 * @return the accounts
+	 */
+	public List<Long> getAccounts() {
 		return accounts;
 	}
 
-	public void setAccounts(List<AccountDto> accounts){
+	/**
+	 * @param accounts the accounts to set
+	 */
+	public void setAccounts(List<Long> accounts) {
 		this.accounts = accounts;
 	}
 
-	public List<LibraryItemDto> getLibraryItems() {
+	/**
+	 * @return the libraryItems
+	 */
+	public List<Long> getLibraryItems() {
 		return libraryItems;
 	}
 
-	public void setLibraryItems(List<LibraryItemDto> aLibraryItem){
-		this.libraryItems = aLibraryItem;
+	/**
+	 * @param libraryItems the libraryItems to set
+	 */
+	public void setLibraryItems(List<Long> libraryItems) {
+		this.libraryItems = libraryItems;
 	}
+
+	/**
+	 * @return the schedules
+	 */
+	public List<Long> getSchedules() {
+		return schedules;
+	}
+
+	/**
+	 * @param schedules the schedules to set
+	 */
+	public void setSchedules(List<Long> schedules) {
+		this.schedules = schedules;
+	}
+
 	
 	public static LibraryDto convertToDto(Library library) {
 		LibraryDto libraryDto = new LibraryDto(

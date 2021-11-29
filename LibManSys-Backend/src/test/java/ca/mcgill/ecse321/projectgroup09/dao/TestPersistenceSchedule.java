@@ -47,7 +47,7 @@ public class TestPersistenceSchedule {
 		
 		Librarian librarian = new Librarian();
 		librarian.setLibrarianUsername(librarianUsername);
-		librarian.setemployeeIDNum(employeeIDNum);
+		librarian.setemployeeIDNumber(employeeIDNum);
 		librarian.setLibrarianPassword(librarianPassword);
 		librarian.setLibrarianEmail(librarianEmail);
 		librarian.setFullName(fullName);
@@ -74,7 +74,7 @@ public class TestPersistenceSchedule {
 		schedule = scheduleRepository.findScheduleByScheduleID(scheduleID);
 		assertNotNull(schedule);
 		assertEquals(scheduleID, schedule.getscheduleID());
-		assertEquals(librarian.getemployeeIDNum(), schedule.getLibrarian().getemployeeIDNum());
+		assertEquals(librarian.getemployeeIDNumber(), schedule.getLibrarian().getemployeeIDNumber());
 		
 	}
 }

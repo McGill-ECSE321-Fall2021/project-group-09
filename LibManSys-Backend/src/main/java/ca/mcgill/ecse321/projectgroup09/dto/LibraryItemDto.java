@@ -28,8 +28,9 @@ public class LibraryItemDto {
 	private ItemStatus itemStatus;
 
 	// LibraryItem associations
-	private MemberDto member;
-	private List<LoanDto> loans;
+	/** Lib card number of reserving member. */
+	private Long reservingMemberLibCardNumber;
+	private List<Long> loans;
 	
 	// type of library item
 	private LibraryItemType type;
@@ -61,17 +62,18 @@ public class LibraryItemDto {
 		this.loanablePeriod = aLoanablePeriod;
 		this.dailyOverdueFee = aDailyOverdueFee;
 		this.itemStatus = aItemStatus;
-		// convert Member to dto
+		// convert Member to dto if exists
 		if (aMember != null) {
-			MemberDto aMemberDto = MemberDto.convertToDto(aMember);
-			this.member = aMemberDto;
+			this.reservingMemberLibCardNumber = aMember.getLibCardNumber();
 		} else {
 			// else if member is null, just set to null in dto
-			this.member = null;
+			this.reservingMemberLibCardNumber = null;
 		}
 		// convert collection
-		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan, false)).collect(Collectors.toList());
-		this.loans = aLoansDto;
+		List<Long> aLoanIds = aLoans.stream().map(loan -> loan.getLoanID()).collect(Collectors.toList());
+		this.loans = aLoanIds;
+		
+		// subclass type
 		this.type = aType;
 	}
 	
@@ -192,34 +194,6 @@ public class LibraryItemDto {
 	}
 
 	/**
-	 * @return the member
-	 */
-	public MemberDto getMember() {
-		return member;
-	}
-
-	/**
-	 * @param member the member to set
-	 */
-	public void setMember(MemberDto member) {
-		this.member = member;
-	}
-
-	/**
-	 * @return the loans
-	 */
-	public List<LoanDto> getLoans() {
-		return loans;
-	}
-
-	/**
-	 * @param loans the loans to set
-	 */
-	public void setLoans(List<LoanDto> loans) {
-		this.loans = loans;
-	}
-
-	/**
 	 * @return the type
 	 */
 	public LibraryItemType getType() {
@@ -231,5 +205,33 @@ public class LibraryItemDto {
 	 */
 	public void setType(LibraryItemType type) {
 		this.type = type;
+	}
+
+	/**
+	 * @return the member
+	 */
+	public Long getReservingMemberLibCardNumber() {
+		return reservingMemberLibCardNumber;
+	}
+
+	/**
+	 * @param member the member to set
+	 */
+	public void setReservingMemberLibCardNumber(Long member) {
+		this.reservingMemberLibCardNumber = member;
+	}
+
+	/**
+	 * @return the loans
+	 */
+	public List<Long> getLoans() {
+		return loans;
+	}
+
+	/**
+	 * @param loans the loans to set
+	 */
+	public void setLoans(List<Long> loans) {
+		this.loans = loans;
 	}
 }
