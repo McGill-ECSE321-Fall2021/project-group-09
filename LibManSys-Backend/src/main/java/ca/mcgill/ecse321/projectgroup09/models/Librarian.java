@@ -2,8 +2,6 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -12,10 +10,6 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Librarian extends Account {
-
-	
-	public enum LoanStatus { Active, Renewed, Overdue, Closed }
-
 	
 	// Librarian Attributes
 	private String librarianEmail;

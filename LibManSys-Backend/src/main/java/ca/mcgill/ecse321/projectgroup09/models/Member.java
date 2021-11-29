@@ -14,10 +14,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Member extends Account {
 
-
-	public enum LoanStatus { Active, Renewed, Overdue, Closed }
-
-
 	// Member Attributes
 	private Long libCardNumber;
 	private String address;
