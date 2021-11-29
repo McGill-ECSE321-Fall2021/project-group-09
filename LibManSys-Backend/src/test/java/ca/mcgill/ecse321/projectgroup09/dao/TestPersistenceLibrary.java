@@ -73,7 +73,7 @@ public class TestPersistenceLibrary {
 		// Dummy head librarian for library schedule
 		HeadLibrarian hl = new HeadLibrarian();
 		hl.setmanagerIDNum(999L);
-		hl.setemployeeIDNum(888L);
+		hl.setemployeeIDNumber(888L);
 		hl.setBookings(emptyBookingsList);
 		hl.setFullName("hl full name");
 		hl.setLibrarianEmail("hl@read.org");

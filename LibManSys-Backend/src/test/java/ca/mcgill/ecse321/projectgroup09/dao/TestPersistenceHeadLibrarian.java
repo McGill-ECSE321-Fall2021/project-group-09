@@ -78,7 +78,7 @@ public class TestPersistenceHeadLibrarian {
 		librarian.setLibrarianEmail(librarianEmail);
 		librarian.setLibrarianPassword(librarianPassword);
 		librarian.setLibrarianUsername(librarianUsername);
-		librarian.setemployeeIDNum(employeeIDNum);
+		librarian.setemployeeIDNumber(employeeIDNum);
 
 
 		// create example schedule for head librarian's library
@@ -127,7 +127,7 @@ public class TestPersistenceHeadLibrarian {
 		hl.setLibrarianEmail(hlEmail);
 		hl.setLibrarianPassword(hlPassword);
 		hl.setLibrarianUsername(hlUsername);
-		hl.setemployeeIDNum(hlEmployeeId);
+		hl.setemployeeIDNumber(hlEmployeeId);
 		hl.setmanagerIDNum(hlManagerId);
 		//hl.setLibrary(library);
 		sampleSchedule.setLibrarian(hl);
@@ -146,7 +146,7 @@ public class TestPersistenceHeadLibrarian {
 		hl = headLibrarianRepository.findHeadLibrarianByManagerIDNum(hlManagerId);
 		library = libraryRepository.findLibraryByLibraryName(libraryName);
 		sampleSchedule = scheduleRepository.findScheduleByScheduleID(scheduleId);
-		librarian = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		librarian = librarianRepository.findLibrarianByEmployeeIDNumber(employeeIDNum);
 
 		assertNotNull(hl);
 		assertNotNull(librarian);

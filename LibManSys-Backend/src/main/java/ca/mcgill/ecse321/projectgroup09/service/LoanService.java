@@ -52,7 +52,7 @@ public class LoanService {
 		// get Member, library item and librarian using ID's
 		Member member = memberRepository.findMemberByLibCardNumber(memberLibCardNumber);
 		LibraryItem libraryItem = libraryItemRepository.findLibraryItemByLibraryItemID(libraryItemId);
-		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(librarianEmployeeId);
+		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNumber(librarianEmployeeId);
 		// make sure member, library item and librarian exist
 		if (member == null) {
 			throw new IllegalArgumentException("Member does not exist");

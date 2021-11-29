@@ -51,7 +51,7 @@ public class LibrarianService {
 		if (schedules == null || schedules.isEmpty()) {
 			throw new IllegalArgumentException("'schedules' input parameter cannot be null or empty list.");
 		}
-		Librarian l = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		Librarian l = librarianRepository.findLibrarianByEmployeeIDNumber(employeeIDNum);
 		if (l == null) {
 			throw new IllegalArgumentException("Could not find librarian with employee id " + employeeIDNum + " in repository.");
 		}
@@ -65,7 +65,7 @@ public class LibrarianService {
 		if (employeeIDNum == null) {
 			throw new IllegalArgumentException("'employeeIDNum' input parameter cannot be null");
 		}
-		Librarian l = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		Librarian l = librarianRepository.findLibrarianByEmployeeIDNumber(employeeIDNum);
 		if (l == null) {
 			throw new IllegalArgumentException("Could not find librarian with employee id " + employeeIDNum + " in repository.");
 		}
@@ -82,7 +82,7 @@ public class LibrarianService {
 		if (employeeIDNum == null) {
 			throw new IllegalArgumentException("'employeeIDNum' input parameter cannot be null");
 		}
-		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNum(employeeIDNum);
+		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNumber(employeeIDNum);
 		if (librarian == null) {
 			throw new IllegalArgumentException("Could not find librarian with employee id " + employeeIDNum + " in repository.");
 		}

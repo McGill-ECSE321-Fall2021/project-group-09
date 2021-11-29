@@ -20,7 +20,7 @@ public class ScheduleDto {
 
 	// Schedule Associations
 	/** Employee Id number of associated librarian */
-	private Long librarian;
+	private Long librarianEmployeeID;
 	
 	/**
 	 * Default No-Arg constructor.
@@ -44,9 +44,9 @@ public class ScheduleDto {
 		this.dayOfWeek = aDayofWeek;
 		// get id of librarian if association is present, otherwise just set to null
 		if (aLibrarian != null) {
-			this.librarian = aLibrarian.getemployeeIDNumber();
+			this.librarianEmployeeID = aLibrarian.getemployeeIDNumber();
 		} else {
-			this.librarian = null;
+			this.librarianEmployeeID = null;
 		}
 	}
 
@@ -109,15 +109,15 @@ public class ScheduleDto {
 	/**
 	 * @return the librarian
 	 */
-	public Long getLibrarian() {
-		return librarian;
+	public Long getLibrarianEmployeeID() {
+		return librarianEmployeeID;
 	}
 
 	/**
 	 * @param librarian the librarian to set
 	 */
-	public void setLibrarian(Long librarian) {
-		this.librarian = librarian;
+	public void setLibrarianEmployeeID(Long librarian) {
+		this.librarianEmployeeID = librarian;
 	}
 
 	/**

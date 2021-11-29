@@ -19,11 +19,11 @@ public class LoanDto {
 	private Long loanId;
 
 	// Loan Associations
-	private Long libraryItem;
+	private Long libraryItemID;
 	/** Lib card number of associated member. */
-	private Long member;
+	private Long memberLibCardNumber;
 	/** Employee Id number of associated librarian */
-	private Long librarian;
+	private Long librarianEmployeeID;
 	
 	/**
 	 * Default No-Arg Constructor
@@ -44,19 +44,19 @@ public class LoanDto {
 			if (libraryItem != null) {
 				lidto = libraryItem.getlibraryItemID();
 			}
-			this.libraryItem = lidto;
+			this.libraryItemID = lidto;
 			// member
 			Long mdto = null;
 			if (member!= null) {
 				mdto = member.getLibCardNumber();
 			}
-			this.member = mdto;
+			this.memberLibCardNumber = mdto;
 			// librarian
 			Long ldto = null;
 			if (librarian != null) {
 				ldto = librarian.getemployeeIDNumber();
 			}
-			this.librarian = ldto;
+			this.librarianEmployeeID = ldto;
 			
 			// if lidto is null, just means loan has no library item associated with 
 			//if (lidto == null) {
@@ -169,42 +169,42 @@ public class LoanDto {
 	/**
 	 * @return the libraryItem
 	 */
-	public Long getLibraryItem() {
-		return libraryItem;
+	public Long getLibraryItemID() {
+		return libraryItemID;
 	}
 
 	/**
 	 * @param libraryItem the libraryItem to set
 	 */
-	public void setLibraryItem(Long libraryItem) {
-		this.libraryItem = libraryItem;
+	public void setLibraryItemID(Long libraryItem) {
+		this.libraryItemID = libraryItem;
 	}
 
 	/**
 	 * @return the member
 	 */
-	public Long getMember() {
-		return member;
+	public Long getMemberLibCardNumber() {
+		return memberLibCardNumber;
 	}
 
 	/**
 	 * @param member the member to set
 	 */
-	public void setMember(Long member) {
-		this.member = member;
+	public void setMemberLibCardNumber(Long member) {
+		this.memberLibCardNumber = member;
 	}
 
 	/**
 	 * @return the librarian
 	 */
-	public Long getLibrarian() {
-		return librarian;
+	public Long getLibrarianEmployeeID() {
+		return librarianEmployeeID;
 	}
 
 	/**
 	 * @param librarian the librarian to set
 	 */
-	public void setLibrarian(Long librarian) {
-		this.librarian = librarian;
+	public void setLibrarianEmployeeID(Long librarian) {
+		this.librarianEmployeeID = librarian;
 	}
 }

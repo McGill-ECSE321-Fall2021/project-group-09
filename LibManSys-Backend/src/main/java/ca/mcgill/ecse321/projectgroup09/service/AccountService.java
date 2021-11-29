@@ -27,7 +27,7 @@ public class AccountService {
 		if (accountId == null) {
 			throw new IllegalArgumentException("accountId must not be null.");
 		}
-		Account a = accountRepo.findAccountByAccountId(accountId);
+		Account a = accountRepo.findAccountByAccountID(accountId);
 		return a;
 	}
 }

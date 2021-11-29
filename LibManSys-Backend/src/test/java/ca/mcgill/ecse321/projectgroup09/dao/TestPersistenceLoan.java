@@ -100,7 +100,7 @@ public class TestPersistenceLoan {
 		librarian.setLibrarianEmail(librarianEmail);
 		librarian.setLibrarianPassword(librarianPassword);
 		librarian.setLibrarianUsername(librarianUsername);
-		librarian.setemployeeIDNum(employeeIDNum);
+		librarian.setemployeeIDNumber(employeeIDNum);
 
 		librarianRepository.save(librarian);
 		

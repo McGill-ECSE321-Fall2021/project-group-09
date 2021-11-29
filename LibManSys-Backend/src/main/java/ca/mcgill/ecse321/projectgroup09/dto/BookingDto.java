@@ -18,8 +18,8 @@ public class BookingDto {
 	// Associations
 	/** Lib card number of associated member. */
 	private Long memberLibCardNumber;
-	/** Employee Id number of associated librarian */
-	private Long librarian;
+	/** Employee ID number of associated librarian */
+	private Long librarianEmployeeID;
 
 	public BookingDto() {}
 
@@ -29,7 +29,7 @@ public class BookingDto {
 		this.bookingStartTime = bookingStartTime;
 		this.bookingID = bookingID;
 		this.memberLibCardNumber = member.getLibCardNumber();
-		this.librarian = librarian.getemployeeIDNumber();
+		this.librarianEmployeeID = librarian.getemployeeIDNumber();
 		
 	}
 
@@ -81,28 +81,28 @@ public class BookingDto {
 	/**
 	 * @return the librarian
 	 */
-	public Long getLibrarian() {
-		return librarian;
+	public Long getLibrarianEmployeeID() {
+		return librarianEmployeeID;
 	}
 
 	/**
 	 * @param librarian the librarian to set
 	 */
-	public void setLibrarian(Long librarian) {
-		this.librarian = librarian;
+	public void setLibrarianEmployeeID(Long librarian) {
+		this.librarianEmployeeID = librarian;
 	}
 
 	/**
 	 * @return the member
 	 */
-	public Long getMember() {
+	public Long getMemberLibCardNumber() {
 		return memberLibCardNumber;
 	}
 
 	/**
 	 * @param member the member to set
 	 */
-	public void setMember(Long member) {
+	public void setMemberLibCardNumber(Long member) {
 		this.memberLibCardNumber = member;
 	} 
 	

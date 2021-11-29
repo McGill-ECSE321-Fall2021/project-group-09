@@ -243,7 +243,7 @@ public class LibraryItemService {
 			throw new IllegalArgumentException("Arguments must not be null.");
 		}
 		// find in repo
-		Librarian l = librarianRepo.findLibrarianByEmployeeIDNum(librarianId);
+		Librarian l = librarianRepo.findLibrarianByEmployeeIDNumber(librarianId);
 		if (l == null) {
 			throw new IllegalStateException("Could not find librarian in repository.");
 		}

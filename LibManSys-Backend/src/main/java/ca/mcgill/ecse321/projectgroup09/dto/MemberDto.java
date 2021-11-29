@@ -23,7 +23,7 @@ public class MemberDto extends AccountDto {
 	private List<Long> loans;
 	private List<Long> bookings;
 	/** ID's of library items reserved by this member. */
-	private List<Long> reserved;
+	private List<Long> reservedLibraryItems;
 	
 //	/**
 //	 * Default No-Arg Constructor
@@ -63,7 +63,7 @@ public class MemberDto extends AccountDto {
 		List<Long> aBookingsDto = aBookings.stream().map(booking -> booking.getBookingID()).collect(Collectors.toList());
 		this.bookings = aBookingsDto;
 		List<Long> aReservedDto = aReserved.stream().map(libraryItem -> libraryItem.getlibraryItemID()).collect(Collectors.toList());
-		this.reserved = aReservedDto;
+		this.reservedLibraryItems = aReservedDto;
 	}
 	
 	/**
@@ -203,15 +203,15 @@ public class MemberDto extends AccountDto {
 	/**
 	 * @return the reserved
 	 */
-	public List<Long> getReserved() {
-		return reserved;
+	public List<Long> getReservedLibraryItems() {
+		return reservedLibraryItems;
 	}
 
 	/**
 	 * @param reserved the reserved to set
 	 */
-	public void setReserved(List<Long> reserved) {
-		this.reserved = reserved;
+	public void setReservedLibraryItems(List<Long> reserved) {
+		this.reservedLibraryItems = reserved;
 	}
 
 	

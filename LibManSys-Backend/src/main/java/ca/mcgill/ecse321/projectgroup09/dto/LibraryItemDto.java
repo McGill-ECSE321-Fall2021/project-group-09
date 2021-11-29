@@ -29,7 +29,7 @@ public class LibraryItemDto {
 
 	// LibraryItem associations
 	/** Lib card number of reserving member. */
-	private Long member;
+	private Long reservingMemberLibCardNumber;
 	private List<Long> loans;
 	
 	// type of library item
@@ -64,10 +64,10 @@ public class LibraryItemDto {
 		this.itemStatus = aItemStatus;
 		// convert Member to dto if exists
 		if (aMember != null) {
-			this.member = aMember.getLibCardNumber();
+			this.reservingMemberLibCardNumber = aMember.getLibCardNumber();
 		} else {
 			// else if member is null, just set to null in dto
-			this.member = null;
+			this.reservingMemberLibCardNumber = null;
 		}
 		// convert collection
 		List<Long> aLoanIds = aLoans.stream().map(loan -> loan.getLoanID()).collect(Collectors.toList());
@@ -210,15 +210,15 @@ public class LibraryItemDto {
 	/**
 	 * @return the member
 	 */
-	public Long getMember() {
-		return member;
+	public Long getReservingMemberLibCardNumber() {
+		return reservingMemberLibCardNumber;
 	}
 
 	/**
 	 * @param member the member to set
 	 */
-	public void setMember(Long member) {
-		this.member = member;
+	public void setReservingMemberLibCardNumber(Long member) {
+		this.reservingMemberLibCardNumber = member;
 	}
 
 	/**
