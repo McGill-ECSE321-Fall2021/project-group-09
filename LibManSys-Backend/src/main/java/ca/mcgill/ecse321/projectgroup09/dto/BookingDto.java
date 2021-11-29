@@ -87,7 +87,7 @@ public class BookingDto {
 			booking.getLibrarian()
 			);
 				
-		return new BookingDto();
+		return convertToDto;
 	} 
 	
 
