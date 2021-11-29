@@ -77,16 +77,19 @@ public class BookingService { // service class for booking out the library for e
 			throw new IllegalArgumentException("Cannot pick a date in the past. Please choose another date."); 
 		}
 
-		//Check to ensure that booking is within library opening hours 
-		Schedule libHours = scheduleRepository.findScheduleByScheduleID(getDayOfWeekForScheduleID(date));
-
-		if (sTime.toLocalTime().isBefore(libHours.getOpeningTime().toLocalTime())) {
-			throw new IllegalArgumentException("The library opens at " + libHours.getOpeningTime().toString() + ", please choose a later time.");
-		}
-
-		if (eTime.toLocalTime().isAfter(libHours.getClosingTime().toLocalTime())) {
-			throw new IllegalArgumentException("The library closes at " + libHours.getClosingTime().toString() + ", please choose an earlier time.");
-		}
+//		//Check to ensure that booking is within library opening hours 
+//		Schedule libHours = scheduleRepository.findScheduleByScheduleID(getDayOfWeekForScheduleID(date));
+//		if (libHours == null) {
+//			throw new IllegalArgumentException("Please add library hours");
+//		}
+//		
+//		if (sTime.toLocalTime().isBefore(libHours.getOpeningTime().toLocalTime())) {
+//			throw new IllegalArgumentException("The library opens at " + libHours.getOpeningTime().toString() + ", please choose a later time.");
+//		}
+//
+//		if (eTime.toLocalTime().isAfter(libHours.getClosingTime().toLocalTime())) {
+//			throw new IllegalArgumentException("The library closes at " + libHours.getClosingTime().toString() + ", please choose an earlier time.");
+//		}
 
 		Booking booking = new Booking(); 
 		booking.setBookingDate(date);

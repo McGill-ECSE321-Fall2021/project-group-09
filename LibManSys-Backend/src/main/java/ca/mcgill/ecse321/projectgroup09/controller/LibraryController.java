@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.projectgroup09.dto.LibraryDto;
@@ -24,9 +25,9 @@ public class LibraryController {
 	private LibraryService libraryService; 
 	
 
-	@PostMapping(value = {"/library/create/{libraryName}/{address}/{phoneNo}/{email}", "/library/create/{libraryName}/{address}/{phoneNo}/{email}/"})
-	public LibraryDto createLibrary(@PathVariable("address") String address, @PathVariable("phoneNo") String phoneNo, @PathVariable("email") String email,
-			@PathVariable("libraryName") String libraryName) {
+	@PostMapping(value = {"/library/create", "/library/create/"})
+	public LibraryDto createLibrary(@RequestParam("address") String address, @RequestParam("phoneNo") String phoneNo, @RequestParam("email") String email,
+			@RequestParam("libraryName") String libraryName) {
 		
 		Library library = libraryService.createLibrary(address, phoneNo, email, libraryName);
 		return LibraryDto.convertToDto(library);

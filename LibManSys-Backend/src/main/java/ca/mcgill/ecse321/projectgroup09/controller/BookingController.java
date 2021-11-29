@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.projectgroup09.dto.BookingDto;
@@ -24,20 +27,24 @@ public class BookingController {
 	@Autowired 
 	private BookingService bookingService;  
 
-	@GetMapping(value = {"/bookings", "/bookings/"})
-	public List<BookingDto> getAllBookings() {
-		return bookingService.getAllBookings().stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
-	}
-	
-	@PostMapping(value = {"/bookings/create/{bookingID}/{startTime}/{endTime}/{bookingDate}/{memberID}/{librarianID}", "bookings/create/{bookingID}/{startTime}/{endTime}/{bookingDate}/{memberID}/{librarianID}/"})
-	public BookingDto createBooking (@PathVariable("startTime") String startTime, @PathVariable("endTime") String endTime, @PathVariable("bookingID") Long bookingID, @PathVariable("bookingDate") String bookingDate, @PathVariable("memberID") long memberID, @PathVariable("librarianID") long librarianID) throws IllegalArgumentException {
+	@PostMapping(value = {"/bookings/new", "/bookings/new/"})
+	public BookingDto createBooking (@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime, @RequestParam("bookingID") Long bookingID,
+			@RequestParam("bookingDate") String bookingDate, @RequestParam("memberID") long memberID, @RequestParam("librarianID") long librarianID) throws IllegalArgumentException {
 		Booking booking = bookingService.createBooking(startTime, endTime, bookingID, bookingDate, memberID, librarianID);
 		return BookingDto.convertToDto(booking);
 	}
 	
+	@GetMapping(value = {"/bookings/view-all", "/bookings/view-all/"})
+	public List<BookingDto> getAllBookings() {
+		return bookingService.getAllBookings().stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
+	}
+	
+	
+	
 
-	@PostMapping(value = {"/bookings/update/{bookingID}/{startTime}/{endTime}/{bookingDate}", "bookings/update/{bookingID}/{startTime}/{endTime}/{bookingDate}/"})
-	public BookingDto updateBooking (@PathVariable("id") Long id, @PathVariable("startTime") String startTime, @PathVariable("endTime") String endTime, @PathVariable("bookingDate") String bookingDate) {
+	@PutMapping(value = {"/bookings/update", "bookings/update/"})
+	public BookingDto updateBooking (@RequestParam("id") Long id, @RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime,
+			@RequestParam("bookingDate") String bookingDate) {
 		Booking booking = bookingService.updateBooking(id, startTime, endTime, bookingDate);
 		return BookingDto.convertToDto(booking);
 	}
