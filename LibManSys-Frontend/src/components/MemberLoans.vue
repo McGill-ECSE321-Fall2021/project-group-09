@@ -48,11 +48,15 @@ Head Librarian:
                 <myText> Member Loans </myText>
               
             
-                  <div>
-    <v-data-table  class="elevation-1">
+  <div  v-if="
+          880707   == 880707  
+          "> 
+    <v-data-table  class="elevation-1" >
       <tr><b-col class="myColumn">
           <td><myText2>|  LoanId  |</myText2> </td> </b-col>
           <td><myText2>|  Borrowed Date |</myText2> </td>
+                    <td><myText2>|  Libcard # |</myText2> </td>
+
                     <td><myText2>|  Library Item  |</myText2></td>
                     <td><myText2>|  Loan Status  |</myText2></td>
                     <td><myText2>|  Late Fees  |</myText2></td>
@@ -60,9 +64,10 @@ Head Librarian:
       <tr v-for="loan in loans">
           <td >  
           <myText2> {{loan.loanId}}</myText2></td> </b-row>
-
                      <td> <myText2> {{loan.borrowedDate}}</myText2></td> 
-              
+                                   <td> <myText2> {{loan.member.libCardNumber
+}}</myText2></td> 
+
                 <td>
             <myText2>  {{loan.libraryItem.libraryItemID}}</myText2> </td> 
               <td>
@@ -72,6 +77,7 @@ Head Librarian:
       </tr>
       
     </v-data-table> 
+   
     </div>
     
            

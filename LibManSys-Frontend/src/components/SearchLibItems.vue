@@ -72,7 +72,7 @@
 <script>
 import Register from "../components/Register";
 import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
+import SearchResults from "../components/SearchResults";
 import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
 import LibrarianDashboard from "../components/LibrarianDashboard";
 import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
@@ -107,8 +107,8 @@ export default {
         },
         goToSearchPage: function (){
             Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
+                path: "/SearchResults",
+                name: "SearchResults"
             })
         },
         goToLibManagmentPage: function (){

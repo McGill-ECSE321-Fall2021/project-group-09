@@ -36,8 +36,8 @@
 
    <b-container fluid>
       <myText>  Search Results </myText>
-
-  <b-row class="my-1" color="#00000">
+<br>
+  <!--<b-row class="my-1" color="#00000">
     <b-col sm="2" color="#00000">
       <label for="input-default" color="#00000">Name:</label>
     </b-col>
@@ -58,8 +58,94 @@
     <b-col sm="2" > 
       <label for="input-large" >Published Year:</label>
     </b-col>
-  </b-row>
- <b-table dense :headers="headers" :items="myTable" item-key="name" class="elevation-1"></b-table>
+  </b-row> -->
+  
+
+     <myText3>All Books</myText3>
+    <div  v-if="
+          880707   == 880707  
+          "> 
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Author  |</myText2> </td>
+                              <td><myText2>|  Pages  |</myText2> </td>
+
+                    <td><myText2>|  Published Year  |</myText2> </td>
+                    <td><myText2>|  ISBN  |</myText2> </td>
+
+
+                    <td><myText2>|  Loanable Period  |</myText2></td>
+                    <td><myText2>|  Status  |</myText2></td>
+      </tr>
+      <tr v-for="result in results">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                    <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.author}}</myText2></td> 
+                   <td>
+             <myText2> {{result.numPages}} </myText2> </td>  
+              <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                      <td> <myText2> {{result.isbn}}</myText2></td> 
+                                 
+
+                <td>
+            <myText2>  {{result.loanablePeriod}}</myText2> </td> 
+              
+              <td>
+             <myText2> {{result.itemStatus}} </myText2> </td> 
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+
+
+ <myText3>All Movies</myText3>
+    <div  v-if="
+          880707   == 880707  
+          "> 
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Genre  |</myText2> </td>
+                    <td><myText2>|  Runtime  |</myText2> </td>
+                    <td><myText2>|  Director  |</myText2> </td>
+
+
+                    <td><myText2>|  Loanable Period  |</myText2></td>
+                    <td><myText2>|  Status  |</myText2></td>
+      </tr>
+      <tr v-for="result in movies">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                    <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td>
+             <myText2> {{result.genre}} </myText2> </td>  
+              <td>
+             <myText2> {{result.runtime}} </myText2> </td>               
+             <myText2> {{result.director}} </myText2> </td>               
+
+                <td>
+            <myText2>  {{result.loanablePeriod}}</myText2> </td> 
+              
+              <td>
+             <myText2> {{result.itemStatus}} </myText2> </td> 
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
 
 </b-container>
 
@@ -71,9 +157,12 @@
 
    
   </div>
+
+
 </template>
+<script src="./SearchResults.js"></script> 
 
-
+<!--
 <script>
 
 import MemberLogin from "../components/MemberLogin";
@@ -140,7 +229,7 @@ export default {
         }
    }
 }
-</script>
+</script> -->
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -196,6 +285,12 @@ section {
   background-repeat: no-repeat;
   background-size: 100%;
 }
+myText2 {
+    color: #5E3515;
+    font: "Times";
+    font-size: 18px;
+    font-weight: 100;
+}
 
 a.normal {
   font-weight: 400;
@@ -230,9 +325,17 @@ b-nav-item {
   font-size: 18px;
 }
 myText{
+  color:black;
+  font: "Times";
+  font-size: 35px;
+  font-weight: 100;
+
+}
+
+myText3{
   color:#a85f32;
   font: "Times";
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 100;
 
 }

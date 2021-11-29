@@ -25,57 +25,62 @@ import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import Router from "../router/index";
 import Register from "../components/Register";
 export default {
-	name: 'loan',
+	name: 'result',
 	data() {
 		return {
-			loans: [],
-			newLoan: '',
-			errorLoan:'',
+			results: [],
+			books:[],
+			movies:[],
+			cd:[],
+			newResult: '',
+			errorResult:'',
 			response: []
 		}
 	},
 	created: function () {
     // Initializing persons from backend
-    AXIOS.get('/loan/get-by-member/3968') //change for logged in member
+    AXIOS.get('/book/') //change for logged in member
     .then(response => {
       // JSON responses are automatically parsed.
-      this.loans = response.data;
+      this.results = response.data;
       console.log(response.data);
     })
     .catch(e => {
-      this.errorLoan = e
+      this.errorResult = e
+    }),
+    AXIOS.get('/movie') //change for logged in member
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.movies = response.data;
+      console.log(response.data);
+    })
+    .catch(e => {
+      this.errorResult = e
     })
     
   }
 ,
 	methods: {
-	createLoan: function(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian){
-		var p = new LoanDto(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian);
-		this.loans.push(p);
-		this.newLoan = '';
+	createLibItems: function(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian){
+		var p = new LibItems(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian);
+		this.results.push(p);
+		this.newResult = '';
 	},
-	goToSubmitPage: function() {
+	 goToSubmitPage: function (){
             Router.push({
                 path: "/MemberLogin",
                 name: "MemberLogin"
             })
         },
-        goToRegisterPage: function() {
+        goToRegisterPage: function (){
             Router.push({
                 path: "/Register",
                 name: "Register"
             })
-        },
-        goToSearchPage: function() {
+        }, goToSearchPage: function (){
             Router.push({
                 path: "/SearchLibItems",
                 name: "SearchLibItems"
-            })
-        },
-        goToMemberPage: function() {
-            Router.push({
-                path: "/OnlineMemberDashboard",
-                name: "OnlineMemberDashboard"
             })
         }
 	}

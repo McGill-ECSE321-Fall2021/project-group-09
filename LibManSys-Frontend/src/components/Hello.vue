@@ -149,6 +149,8 @@ import MemberLogin from "../components/MemberLogin";
 import SearchLibItems from "../components/SearchLibItems";
 import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
 import LibrarianDashboard from "../components/LibrarianDashboard";
+import SearchResults from "../components/SearchResults";
+
 import ItemPage from "../components/ItemPage";
 import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import Router from "../router/index";
@@ -181,8 +183,8 @@ export default {
         },
         goToSearchPage: function (){
             Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
+                path: "/SearchResults",
+                name: "SearchResults"
             })
         },
         goToLibManagmentPage: function (){
