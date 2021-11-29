@@ -30,42 +30,42 @@
     </nav>
 
     <section>
-      <br />
-      <br />
-           <br />
+        <br />
+        <br />
+        <br />
 
-   <b-container fluid>
-      <myText>  Log In </myText>
+        <b-container fluid>
+            <myText>  Log In </myText>
 
 
-  <b-row class="my-1" color="#00000">
-    <b-col sm="2" color="#00000">
-      <label for="input-default" color="#00000">Email:</label>
-    </b-col>
-    <b-col sm="10" >
-      <b-form-input id="input-default" color="#00000"placeholder="Enter your email"></b-form-input>
-    </b-col>
-  </b-row>
+            <b-row class="my-1" color="#00000">
+                <b-col sm="2" color="#00000">
+                    <label for="input-default" color="#00000">Email:</label>
+                </b-col>
+                <b-col sm="10" >
+                    <b-form-input id="input-default" color="#00000"placeholder="Enter your email"></b-form-input>
+                </b-col>
+            </b-row>
 
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="input-large" >Password:</label>
-    </b-col>
-    <b-col sm="10">
-      <b-form-input id="input-large"  placeholder="Enter your password"></b-form-input>
-    </b-col>
-  </b-row>
-  
-</b-container>
+            <b-row class="my-1" >
+                <b-col sm="2" > 
+                    <label for="input-large" >Password:</label>
+                </b-col>
+                <b-col sm="10">
+                    <b-form-input id="input-large"  placeholder="Enter your password"></b-form-input>
+                </b-col>
+            </b-row>
+          
+        </b-container>
 
-<b class="nav-link" href="#" v-on:click="goToSubmitPage()"
-            >Submit
-          </b>
+        <b class="nav-link" href="#" v-on:click="loginMember()">Submit</b>
+        <b class="nav-link" href="#" v-on:click="goToLibrarianLogin()">Go to Librarian Login</b>
      
     </section>
-     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> blah blah blah some copyright bs </b>
-      
+    
+    
+    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
+      <b> blah blah blah some copyright bs </b> 
     </footer>
 
    
@@ -73,43 +73,7 @@
 </template>
 
 
-<script>
-
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-import SearchLibItems from "../components/SearchLibItems";
-import Hello from "../components/Hello";
-import Register from "../components/Register";
-import Router from "../router/index";
-
-export default {
-  data () {
-   return {
-        types: [
-        ]
-      }
-  },
-   methods: {
-       goToSubmitPage: function (){
-            Router.push({
-                path: "/OnlineMemberDashboard",
-                name: "OnlineMemberDashboard"
-            })
-        },
-        goToSearchPage: function (){
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        },
-        goToRegisterPage: function (){
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-   }
-}
-</script>
+<script src="./MemberLogin.js"></script>
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -220,7 +184,6 @@ myText{
   font: "Times";
   font-size: 30px;
   font-weight: 100;
-
 }
 
 /*Resize the wrap to see the search bar change!*/
