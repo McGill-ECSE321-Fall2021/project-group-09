@@ -164,7 +164,7 @@
                             <label for="name">Title:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="name" placeholder="Enter the Title"></b-form-input>
+                            <b-form-input id="name" type="text" v-model="title" placeholder="Enter the Title"></b-form-input>
                         </b-col>
                     </b-row>
     
@@ -174,7 +174,7 @@
                             <label for="input-large"> Published Year:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Published Year"></b-form-input>
+                            <b-form-input id="input-large" type="text"  placeholder="Enter the Published Year"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -182,13 +182,41 @@
                      <b-row class="my-1">
     
                         <b-col sm="2">
-                            <label for="input-large"> Other Movie:</label>
+                            <label for="input-large"> Director :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Other"></b-form-input>
+                            <b-form-input id="input-large" type="text" placeholder="Enter the Director"></b-form-input>
                         </b-col>
     
                     </b-row>
+
+                     <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Runtime :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large"type="text"  placeholder="Enter the Runtime"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+
+                    </b-row>
+
+                     <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Genre :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large" type="text"   placeholder="Enter the Genre"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+
+                     </b-row>
+
+                     
                 </div>
 
                  <!-- NEWSPAPER FIELDS -->
@@ -230,8 +258,11 @@
                 
     
             </b-container>
-    
+                 <span v-if="errorResult" style="color:red">{{errorResult}} </span>
+
             <br>
+            <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="createMovie(title,publishedYear,director,runtime,genre)">Create Item</b-button>
+
             <b-button v-row justify="center" v-on:click="goToSubmitPage()">Create Item</b-button>
     
     
@@ -244,9 +275,10 @@
     
     </div>
 </template>
+<script src="./CreateLibItem.js"></script> 
 
 
-<script>
+<!--<script>
 import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import SearchLibItems from "../components/SearchLibItems";
 import Hello from "../components/Hello";
@@ -297,8 +329,8 @@ export default {
             })
         }
     }
-}
-</script>
+} 
+</script> -->
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
