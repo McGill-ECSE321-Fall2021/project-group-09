@@ -12,7 +12,7 @@ import ca.mcgill.ecse321.projectgroup09.models.Account;
  */
 public interface AccountRepository extends CrudRepository<Account, String> {
 	
-	Account findAccountByAccountId(Long accountId);
+	Account findAccountByAccountID(Long accountID);
 	Account findAccountByFullName(String fullName);
 	
 }
