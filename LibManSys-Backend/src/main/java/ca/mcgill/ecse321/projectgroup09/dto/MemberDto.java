@@ -57,7 +57,7 @@ public class MemberDto extends AccountDto {
 		this.activeLoans = aActiveLoans;
 		this.isVerifiedResident = aIsVerifiedResident;
 		// convert collections to Dto's
-		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan, false)).collect(Collectors.toList());
 		this.loans = aLoansDto;
 		List<BookingDto> aBookingsDto = aBookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 		this.bookings = aBookingsDto;

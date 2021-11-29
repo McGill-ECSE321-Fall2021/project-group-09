@@ -38,31 +38,75 @@ public class LoanDto {
 			this.lateFees = lateFees;
 			this.loanStatus = loanStatus;
 			this.loanId = loanId;
-			
-			// safe to assume Loan must always have valid LibraryItem, Member and Librarian
-			LibraryItemDto lidto = LibraryItemDto.convertToDto(libraryItem);
+			// Check if associations present before converting
+			LibraryItemDto lidto = null;
+			if (libraryItem != null) {
+				lidto = LibraryItemDto.convertToDto(libraryItem);
+			}
 			this.libraryItem = lidto;
-			MemberDto mdto = MemberDto.convertToDto(member);
+			// member
+			MemberDto mdto = null;
+			if (member!= null) {
+				mdto = MemberDto.convertToDto(member);
+			}
 			this.member = mdto;
-			LibrarianDto ldto = LibrarianDto.convertToDto(librarian);
+			// librarian
+			LibrarianDto ldto = null;
+			if (librarian != null) {
+				ldto = LibrarianDto.convertToDto(librarian);
+			}
 			this.librarian = ldto;
 		}
 	
 	/**
+	 * Use cascade = false if converting a Loan to a DTO as part of another DTO conversion. This
+	 * will avoid circular references.
+	 * 
+	 * Basically, if calling converToDto from another converToDto method, use casacde = false,
+	 * otherwise if calling convertToDto from controller method use cascade = true
+	 * 
 	 * @param loan
+	 * @param cascade If true, converts associations to DTOs, else if false, sets associations to null.
 	 * @return
 	 */
-	public static LoanDto convertToDto(Loan loan) {
-		LoanDto loanDto = new LoanDto(
-				loan.getBorrowedDate(),
-				loan.getReturnDate(),
-				loan.getLateFees(),
-				loan.getLoanStatus(),
-				loan.getLoanID(),
-				loan.getLibraryItem(),
-				loan.getMember(),
-				loan.getLibrarian()
-				);
+	public static LoanDto convertToDto(Loan loan, boolean cascade) {
+		LoanDto loanDto;
+		/*
+		// remove association, convert, then add back to avoid circular references
+		loan.getLibraryItem().getLoans().remove(loan);
+		loan.getMember().getLoans().remove(loan);
+		loan.getLibrarian().getLoans().remove(loan);
+		*/
+		if (cascade) {
+			loanDto = new LoanDto(
+					loan.getBorrowedDate(),
+					loan.getReturnDate(),
+					loan.getLateFees(),
+					loan.getLoanStatus(),
+					loan.getLoanID(),
+					loan.getLibraryItem(),
+					loan.getMember(),
+					loan.getLibrarian()
+					);
+		} else {
+			loanDto = new LoanDto(
+					loan.getBorrowedDate(),
+					loan.getReturnDate(),
+					loan.getLateFees(),
+					loan.getLoanStatus(),
+					loan.getLoanID(),
+					null,
+					null,
+					null
+					);
+		}
+		
+		
+		/*
+		loan.getLibraryItem().getLoans().add(loan);
+		loan.getMember().getLoans().add(loan);
+		loan.getLibrarian().getLoans().add(loan);
+		*/
 		return loanDto;
 	}
 	
@@ -71,8 +115,8 @@ public class LoanDto {
 	 * @param loans
 	 * @return
 	 */
-	public static List<LoanDto> convertToDtos(List<Loan> loans) {
-		List<LoanDto> loanDtos = loans.stream().map(l -> LoanDto.convertToDto(l)).collect(Collectors.toList());
+	public static List<LoanDto> convertToDtos(List<Loan> loans, boolean cascade) {
+		List<LoanDto> loanDtos = loans.stream().map(l -> LoanDto.convertToDto(l, cascade)).collect(Collectors.toList());
 		return loanDtos;
 	}
 

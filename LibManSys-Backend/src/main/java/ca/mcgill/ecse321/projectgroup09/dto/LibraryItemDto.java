@@ -14,6 +14,11 @@ import ca.mcgill.ecse321.projectgroup09.models.MusicAlbum;
 import ca.mcgill.ecse321.projectgroup09.models.Newspaper;
 
 public class LibraryItemDto {
+	
+	public enum LibraryItemType {
+		ARCHIVE, BOOK, MOVIE, MUSIC_ALBUM, NEWSPAPER
+	}
+	
 	// LibraryItem attributes
 	private Long libraryItemID;
 	private String title;
@@ -25,6 +30,9 @@ public class LibraryItemDto {
 	// LibraryItem associations
 	private MemberDto member;
 	private List<LoanDto> loans;
+	
+	// type of library item
+	private LibraryItemType type;
 	
 	/**
 	 * No-arg constructor
@@ -46,7 +54,7 @@ public class LibraryItemDto {
 	 */
 	public LibraryItemDto(Long aLibraryItemId, String aTitle, int aPublishedYear,
 			int aLoanablePeriod, double aDailyOverdueFee, ItemStatus aItemStatus,
-			Member aMember, List<Loan> aLoans) {
+			Member aMember, List<Loan> aLoans, LibraryItemType aType) {
 		this.libraryItemID = aLibraryItemId;
 		this.title = aTitle;
 		this.publishedYear = aPublishedYear;
@@ -62,8 +70,9 @@ public class LibraryItemDto {
 			this.member = null;
 		}
 		// convert collection
-		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+		List<LoanDto> aLoansDto = aLoans.stream().map(loan -> LoanDto.convertToDto(loan, false)).collect(Collectors.toList());
 		this.loans = aLoansDto;
+		this.type = aType;
 	}
 	
 	/**
@@ -84,7 +93,7 @@ public class LibraryItemDto {
 		} else if (libraryItem instanceof Newspaper) {
 			lidto = (LibraryItemDto) NewspaperDto.convertToDto((Newspaper) libraryItem);
 		} else {
-			throw new IllegalStateException("invalid type of library item.");
+			throw new IllegalStateException("invalid type of (or probably just null) library item.");
 		}
 		return lidto;
 	}
@@ -208,5 +217,19 @@ public class LibraryItemDto {
 	 */
 	public void setLoans(List<LoanDto> loans) {
 		this.loans = loans;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public LibraryItemType getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(LibraryItemType type) {
+		this.type = type;
 	}
 }

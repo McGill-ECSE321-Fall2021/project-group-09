@@ -62,7 +62,7 @@ public class LoanController {
 		// Create loan object
 		try {
 			Loan loan = loanService.createLoan(borrowedDate, loanStatus, memberId, librarianId, libraryItemId);
-			return httpSuccess(LoanDto.convertToDto(loan));
+			return httpSuccess(LoanDto.convertToDto(loan, true));
 		} catch (Exception e) {
 			return httpFailure("Error: " + e.getMessage());
 		}
@@ -77,7 +77,7 @@ public class LoanController {
 	public ResponseEntity<?> getLoanbyId(@PathVariable("id") Long loanId)  {
 		try {
 			Loan loan = loanService.getLoanbyId(loanId);
-			return httpSuccess(LoanDto.convertToDto(loan));
+			return httpSuccess(LoanDto.convertToDto(loan, true));
 		} catch (Exception e) {
 			return httpFailure("Error: " + e.getMessage());
 		}
@@ -92,7 +92,7 @@ public class LoanController {
 	public ResponseEntity<?> getAllLoansByMember(@PathVariable("libCardNumber") Long memberLibCardNumber)  {
 		try {
 			List<Loan> loans = loanService.getLoansbyMember(memberLibCardNumber);
-			return httpSuccess(LoanDto.convertToDtos(loans));
+			return httpSuccess(LoanDto.convertToDtos(loans, true));
 		} catch (Exception e) {
 			return httpFailure("Error: " + e.getMessage());
 		}
@@ -117,7 +117,7 @@ public class LoanController {
 	 * @return message indicating if loan was deleted or not.
 	 */
 	@PostMapping(value = { BASE_URL + "/delete/{id}", BASE_URL + "/delete/{id}/" })
-	public ResponseEntity<?> deleteLoan(@PathVariable("loanId") Long loanId)  {
+	public ResponseEntity<?> deleteLoan(@PathVariable("id") Long loanId)  {
 		// try to delete loan
 		try {
 			loanService.deleteLoan(loanId);
@@ -137,7 +137,7 @@ public class LoanController {
 		// Create list of all books, converted to Dto's
 		List<LoanDto> loans = null;
 		try {
-			loans = loanService.getAllLoans().stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+			loans = loanService.getAllLoans().stream().map(loan -> LoanDto.convertToDto(loan, true)).collect(Collectors.toList());
 		} catch (Exception e) {
 			return httpFailureMessage(e.getMessage());
 		}

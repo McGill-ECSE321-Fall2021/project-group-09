@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.controller;
 
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailure;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
 
@@ -31,6 +32,9 @@ public class LibrarianController {
 			List<LibrarianDto> ls = LibrarianDto.convertToDtos(librarianService.getAll());
 			return httpSuccess(ls);
 		} catch (Exception e) {
+			if (e.getMessage() == null) {
+				return httpFailure(e.getStackTrace());
+			}
 			return httpFailureMessage(e.getMessage());
 		}
 	}

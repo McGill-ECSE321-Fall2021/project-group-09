@@ -19,7 +19,7 @@ public class NewspaperDto extends LibraryItemDto {
 	
 	public NewspaperDto(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee,
 			ItemStatus aItemStatus, Member aMember, List<Loan> aLoans, String journalName, String edition, String chiefEditor) {
-		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans);
+		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans, LibraryItemType.NEWSPAPER);
 		this.journalName=journalName;
 		this.edition=edition;
 		this.chiefEditor=chiefEditor;

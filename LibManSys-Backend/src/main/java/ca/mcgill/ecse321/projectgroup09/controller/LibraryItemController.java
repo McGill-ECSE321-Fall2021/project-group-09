@@ -212,7 +212,7 @@ public class LibraryItemController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
-		LoanDto ldto = LoanDto.convertToDto(l);
+		LoanDto ldto = LoanDto.convertToDto(l, true);
 		return ResponseEntity.status(HttpStatus.OK).body(ldto);
 	}
 	
@@ -231,7 +231,7 @@ public class LibraryItemController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
 		}
-		LoanDto ldto = LoanDto.convertToDto(l);
+		LoanDto ldto = LoanDto.convertToDto(l, true);
 		return ResponseEntity.status(HttpStatus.OK).body(ldto);
 	}
 	
@@ -251,7 +251,7 @@ public class LibraryItemController {
 		} catch (Exception e) {
 			return httpFailureMessage("Error: " + e.getMessage());
 		}
-		LoanDto ldto = LoanDto.convertToDto(l);
+		LoanDto ldto = LoanDto.convertToDto(l, true);
 		return httpSuccess(ldto);
 	}
 }

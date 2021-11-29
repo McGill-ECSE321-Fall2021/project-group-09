@@ -20,7 +20,7 @@ public class ArchiveDto extends LibraryItemDto {
 	
 	public ArchiveDto(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee,
 			ItemStatus aItemStatus, Member aMember, List<Loan> aLoans, String aInstitution) {
-		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans);
+		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans, LibraryItemType.ARCHIVE);
 		this.institution = aInstitution;
 	}
 	

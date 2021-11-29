@@ -21,7 +21,7 @@ public class MusicAlbumDto extends LibraryItemDto {
 	
 	public MusicAlbumDto(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee,
 			ItemStatus aItemStatus, Member aMember, List<Loan> aLoans, String aGenre, String anArtist, int numSongs, int albumLengthInMinutes) {
-		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans);
+		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans, LibraryItemType.MUSIC_ALBUM);
 		this.genre = aGenre;
 		this.artist=anArtist;
 		this.numSongs=numSongs;

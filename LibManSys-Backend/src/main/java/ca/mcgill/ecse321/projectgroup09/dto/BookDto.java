@@ -45,7 +45,7 @@ public class BookDto extends LibraryItemDto {
 	 */
 	public BookDto(Long aLibraryItemId, String aTitle, int aPublishedYear, int aLoanablePeriod, double aDailyOverdueFee,
 			ItemStatus aItemStatus, Member aMember, List<Loan> aLoans, String aAuthor, String aPublisher, String aISBN, int aNumPages) {
-		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans);
+		super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans, LibraryItemType.BOOK);
 		
 		this.author = aAuthor;
 		this.publisher = aPublisher;

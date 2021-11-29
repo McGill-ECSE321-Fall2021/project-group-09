@@ -37,7 +37,7 @@ public OnlineMemberDto(long accountID, String aFullName, Long aLibCardNumber, St
 		List<Loan> loans, List<Booking> bookings, List<LibraryItem> reserved, String aMemberEmail, String aMemberPassword, String aMemberUsername) {
 	super(accountID, aFullName, aLibCardNumber, anAddress, aPhoneNumber, anAmountOwed, activeLoans, isVerifiedResident, loans, bookings, reserved);
 	
-	List<LoanDto> aLoansDto = loans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+	List<LoanDto> aLoansDto = loans.stream().map(loan -> LoanDto.convertToDto(loan, false)).collect(Collectors.toList());
 	this.loans = aLoansDto;
 	List<BookingDto> aBookingsDto = bookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	this.bookings = aBookingsDto;

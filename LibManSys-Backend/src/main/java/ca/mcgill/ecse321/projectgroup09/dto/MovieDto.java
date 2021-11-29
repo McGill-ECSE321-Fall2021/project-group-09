@@ -22,7 +22,7 @@ public class MovieDto extends LibraryItemDto {
 				Integer aLoanablePeriod, Double aDailyOverdueFee, ItemStatus aItemStatus, 
 				Member aMember, List<Loan> aLoans,
 				String aDirector, Integer aRuntime, String aGenre) {
-		  super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans);
+		  super(aLibraryItemId, aTitle, aPublishedYear, aLoanablePeriod,aDailyOverdueFee, aItemStatus, aMember, aLoans, LibraryItemType.MOVIE);
 			this.director = aDirector;
 			this.runtime = aRuntime;
 			this.genre = aGenre;

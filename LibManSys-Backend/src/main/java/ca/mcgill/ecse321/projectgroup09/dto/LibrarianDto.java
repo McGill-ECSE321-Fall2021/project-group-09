@@ -31,7 +31,7 @@ public class LibrarianDto extends AccountDto {
 
 		List<ScheduleDto> scheduleDto = schedules.stream().map(schedule -> ScheduleDto.convertToDto(schedule)).collect(Collectors.toList());
 		this.schedules = scheduleDto;
-		List<LoanDto> loanDto = loans.stream().map(loan -> LoanDto.convertToDto(loan)).collect(Collectors.toList());
+		List<LoanDto> loanDto = loans.stream().map(loan -> LoanDto.convertToDto(loan, false)).collect(Collectors.toList());
 		this.loans = loanDto;
 		List <BookingDto> bookingDto = bookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 		this.bookings = bookingDto;
