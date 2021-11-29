@@ -1,6 +1,5 @@
 <template>
   <div class="header">
-
     <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
       <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
       <ul class="nav-left mr-auto">
@@ -35,20 +34,15 @@
       </ul>
     </nav>
 
-    <section>
-     
-    </section>
- 
-    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b>  </b>
-      
-    </footer>
+    <section></section>
 
-   
+    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
+      <b> </b>
+    </footer>
   </div>
 </template>
 
-<script>
+<script >
 import Register from "../components/Register";
 import MemberLogin from "../components/MemberLogin";
 import SearchLibItems from "../components/SearchLibItems";
