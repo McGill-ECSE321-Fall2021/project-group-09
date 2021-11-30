@@ -51,11 +51,12 @@ public class MemberService {
 	            throw new IllegalArgumentException("Phone Number must be 10 characters long");
 	        }
 		
-		  int max = 999999;
-	        int min = 1;
-	        int range = max - min + 1;
-	        final Long libCardNumber = (long) ((Math.random() * range) + min);
-		//final Long libCardNumber = UUID.randomUUID().getLeastSignificantBits() & Long.MAX_VALUE;
+		long leftLimit = 000001;
+	    long rightLimit = 999999;
+	    long libCardNumber = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+		
+	        
+	        //final Long libCardNumber = UUID.randomUUID().getLeastSignificantBits() & Long.MAX_VALUE;
 	
 		Member member = new Member();
 		member.setFullName(fullName);

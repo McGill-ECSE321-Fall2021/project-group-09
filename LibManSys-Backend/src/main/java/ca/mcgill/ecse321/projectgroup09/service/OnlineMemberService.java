@@ -67,9 +67,12 @@ public class OnlineMemberService extends MemberService {
 		}
 		
 
-		Long libCardNumber = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-
-		//OnlineMember onlineMember = (OnlineMember) super.createMember(fullName, address, phoneNumber);
+		long leftLimit = 000001;
+	    long rightLimit = 999999;
+	    long libCardNumber = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+		
+	    
+	    //OnlineMember onlineMember = (OnlineMember) super.createMember(fullName, address, phoneNumber);
 		OnlineMember onlineMember = new OnlineMember();
 		onlineMember.setFullName(fullName);
 		onlineMember.setAddress(address);

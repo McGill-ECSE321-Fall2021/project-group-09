@@ -65,11 +65,11 @@ public class OnlineMemberController {
 	 
 	@PostMapping(value = { "/OnlineMembers/create/{fullName}", "/OnlineMembers/create/{fullName}/" })
 	public OnlineMemberDto createOnlineMember(@PathVariable("fullName") String fullName,
-				@RequestParam(name = "Address") String OnlineMemberAddress,
-				@RequestParam(name = "Phone Number") String OnlineMemberPhoneNumber,
-				@RequestParam(name = "Email Address") String memberEmail,
-				@RequestParam(name = "Password") String memberPassword,
-				@RequestParam(name = "Username") String memberUsername
+				@RequestParam(name = "address") String OnlineMemberAddress,
+				@RequestParam(name = "phoneNumber") String OnlineMemberPhoneNumber,
+				@RequestParam(name = "emailAddress") String memberEmail,
+				@RequestParam(name = "password") String memberPassword,
+				@RequestParam(name = "username") String memberUsername
 				)
 				throws IllegalArgumentException {
 			OnlineMember OnlineMember = onlineMemberService.createOnlineMember(fullName, OnlineMemberAddress, OnlineMemberPhoneNumber, memberEmail, memberPassword, memberUsername);
