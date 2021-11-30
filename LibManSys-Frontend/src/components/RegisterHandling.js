@@ -50,12 +50,12 @@ export default {
 	methods: 
 	{	createMemberAccount: function (fullName, address, phoneNumber, emailAddress, password, username) {
                 
-                AXIOS.post('/OnlineMembers/create/' + fullName + '?address=' + address + '?phoneNumber=' + phoneNumber +
-				'emailAddress=' + emailAddress + '?password=' + password + '?username=' +username
+                AXIOS.post('/OnlineMembers/create/' + fullName + '?address=' + address + '&phoneNumber=' + phoneNumber +
+				'&emailAddress=' + emailAddress + '&password=' + password + '&username=' +username
 				)
 				
 				.then(response => {
-                   his.MemberAccounts.push(response.data)
+                   //this.MemberAccounts.push(response.data)
                     /*fullName = this.fullName,
                     address = this.address,
                     phoneNumber = this.phoneNumber,
