@@ -91,5 +91,27 @@ public class LibrarianService {
 		return librarian;
 	}
 	
-
+	/**
+	 * Return librarian matching username and password.
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@Transactional
+	public Librarian loginLibrarian(String username, String password) {
+		if (username == null || username.isBlank()) {
+			throw new IllegalArgumentException("Please provide a username.");
+		}
+		if (password == null || password.isBlank()) {
+			throw new IllegalArgumentException("Please provide a password.");
+		}
+		Librarian l = librarianRepository.findLibrarianByLibrarianUsername(username);
+		if (l == null) {
+			throw new IllegalStateException("Could not find librarian with that username.");
+		}
+		if (!l.getLibrarianPassword().equals(password)) {
+			throw new IllegalStateException("Password does not match username.");
+		}
+		return l;
+	}
 }

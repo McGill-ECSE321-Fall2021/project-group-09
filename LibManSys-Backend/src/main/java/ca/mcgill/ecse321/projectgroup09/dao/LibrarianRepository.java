@@ -17,5 +17,6 @@ public interface LibrarianRepository extends CrudRepository<Librarian, Long> {
 	Librarian findLibrarianByLoans(Loan loan);
 	Librarian findLibrarianBySchedules(Schedule schedule);
 	Librarian findLibrarianByEmployeeIDNumber(Long employeeIDNumber);
+	Librarian findLibrarianByLibrarianUsername(String librarianUsername);
 	List<Librarian> findAll();
 }

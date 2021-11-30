@@ -21,7 +21,7 @@ import ca.mcgill.ecse321.projectgroup09.service.LibrarianService;
 @RestController
 public class LibrarianController {
 	
-	public static final String BASE_URL = "/librarian";
+	private static final String BASE_URL = "/librarian";
 	
 	@Autowired
 	private LibrarianService librarianService;
@@ -57,6 +57,21 @@ public class LibrarianController {
 			return httpSuccess(ldto);
 		} catch (Exception e) {
 			return httpFailureMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Login a librarian. Given matching username and password, return
+	 * librarian associated with it.
+	 */
+	@PostMapping(value = {BASE_URL + "/login", BASE_URL + "/login/"})
+	public ResponseEntity<?> loginLibrarian(@RequestParam("username") String username, 
+			@RequestParam("password") String password) {
+		try {
+			LibrarianDto ldto = LibrarianDto.convertToDto(librarianService.loginLibrarian(username, password));
+			return httpSuccess(ldto);
+		} catch (Exception e) {
+			return httpFailure("Error: " + e.getMessage());
 		}
 	}
 }
