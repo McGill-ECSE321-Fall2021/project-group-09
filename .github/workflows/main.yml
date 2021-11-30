@@ -42,13 +42,16 @@ jobs:
         working-directory: LibManSys-Backend
         
       - name: Build with Gradle
-        run: ./gradlew build --no-daemon
         id: build_gradle
+        run: |
+          ./gradlew build --no-daemon
+          echo ::set-output name=exit_code::$?
         working-directory: LibManSys-Backend
         
       # if successful build, push to heroku
-      - name: print
-        run: echo $?
+      - name: Push Successful Build to Heroku
+        if: steps.build_gradle.outputs.exit_code == true
+        run: echo "Successful build, pushing to heroku"
         working-directory: LibManSys-Backend
 
       - name: Stop Gradle Daemon
