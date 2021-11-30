@@ -1,6 +1,6 @@
 <template>
-  <div class="hello-body">
-
+  <div class="home-body">
+    
     <section>
       <br />
       <br />
@@ -34,30 +34,6 @@
     <!--! On user loged in = librarian -->
     <td><button v-on:click="goToItemPage()">Test Item Page</button></td>
     <td><button v-on:click="goToBookingsPage()">Bookings</button></td>
-    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> blah blah blah some copyright bs </b>
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <!-- <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-        </li>
-      </ul> -->
-    </footer>
 
     <!--
             <td>   <button v-on:click="goToRegisterPage()">Register</button>   </td>
@@ -95,7 +71,7 @@ import Register from "../components/Register";
 import Router from "../router/index";
 
 export default {
-  name: "hello",
+  name: "Home",
   data() {
     return {
       hover: false,

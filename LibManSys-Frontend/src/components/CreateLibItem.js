@@ -18,12 +18,6 @@ function LoanDto(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryIt
 	this.member = member;
 	this.librarian = librarian;
 }
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-import SearchLibItems from "../components/SearchLibItems";
-import Hello from "../components/Hello";
-import Register from "../components/Register";
-import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
 
 export default {

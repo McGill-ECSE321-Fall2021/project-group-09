@@ -5,7 +5,7 @@ module.exports = {
   
   build: {
     env: require('./prod.env'),
-    host: 'libmansys-g09a.herokuapp.com',
+    host: 'libmansys-frontend-g09a.herokuapp.com',
     port: 443,
     backendHost: 'libmansys-g09a.herokuapp.com',
     backendPort: 443,

@@ -41,9 +41,55 @@ jobs:
         run: chmod +x gradlew
         working-directory: LibManSys-Backend
         
-      - name: Build with Gradle
-        run: ./gradlew build --no-daemon
+      - name: Build backend with Gradle
+        id: build_gradle
+        run: |
+          ./gradlew build --no-daemon
+          echo ::set-output name=exit_code::$?
         working-directory: LibManSys-Backend
+        
+      # if successful build, push to heroku
+      - name: Push Successful backend Build to Heroku
+        if: steps.build_gradle.outputs.exit_code == 0
+        # {{ secrets.CC_HEROKU_API_KEU }}
+        
+        run: |
+          echo "Successful build, pushing to heroku"
+          echo "machine api.heroku.com
+            login christoscunn@gmail.com
+            password 6d011963-a494-4236-ae6c-1a7b6726fdef
+            login christoscunn@gmail.com
+            password 6d011963-a494-4236-ae6c-1a7b6726fdef" > $HOME/_netrc          
+          echo "test"
+          cat $HOME/_netrc
+          heroku git:remote --app libmansys-g09a --remote backend-heroku
+          git remote -v
+          git push backend-heroku master
+        working-directory: LibManSys-Backend
+        
+      - name: Build frontend with node
+        id: build_node
+        run: |
+          npm install
+          npm run build
+          echo ::set-output name=exit_code::$?
+        working-directory: LibManSys-Frontend
+        
+      - name: Push successful front end build to heroku
+        if: steps.build_node.outputs.exit_code == 0
+        run: |
+          echo "Successful build, pushing to heroku"
+          echo "machine api.heroku.com
+            login christoscunn@gmail.com
+            password 6d011963-a494-4236-ae6c-1a7b6726fdef
+            login christoscunn@gmail.com
+            password 6d011963-a494-4236-ae6c-1a7b6726fdef" > $HOME/_netrc          
+          echo "test"
+          cat $HOME/_netrc
+          heroku git:remote --app libmansys-frontend-g09a --remote frontend-heroku
+          git remote -v
+          git push frontend-heroku master
+        working-directory: LibManSys-Frontend
 
       - name: Stop Gradle Daemon
         run: ./gradlew --stop
