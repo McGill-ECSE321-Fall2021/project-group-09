@@ -28,10 +28,10 @@ public class ScheduleController {
 	private ScheduleService scheduleService;
 	
 	/**
-	 * 
+	 * Create a schedule for a librarian
 	 * @param openingTimeString Formatted as "hh:mm:ss"
 	 * @param closingTimeString Formatted as "hh:mm:ss"
-	 * @param dayOfWeekString Either all caps or just first letter captialized.
+	 * @param dayOfWeekString All caps day of week string.
 	 * @param librarianId
 	 * @return
 	 */
@@ -44,14 +44,22 @@ public class ScheduleController {
 		DayOfWeek dayOfWeek = null;
 		try {
 			openingTime = Time.valueOf(openingTimeString);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: failed to parse openingTime as valid Time: " + e.getMessage());
+		}
+		try {
 			closingTime = Time.valueOf(closingTimeString);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: failed to parse closingTime as valid Time: " + e.getMessage());
+		}
+		try {
 			dayOfWeek = DayOfWeek.valueOf(dayOfWeekString);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: failed to parse inputs as valid Time or DayOfWeek.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: failed to parse dayOfWeek as valid DayOfWeek (must be all caps): " + e.getMessage());
 		}
 		ScheduleDto sdto = null;
 		try {
-			Schedule s = scheduleService.createSchedule(openingTime, closingTime, dayOfWeek, librarianId);
+			Schedule s = scheduleService.createScheduleForLibrarian(openingTime, closingTime, dayOfWeek, librarianId);
 			sdto = ScheduleDto.convertToDto(s);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
@@ -64,7 +72,7 @@ public class ScheduleController {
 	 * @param scheduleId
 	 * @return
 	 */
-	@GetMapping(value = {BASE_URL + "/get/{id}", BASE_URL + "/get/{id}/"})
+	@GetMapping(value = {BASE_URL + "/get-by-id/{id}", BASE_URL + "/get-by-id/{id}/"})
 	public ResponseEntity<?> getScheduleById(@PathVariable("id") Long scheduleId) {
 		ScheduleDto sdto = null;
 		try {
@@ -81,7 +89,7 @@ public class ScheduleController {
 	 * @param day
 	 * @return
 	 */
-	@GetMapping(value = {BASE_URL + "/get/{day}", BASE_URL + "/get/{day}/"})
+	@GetMapping(value = {BASE_URL + "/get-by-day/{day}", BASE_URL + "/get-by-day/{day}/"})
 	public ResponseEntity<?> getSchedulesByDay(@PathVariable("day") String day) {
 		// parse day
 		DayOfWeek dayOfWeek = null;
@@ -106,7 +114,7 @@ public class ScheduleController {
 	 * @param librarianId
 	 * @return
 	 */
-	@GetMapping(value = {BASE_URL + "/get/{librarianId}", BASE_URL + "/get/{librarianId}/"})
+	@GetMapping(value = {BASE_URL + "/get-by-librarian/{librarianId}", BASE_URL + "/get-by-librarian/{librarianId}/"})
 	public ResponseEntity<?> getSchedulesByLibrarian(@PathVariable("librarianId") Long librarianId) {
 		List<ScheduleDto> sdtos = null;
 		try {

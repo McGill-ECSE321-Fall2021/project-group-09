@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "heroku-prebuild": "cd LibManSys-Frontend && npm install && npm run build",
+        "start": "cd LibManSys-Frontend && npm start"
+    }
+}

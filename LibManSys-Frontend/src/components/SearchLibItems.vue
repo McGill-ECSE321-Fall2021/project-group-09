@@ -51,7 +51,7 @@ export default {
   },
 
   components: {
-    Register,
+    Register
   },
 
    methods: {

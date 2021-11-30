@@ -10,10 +10,11 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.lenient;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.sql.Date;
-
+import java.sql.Time;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -123,6 +124,7 @@ public class TestBookingService {
 				member.setFullName(FULL_NAME);
 				member.setIsVerifiedResident(IS_VERIFIED_RESIDENT);
 				member.setPhoneNumber(PHONE_NO);
+				member.setBookings(new ArrayList<Booking>());
 				return member;
 			}
 			else {
@@ -154,6 +156,7 @@ public class TestBookingService {
 				librarian.setLibrarianEmail(LIBRARIAN_EMAIL);
 				librarian.setLibrarianPassword(LIBRARIAN_PASSWORD);
 				librarian.setLibrarianUsername(LIBRARIAN_USERNAME);
+				librarian.setBookings(new ArrayList<Booking>());
 				return librarian;
 			}
 			else {
@@ -237,12 +240,12 @@ public class TestBookingService {
 	@Test 
 	public void createBooking() { 
 		long bookingID = 12345678;
-		String startTime = "8:00:00";
-		String endTime = "16:00:00";
-		String bookingDate = "2023-11-30";
+		Time startTime = java.sql.Time.valueOf("8:00:00");
+		Time endTime = java.sql.Time.valueOf("16:00:00");
+		Date bookingDate = java.sql.Date.valueOf("2023-11-30");
 		
-		long librarianID = 12345678;
-		long memberID = 999999999;
+		long librarianID = EMPLOYEE_ID;
+		long memberID = LIB_CARD_NO;
 
 		Booking booking = null; 
 		
@@ -263,11 +266,11 @@ public class TestBookingService {
 	public void createBookingWithNullParameters() { 
 		String error = null;
 		long bookingID = 12345678;
-		String endTime = "16:00:00";
-		String bookingDate = "2023-11-11";
+		Time endTime = java.sql.Time.valueOf("16:00:00");
+		Date bookingDate = java.sql.Date.valueOf("2023-11-30");
 		
-		long librarianID = 12345678;
-		long memberID = 999999999;
+		long librarianID = EMPLOYEE_ID;
+		long memberID = LIB_CARD_NO;
 
 		Booking booking = null; 
 		
@@ -289,9 +292,9 @@ public class TestBookingService {
 	@Test 
 	public void updateBooking() {
 		long BOOKING_ID = 12345678;
-		String START_TIME = "09:00:00";
-		String END_TIME = "13:00:00";
-		String DATE = "2023-11-12";
+		Time START_TIME = java.sql.Time.valueOf("09:00:00");
+		Time END_TIME = java.sql.Time.valueOf("13:00:00");
+		Date DATE = java.sql.Date.valueOf("2023-11-12");
 	
 		
 		Booking booking = null;
@@ -304,14 +307,14 @@ public class TestBookingService {
 		
 	}
 	assertNotNull(booking);
-	assertEquals(START_TIME, booking.getBookingStartTime().toString());
-	assertEquals(END_TIME, booking.getBookingEndTime().toString());
+	assertEquals(START_TIME, booking.getBookingStartTime());
+	assertEquals(END_TIME, booking.getBookingEndTime());
 	}
 	
 	@Test 
 	public void updateBookingWithAcceptableNullParameters() {
 		long BOOKING_ID = 12345678;
-		String START_TIME = "09:00:00";
+		Time START_TIME = java.sql.Time.valueOf("09:00:00");
 	
 		
 		Booking booking = null;
@@ -324,7 +327,7 @@ public class TestBookingService {
 		
 	}
 	assertNotNull(booking);
-	assertEquals(START_TIME, booking.getBookingStartTime().toString());
+	assertEquals(START_TIME, booking.getBookingStartTime());
 	assertEquals(END_TIME, booking.getBookingEndTime().toString());
 	assertEquals(DATE, booking.getBookingDate().toString());
 	}

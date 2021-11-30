@@ -100,7 +100,7 @@ public class Schedule {
 		return this.dayOfWeek;
 	}
 
-	@ManyToOne
+	@ManyToOne(targetEntity = Librarian.class)
 	public Librarian getLibrarian() {
 		return this.librarian;
 	}

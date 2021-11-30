@@ -38,7 +38,7 @@ Head Librarian:
                             <label for="input-default" color="#00000">Name:</label>
                         </b-col>
                         <b-col sm="10">
-                            <p>namme</p>
+                            <p>{{librarian.fullName}}</p>
                         </b-col>
                     </b-row>
         
@@ -47,7 +47,7 @@ Head Librarian:
                             <label for="input-large">Email:</label>
                         </b-col>
                         <b-col sm="10">
-                            <p>namme</p>
+                            <p>{{librarian.librarianEmail}}</p>
                         </b-col>
                     </b-row>
                     <b-row class="my-1">
@@ -55,7 +55,7 @@ Head Librarian:
                             <label for="input-large">Username:</label>
                         </b-col>
                         <b-col sm="10">
-                            <p>namme</p>
+                            <p>{{librarian.librarianUsername}}</p>
                         </b-col>
                     </b-row>
                     <b-row class="my-1" color="#00000">
@@ -63,7 +63,7 @@ Head Librarian:
                             <label for="input-default" color="#00000">Password:</label>
                         </b-col>
                         <b-col sm="10">
-                            <p>namme</p>
+                            <p>{{librarian.librarianPassword}}</p>
                         </b-col>
                     </b-row>
                     <b-row class="my-1">
@@ -71,33 +71,110 @@ Head Librarian:
                             <label for="input-large">Employee ID Number:</label>
                         </b-col>
                         <b-col sm="10">
-                            <p>namme</p>
+                            <p>{{librarian.employeeIDNumber}}</p>
                         </b-col>
                     </b-row>
                     <!-- Associations -->
                     <b-row class="my-1">
-                        <b-col sm="2">
-                            <label for="input-large">Schedules:</label>
-                        </b-col>
-                        <b-col sm="10">
-                            <p>namme</p>
-                        </b-col>
+                        <b-container>
+                            <b-row class="my-2">
+                                <b-col>
+                                    <label for="input-large">Schedules:</label>
+                                </b-col>
+                            </b-row>
+                            
+                            <b-row class="my-2">
+                                <b-col>
+                                    <v-data-table  class="elevation-1" >
+                                        <tr>
+                                             <td class="table-text">|  Schedule ID  |</td>
+                                             <td class="table-text">|  Opening Time |</td>
+                                             <td class="table-text">|  Closing Time |</td>
+                                             <td class="table-text">|  Day of Week  |</td>
+                                             <td class="table-text">|  Librarian Employee ID  |</td>
+                                        </tr>
+                                        <tr v-for="schedule in schedules" :key="schedule.scheduleID">
+                                            <td class="table-text">{{schedule.scheduleID}}</td>
+                                            <td class="table-text">{{schedule.openingTime}}</td> 
+                                            <td class="table-text">{{schedule.closingTime}}</td> 
+                                            <td class="table-text">{{schedule.dayofWeek}} </td> 
+                                            <td class="table-text">{{schedule.librarianEmployeeID}} </td> 
+                                        </tr>
+                                        
+                                    </v-data-table> 
+                                </b-col>
+                            </b-row>
+                        </b-container>
                     </b-row>
                     <b-row class="my-1">
-                        <b-col sm="2">
-                            <label for="input-large">Loans:</label>
-                        </b-col>
-                        <b-col sm="10">
-                            <p>namme</p>
-                        </b-col>
+                        <b-container>
+                            <b-row class="my-2">
+                                <b-col>
+                                    <label for="input-large">Loans:</label>
+                                </b-col>
+                            </b-row>
+                            
+                            <b-row class="my-2">
+                                <b-col>
+                                    <v-data-table  class="elevation-1" >
+                                        <tr>
+                                             <td class="table-text">|  Loan ID  |</td>
+                                             <td class="table-text">|  Borrowed Date |</td>
+                                             <td class="table-text">|  Returned Date |</td>
+                                             <td class="table-text">|  Late Fees  |</td>
+                                             <td class="table-text">|  Loan Status  |</td>
+                                             <td class="table-text">|  Library Item ID  |</td>
+                                             <td class="table-text">|  Member Library Card Number  |</td>
+                                             <td class="table-text">|  Librarian Employee ID  |</td>
+                                        </tr>
+                                        <tr v-for="loan in loans" :key="loan.loanId">
+                                            <td class="table-text">{{loan.loanId}}</td>
+                                            <td class="table-text">{{loan.borrowedDate}}</td> 
+                                            <td class="table-text">{{loan.returnDate}}</td> 
+                                            <td class="table-text">{{loan.lateFees}} </td> 
+                                            <td class="table-text">{{loan.loanStatus}} </td> 
+                                            <td class="table-text">{{loan.libraryItemID}} </td>  
+                                            <td class="table-text">{{loan.memberLibCardNumber}} </td>
+                                            <td class="table-text">{{loan.librarianEmployeeID}} </td> 
+                                        </tr>
+                                        
+                                    </v-data-table> 
+                                </b-col>
+                            </b-row>
+                        </b-container>
                     </b-row>
                     <b-row class="my-1">
-                        <b-col sm="2">
-                            <label for="input-large">Bookings:</label>
-                        </b-col>
-                        <b-col sm="10">
-                            <p>namme</p>
-                        </b-col>
+                        <b-container>
+                            <b-row class="my-2">
+                                <b-col>
+                                    <label for="input-large">Bookings:</label>
+                                </b-col>
+                            </b-row>
+                            
+                            <b-row class="my-2">
+                                <b-col>
+                                    <v-data-table  class="elevation-1" >
+                                        <tr>
+                                             <td class="table-text">|  Booking ID  |</td>
+                                             <td class="table-text">|  Start Time |</td>
+                                             <td class="table-text">|  End Time |</td>
+                                             <td class="table-text">|  Booking Date  |</td>
+                                             <td class="table-text">|  Member Library Card Number  |</td>
+                                             <td class="table-text">|  Librarian Employee ID  |</td>
+                                        </tr>
+                                        <tr v-for="booking in bookings" :key="booking.bookingID">
+                                            <td class="table-text">{{booking.bookingID}}</td>
+                                            <td class="table-text">{{booking.bookingStartTime}}}</td> 
+                                            <td class="table-text">{{booking.bookingEndTime}}</td> 
+                                            <td class="table-text">{{booking.bookingDate}} </td> 
+                                            <td class="table-text">{{booking.memberLibCardNumber}} </td> 
+                                            <td class="table-text">{{booking.librarianEmployeeID}} </td> 
+                                        </tr>
+                                        
+                                    </v-data-table> 
+                                </b-col>
+                            </b-row>
+                        </b-container>
                     </b-row>
                 </div>
                 <!-- if librarian is logged in, display above, else display below content -->
@@ -106,12 +183,14 @@ Head Librarian:
                 </div>
             </b-container>
     
-            <b-col class="myColumn">
-                <td>
+            <b-container>
+                    
+                <b-col class="myColumn">
                     <b-button justify="center" v-on:click="goToLibraryManagmentPage()">Library Managment</b-button>
-                </td>
-            </b-col>
-    
+                </b-col>
+
+            </b-container>
+
         </section>
         
     </div>
@@ -157,7 +236,8 @@ div {
 
 section {
     font-family: "Lato", sans-serif;
-    height: 100vh;
+    /*height: 100vh;*/
+    padding-bottom: 2em;
     background-size: contain;
     background-repeat: no-repeat;
     background-size: 100%;

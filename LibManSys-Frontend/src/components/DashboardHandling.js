@@ -9,14 +9,10 @@ var AXIOS = axios.create({
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-import SearchLibItems from "../components/SearchLibItems";
-import Hello from "../components/Hello";
-import Register from "../components/Register";
-import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
 import MemberLoans from "../components/MemberLoans";
 import VueSweetalert2 from 'vue-sweetalert2'
+
 
 function OnlineMemberDto(fullName, libCardNumber, address, phoneNumber, amountOwed, activeLoans, isVerifiedResident,   
 			emailAddress, username) {

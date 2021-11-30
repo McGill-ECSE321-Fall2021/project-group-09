@@ -1,4 +1,5 @@
 import Router from "../router/index";
+//import { eventBus } from "../eventBus";
 
 import axios from 'axios'
 var config = require('../../config')
@@ -24,7 +25,7 @@ export default {
        loginMember: function (username, password){
         console.log(username + ", " + password)
         // given username, password, get librarian employeeID
-        AXIOS.post('/online-member/login', {}, {
+        AXIOS.post('/OnlineMember/login', {}, {
             params: {
                 "username": username,
                 "password": password
@@ -33,8 +34,13 @@ export default {
         .then(response => {
             this.errorLogin = ''
 
+            var newLoggedInUser = response.data.libCardNumber
             // set cookie for logged in user
-            $cookies.set("loggedInUser", response.data.libCardNumber)
+            $cookies.set("loggedInUser", newLoggedInUser)
+            $cookies.set("loggedInType", "onlineMember")
+
+            // published event
+            EventBus.$emit('loggedInUserSet', newLoggedInUser)
 
             // send to dashboard
             Router.push({

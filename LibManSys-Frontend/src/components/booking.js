@@ -5,12 +5,12 @@ import Router from "../router/index";
 import axios from 'axios'
 var config = require('../../config')
 
-var frontendUrl =   'http://' + config.dev.host + ':' + config.dev.port
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
 var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
 
 var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+    baseURL: backendUrl,
+    headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
 function BookingDto(bookingStartTime, bookingEndTime, bookingID, bookingDate, member, librarian) {
@@ -29,80 +29,61 @@ export default {
             bookings: [],
             newBooking: '',
             errorBooking: '',
-            response: []
+            response: [],
+            bookingStartTime: '',
+            bookingEndTime: '',
+            bookingID: '',
+            bookingDate: '',
+            member: '',
+            librarian: ''
+
         }
+
     },
     created: function () {
-        const b1 = new BookingDto('9:00:00', '12:00:00', '1234', '01-01-2022', '1', '1')
-        const b2 = new BookingDto('6:00:00', '9:00:00', '1234', '01-01-2022', '1', '1')
-        this.bookings = [b1, b2];
+
+    //     AXIOS.get('/bookings/view-all') //change for logged in member
+    //         .then(response => {
+    //             this.bookings = response.data;
+    //             console.log(response.data);
+    //         })
+    //         .catch(e => {
+    //             this.errorResult = e
+    //         })
     },
+
     methods: {
         createBooking: function (bookingStartTime, bookingEndTime, bookingID, bookingDate, member, librarian) {
-            var b = new BookingDto(bookingStartTime, bookingEndTime, bookingID, bookingDate, member, librarian)
-            this.bookings.push(b)
-            this.bookingStartTime = ''
-            this.bookingEndTime = ''
-            this.bookingDate = ''
-            this.bookingID = ''
-            this.member = ''
-            this.librarian = ''
-        },
+            AXIOS.post('bookings/new/', {}, {
+                params: {
+                    bookingStartTime: bookingStartTime,
+                    bookingEndTime: bookingEndTime,
+                    bookingID: bookingID,
+                    bookingDate: bookingDate,
+                    member: member,
+                    librarian: librarian //should be logged in librarian
 
-        goToRegisterPage: function () {
-            Router.push({
-                path: "/Register",
-                name: "Register",
-            });
-        },
-        goToLoginPage: function () {
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin",
-            });
-        },
-        goToSearchPage: function () {
-            Router.push({
-                path: "/SearchResults",
-                name: "SearchResults",
-            });
-        },
-        goToLibManagmentPage: function () {
-            Router.push({
-                path: "/LibraryManagementDashboard",
-                name: "LibraryManagementDashboard",
-            });
-        },
-        goToUserPage: function () {
-            Router.push({
-                path: "/OnlineMemberDashboard",
-                name: "OnlineMemberDashboard",
-            });
-        },
-        goToLibrarianPage: function () {
-            Router.push({
-                path: "/LibrarianDashboard",
-                name: "LibrarianDashboard",
-            });
-        },
-        goToItemPage: function () {
-            Router.push({
-                path: "/ItemPage",
-                name: "ItemPage",
-            });
-        },
-        goToContactUsPage: function () {
-            Router.push({
-                path: "/ContactUs",
-                name: "ContactUs",
-            });
-        },
-        goToBookingsPage: function () {
-            Router.push({
-                path: "/Bookings",
-                name: "Bookings",
-            });
+                }
+            })
+                .then(response => {
+                    this.bookings.push(response.data)
+                    this.errorResult = ''
+                    this.bookingStartTime = ''
+                    this.bookingEndTime = ''
+                    this.bookingID = ''
+                    this.member = ''
+                    this.librarian = ''
+                })
+                .catch(error => {
+                    var errorMsg = error
+                    if (error.response) {
+                        errorMsg = error.response.data
+                    }
+                    console.log(errorMsg)
+                    this.errorResult = errorMsg
+                })
         },
     }
+
 }
 

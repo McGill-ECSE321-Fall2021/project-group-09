@@ -28,7 +28,7 @@ public class BookingService { // service class for booking out the library for e
 
 
 	/**
-	 * 
+	 * Associaties librarian and member with new booking.
 	 * @param startTime
 	 * @param endTime
 	 * @param bookingID
@@ -39,10 +39,16 @@ public class BookingService { // service class for booking out the library for e
 	 * @throws IllegalArgumentException 
 	 */
 	@Transactional
-	public Booking createBooking (String startTime, String endTime, Long bookingID, String bookingDate, Long memberID, Long librarianID) throws IllegalArgumentException {
+	public Booking createBooking (Time startTime, Time endTime, Long bookingID, Date bookingDate, Long memberID, Long librarianID) throws IllegalArgumentException {
 
 		Member member = memberRepository.findMemberByLibCardNumber(memberID);
 		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNumber(librarianID);
+		if (member == null) {
+			throw new IllegalArgumentException("Member does not exist.");
+		}
+		if (librarian == null) {
+			throw new IllegalArgumentException("Librarian does not exist.");
+		}
 		
 //		if (member == null) {
 //			throw new IllegalArgumentException("Error: Member is null"); 
@@ -59,11 +65,14 @@ public class BookingService { // service class for booking out the library for e
 		if (endTime == null) {
 			throw new IllegalArgumentException("Please enter an end time for your event.");
 		}
+//
+//		Time sTime = java.sql.Time.valueOf(startTime);
+//		Time eTime = java.sql.Time.valueOf(endTime);
+//		Date date = java.sql.Date.valueOf(bookingDate);
 
-		Time sTime = java.sql.Time.valueOf(startTime);
-		Time eTime = java.sql.Time.valueOf(endTime);
-		Date date = java.sql.Date.valueOf(bookingDate);
-
+		Time sTime = startTime;
+		Time eTime = endTime;
+		Date date = bookingDate;
 
 		if (sTime.toLocalTime().isAfter(eTime.toLocalTime())) {
 			throw new IllegalArgumentException("Start time cannot be later than end time");
@@ -99,7 +108,15 @@ public class BookingService { // service class for booking out the library for e
 		booking.setMember(member);
 		booking.setLibrarian(librarian);
 
-		bookingRepository.save(booking);
+		booking = bookingRepository.save(booking);
+		
+		member.getBookings().add(booking);
+		librarian.getBookings().add(booking);
+		
+		// save associations
+		librarianRepository.save(librarian);
+		memberRepository.save(member);
+		
 		return booking;
 
 	}
@@ -112,7 +129,7 @@ public class BookingService { // service class for booking out the library for e
 	}
 
 	@Transactional
-	public Booking updateBooking (Long id, String startTime, String endTime, String bookingDate) {
+	public Booking updateBooking (Long id, Time startTime, Time endTime, Date bookingDate) {
 
 		Time sTime = null;
 		Time eTime = null;
@@ -126,21 +143,21 @@ public class BookingService { // service class for booking out the library for e
 			sTime = booking.getBookingStartTime();
 		}
 		else {
-			sTime = java.sql.Time.valueOf(startTime);
+			sTime = startTime;
 		}
 
 		if (endTime == null ) { 
 			eTime = booking.getBookingEndTime();
 		}
 		else {
-			eTime = java.sql.Time.valueOf(endTime);
+			eTime = endTime;
 		}
 
 		if (bookingDate == null) {
 			date = booking.getBookingDate();
 		}
 		else {
-			date = java.sql.Date.valueOf(bookingDate);
+			date = bookingDate;
 		}
 
 		//Errors 
@@ -157,15 +174,15 @@ public class BookingService { // service class for booking out the library for e
 		}
 
 		//Check to ensure that new booking hours are within library opening hours 
-		Schedule libHours = scheduleRepository.findScheduleByScheduleID(getDayOfWeekForScheduleID(date));
-
-		if (sTime.toLocalTime().isBefore(libHours.getOpeningTime().toLocalTime())) {
-			throw new IllegalArgumentException("The library opens at " + libHours.getOpeningTime().toString() + ", please choose a later time..");
-		}
-
-		if (eTime.toLocalTime().isAfter(libHours.getClosingTime().toLocalTime())) {
-			throw new IllegalArgumentException("The library closes at " + libHours.getClosingTime().toString() + ", please choose an earlier time.");
-		}
+//		Schedule libHours = scheduleRepository.findScheduleByScheduleID(getDayOfWeekForScheduleID(date));
+//
+//		if (sTime.toLocalTime().isBefore(libHours.getOpeningTime().toLocalTime())) {
+//			throw new IllegalArgumentException("The library opens at " + libHours.getOpeningTime().toString() + ", please choose a later time..");
+//		}
+//
+//		if (eTime.toLocalTime().isAfter(libHours.getClosingTime().toLocalTime())) {
+//			throw new IllegalArgumentException("The library closes at " + libHours.getClosingTime().toString() + ", please choose an earlier time.");
+//		}
 
 		booking.setBookingStartTime(sTime);
 		booking.setBookingDate(date);

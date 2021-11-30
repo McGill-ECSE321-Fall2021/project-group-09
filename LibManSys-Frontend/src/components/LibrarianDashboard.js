@@ -4,19 +4,82 @@ import axios from 'axios'
 var config = require('../../config')
 
 /* http vs https*/
-var frontendUrl = 'https://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'https://' + config.dev.backendHost + ':' + config.dev.backendPort
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
 
 var AXIOS = axios.create({
   baseURL: backendUrl,
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
+function getSchedules(schedules) {
+    var scheduleList = []
+    for (const sid of schedules) {
+        AXIOS.get("/schedule/get-by-id/" + sid)
+        .then(response => {
+            var schedule = response.data
+            console.log(schedule)
+            scheduleList.push(schedule)
+        })
+        .catch(error => {
+            var errorMsg = error
+            if ( error.response ) {
+                errorMsg = error.response.data
+            }
+            console.log(errorMsg)
+        })
+    }
+    return scheduleList
+}
+
+function getLoans(loans) {
+    var loanList = []
+    for (const lid of loans) {
+        AXIOS.get("/loan/" + lid)
+        .then(response => {
+            var loan = response.data
+            console.log(loan)
+            loanList.push(loan)
+        })
+        .catch(error => {
+            var errorMsg = error
+            if ( error.response ) {
+                errorMsg = error.response.data
+            }
+            console.log(errorMsg)
+        })
+    }
+    return loanList
+}
+
+function getBookings(bookings) {
+    var bookingList = []
+    for (const bid of bookings) {
+        AXIOS.get("/bookings/getID/" + bid)
+        .then(response => {
+            var booking = response.data
+            console.log(booking)
+            bookingList.push(booking)
+        })
+        .catch(error => {
+            var errorMsg = error
+            if ( error.response ) {
+                errorMsg = error.response.data
+            }
+            console.log(errorMsg)
+        })
+    }
+    return bookingList
+}
+
 export default {
     data() {
         return {
             loggedInUser: '',
-            librarian: ''
+            librarian: '',
+            schedules: [],
+            loans: [],
+            bookings: []
         }
     },
     created: function () {
@@ -27,6 +90,10 @@ export default {
             AXIOS.get("/librarian/" + this.loggedInUser)
             .then(response => {
                 this.librarian = response.data
+                // get associations from IDs
+                this.schedules = getSchedules(response.data.schedules)
+                this.loans = getLoans(response.data.loans)
+                this.bookings = getBookings(response.data.bookings)
             })
             .catch(error => {
                 var errorMsg = error
@@ -38,7 +105,7 @@ export default {
         }
     },
     methods: {
-        
+        // navigation
         goToRegisterPage: function() {
             Router.push({
                 path: "/Register",
