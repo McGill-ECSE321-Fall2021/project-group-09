@@ -11,129 +11,143 @@ Head Librarian:
 
 -->
 <template>
-    <div class="header">
-    
-    
-        <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-            <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-            <ul class="nav-left mr-auto">
-                <li class="nav-item">
-                    <b class="nav-link" href="#a">LibManSys </b>
-                </li>
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToSearchPage()">Catalogue
-              </b>
-                </li>
-            </ul>
-            <ul class="nav-right ml-auto">
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
-                </li>
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToRegisterPage()">Sign Up
-              </b>
-    
-                </li>
-    
-            </ul>
-        </nav>
-    
-        <section>
-            <br />
-            <br />
-            <br />
-    
-       
-            <b-container fluid>
-         <myText> Librarian Profile </myText>
-    
-                <b-row class="my-1" color="#00000">
-                    <b-col sm="2" color="#00000">
-                        <label for="input-default" color="#00000">Name:</label>
-                    </b-col>
-    
-                </b-row>
-    
-                <b-row class="my-1">
-                    <b-col sm="2">
-                        <label for="input-large">Email:</label>
-                    </b-col>
-                </b-row>
-                <b-row class="my-1">
-                    <b-col sm="2">
-                        <label for="input-large">Address:</label>
-                    </b-col>
-                </b-row>
-                <b-row class="my-1">
-                    <b-col sm="2">
-                        <label for="input-large">Something else:</label>
-                    </b-col>
-                </b-row>
-    
-            </b-container>
-    
-            <!--
-    <b class="nav-link" href="#" v-on:click="goToLibraryManagmentPage()"
-                >Library Managment -->
-            </b>
-            </b>
-            </b>
-            </b>
-            <b-col class="myColumn">
-    
-                <td>
-                    <b-button v-row justify="center" v-on:click="goToLibraryManagmentPage()">Library Managment</b-button>
-                </td>
-    
-            </b-col>
-    
-        </section>
-        <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-            <b> blah blah blah some copyright bs </b>
-    
-        </footer>
-    
-    
+    <div id="librarian-dashboard">
+        <div class="header">
+            <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
+                <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
+                <ul class="nav-left mr-auto">
+                    <li class="nav-item">
+                        <b class="nav-link" href="#a">LibManSys </b>
+                    </li>
+                    <li class="nav-item">
+                        <b class="nav-link" href="#" v-on:click="goToSearchPage()">Catalogue </b>
+                    </li>
+                </ul>
+                <ul class="nav-right ml-auto">
+                    <li class="nav-item">
+                        <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
+                    </li>
+                    <li class="nav-item">
+                        <b class="nav-link" href="#" v-on:click="goToRegisterPage()">Sign Up</b>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="librarian-dashboard-body">
+            <section>
+                <br />
+                <br />
+                <br />
+        
+        
+                <b-container fluid>
+                    <b class="librarian-dashboard-title"> Librarian Profile </b>
+                    <br />
+                    <br />
+
+                    <div v-if="librarian">
+                        <b-row class="my-1" color="#00000">
+                            <b-col sm="2" color="#00000">
+                                <label for="input-default" color="#00000">Account ID:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>{{librarian.accountID}}</p>
+                            </b-col>
+                        </b-row>
+
+                        <b-row class="my-1" color="#00000">
+                            <b-col sm="2" color="#00000">
+                                <label for="input-default" color="#00000">Name:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>namme</p>
+                            </b-col>
+                        </b-row>
+            
+                        <b-row class="my-1">
+                            <b-col sm="2">
+                                <label for="input-large">Email:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>namme</p>
+                            </b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                            <b-col sm="2">
+                                <label for="input-large">Username:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>namme</p>
+                            </b-col>
+                        </b-row>
+                        <b-row class="my-1" color="#00000">
+                            <b-col sm="2" color="#00000">
+                                <label for="input-default" color="#00000">Password:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>namme</p>
+                            </b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                            <b-col sm="2">
+                                <label for="input-large">Employee ID Number:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>namme</p>
+                            </b-col>
+                        </b-row>
+                        <!-- Associations -->
+                        <b-row class="my-1">
+                            <b-col sm="2">
+                                <label for="input-large">Schedules:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>namme</p>
+                            </b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                            <b-col sm="2">
+                                <label for="input-large">Loans:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>namme</p>
+                            </b-col>
+                        </b-row>
+                        <b-row class="my-1">
+                            <b-col sm="2">
+                                <label for="input-large">Bookings:</label>
+                            </b-col>
+                            <b-col sm="10">
+                                <p>namme</p>
+                            </b-col>
+                        </b-row>
+                    </div>
+                    <!-- if librarian is logged in, display above, else display below content -->
+                    <div v-else>
+                        <b> No user is currently logged in, so no librarian details to display.</b>
+                    </div>
+                </b-container>
+        
+                <b-col class="myColumn">
+                    <td>
+                        <b-button justify="center" v-on:click="goToLibraryManagmentPage()">Library Managment</b-button>
+                    </td>
+                </b-col>
+        
+            </section>
+        </div>
+            
+        <div class="footer"> 
+            <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
+                <b> blah blah blah some copyright bs </b>
+            </footer>
+        </div>
     </div>
 </template>
 
 
-<script>
-import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
-import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-import Hello from "../components/Hello";
-import Router from "../router/index";
-
-export default {
-    name: 'hello',
-    data() {
-        return {
-            types: []
-        }
-    },
-    methods: {
-        goToSubmitPage: function() {
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
-        goToSearchPage: function() {
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        },
-        goToLibraryManagmentPage: function() {
-            Router.push({
-                path: "/LibraryManagementDashboard",
-                name: "LibraryManagementDashboard"
-            })
-        }
-    }
-}
-</script>
+<script src="./LibrarianDashboard.js"></script>
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -245,7 +259,7 @@ button {
     padding-bottom: 10;
 }
 
-myText{
+.librarian-dashboard-title {
   color:#a85f32;
   font: "Times";
   font-size: 30px;
