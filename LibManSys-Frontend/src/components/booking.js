@@ -13,13 +13,13 @@ var AXIOS = axios.create({
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function BookingDto(bookingStartTime, bookingEndTime, bookingID, bookingDate, member, librarian) {
-    this.bookingStartTime = bookingStartTime
-    this.bookingEndTime = bookingEndTime
+function BookingDto(startTime, endTime, bookingID, bookingDate, memberID, librarianID) {
+    this.startTime = startTime
+    this.endTime = endTime
     this.bookingDate = bookingDate
     this.bookingID = bookingID
-    this.member = member
-    this.librarian = librarian
+    this.memberID = memberID
+    this.librarianID = librarianID
 }
 
 export default {
@@ -30,12 +30,12 @@ export default {
             newBooking: '',
             errorBooking: '',
             response: [],
-            bookingStartTime: '',
-            bookingEndTime: '',
+            startTime: '',
+            endTime: '',
             bookingID: '',
             bookingDate: '',
-            member: '',
-            librarian: ''
+            memberID: '',
+            librarianID: ''
 
         }
 
@@ -53,26 +53,26 @@ export default {
     },
 
     methods: {
-        createBooking: function (bookingStartTime, bookingEndTime, bookingID, bookingDate, member, librarian) {
+        createBooking: function (bookingStartTime, endTime, bookingID, bookingDate, memberID, librarianID) {
             AXIOS.post('bookings/new/', {}, {
                 params: {
-                    bookingStartTime: bookingStartTime,
-                    bookingEndTime: bookingEndTime,
+                    startTime: startTime,
+                    endTime: endTime,
                     bookingID: bookingID,
                     bookingDate: bookingDate,
-                    member: member,
-                    librarian: librarian //should be logged in librarian
+                    memberID: memberID,
+                    librarianID: librarianID //should be logged in librarian
 
                 }
             })
                 .then(response => {
                     this.bookings.push(response.data)
                     this.errorResult = ''
-                    this.bookingStartTime = ''
-                    this.bookingEndTime = ''
+                    this.startTime = ''
+                    this.endTime = ''
                     this.bookingID = ''
-                    this.member = ''
-                    this.librarian = ''
+                    this.memberID = ''
+                    this.librarianID = ''
                 })
                 .catch(error => {
                     var errorMsg = error
@@ -80,7 +80,7 @@ export default {
                         errorMsg = error.response.data
                     }
                     console.log(errorMsg)
-                    this.errorResult = errorMsg
+                    this.errorBooking = errorMsg
                 })
         },
     }
