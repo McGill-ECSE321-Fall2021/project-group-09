@@ -45,22 +45,22 @@
     
                     <b-col class="myRow">
                         <td>
-                            <b-button v-row justify="center" v-on:click="goToCheckoutPage()">Edit Library Hours</b-button>
+                            <b-button v-row justify="center" v-on:click="goToEditHoursPage()">Edit Library Hours</b-button>
                         </td>
                     </b-col>
                     <b-col class="myColumn">
                         <td>
-                            <b-button v-row justify="center" v-on:click="goToCheckoutPage()">Create Library Schedule</b-button>
+                            <b-button v-row justify="center" v-on:click="goToCreateSchedulePage()">Create Library Schedule</b-button>
                         </td>
                     </b-col>
                     <b-col class="myColumn">
                         <td>
-                            <b-button v-row justify="center" v-on:click="goToCheckoutPage()">Fire Librarian</b-button>
+                            <b-button v-row justify="center" v-on:click="goToFirePage()">Fire Librarian</b-button>
                         </td>
                     </b-col>
                     <b-col class="myColumn">
                         <td>
-                            <b-button v-row justify="center" v-on:click="goToCheckoutPage()">Hire Librarian</b-button>
+                            <b-button v-row justify="center" v-on:click="goToHirePage()"> Hire Librarian</b-button>
                         </td>
                     </b-col>
                 </b-row>
@@ -131,6 +131,18 @@ export default {
             Router.push({
                 path: "/CreateLibItem",
                 name: "CreateLibItem"
+            })
+        },
+        goToHirePage: function() {
+            Router.push({
+                path: "/HireLibrarian",
+                name: "HireLibrarian"
+            })
+        },
+        goToFirePage: function() {
+            Router.push({
+                path: "/FireLibrarian",
+                name: "FireLibrarian"
             })
         }
     }

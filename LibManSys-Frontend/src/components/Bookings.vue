@@ -2,105 +2,135 @@
 <template>
   <div id="member-booking-body">
     <section>
+      <br />
+      <br />
+      <br />
+
+      <b-container fluid>
+        <b class="booking-title"> New Booking </b>
+
         <br />
         <br />
-        <br />
 
-        <b-container fluid>
-            <b class="booking-title"> New Booking </b>
+        <b-row class="my-1" color="#00000">
+          <b-col sm="4" color="#00000">
+            <label class="booking-input" for="input-default">Date:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input
+              id="input-default"
+              v-model="bookingDate"
+              placeholder="yyyy-mm-dd"
+            ></b-form-input>
+          </b-col>
+          <b-col sm="3" color="#00000"> </b-col>
+        </b-row>
 
-            <br />
-            <br />
+        <b-row class="my-1">
+          <b-col sm="4">
+            <label class="booking-input" for="input-large">Start Time</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input
+              id="input-default"
+              v-model="startTime"
+              placeholder="hh:mm:ss"
+            ></b-form-input>
+          </b-col>
+          <b-col sm="3" color="#00000"> </b-col>
+        </b-row>
 
-            <b-row class="my-1" color="#00000">
-                <b-col sm="4" color="#00000">
-                    <label class="booking-input" for="input-default">Date:</label>
-                </b-col>
-                <b-col sm="5" >
-                    <b-form-input  id="input-default"  type="text" v-model="bookingDate" placeholder="yyyy-mm-dd"></b-form-input>
-                </b-col>
-                <b-col sm="3" color="#00000">
-                    
-                </b-col>
-            </b-row>
+        <b-row class="my-1" color="#00000">
+          <b-col sm="4" color="#00000">
+            <label class="booking-input" for="input-default">End Time:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input
+              id="input-default"
+              v-model="endTime"
+              placeholder="hh:mm:ss"
+            ></b-form-input>
+          </b-col>
+          <b-col sm="3" color="#00000"> </b-col>
+        </b-row>
 
-            <b-row class="my-1" >
-                <b-col sm="4" > 
-                    <label class="booking-input" for="input-large" >Start Time</label>
-                </b-col>
-                <b-col sm="5">
-                    <b-form-input id="input-default" type="text" v-model="bookingStartTime" placeholder="hh:mm:ss"></b-form-input>
-                </b-col>
-                <b-col sm="3" color="#00000">
-                    
-                </b-col>
-            </b-row>
+        <b-row class="my-1">
+          <b-col sm="4">
+            <label class="booking-input" for="input-large">Booking ID:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input
+              id="input-default"
+              v-model="bookingID"
+              placeholder="Please enter the booking ID"
+            ></b-form-input>
+          </b-col>
+          <b-col sm="3" color="#00000"> </b-col>
+        </b-row>
 
-           <b-row class="my-1" color="#00000">
-                <b-col sm="4" color="#00000">
-                    <label class="booking-input" for="input-default">End Time:</label>
-                </b-col>
-                <b-col sm="5" >
-                    <b-form-input  id="input-default"  type="text" v-model="bookingEndTime" placeholder="hh:mm:ss"></b-form-input>
-                </b-col>
-                <b-col sm="3" color="#00000">
-                    
-                </b-col>
-            </b-row>
+        <b-row class="my-1">
+          <b-col sm="4">
+            <label class="booking-input" for="input-large"
+              >Library Card No:</label
+            >
+          </b-col>
+          <b-col sm="5">
+            <b-form-input
+              id="input-default"
+              v-model="memberID"
+              placeholder="Please enter the member's library card number"
+            ></b-form-input>
+          </b-col>
+          <b-col sm="3" color="#00000"> </b-col>
+        </b-row>
 
-            <b-row class="my-1" >
-                <b-col sm="4" > 
-                    <label class="booking-input" for="input-large" >Booking ID:</label>
-                </b-col>
-                <b-col sm="5">
-                    <b-form-input id="input-default" type="text" v-model="bookingID" placeholder="Please enter the booking ID"></b-form-input>
-                </b-col>
-                <b-col sm="3" color="#00000">
-                    
-                </b-col>
-            </b-row>
+        <b-row class="my-1">
+          <b-col sm="4">
+            <label class="booking-input" for="input-large">Employee ID:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input
+              id="input-default"
+              v-model="librarianID"
+              placeholder="Please enter your employee ID"
+            ></b-form-input>
+          </b-col>
+          <b-col sm="3" color="#00000"> </b-col>
+        </b-row>
+      </b-container>
 
-             <b-row class="my-1" >
-                <b-col sm="4" > 
-                    <label class="booking-input" for="input-large" >Library Card No:</label>
-                </b-col>
-                <b-col sm="5">
-                    <b-form-input id="input-default" type="text" v-model="member" placeholder="Please enter the member's library card number"></b-form-input>
-                </b-col>
-                <b-col sm="3" color="#00000">
-                    
-                </b-col>
-            </b-row>
+      <br />
+      <span v-if="errorBooking" style="color: red">{{ errorBooking }} </span>
+      <br />
 
-             <b-row class="my-1" >
-                <b-col sm="4" > 
-                    <label class="booking-input" for="input-large" >Employee ID:</label>
-                </b-col>
-                <b-col sm="5">
-                    <b-form-input id="input-default" type="text" v-model="librarian" placeholder="Please enter your employee ID"></b-form-input>
-                </b-col>
-                <b-col sm="3" color="#00000">
-                    
-                </b-col>
-            </b-row>
-        </b-container>
-        
-        <br />
-        <span v-if="errorbooking" style="color:red">{{errorbooking}} </span>
-        <br />
-
-        <b-container>
-          <b-row class="my-1 text-center" align-h="center">
-            <b class="button" href="#" v-on:click="createBooking(bookingStartTime, bookingEndTime, bookingDate, bookingID, member, librarian)">Create Booking</b>
-            <b class="button" href="#" v-on:click="document.getElementById('member').input = ''">Clear</b>
-          </b-row>
-        </b-container>
-
+      <b-container>
+        <b-row class="my-1 text-center" align-h="center">
+          <b
+            class="button"
+            href="#"
+            v-on:click="
+              createBooking(
+                startTime,
+                endTime,
+                bookingDate,
+                bookingID,
+                memberID,
+                librarianID
+              )
+            "
+            >Create Booking</b
+          >
+          <b
+            class="button"
+            href="#"
+            v-on:click="document.getElementById('input-default').input = ''"
+            >Clear</b
+          >
+        </b-row>
+      </b-container>
     </section>
-  <!-- End of body div -->
-    
+    <!-- End of body div -->
   </div>
-
 </template>
 
 
@@ -109,8 +139,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
 .bg-custom-1 {
   background-color: #d9b086;
 }
@@ -126,13 +154,12 @@ b-navbar {
 
 div {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
- /*   background: #f0dbce;*/
+  /*   background: #f0dbce;*/
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  
 }
 
 ::-webkit-scrollbar {
@@ -150,12 +177,11 @@ section {
 a.normal {
   font-weight: 400;
 }
-h1, h2 {
- 
+h1,
+h2 {
   color: black;
   font-size: 40px;
   font-weight: normal;
-
 }
 ul {
   list-style-type: none;
@@ -187,9 +213,9 @@ b-nav-item {
   display: flex;
 }
 
-#container{
-    width: 65%;
-    margin: 0 auto;
+#container {
+  width: 65%;
+  margin: 0 auto;
 }
 .button {
   display: inline-block;
@@ -204,21 +230,20 @@ b-nav-item {
   font-weight: 500;
 }
 
-
 .button:hover {
-    cursor: pointer;
-    background-color: #ffd24d;
+  cursor: pointer;
+  background-color: #ffd24d;
 }
 
 .booking-title {
-  color:#a85f32;
+  color: #a85f32;
   font: "Times";
   font-size: 30px;
   font-weight: 100;
 }
 
 .booking-input {
-    float: right;
+  float: right;
 }
 
 /*Resize the wrap to see the search bar change!*/
