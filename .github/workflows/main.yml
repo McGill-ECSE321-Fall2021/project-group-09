@@ -73,7 +73,7 @@ jobs:
           echo "Successful build, pushing to heroku"
           heroku git:remote --app libmansys-g09a
           git remote -v
-          git pull heroku master
+          git pull --ff--only heroku master
           git push heroku master
         
       - name: Build frontend with node
@@ -90,7 +90,7 @@ jobs:
         run: |
           echo "Successful build, pushing to heroku"
           heroku git:remote --app libmansys-frontend-g09a
-          git pull heroku master
+          git pull --ff--only heroku master
           git push heroku master
 
       - name: Stop Gradle Daemon
