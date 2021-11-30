@@ -3,6 +3,7 @@ import Router from "../router/index";
 import axios from 'axios'
 var config = require('../../config')
 
+/* http vs https*/
 var frontendUrl = 'https://' + config.dev.host + ':' + config.dev.port
 var backendUrl = 'https://' + config.dev.backendHost + ':' + config.dev.backendPort
 
