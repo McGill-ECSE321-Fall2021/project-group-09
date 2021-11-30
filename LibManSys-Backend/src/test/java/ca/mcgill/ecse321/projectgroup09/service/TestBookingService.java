@@ -10,6 +10,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.lenient;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.sql.Date;
@@ -123,6 +124,7 @@ public class TestBookingService {
 				member.setFullName(FULL_NAME);
 				member.setIsVerifiedResident(IS_VERIFIED_RESIDENT);
 				member.setPhoneNumber(PHONE_NO);
+				member.setBookings(new ArrayList<Booking>());
 				return member;
 			}
 			else {
@@ -154,6 +156,7 @@ public class TestBookingService {
 				librarian.setLibrarianEmail(LIBRARIAN_EMAIL);
 				librarian.setLibrarianPassword(LIBRARIAN_PASSWORD);
 				librarian.setLibrarianUsername(LIBRARIAN_USERNAME);
+				librarian.setBookings(new ArrayList<Booking>());
 				return librarian;
 			}
 			else {
@@ -241,8 +244,8 @@ public class TestBookingService {
 		Time endTime = java.sql.Time.valueOf("16:00:00");
 		Date bookingDate = java.sql.Date.valueOf("2023-11-30");
 		
-		long librarianID = 12345678;
-		long memberID = 999999999;
+		long librarianID = EMPLOYEE_ID;
+		long memberID = LIB_CARD_NO;
 
 		Booking booking = null; 
 		
@@ -266,8 +269,8 @@ public class TestBookingService {
 		Time endTime = java.sql.Time.valueOf("16:00:00");
 		Date bookingDate = java.sql.Date.valueOf("2023-11-30");
 		
-		long librarianID = 12345678;
-		long memberID = 999999999;
+		long librarianID = EMPLOYEE_ID;
+		long memberID = LIB_CARD_NO;
 
 		Booking booking = null; 
 		

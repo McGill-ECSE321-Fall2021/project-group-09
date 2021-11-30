@@ -228,12 +228,14 @@ public class TestScheduleService {
 	@Test
 	public void testGetScheduleById_NotExisting() {
 		Schedule s = null;
+		String error = null;
 		try {
 			s = sService.getScheduleById(NAN_SCHEDULE_ID);
 		} catch (Exception e) {
-			fail(e.getMessage());
+			error = e.getMessage();
 		}
 		assertNull(s);
+		assertNotNull(error);
 	}
 	
 	@Test

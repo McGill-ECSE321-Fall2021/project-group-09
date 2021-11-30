@@ -43,6 +43,12 @@ public class BookingService { // service class for booking out the library for e
 
 		Member member = memberRepository.findMemberByLibCardNumber(memberID);
 		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNumber(librarianID);
+		if (member == null) {
+			throw new IllegalArgumentException("Member does not exist.");
+		}
+		if (librarian == null) {
+			throw new IllegalArgumentException("Librarian does not exist.");
+		}
 		
 //		if (member == null) {
 //			throw new IllegalArgumentException("Error: Member is null"); 
