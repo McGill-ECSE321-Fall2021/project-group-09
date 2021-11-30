@@ -10,9 +10,6 @@ var AXIOS = axios.create({
 })
 
 import Router from "../router/index";
-import MemberLoans from "../components/MemberLoans";
-import VueSweetalert2 from 'vue-sweetalert2'
-
 
 function OnlineMemberDto(fullName, libCardNumber, address, phoneNumber, amountOwed, activeLoans, isVerifiedResident,   
 			emailAddress, username) {
