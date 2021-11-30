@@ -1,17 +1,34 @@
-<!-- Only accessible by Librarians and Head Librarians
-
-Librarians: 
-- Create new Library Item 
-
-Head Librarian:
-- View all librarians (and create/fire librarians)
-- Set library schedule 
-- Set library hours 
-- Update library phone number and email address
-
--->
 <template>
-  <div class="online-member-dashboard-body">
+
+  <div class="OnlineMemberDashboard">
+
+
+    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
+      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
+      <ul class="nav-left mr-auto">
+        <li class="nav-item">
+          <b class="nav-link" href="#a">LibManSys </b>
+        </li>
+        <li class="nav-item">
+          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
+            >Catalogue
+          </b>
+        </li>
+      </ul>
+      <ul class="nav-right ml-auto">
+        <li class="nav-item">
+          <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
+        </li>
+        <li class="nav-item">
+          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
+            >Sign Up
+          </b>
+             
+        </li>
+        
+      </ul>
+    </nav>
+
 
     <section>
       <br />
@@ -19,52 +36,77 @@ Head Librarian:
            <br />
 
      
-   <b-container fluid>
- <myText>  Member Profile </myText>
+<b-container fluid>
+ 
+ <h2>  Profile Info </h2>
 
 
 
-  <b-row class="my-1" >
+<b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Email:</label>
+      <label for="fullName" >Full Name:</label>
     </b-col>
   </b-row>
-    <b-row class="my-1" >
+
+  
+<b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Username:</label>
+      <label for="address">Address:</label>
     </b-col>
   </b-row>
-    <b-row class="my-1" color="#00000">
-    <b-col sm="2" color="#00000">
-      <label for="input-default" color="#00000">Full Name:</label>
+
+<b-row>
+    <b-col sm="2">
+      <label for="phoneNumber">Phone Number:</label>
     </b-col>
      </b-row>
 
 
-  <b-row class="my-1" >
+<b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Address:</label>
+      <label for="emailAddress" >Email Address:</label>
     </b-col>
-  </b-row>
-  <b-row class="my-1" >
+</b-row>
+
+<b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Phone Number:</label>
+      <label for="username" >Phone Number:</label>
     </b-col>
-  </b-row>
-   <b-row class="my-1" >
+</b-row>
+   
+<b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Fees: </label>
+      <label for="libCardNumber" >Library Card Number: </label>
     </b-col>
-      <b-col sm="2" > 
-      <label for="input-large" >$ </label>
+    <b-col sm="2"> 
+      <label for="libCardNumber" >TBD</label>
     </b-col>
-  </b-row>
-   <b-row class="my-1" >
+</b-row>
+
+<b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Verification Status: </label>
+      <label for="amountOwed" >Amount Owed: </label>
+    </b-col>
+    <b-col sm="2"> 
+      <label for="amountOwed" >TBD</label>
+    </b-col>
+</b-row>
+
+<b-row>
+    <b-col sm="2" > 
+      <label for="activeLoans" >Number of Active Loans: </label>
+    </b-col>
+    <b-col sm="2"> 
+      <label for="activeLoans" >TBD</label>
+    </b-col>
+</b-row>
+  
+<b-row>
+    <b-col sm="2" > 
+      <label for="isVerifiedResident" >Residency Verification Status: </label>
     </b-col>
     <b-col sm="2" > 
-      <label for="input-large" >Verified or Not </label>
+      <label for="isVerifiedResident" >Verified? </label>
     </b-col>
   </b-row>
   
@@ -78,6 +120,14 @@ Head Librarian:
             </b-col>
      
     </section>
+     
+    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
+      <b> Copyright libManSys-g09a </b>
+      
+    </footer>
+
+   
+
   </div>
 </template>
 
@@ -128,6 +178,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+
+OnlineMemberDashboard {
+  color: firebrick;
+}
+
 .bg-custom-1 {
   background: linear-gradient(
     200deg,
@@ -138,11 +193,11 @@ export default {
 }
 
 b.nav-link {
-  color: #000000;
+  color: firebrick;
   font-size: 18px;
 }
 b-navbar {
-  background-color: #4e1d04;
+  background-color: firebrick;
 }
 .myColumn {
     display: flex;
@@ -154,15 +209,23 @@ b-navbar {
 div {
     /*  background: #f0dbce;*/
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #000000;
- 
-
+  color: firebrick;
+  background-color: lightsalmon;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  
+  /*margin: auto;*/
+  /*background-image: linear-gradient(
+      115deg,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.9),
+      rgba(43, 16, 7, 0.8)
+    ),
+    url(../assets/library-bkg.jpg);*/
+    
+
 }
 
 ::-webkit-scrollbar {
@@ -180,9 +243,12 @@ a.normal {
   font-weight: 400;
 }
 h1, h2 {
+  color: coral;
+  font-size: 40px;
   font-weight: normal;
-  color: black;
-
+  background-color: firebrick;
+  width: 100%;
+  margin: auto;
 }
 ul {
   list-style-type: none;
@@ -195,10 +261,10 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: firebrick;
 }
 myText{
-  color:#a85f32;
+  color: firebrick;
   font: "Times";
   font-size: 30px;
   font-weight: 100;
@@ -207,11 +273,11 @@ myText{
 b {
   font: "Lato", sans-serif;
   font-weight: 100;
-  color: #ffffff;
+  color: firebrick;
   font-size: 18px;
 }
 b-nav-item {
-  color: #efecf2;
+  color: firebrick;
   font-size: 18px;
 }
 .nav-left {
@@ -224,12 +290,26 @@ b-nav-item {
 #container{
     width: 65%;
     margin: 0 auto;
+   /* color: firebrick;
+  background-color: bisque;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  /*scrollbar-width: none; /* Firefox */
+   /*background-image: linear-gradient(
+      115deg,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.9),
+      rgba(43, 16, 7, 0.8)
+    ),
+    url(../assets/library-bkg.jpg);*/
 }
 button {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     padding: 16px 32px;
-    background-color: #0000;
-    color: #a85f32;
+    background-color: coral;
+    color: firebrick;
 }
 
 

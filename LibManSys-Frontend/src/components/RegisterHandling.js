@@ -10,6 +10,8 @@ var AXIOS = axios.create({
 })
 
 import Router from "../router/index";
+import MemberLoans from "../components/MemberLoans";
+
 
 export default {
     data() {
@@ -45,7 +47,7 @@ export default {
 	methods: 
 	{	createMemberAccount: function (fullName, address, phoneNumber, emailAddress, password, username) {
                 
-                AXIOS.post('/OnlineMembers/create/' + fullName + '?address=' + address + '&phoneNumber=' + phoneNumber +
+                AXIOS.post('/OnlineMember/create/' + fullName + '?address=' + address + '&phoneNumber=' + phoneNumber +
 				'&emailAddress=' + emailAddress + '&password=' + password + '&username=' +username
 				)
 				

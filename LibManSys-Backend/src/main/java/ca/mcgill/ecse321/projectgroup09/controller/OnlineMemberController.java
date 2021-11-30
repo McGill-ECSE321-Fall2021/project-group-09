@@ -29,7 +29,7 @@ import ca.mcgill.ecse321.projectgroup09.service.OnlineMemberService;
 @RestController
 public class OnlineMemberController {
 
-	private static final String BASE_URL = "/online-member";
+	private static final String BASE_URL = "/OnlineMember";
 	
 	@Autowired
 	private OnlineMemberService onlineMemberService;
@@ -48,12 +48,12 @@ public class OnlineMemberController {
 		return OnlineMemberDto.convertToDto(onlineMemberService.getOnlineMemberByLibCardNumber(libCardNumber));
 	}
 	
-	@GetMapping(value = {"/OnlineMembers/{fullName}", "/OnlineMembers/{fullName}/"})
+	@GetMapping(value = {"/OnlineMember/{fullName}", "/OnlineMember/{fullName}/"})
 	public List<OnlineMemberDto> getOnlineMemberByFullName(@PathVariable("fullName") String fullName) {
 		return onlineMemberService.getOnlineMemberByFullName(fullName).stream().map(onlineMember -> OnlineMemberDto.convertToDto(onlineMember)).collect(Collectors.toList());
 	}
 	
-	@GetMapping(value = {"/OnlineMembers/{isVerifiedResident}", "/OnlineMembers/{isVerifiedResident}/"})
+	@GetMapping(value = {"/OnlineMember/{isVerifiedResident}", "/OnlineMember/{isVerifiedResident}/"})
 	public List<OnlineMemberDto> getOnlineMembersByVerificationStatus(@PathVariable("isVerifiedResident") boolean isVerifiedResident) {
 		return onlineMemberService.getOnlineMembersByVerificationStatus(isVerifiedResident).stream().map(onlineMember -> OnlineMemberDto.convertToDto(onlineMember)).collect(Collectors.toList());
 	}
@@ -69,7 +69,7 @@ public class OnlineMemberController {
 	}
 	
 	 
-	@PostMapping(value = { "/OnlineMembers/create/{fullName}", "/OnlineMembers/create/{fullName}/" })
+	@PostMapping(value = { "/OnlineMember/create/{fullName}", "/OnlineMember/create/{fullName}/" })
 	public OnlineMemberDto createOnlineMember(@PathVariable("fullName") String fullName,
 				@RequestParam(name = "address") String OnlineMemberAddress,
 				@RequestParam(name = "phoneNumber") String OnlineMemberPhoneNumber,
