@@ -35,35 +35,48 @@
         <br />
 
         <b-container fluid>
-            <myText> Librarian Log In </myText>
+            <b class="login-title"> Librarian Log In </b>
 
-            <br>
+            <br />
+            <br />
 
             <b-row class="my-1" color="#00000">
-                <b-col sm="2" color="#00000">
-                    <label for="input-default" color="#00000">Username:</label>
+                <b-col sm="4" color="#00000">
+                    <label class="login-input" for="input-default">Username:</label>
                 </b-col>
-                <b-col sm="10" >
-                    <b-form-input id="input-default" color="#00000"placeholder="Enter your email"></b-form-input>
+                <b-col sm="5" >
+                    <b-form-input id="input-default" type="text" v-model="username" placeholder="Enter your username"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
                 </b-col>
             </b-row>
 
             <b-row class="my-1" >
-                <b-col sm="2" > 
-                    <label for="input-large" >Password:</label>
+                <b-col sm="4" > 
+                    <label class="login-input" for="input-default" >Password:</label>
                 </b-col>
-                <b-col sm="10">
-                    <b-form-input id="input-large"  placeholder="Enter your password"></b-form-input>
+                <b-col sm="5">
+                    <b-form-input id="input-large"  type="text" v-model="password" placeholder="Enter your password"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
                 </b-col>
             </b-row>
           
         </b-container>
         
-        <br>
+        <br />
+        <span v-if="errorLogin" style="color:red">{{errorLogin}} </span>
+        <br />
 
-        <b class="button" href="#" v-on:click="loginMember()">Login</b>
-        <b class="button" href="#" v-on:click="goToMemberLogin()">Go to Member Login</b>
-     
+        <b-container>
+          <b-row class="my-1 text-center" align-h="center">
+            <b class="button" href="#" v-on:click="loginLibrarian(username, password)">Login</b>
+            <b class="button" href="#" v-on:click="goToMemberLoginPage()">Go to Member Login</b>
+          </b-row>
+        </b-container>
+
     </section>
     
     
@@ -87,8 +100,7 @@ header {
 }
 
 .bg-custom-1 {
-background : ##d9b086;
-
+  background : #d9b086;
 }
 
 nav.navbar {
@@ -119,7 +131,7 @@ div {
   display: none;
 }
 section {
-  color : ##d9b086;
+  color : #d9b086;
   font-family: "Lato", sans-serif;
   height: 100vh;
   background-size: contain;
@@ -172,6 +184,7 @@ b-nav-item {
     margin: 0 auto;
 }
 .button {
+  display: inline-block;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 16px 32px;
   background-color: a85f32;
@@ -189,11 +202,15 @@ b-nav-item {
     background-color: #ffd24d;
 }
 
-myText{
+.login-title {
   color:#a85f32;
   font: "Times";
   font-size: 30px;
   font-weight: 100;
+}
+
+.login-input {
+    float: right;
 }
 
 /*Resize the wrap to see the search bar change!*/

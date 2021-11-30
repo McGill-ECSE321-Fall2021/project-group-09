@@ -31,7 +31,9 @@ export default {
 			results: [],
 			books:[],
 			movies:[],
-			cd:[],
+		newspapers:[],
+			archives:[],
+			musicAlbums:[],
 			newResult: '',
 			errorResult:'',
 			response: []
@@ -52,6 +54,33 @@ export default {
     .then(response => {
       // JSON responses are automatically parsed.
       this.movies = response.data;
+      console.log(response.data);
+    })
+    .catch(e => {
+      this.errorResult = e
+    }),
+      AXIOS.get('/newspaper/') //change for logged in member
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.newspapers = response.data;
+      console.log(response.data);
+    })
+    .catch(e => {
+      this.errorResult = e
+    }),
+     AXIOS.get('/archive/') //change for logged in member
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.archives = response.data;
+      console.log(response.data);
+    })
+    .catch(e => {
+      this.errorResult = e
+    }),
+     AXIOS.get('/musicAlbum/') //change for logged in member
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.musicAlbums = response.data;
       console.log(response.data);
     })
     .catch(e => {
