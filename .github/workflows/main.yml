@@ -54,11 +54,12 @@ jobs:
         run: |
           echo "Successful build, pushing to heroku"
           echo "machine api.heroku.com
-                  login <your-email@address>
-                  password <your-api-key>
-                machine git.heroku.com
-                  login <your-email@address>
-                  password <your-api-key>" > $HOME/_netrc
+  login <your-email@address>
+  password <your-api-key>
+machine git.heroku.com
+  login <your-email@address>
+  password <your-api-key>" > $HOME/_netrc
+          echo "test"
           cat $HOME/_netrc
           git status
           git remote -v
