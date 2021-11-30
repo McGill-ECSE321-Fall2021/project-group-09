@@ -7,6 +7,13 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+// Setup Vue cookies
+Vue.use(require('vue-cookies'))
+// set default config
+Vue.$cookies.config('7d')
+// set global cookie
+//Vue.$cookies.set('theme','default');
+
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
