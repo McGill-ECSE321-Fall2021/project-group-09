@@ -16,6 +16,7 @@ import Register from "../components/Register";
 import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
 import MemberLoans from "../components/MemberLoans";
+import VueSweetalert2 from 'vue-sweetalert2'
 
 function OnlineMemberDto(fullName, libCardNumber, address, phoneNumber, amountOwed, activeLoans, isVerifiedResident,   
 			emailAddress, username) {
@@ -31,12 +32,43 @@ function OnlineMemberDto(fullName, libCardNumber, address, phoneNumber, amountOw
 }
 
 export default {
-  name: 'hello',
+  name: 'DashboardHandling',
   data () {
    return {
-        types: [
-        ]
-      }
+		fullName : '',
+		libCardNumber: '',
+		address : '',
+		phoneNumber: '',
+		amountOwed: '',
+		activeLoans: '',
+		isVerifiedResident: '',
+		emailAddress: '',
+		username: '',
+		errorAccount: '',
+		response: []
+	}
+  },
+
+  created: function () {
+    AXIOS.get('/login/currentMember')
+	  
+	.then(response => 
+		{this.libCardNumber = response.data.libCardNumber})
+	  
+	.catch(e => { this.errorUser = e })
+	  
+	.finally(() => {
+        AXIOS.get('/OnlineMember' + this.libCardNumber)
+		
+		.then(response => {
+          this.profile = response.data
+          this.profileId = this.profile.profileId
+        })
+        .catch(e => {
+          this.errorProfile = e
+        })
+      })
+    
   },
    methods: {
        goToSubmitPage: function (){
