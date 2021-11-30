@@ -14,7 +14,7 @@ public class LibrarianDto extends AccountDto {
 	private String librarianEmail;
 	private String librarianPassword;
 	private String librarianUsername;
-	private Long employeeIDNum;
+	private Long employeeIDNumber;
 
 	// associations
 	private List<Long> schedules;
@@ -28,7 +28,7 @@ public class LibrarianDto extends AccountDto {
 		this.librarianEmail = librarianEmail;
 		this.librarianPassword = librarianPassword;
 		this.librarianUsername = librarianUsername;
-		this.employeeIDNum = employeeIDNum;
+		this.employeeIDNumber = employeeIDNum;
 
 		List<Long> scheduleIds = schedules.stream().map(schedule -> schedule.getscheduleID()).collect(Collectors.toList());
 		this.schedules = scheduleIds;
@@ -56,11 +56,11 @@ public class LibrarianDto extends AccountDto {
 	public void setLibrarianUsername(String librarianUsername) {
 		this.librarianUsername = librarianUsername;
 	}
-	public Long getEmployeeIDNum() {
-		return employeeIDNum;
+	public Long getEmployeeIDNumber() {
+		return employeeIDNumber;
 	}
-	public void setEmployeeIDNum(Long employeeIDNum) {
-		this.employeeIDNum = employeeIDNum;
+	public void setEmployeeIDNumber(Long employeeIDNumber) {
+		this.employeeIDNumber = employeeIDNumber;
 	}
 
 	/**

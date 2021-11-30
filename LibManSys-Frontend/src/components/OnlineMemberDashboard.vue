@@ -1,102 +1,86 @@
-<!-- Only accessible by Librarians and Head Librarians
-
-Librarians: 
-- Create new Library Item 
-
-Head Librarian:
-- View all librarians (and create/fire librarians)
-- Set library schedule 
-- Set library hours 
-- Update library phone number and email address
-
--->
 <template>
-  <div class="header">
 
-
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-             
-        </li>
-        
-      </ul>
-    </nav>
-
-    <section>
+  <div class="OnlineMemberDashboard">
+  
+  <section>
       <br />
       <br />
            <br />
 
      
-   <b-container fluid>
- <myText>  Member Profile </myText>
+<b-container fluid>
+ 
+ <h2>  PROFILE INFORMATION  </h2>
 
 
 
-  <b-row class="my-1" >
+<b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Email:</label>
+      <label for="fullName" >Full Name:</label>
     </b-col>
   </b-row>
-    </b-row>
-    <b-row class="my-1" >
+
+ <b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Username:</label>
+      <label for="libCardNumber" >Library Card Number: </label>
+    </b-col>
+    <b-col sm="2"> 
+      <label for="libCardNumber" >TBD</label>
+    </b-col>
+</b-row>
+
+<b-row>
+    <b-col sm="2" > 
+      <label for="address">Address:</label>
     </b-col>
   </b-row>
-    <b-row class="my-1" color="#00000">
-    <b-col sm="2" color="#00000">
-      <label for="input-default" color="#00000">Full Name:</label>
+
+<b-row>
+    <b-col sm="2">
+      <label for="phoneNumber">Phone Number:</label>
     </b-col>
      </b-row>
 
+<b-row>
+    <b-col sm="2" > 
+      <label for="amountOwed" >Amount Owed: </label>
+    </b-col>
+    <b-col sm="2"> 
+      <label for="amountOwed" >TBD</label>
+    </b-col>
+</b-row>
 
-  <b-row class="my-1" >
+<b-row>
     <b-col sm="2" > 
-      <label for="input-large" >Address:</label>
+      <label for="activeLoans" >Number of Active Loans: </label>
     </b-col>
-  </b-row>
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="input-large" >Phone Number:</label>
+    <b-col sm="2"> 
+      <label for="activeLoans" >TBD</label>
     </b-col>
-  </b-row>
-   <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="input-large" >Fees: </label>
-    </b-col>
-      <b-col sm="2" > 
-      <label for="input-large" >$ </label>
-    </b-col>
-  </b-row>
-   </b-row>
-   <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="input-large" >Verification Status: </label>
-    </b-col>
-    <b-col sm="2" > 
-      <label for="input-large" >Verified or Not </label>
-    </b-col>
-  </b-row>
+</b-row>
   
+<b-row>
+    <b-col sm="2" > 
+      <label for="isVerifiedResident" >Residency Verification Status: </label>
+    </b-col>
+    <b-col sm="2" > 
+      <label for="isVerifiedResident" >Verified? </label>
+    </b-col>
+  </b-row>
+
+<b-row>
+    <b-col sm="2" > 
+      <label for="emailAddress" >Email Address:</label>
+    </b-col>
+</b-row>
+
+<b-row>
+    <b-col sm="2" > 
+      <label for="username" >Phone Number:</label>
+    </b-col>
+</b-row>
+   
+ 
 </b-container>
       <b-col class="myColumn">
     
@@ -106,69 +90,23 @@ Head Librarian:
     
             </b-col>
      
-    </section>
-     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> blah blah blah some copyright bs </b>
-      
-    </footer>
+    </section>   
 
-   
   </div>
 </template>
 
 
-<script>
+<script src='./DashboardHandling.js'>
 
-import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
-import MemberLoans from "../components/MemberLoans";
-
-import Router from "../router/index";
-import Register from "../components/Register";
-
-export default {
-  name: 'hello',
-  data () {
-   return {
-        types: [
-        ]
-      }
-  },
-   methods: {
-       goToSubmitPage: function (){
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
-        goToRegisterPage: function (){
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-         goToSearchPage: function (){
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        },
-        goToLoansPage: function (){
-            Router.push({
-                path: "/MemberLoans",
-                name: "MemberLoans"
-            })
-        }
-   }
-}
 </script>
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-header {
-  color: #42b983;
+
+OnlineMemberDashboard {
+  color: firebrick;
 }
 
 .bg-custom-1 {
@@ -180,17 +118,12 @@ header {
   );
 }
 
-
-
-nav.navbar {
-  height: 60px;
-}
 b.nav-link {
-  color: #000000;
+  color: firebrick;
   font-size: 18px;
 }
 b-navbar {
-  background-color: #4e1d04;
+  background-color: firebrick;
 }
 .myColumn {
     display: flex;
@@ -202,15 +135,23 @@ b-navbar {
 div {
     /*  background: #f0dbce;*/
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #000000;
- 
-
+  color: firebrick;
+  background-color: #fffeee;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  
+  /*margin: auto;*/
+  /*background-image: linear-gradient(
+      115deg,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.9),
+      rgba(43, 16, 7, 0.8)
+    ),
+    url(../assets/library-bkg.jpg);*/
+    
+
 }
 
 ::-webkit-scrollbar {
@@ -228,9 +169,13 @@ a.normal {
   font-weight: 400;
 }
 h1, h2 {
+  color: whitesmoke;
+  font: 'American TypeWriter', serif;
+  font-size: 40px;
   font-weight: normal;
-  color: black;
-
+  background-color: firebrick;
+  width: 100%;
+  margin: auto;
 }
 ul {
   list-style-type: none;
@@ -243,10 +188,10 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: firebrick;
 }
 myText{
-  color:#a85f32;
+  color: firebrick;
   font: "Times";
   font-size: 30px;
   font-weight: 100;
@@ -255,11 +200,11 @@ myText{
 b {
   font: "Lato", sans-serif;
   font-weight: 100;
-  color: #ffffff;
+  color: firebrick;
   font-size: 18px;
 }
 b-nav-item {
-  color: #efecf2;
+  color: firebrick;
   font-size: 18px;
 }
 .nav-left {
@@ -272,12 +217,26 @@ b-nav-item {
 #container{
     width: 65%;
     margin: 0 auto;
+   /* color: firebrick;
+  background-color: bisque;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  /*scrollbar-width: none; /* Firefox */
+   /*background-image: linear-gradient(
+      115deg,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.9),
+      rgba(43, 16, 7, 0.8)
+    ),
+    url(../assets/library-bkg.jpg);*/
 }
 button {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     padding: 16px 32px;
-    background-color: #0000;
-    color: #a85f32;
+    background-color: firebrick;
+    color: whitesmoke;
 }
 
 

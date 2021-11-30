@@ -3,11 +3,15 @@
  */
 package ca.mcgill.ecse321.projectgroup09.controller;
 
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,10 +29,12 @@ import ca.mcgill.ecse321.projectgroup09.service.OnlineMemberService;
 @RestController
 public class OnlineMemberController {
 
+	private static final String BASE_URL = "/OnlineMember";
+	
 	@Autowired
 	private OnlineMemberService onlineMemberService;
 	
-	@GetMapping(value = {"/onlineMembers", "/onlineMembers/"})
+	@GetMapping(value = { BASE_URL, BASE_URL + "/"})
 	public List<OnlineMemberDto> getAllOnlineMembers() {
 		List<OnlineMemberDto> OnlineMemberDtos = new ArrayList<>();
 		for (OnlineMember onlineMember : onlineMemberService.getAllOnlineMembers()) {
@@ -37,17 +43,17 @@ public class OnlineMemberController {
 		return OnlineMemberDtos;
 	}
 
-	@GetMapping(value = { "/OnlineMember/{libCardNumber}", "/OnlineMember/{libCardNumber}/" })
+	@GetMapping(value = { BASE_URL + "/{libCardNumber}", BASE_URL + "/{libCardNumber}/" })
 	public OnlineMemberDto getOnlineMemberById(@PathVariable("libCardNumber") Long libCardNumber) throws IllegalArgumentException {
 		return OnlineMemberDto.convertToDto(onlineMemberService.getOnlineMemberByLibCardNumber(libCardNumber));
 	}
 	
-	@GetMapping(value = {"/OnlineMembers/{fullName}", "/OnlineMembers/{fullName}/"})
+	@GetMapping(value = {"/OnlineMember/{fullName}", "/OnlineMember/{fullName}/"})
 	public List<OnlineMemberDto> getOnlineMemberByFullName(@PathVariable("fullName") String fullName) {
 		return onlineMemberService.getOnlineMemberByFullName(fullName).stream().map(onlineMember -> OnlineMemberDto.convertToDto(onlineMember)).collect(Collectors.toList());
 	}
 	
-	@GetMapping(value = {"/OnlineMembers/{isVerifiedResident}", "/OnlineMembers/{isVerifiedResident}/"})
+	@GetMapping(value = {"/OnlineMember/{isVerifiedResident}", "/OnlineMember/{isVerifiedResident}/"})
 	public List<OnlineMemberDto> getOnlineMembersByVerificationStatus(@PathVariable("isVerifiedResident") boolean isVerifiedResident) {
 		return onlineMemberService.getOnlineMembersByVerificationStatus(isVerifiedResident).stream().map(onlineMember -> OnlineMemberDto.convertToDto(onlineMember)).collect(Collectors.toList());
 	}
@@ -63,13 +69,13 @@ public class OnlineMemberController {
 	}
 	
 	 
-	@PostMapping(value = { "/OnlineMembers/create/{fullName}", "/OnlineMembers/create/{fullName}/" })
+	@PostMapping(value = { "/OnlineMember/create/{fullName}", "/OnlineMember/create/{fullName}/" })
 	public OnlineMemberDto createOnlineMember(@PathVariable("fullName") String fullName,
-				@RequestParam(name = "Address") String OnlineMemberAddress,
-				@RequestParam(name = "Phone Number") String OnlineMemberPhoneNumber,
-				@RequestParam(name = "Email Address") String memberEmail,
-				@RequestParam(name = "Password") String memberPassword,
-				@RequestParam(name = "Username") String memberUsername
+				@RequestParam(name = "address") String OnlineMemberAddress,
+				@RequestParam(name = "phoneNumber") String OnlineMemberPhoneNumber,
+				@RequestParam(name = "emailAddress") String memberEmail,
+				@RequestParam(name = "password") String memberPassword,
+				@RequestParam(name = "username") String memberUsername
 				)
 				throws IllegalArgumentException {
 			OnlineMember OnlineMember = onlineMemberService.createOnlineMember(fullName, OnlineMemberAddress, OnlineMemberPhoneNumber, memberEmail, memberPassword, memberUsername);
@@ -156,6 +162,24 @@ public class OnlineMemberController {
 	public OnlineMemberDto DeleteOnlineMember(@PathVariable("libCardNumber") Long libCardNumber) {
 		OnlineMember onlineMember = onlineMemberService.deleteOnlineMember(libCardNumber);
 		return OnlineMemberDto.convertToDto(onlineMember);
+	}
+	
+	/**
+	 * Login in an online member, given a username and password, if they match,
+	 * return corresponding online member.
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@PostMapping(value = { BASE_URL + "/login", BASE_URL + "/login/"})
+	public ResponseEntity<?> loginOnlineMember(@RequestParam("username") String username,
+			@RequestParam("password") String password) {
+		try {
+			// onlineMemberService.login(username, password)
+			return httpSuccess("logged in");
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
 	}
 	
 }

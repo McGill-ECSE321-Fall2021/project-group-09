@@ -1,66 +1,5 @@
 <template>
-  <div class="header">
-    <!--
-  <header>
-    <div>
-      <b-navbar  style ="background-color: #5f8ea0" type="primary" height="1%">
-
-        <b-navbar-brand href="#">
-          <img src="../assets/libraryLogo.jpeg" width="50px" height="50px">
-          <router-view></router-view> -->
-    <!-- Library Management System -->
-    <!-- </b-navbar-brand>
-
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav >
-            <b-nav-item href="#" v-on:click="goToSearchPage()">Catalogue</b-nav-item>
-            <b-nav-item href="#" disabled>Disabled</b-nav-item>
-          </b-navbar-nav> -->
-
-    <!-- Right aligned nav items -->
-    <!--  <b-navbar-nav class="ml-auto">
-            <b-nav-item href="#" v-on:click="goToLoginPage()">Login</b-nav-item>
-            <b-nav-item href="#" v-on:click="goToRegisterPage()">Sign Up</b-nav-item>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-    </div> 
-  </header> -->
-
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToContactUsPage()"
-            >Contact Us
-          </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToBookingsPage()"
-            >Bookings
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-        </li>
-      </ul>
-    </nav>
+  <div class="hello-body">
 
     <section>
       <br />
@@ -152,14 +91,7 @@
 
 <script>
 import Register from "../components/Register";
-import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
-import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-import LibrarianDashboard from "../components/LibrarianDashboard";
-import SearchResults from "../components/SearchResults";
 
-import ItemPage from "../components/ItemPage";
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import Router from "../router/index";
 
 export default {
@@ -238,10 +170,6 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 
-header {
-  color: #42b983;
-}
-
 .bg-custom-1 {
   background: linear-gradient(
     200deg,
@@ -260,9 +188,6 @@ header {
   );
 }
 
-nav.navbar {
-  height: 60px;
-}
 b.nav-link {
   color: #ffffff;
   font-size: 18px;

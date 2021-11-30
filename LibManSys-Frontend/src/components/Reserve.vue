@@ -1,31 +1,6 @@
 
 <template>
-    <div class="header">
-    
-    
-        <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-            <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-            <ul class="nav-left mr-auto">
-                <li class="nav-item">
-                    <b class="nav-link" href="#a">LibManSys </b>
-                </li>
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToSearchPage()">Catalogue
-              </b>
-                </li>
-            </ul>
-            <ul class="nav-right ml-auto">
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-                </li>
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToRegisterPage()">Sign Up
-              </b>
-    
-                </li>
-    
-            </ul>
-        </nav>
+    <div class="reserve-body">
     
         <section>
             <br />
@@ -70,23 +45,11 @@
 
     
         </section>
-        <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-            <b> blah blah blah some copyright bs </b>
-    
-        </footer>
-    
-    
     </div>
 </template>
 
 
 <script>
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-import SearchLibItems from "../components/SearchLibItems";
-import Hello from "../components/Hello";
-import Register from "../components/Register";
-import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
 
 export default {
@@ -128,32 +91,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-header {
-    color: #42b983;
-}
-
-/*
-.bg-custom-1 {
-  background: linear-gradient(
-    200deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-}
--->
-.bg-custom-2 {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-} */
-
-nav.navbar {
-    height: 60px;
-}
 
 b.nav-link {
     color: #000000;

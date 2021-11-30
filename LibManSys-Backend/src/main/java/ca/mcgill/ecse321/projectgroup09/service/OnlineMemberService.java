@@ -67,9 +67,12 @@ public class OnlineMemberService extends MemberService {
 		}
 		
 
-		Long libCardNumber = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-
-		//OnlineMember onlineMember = (OnlineMember) super.createMember(fullName, address, phoneNumber);
+		long leftLimit = 000001;
+	    long rightLimit = 999999;
+	    long libCardNumber = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+		
+	    
+	    //OnlineMember onlineMember = (OnlineMember) super.createMember(fullName, address, phoneNumber);
 		OnlineMember onlineMember = new OnlineMember();
 		onlineMember.setFullName(fullName);
 		onlineMember.setAddress(address);
@@ -325,6 +328,9 @@ public class OnlineMemberService extends MemberService {
         onlineMemberRepository.save(onlineMember);
 		return onlineMember;
 	}
+	
+	
+	
 	/**@Transactional
 	@Override
 	 public OnlineMember getMemberByLibCardNumber(Long libCardNumber) {
@@ -337,6 +343,11 @@ public class OnlineMemberService extends MemberService {
 		return (OnlineMember)super.getMemberByBookingID(bookingID);
 	}
 	
+	@Transactional
+    public List<OnlineMember> getAllOnlineMembers() {
+		return toList(onlineMemberRepository.findAll());
+    }
+    
 	@Transactional
 	@Override
 	public OnlineMember getMemberByLoanID(Long loanID) {
@@ -354,11 +365,7 @@ public class OnlineMemberService extends MemberService {
 	public List<Member> getMembersByVerificationStatus(boolean isVerifiedResident) {
 		return super.getMembersByVerificationStatus(isVerifiedResident);
 	}
-	
-	@Transactional
-    public List<OnlineMember> getAllOnlineMembers() {
-		return toList(onlineMemberRepository.findAll());
-    }
+
 	
 	@Transactional
 	@Override

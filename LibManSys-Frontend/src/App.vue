@@ -1,13 +1,21 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/libraryLogo.jpeg" width="100px" height="100px"> -->
+    <topnavbar></topnavbar>
     <router-view></router-view> 
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+import topnavbar from './components/topnavbar.vue'
+import Footer from './components/Footer.vue'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    topnavbar, // register component
+    Footer
+  }
 }
 </script>
 
