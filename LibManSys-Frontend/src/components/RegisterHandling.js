@@ -9,11 +9,19 @@ var AXIOS = axios.create({
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
+import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
+import SearchLibItems from "../components/SearchLibItems";
+import Hello from "../components/Hello";
+import Register from "../components/Register";
+import MemberLogin from "../components/MemberLogin";
+import Router from "../router/index";
 
 export default {
     data() {
         return {
-            MemberAccounts: [],
+            
+            memberAccounts: [],
+            
             newMemberAccount: {
 				fullName: '',
 				address: '',
@@ -22,13 +30,17 @@ export default {
 				password: '',
 				username: '',
             },
-			
-			selectedMemberAccount: {
-                username: '',
-                password: '',
-                name: ''
+
+            selectedMemberAccount: {
+				fullName: '',
+				address: '',
+				phoneNumber: '',
+				emailAddress: '',
+				password: '',
+				username: '',
             },
-            errorMemberAccount: '',
+			
+			errorMemberAccount: '',
             response: [],
 
         }
@@ -37,11 +49,19 @@ export default {
 	
 	methods: 
 	{	createMemberAccount: function (fullName, address, phoneNumber, emailAddress, password, username) {
-				AXIOS.post('/OnlineMembers/create/' + fullName + '?Address=' + address + '?Phone Number=' + phoneNumber +
-				'?Email Address=' + emailAddress + '?Password=' + password + '?Username=' +username
-				).then(response => {
-                    // JSON responses are automatically parsed.
-                    this.MemberAccounts.push(response.data)
+                
+                AXIOS.post('/OnlineMembers/create/' + fullName + '?address=' + address + '?phoneNumber=' + phoneNumber +
+				'emailAddress=' + emailAddress + '?password=' + password + '?username=' +username
+				)
+				
+				.then(response => {
+                   his.MemberAccounts.push(response.data)
+                    /*fullName = this.fullName,
+                    address = this.address,
+                    phoneNumber = this.phoneNumber,
+                    emailAddress = this.emailAddress,
+                    password = this.password, 
+                    username = this.username;*/
                     this.newMemberAccount.fullName = ''
                     this.newMemberAccount.address = ''
 					this.newMemberAccount.phoneNumber = ''
@@ -49,15 +69,17 @@ export default {
 					this.newMemberAccount.password = ''
 					this.newMemberAccount.username = ''
                     this.errorMemberAccount = ''
-                    this.$currentUsername.value = username
-                    this.$currentName.value = name
+                    /*swal("Success", "Registration Successful", "success")*/
+                })
+                .then(okay =>{
                     this.$router.push("/OnlineMemberDashboard")
                 })
                     .catch(e => {
-                        var errorMsg = e.response.data.message
+                        var errorMsg = e
                         console.log(errorMsg)
-                        this.errorMemberAccount = errorMsg
-					})
+                        this.errorProfile = errorMsg
+                        //swal("Error", e.response.data, "error")
+					});
         },
 	
 		getAllMemberAccounts: function () {
@@ -72,12 +94,12 @@ export default {
                 })
         },
 	
-		goToSubmitPage: function (){
+		/*goToSubmitPage: function (){
             Router.push({
                 path: "/OnlineMemberDashboard",
                 name: "OnlineMemberDashboard"
             })
-        },
+        },*/
     	goToSearchPage: function (){
             Router.push({
                 path: "/SearchLibItems",
