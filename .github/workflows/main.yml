@@ -60,6 +60,7 @@ jobs:
       - name: Build with node
         id: build_node
         run: |
+          npm install
           npm run build
           echo ::set-output name=exit_code::$?
         working-directory: LibManSys-Frontend
