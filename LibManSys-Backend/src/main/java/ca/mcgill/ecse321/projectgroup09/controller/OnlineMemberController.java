@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.projectgroup09.dto.OnlineMemberDto;
 import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 import ca.mcgill.ecse321.projectgroup09.service.OnlineMemberService;
+import ca.mcgill.ecse321.projectgroup09.service.AccountService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -33,6 +35,9 @@ public class OnlineMemberController {
 	
 	@Autowired
 	private OnlineMemberService onlineMemberService;
+	
+	@Autowired
+	private AccountService accountService;
 	
 	@GetMapping(value = { BASE_URL, BASE_URL + "/"})
 	public List<OnlineMemberDto> getAllOnlineMembers() {
@@ -178,11 +183,31 @@ public class OnlineMemberController {
 	public ResponseEntity<?> loginOnlineMember(@RequestParam("username") String username,
 			@RequestParam("password") String password) {
 		try {
-			OnlineMemberDto omdto = OnlineMemberDto.convertToDto(onlineMemberService.loginOnlineMember(username, password));
+			OnlineMemberDto omdto = OnlineMemberDto.convertToDto(onlineMemberService.loginAsOM(username, password));
 			return httpSuccess(omdto);
 		} catch (Exception e) {
 			return httpFailureMessage(e.getMessage());
 		}
 	}
 	
-}
+	@PostMapping(value = { "/logout", "/logout/" })
+	public ResponseEntity<?> logout() {
+		try {
+		onlineMemberService.logout();
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping(value = {"/login/currentMember", "/login/currentMember/" })
+	public OnlineMemberDto getCurrentAccount() {
+		
+			OnlineMember currentOMAccount = onlineMemberService.getLoggedOMAccount();
+			return OnlineMemberDto.convertToDto(currentOMAccount);
+		} 
+
+	}
+	
+	
