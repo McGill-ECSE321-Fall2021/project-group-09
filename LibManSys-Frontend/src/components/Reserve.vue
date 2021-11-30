@@ -41,7 +41,8 @@
             </b-container>
     
          <br>
-         <b-button v-row justify="center" v-on:click="goToSubmitPage()">Reserve Item</b-button>
+                  <b-button v-row justify="center" v-on:click="goToReservePage()">Reserve Item</b-button>
+         <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
 
     
         </section>
@@ -49,44 +50,8 @@
 </template>
 
 
-<script>
-import Router from "../router/index";
+<script src="./Reserve.js"></script>
 
-export default {
-    data() {
-        return {
-            types: []
-        }
-    },
-    methods: {
-        goToSubmitPage: function() {
-            Router.push({
-                path: "/LibraryManagementDashboard",
-                name: "LibraryManagementDashboard"
-            })
-        },
-        goToSearchPage: function() {
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        },
-        goToRegisterPage: function() {
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-
-        goToLoginPage: function() {
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        }
-    }
-}
-</script>
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
