@@ -1,34 +1,6 @@
 <!---Commented--> 
 <template>
-  <div class="header">
-
-
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed color : ##d9b086">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-             
-        </li>
-        
-      </ul>
-    </nav>
-
+  <div class="librarian-login-body">
     <section>
         <br />
         <br />
@@ -78,13 +50,6 @@
         </b-container>
 
     </section>
-    
-    
-    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> blah blah blah some copyright bs </b> 
-    </footer>
-
-   
   </div>
 </template>
 
@@ -94,11 +59,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-header {
-  color: #42b983;
-}
-
 .bg-custom-1 {
   background : #d9b086;
 }
@@ -112,9 +72,6 @@ b.nav-link {
   font-size: 18px;
 }
 
-b-navbar {
-  background-color: #4e1d04;
-}
 
 div {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;

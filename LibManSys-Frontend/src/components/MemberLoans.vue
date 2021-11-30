@@ -11,32 +11,7 @@ Head Librarian:
 
 -->
 <template>
-    <div class="header">
-    
-    
-        <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-            <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-            <ul class="nav-left mr-auto">
-                <li class="nav-item">
-                    <b class="nav-link" href="#a">LibManSys </b>
-                </li>
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToSearchPage()">Catalogue
-              </b>
-                </li>
-            </ul>
-            <ul class="nav-right ml-auto">
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
-                </li>
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToRegisterPage()">Sign Up
-              </b>
-    
-                </li>
-    
-            </ul>
-        </nav>
+    <div class="member-loan-body">
     
         <section>
             <br />
@@ -61,9 +36,9 @@ Head Librarian:
                     <td><myText2>|  Loan Status  |</myText2></td>
                     <td><myText2>|  Late Fees  |</myText2></td>
       </tr>
-      <tr v-for="loan in loans">
+      <tr v-for="loan in loans" :key="loan">
           <td >  
-          <myText2> {{loan.loanId}}</myText2></td> </b-row>
+          <myText2> {{loan.loanId}}</myText2></td>
                      <td> <myText2> {{loan.borrowedDate}}</myText2></td> 
                                    <td> <myText2> {{loan.member.libCardNumber
 }}</myText2></td> 
@@ -97,11 +72,6 @@ Head Librarian:
                 
             </b-col>
         </section>
-        <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-            <b> blah blah blah some copyright bs </b>
-    
-        </footer>
-    
     
     </div>
 </template>
@@ -111,16 +81,9 @@ Head Librarian:
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-header {
-    color: #42b983;
-}
 
 .bg-custom-1 {
     background: linear-gradient( 200deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
-}
-
-nav.navbar {
-    height: 60px;
 }
 
 b.nav-link {

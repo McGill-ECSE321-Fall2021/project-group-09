@@ -1,44 +1,12 @@
 <template>
-  <div class="header">
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToContactUsPage()"
-            >Contact Us
-          </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToBookingsPage()"
-            >Bookings
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-        </li>
-      </ul>
-    </nav>
+  <div class="bookings-body">
+    
 
-    <section></section>
+    <section>
 
-    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> </b>
-    </footer>
+
+    </section>
+
   </div>
 </template>
 

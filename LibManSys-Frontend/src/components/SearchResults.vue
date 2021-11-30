@@ -1,33 +1,6 @@
 
 <template>
-  <div class="header">
-
-
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-             
-        </li>
-        
-      </ul>
-    </nav>
+  <div class="search-results-body">
 
     <section>
       <br />
@@ -64,20 +37,18 @@
     <div>
     <v-data-table  class="elevation-1" >
       <tr><b-col class="myColumn">
-          <td><myText2>|  ID  |</myText2> </td> </b-col>
+          <td><myText2>|  ID  |</myText2> </td>  </b-col>
                     <td><myText2>|  Title  |</myText2> </td>
 
           <td><myText2>|  Published Year |</myText2> </td>
                     <td><myText2>|  Institution   |</myText2> </td>
       </tr>
-      <tr v-for="result in archives">
-          <td >  
-          <myText2> {{result.libraryItemID}}</myText2></td> 
-                    <myText2> {{result.title}}</myText2></td> 
+      <tr v-for="result in archives" :key="result">
+          <td >   <myText2> {{result.libraryItemID}}</myText2></td> 
+                  <td>  <myText2> {{result.title}}</myText2></td> 
 
                      <td> <myText2> {{result.publishedYear}}</myText2></td> 
-                   <td>
-             <myText2> {{result.institution}} </myText2> </td>
+                   <td> <myText2> {{result.institution}} </myText2> </td>
               
              
              
@@ -104,10 +75,10 @@
                     <td><myText2>|  Loanable Period  |</myText2></td>
                     <td><myText2>|  Status  |</myText2></td>
       </tr>
-      <tr v-for="result in results">
+      <tr v-for="result in results" :key="result">
           <td >  
           <myText2> {{result.libraryItemID}}</myText2></td> 
-                    <myText2> {{result.title}}</myText2></td> 
+                  <td>  <myText2> {{result.title}}</myText2></td> 
 
                      <td> <myText2> {{result.author}}</myText2></td> 
                    <td>
@@ -145,17 +116,17 @@
                     <td><myText2>|  Loanable Period  |</myText2></td>
                     <td><myText2>|  Status  |</myText2></td>
       </tr>
-      <tr v-for="result in movies">
+      <tr v-for="result in movies" :key="result">
           <td >  
           <myText2> {{result.libraryItemID}}</myText2></td> 
-                    <myText2> {{result.title}}</myText2></td> 
+                 <td>   <myText2> {{result.title}}</myText2></td> 
 
                      <td> <myText2> {{result.publishedYear}}</myText2></td> 
                    <td>
              <myText2> {{result.genre}} </myText2> </td>  
               <td>
              <myText2> {{result.runtime}} </myText2> </td>               
-             <myText2> {{result.director}} </myText2> </td>               
+           <td>  <myText2> {{result.director}} </myText2> </td>               
 
                 <td>
             <myText2>  {{result.loanablePeriod}}</myText2> </td> 
@@ -182,17 +153,16 @@
                     <td><myText2>|  Number of Songs  |</myText2> </td>
                     <td><myText2>| Length(min)   |</myText2></td>
       </tr>
-      <tr v-for="result in musicAlbums">
+      <tr v-for="result in musicAlbums" :key="result">
           <td >  
           <myText2> {{result.libraryItemID}}</myText2></td> 
-                    <myText2> {{result.title}}</myText2></td> 
+                  <td>  <myText2> {{result.title}}</myText2></td> 
 
                      <td> <myText2> {{result.publishedYear}}</myText2></td> 
                    <td>
              <myText2> {{result.genre}} </myText2> </td>  
-              <td>
-             <myText2> {{result.artist}} </myText2> </td>               
-             <myText2> {{result.numSongs}} </myText2> </td>               
+              <td>  <myText2> {{result.artist}} </myText2> </td>               
+            <td> <myText2> {{result.numSongs}} </myText2> </td>               
 
                 <td>
             <myText2>  {{result.albumLengthInMinutes}}</myText2> </td> 
@@ -212,22 +182,19 @@
           <td><myText2>|  ID  |</myText2> </td> </b-col>
                     <td><myText2>|  Title  |</myText2> </td>
 
-          <td><myText2>|  Published Year |</myText2> </td>
+                  <td><myText2>|  Published Year |</myText2> </td>
                     <td><myText2>|  Journal Name  |</myText2> </td>
                     <td><myText2>|  Edition  |</myText2> </td>
                     <td><myText2>| Chief Editor  |</myText2></td>
       </tr>
-      <tr v-for="result in newspapers">
+      <tr v-for="result in newspapers" :key="result">
           <td >  
           <myText2> {{result.libraryItemID}}</myText2></td> 
-                    <myText2> {{result.title}}</myText2></td> 
-
-                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
-                   <td>
-             <myText2> {{result.journalName}} </myText2> </td>  
-              <td>
-             <myText2> {{result.edition}} </myText2> </td>               
-             <myText2> {{result.chiefEditior}} </myText2> </td>         
+              <td>  <myText2> {{result.title}}</myText2></td> 
+              <td> <myText2> {{result.publishedYear}}</myText2></td> 
+              <td>  <myText2> {{result.journalName}} </myText2> </td>  
+              <td> <myText2> {{result.edition}} </myText2> </td>               
+              <td>  <myText2> {{result.chiefEditior}} </myText2> </td>         
               
              
              
@@ -323,10 +290,6 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 
-header {
-  color: #42b983;
-}
-
 .bg-custom-1 {
   background: linear-gradient(
     200deg,
@@ -336,11 +299,6 @@ header {
   );
 }
 
-
-
-nav.navbar {
-  height: 60px;
-}
 b.nav-link {
   color: #000000;
   font-size: 18px;

@@ -1,33 +1,7 @@
 
 <template>
-  <div class="header">
+  <div class="item-page-body">
 
-
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-             
-        </li>
-        
-      </ul>
-    </nav>
 
     <section>
       <br />
@@ -63,11 +37,6 @@
 </b-container>
 
     </section>
-     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> blah blah blah some copyright bs </b>
-      
-    </footer>
-
    
   </div>
 </template>
@@ -75,11 +44,7 @@
 
 <script>
 
-import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
-import SearchLibItems from "../components/SearchLibItems";
-import Register from "../components/Register";
-
 export default {
   name: 'hello',
   data () {
@@ -115,10 +80,6 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 
-header {
-  color: #42b983;
-}
-
 .bg-custom-1 {
   background: linear-gradient(
     200deg,
@@ -128,11 +89,6 @@ header {
   );
 }
 
-
-
-nav.navbar {
-  height: 60px;
-}
 b.nav-link {
   color: #000000;
   font-size: 18px;

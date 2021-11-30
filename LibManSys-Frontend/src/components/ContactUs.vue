@@ -1,34 +1,5 @@
 <template>
   <div class="contact">
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a" v-on:click="goToHomePage()" >LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToContactUsPage()"
-            >Contact Us
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-        </li>
-      </ul>
-    </nav>
-
     <section>
       <overlay> 
           <map-overlay> </map-overlay>
@@ -64,20 +35,11 @@
       </overlayH>
     </section>
    
-    <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> blah blah blah some copyright bs </b>
-    </footer>
   </div>
 </template>
 
 <script>
 import Register from "../components/Register";
-import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
-import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-import LibrarianDashboard from "../components/LibrarianDashboard";
-import ItemPage from "../components/ItemPage";
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 import Router from "../router/index";
 
 export default {
@@ -150,9 +112,6 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 
-header {
-  color: #42b983;
-}
 
 .bg-custom-1 {
   background: linear-gradient(
@@ -170,10 +129,6 @@ header {
     rgba(0, 0, 0, 0.8),
     rgba(0, 0, 0, 0)
   );
-}
-
-nav.navbar {
-  height: 60px;
 }
 
 div {

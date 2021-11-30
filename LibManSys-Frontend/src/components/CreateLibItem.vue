@@ -1,32 +1,6 @@
 
 <template>
-    <div class="header">
-    
-    
-        <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-            <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-            <ul class="nav-left mr-auto">
-                <li class="nav-item">
-                    <b class="nav-link" href="#a">LibManSys </b>
-                </li>
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToSearchPage()">Catalogue
-                  </b>
-                </li>
-            </ul>
-            <ul class="nav-right ml-auto">
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-                </li>
-                <li class="nav-item">
-                    <b class="nav-link" href="#" v-on:click="goToRegisterPage()">Sign Up
-                  </b>
-    
-                </li>
-    
-            </ul>
-        </nav>
-    
+    <div class="create-lib-item-body">    
         <section>
             <br />
             <br />
@@ -77,7 +51,7 @@
                             <label for="input-large"> Institution :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large"v-model="institution"  placeholder="Enter the Institution"></b-form-input>
+                            <b-form-input id="input-large" v-model="institution"  placeholder="Enter the Institution"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -195,11 +169,9 @@
                             <label for="input-large"> Runtime :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large"type="text" v-model="runtime" placeholder="Enter the Runtime"></b-form-input>
+                            <b-form-input id="input-large" type="text" v-model="runtime" placeholder="Enter the Runtime"></b-form-input>
                         </b-col>
     
-                    </b-row>
-
                     </b-row>
 
                      <b-row class="my-1">
@@ -212,9 +184,9 @@
                         </b-col>
     
                     </b-row>
-            <b-button b-row justify="center"  v-on:click="createMovie(title,publishedYear,director,runtime,genre)">Create Movie</b-button>
 
-                     </b-row>
+                <b-button b-row justify="center"  v-on:click="createMovie(title,publishedYear,director,runtime,genre)">Create Movie</b-button>
+
 
                      
                 </div>
@@ -249,7 +221,7 @@
                             <label for="input-large"> Genre :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large"v-model="genre"  placeholder="Enter the Genre"></b-form-input>
+                            <b-form-input id="input-large" v-model="genre"  placeholder="Enter the Genre"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -259,7 +231,7 @@
                             <label for="input-large"> Artist :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large"v-model="artist"  placeholder="Enter the Artist"></b-form-input>
+                            <b-form-input id="input-large" v-model="artist"  placeholder="Enter the Artist"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -269,7 +241,7 @@
                             <label for="input-large"> Number of Songs :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large"v-model="numSongs"  placeholder="Enter the Number of Songs"></b-form-input>
+                            <b-form-input id="input-large" v-model="numSongs"  placeholder="Enter the Number of Songs"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -280,7 +252,7 @@
                             <label for="input-large"> Length :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large"v-model="albumLengthInMinutes"  placeholder="Enter the Length of the Album in Minutes"></b-form-input>
+                            <b-form-input id="input-large" v-model="albumLengthInMinutes"  placeholder="Enter the Length of the Album in Minutes"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -358,12 +330,7 @@
     <br> <br>            <b-button v-row justify="center" v-on:click="goToSubmitPage()">Go Back to Managment </b-button> 
     
     
-        </section>
-        <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-            <b> blah blah blah some copyright bs </b>
-    
-        </footer>
-    
+        </section>   
     
     </div>
 </template>
@@ -427,9 +394,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-header {
-    color: #42b983;
-}
 
 /*
 .bg-custom-1 {

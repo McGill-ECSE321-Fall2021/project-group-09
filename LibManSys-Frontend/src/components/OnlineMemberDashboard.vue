@@ -11,34 +11,7 @@ Head Librarian:
 
 -->
 <template>
-  <div class="header">
-
-
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSubmitPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-             
-        </li>
-        
-      </ul>
-    </nav>
+  <div class="online-member-dashboard-body">
 
     <section>
       <br />
@@ -56,7 +29,6 @@ Head Librarian:
       <label for="input-large" >Email:</label>
     </b-col>
   </b-row>
-    </b-row>
     <b-row class="my-1" >
     <b-col sm="2" > 
       <label for="input-large" >Username:</label>
@@ -87,7 +59,6 @@ Head Librarian:
       <label for="input-large" >$ </label>
     </b-col>
   </b-row>
-   </b-row>
    <b-row class="my-1" >
     <b-col sm="2" > 
       <label for="input-large" >Verification Status: </label>
@@ -107,24 +78,14 @@ Head Librarian:
             </b-col>
      
     </section>
-     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> blah blah blah some copyright bs </b>
-      
-    </footer>
-
-   
   </div>
 </template>
 
 
 <script>
 
-import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
-import MemberLoans from "../components/MemberLoans";
 
 import Router from "../router/index";
-import Register from "../components/Register";
 
 export default {
   name: 'hello',
@@ -167,10 +128,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-header {
-  color: #42b983;
-}
-
 .bg-custom-1 {
   background: linear-gradient(
     200deg,
@@ -180,11 +137,6 @@ header {
   );
 }
 
-
-
-nav.navbar {
-  height: 60px;
-}
 b.nav-link {
   color: #000000;
   font-size: 18px;

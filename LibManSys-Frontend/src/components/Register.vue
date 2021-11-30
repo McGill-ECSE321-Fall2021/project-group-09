@@ -2,119 +2,86 @@
 <template>
   <div class="Register">
 
+      <section>
+            <br />
+            <br />
+                <br />
 
-    <nav class="navbar navbar-dark bg-custom-2 center-collapsed">
-      <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-      <ul class="nav-left mr-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#a">LibManSys </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-            >Catalogue
-          </b>
-        </li>
-      </ul>
-      <ul class="nav-right ml-auto">
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-        </li>
-        <li class="nav-item">
-          <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-          </b>
-             
-        </li>
+      <b-container fluid>
+            <h2>  ONLINE MEMBER REGISTRATION </h2>
+
+      <b-form>
+
+        <b-form-text>
+          <b-col sm="1" > 
+            <label for="fullName" >FullName:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input id="fullName" v-model="fullName" placeholder="Enter your Full Name"></b-form-input>
+          </b-col>
+        </b-form-text> 
+
+        <b-form-text>
+          <b-col sm="1" > 
+            <label for="address" >Address:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input id="address" v-model="address" placeholder="Enter your Address"></b-form-input>
+          </b-col>
+        </b-form-text>
+
+        <b-form-text>
+          <b-col sm="1" > 
+            <label for="phoneNumber" >PhoneNumber:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input id="phoneNumber" v-model="phoneNumber" placeholder="Enter your phone number"></b-form-input>
+          </b-col>
+        </b-form-text>
+
+        <b-form-text>
+          <b-col sm="1">
+            <label for="emailAddress">MemberEmail:</label>
+          </b-col>
+          <b-col sm="5" >
+            <b-form-input id="emailAddress" v-model="emailAddress" placeholder="Enter your Email"></b-form-input>
+          </b-col>
+        </b-form-text>
+
+        <b-form-text>
+          <b-col sm="1" > 
+            <label for="password">Password:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input id="password" v-model="password" placeholder="Enter your Password"></b-form-input>
+          </b-col>
+        </b-form-text>
+
+        <b-form-text>
+          <b-col sm="1" > 
+            <label for="username" >Username:</label>
+          </b-col>
+          <b-col sm="5">
+            <b-form-input id="username" v-model="username" placeholder="Enter your username"></b-form-input>
+          </b-col>
+        </b-form-text>
+
+        <button
+            @click="createMemberAccount(fullName, address, phoneNumber, emailAddress, password, username)"
+            type="Registerbutton"
+            style="background-color: firebrick; color: coral"
+            class="btn btn-primary"
+          >
+            <font size="3"><b>Create Account</b></font>
+
+      </button>
+
+      </b-form>
         
-      </ul>
-    </nav>
+        </b-container>
 
-<section>
-      <br />
-      <br />
-           <br />
+      </section>
 
-<b-container fluid>
-      <h2>  ONLINE MEMBER REGISTRATION </h2>
-
-<b-form>
-
-  <b-form-text>
-    <b-col sm="1" > 
-      <label for="fullName" >FullName:</label>
-    </b-col>
-    <b-col sm="5">
-      <b-form-input id="fullName" v-model="fullName" placeholder="Enter your Full Name"></b-form-input>
-    </b-col>
-  </b-form-text> 
-
-  <b-form-text>
-    <b-col sm="1" > 
-      <label for="address" >Address:</label>
-    </b-col>
-    <b-col sm="5">
-      <b-form-input id="address" v-model="address" placeholder="Enter your Address"></b-form-input>
-    </b-col>
-  </b-form-text>
-
-  <b-form-text>
-    <b-col sm="1" > 
-      <label for="phoneNumber" >PhoneNumber:</label>
-    </b-col>
-    <b-col sm="5">
-      <b-form-input id="phoneNumber" v-model="phoneNumber" placeholder="Enter your phone number"></b-form-input>
-    </b-col>
-  </b-form-text>
-
-  <b-form-text>
-    <b-col sm="1">
-      <label for="emailAddress">MemberEmail:</label>
-    </b-col>
-    <b-col sm="5" >
-      <b-form-input id="emailAddress" v-model="emailAddress" placeholder="Enter your Email"></b-form-input>
-    </b-col>
-  </b-form-text>
-
-  <b-form-text>
-    <b-col sm="1" > 
-      <label for="password">Password:</label>
-    </b-col>
-    <b-col sm="5">
-      <b-form-input id="password" v-model="password" placeholder="Enter your Password"></b-form-input>
-    </b-col>
-  </b-form-text>
-
-  <b-form-text>
-    <b-col sm="1" > 
-      <label for="username" >Username:</label>
-    </b-col>
-    <b-col sm="5">
-      <b-form-input id="username" v-model="username" placeholder="Enter your username"></b-form-input>
-    </b-col>
-  </b-form-text>
-
-  <button
-      @click="createMemberAccount(fullName, address, phoneNumber, emailAddress, password, username)"
-      type="Registerbutton"
-      style="background-color: firebrick; color: coral"
-      class="btn btn-primary"
-    >
-      <font size="3"><b>Create Account</b></font>
-
-</button>
-
-</b-form>
-  
-  </b-container>
-
-</section>
-
-<footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> Copyright libManSys-g09a </b>
-      
-</footer>
-
-   
   </div>
 
 </template>

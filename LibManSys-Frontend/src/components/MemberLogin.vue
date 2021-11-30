@@ -1,95 +1,59 @@
 
 <template>
-  <div id="member-login">
+  <div id="member-login-body">
+    <section>
+        <br />
+        <br />
+        <br />
 
-    <div class="header">
-      <nav class="navbar navbar-dark bg-custom-2 center-collapsed color : ##d9b086">
-        <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
-        <ul class="nav-left mr-auto">
-          <li class="nav-item">
-            <b class="nav-link" href="#a">LibManSys </b>
-          </li>
-          <li class="nav-item">
-            <b class="nav-link" href="#" v-on:click="goToSearchPage()"
-              >Catalogue
-            </b>
-          </li>
-        </ul>
-        <ul class="nav-right ml-auto">
-          <li class="nav-item">
-            <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-          </li>
-          <li class="nav-item">
-            <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-              >Sign Up
-            </b>
-              
-          </li>
-          
-        </ul>
-      </nav>
-    </div>
+        <b-container fluid>
+            <b class="login-title"> Member Log In </b>
 
-    <div id="member-login-body">
-      <section>
-          <br />
-          <br />
-          <br />
+            <br />
+            <br />
 
-          <b-container fluid>
-              <b class="login-title"> Member Log In </b>
-
-              <br />
-              <br />
-
-              <b-row class="my-1" color="#00000">
-                  <b-col sm="4" color="#00000">
-                      <label class="login-input" for="input-default">Username:</label>
-                  </b-col>
-                  <b-col sm="5" >
-                      <b-form-input  id="input-default"  type="text" v-model="username" placeholder="Enter your username"></b-form-input>
-                  </b-col>
-                  <b-col sm="3" color="#00000">
-                      
-                  </b-col>
-              </b-row>
-
-              <b-row class="my-1" >
-                  <b-col sm="4" > 
-                      <label class="login-input" for="input-large" >Password:</label>
-                  </b-col>
-                  <b-col sm="5">
-                      <b-form-input id="input-default" type="text" v-model="password" placeholder="Enter your password"></b-form-input>
-                  </b-col>
-                  <b-col sm="3" color="#00000">
-                      
-                  </b-col>
-              </b-row>
-            
-          </b-container>
-          
-          <br />
-          <span v-if="errorLogin" style="color:red">{{errorLogin}} </span>
-          <br />
-
-          <b-container>
-            <b-row class="my-1 text-center" align-h="center">
-              <b class="button" href="#" v-on:click="loginMember(username, password)">Login</b>
-              <b class="button" href="#" v-on:click="goToLibrarianLoginPage()">Go to Librarian Login</b>
+            <b-row class="my-1" color="#00000">
+                <b-col sm="4" color="#00000">
+                    <label class="login-input" for="input-default">Username:</label>
+                </b-col>
+                <b-col sm="5" >
+                    <b-form-input  id="input-default"  type="text" v-model="username" placeholder="Enter your username"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
+                </b-col>
             </b-row>
-          </b-container>
 
-      </section>
-    <!-- End of body div -->
-    </div>
+            <b-row class="my-1" >
+                <b-col sm="4" > 
+                    <label class="login-input" for="input-large" >Password:</label>
+                </b-col>
+                <b-col sm="5">
+                    <b-form-input id="input-default" type="text" v-model="password" placeholder="Enter your password"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
+                </b-col>
+            </b-row>
+          
+        </b-container>
+        
+        <br />
+        <span v-if="errorLogin" style="color:red">{{errorLogin}} </span>
+        <br />
 
-    <div class="footer">
-      <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-        <b> blah blah blah some copyright bs </b> 
-      </footer>
-    </div>
+        <b-container>
+          <b-row class="my-1 text-center" align-h="center">
+            <b class="button" href="#" v-on:click="loginMember(username, password)">Login</b>
+            <b class="button" href="#" v-on:click="goToLibrarianLoginPage()">Go to Librarian Login</b>
+          </b-row>
+        </b-container>
 
+    </section>
+  <!-- End of body div -->
+    
   </div>
+
 </template>
 
 
@@ -99,16 +63,9 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-header {
-  color: #42b983;
-}
 
 .bg-custom-1 {
   background-color: #d9b086;
-}
-
-nav.navbar {
-  height: 60px;
 }
 
 b.nav-link {
