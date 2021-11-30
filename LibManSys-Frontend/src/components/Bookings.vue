@@ -1,212 +1,174 @@
+
 <template>
-  <div class="bookings-body">
-    
-
+  <div id="member-booking-body">
     <section>
+        <br />
+        <br />
+        <br />
 
+        <b-container fluid>
+            <b class="booking-title"> New Booking </b>
+
+            <br />
+            <br />
+
+            <b-row class="my-1" color="#00000">
+                <b-col sm="4" color="#00000">
+                    <label class="booking-input" for="input-default">Date:</label>
+                </b-col>
+                <b-col sm="5" >
+                    <b-form-input  id="input-default"  type="text" v-model="bookingDate" placeholder="yyyy-mm-dd"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
+                </b-col>
+            </b-row>
+
+            <b-row class="my-1" >
+                <b-col sm="4" > 
+                    <label class="booking-input" for="input-large" >Start Time</label>
+                </b-col>
+                <b-col sm="5">
+                    <b-form-input id="input-default" type="text" v-model="bookingStartTime" placeholder="hh:mm:ss"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
+                </b-col>
+            </b-row>
+
+           <b-row class="my-1" color="#00000">
+                <b-col sm="4" color="#00000">
+                    <label class="booking-input" for="input-default">End Time:</label>
+                </b-col>
+                <b-col sm="5" >
+                    <b-form-input  id="input-default"  type="text" v-model="bookingEndTime" placeholder="hh:mm:ss"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
+                </b-col>
+            </b-row>
+
+            <b-row class="my-1" >
+                <b-col sm="4" > 
+                    <label class="booking-input" for="input-large" >Booking ID:</label>
+                </b-col>
+                <b-col sm="5">
+                    <b-form-input id="input-default" type="text" v-model="bookingID" placeholder="Please enter the booking ID"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
+                </b-col>
+            </b-row>
+
+             <b-row class="my-1" >
+                <b-col sm="4" > 
+                    <label class="booking-input" for="input-large" >Library Card No:</label>
+                </b-col>
+                <b-col sm="5">
+                    <b-form-input id="input-default" type="text" v-model="member" placeholder="Please enter the member's library card number"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
+                </b-col>
+            </b-row>
+
+             <b-row class="my-1" >
+                <b-col sm="4" > 
+                    <label class="booking-input" for="input-large" >Employee ID:</label>
+                </b-col>
+                <b-col sm="5">
+                    <b-form-input id="input-default" type="text" v-model="librarian" placeholder="Please enter your employee ID"></b-form-input>
+                </b-col>
+                <b-col sm="3" color="#00000">
+                    
+                </b-col>
+            </b-row>
+        </b-container>
+        
+        <br />
+        <span v-if="errorbooking" style="color:red">{{errorbooking}} </span>
+        <br />
+
+        <b-container>
+          <b-row class="my-1 text-center" align-h="center">
+            <b class="button" href="#" v-on:click="createBooking(bookingStartTime, bookingEndTime, bookingDate, bookingID, member, librarian)">Create Booking</b>
+            <b class="button" href="#" v-on:click="document.getElementById('member').input = ''">Clear</b>
+          </b-row>
+        </b-container>
 
     </section>
-
+  <!-- End of body div -->
+    
   </div>
+
 </template>
 
-<script src="./booking.js">
-// import Register from "../components/Register";
-// import MemberLogin from "../components/MemberLogin";
-// import SearchLibItems from "../components/SearchLibItems";
-// import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-// import LibrarianDashboard from "../components/LibrarianDashboard";
-// import SearchResults from "../components/SearchResults";
 
-// import ItemPage from "../components/ItemPage";
-// import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
-// import Router from "../router/index";
+<script src="./booking.js"></script>
 
-// export default {
-//   name: "hello",
-//   data() {
-//     return {
-//       hover: false,
-//       msg: "Welcome to the Library",
-//     };
-//   },
-
-//   components: {
-//     Register,
-//   },
-
-//   methods: {
-//     goToRegisterPage: function () {
-//       Router.push({
-//         path: "/Register",
-//         name: "Register",
-//       });
-//     },
-//     goToLoginPage: function () {
-//       Router.push({
-//         path: "/MemberLogin",
-//         name: "MemberLogin",
-//       });
-//     },
-//     goToSearchPage: function () {
-//       Router.push({
-//         path: "/SearchResults",
-//         name: "SearchResults",
-//       });
-//     },
-//     goToLibManagmentPage: function () {
-//       Router.push({
-//         path: "/LibraryManagementDashboard",
-//         name: "LibraryManagementDashboard",
-//       });
-//     },
-//     goToUserPage: function () {
-//       Router.push({
-//         path: "/OnlineMemberDashboard",
-//         name: "OnlineMemberDashboard",
-//       });
-//     },
-//     goToLibrarianPage: function () {
-//       Router.push({
-//         path: "/LibrarianDashboard",
-//         name: "LibrarianDashboard",
-//       });
-//     },
-//     goToItemPage: function () {
-//       Router.push({
-//         path: "/ItemPage",
-//         name: "ItemPage",
-//       });
-//     },
-//     goToContactUsPage: function () {
-//       Router.push({
-//         path: "/ContactUs",
-//         name: "ContactUs",
-//       });
-//     },
-//     goToBookingsPage: function () {
-//       Router.push({
-//         path: "/Bookings",
-//         name: "Bookings",
-//       });
-//     },
-//   },
-// };
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 
-header {
-  color: #42b983;
-}
 
 .bg-custom-1 {
-  background: linear-gradient(
-    200deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
+  background-color: #d9b086;
 }
 
-.bg-custom-2 {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-}
-
-nav.navbar {
-  height: 60px;
-}
 b.nav-link {
-  color: #ffffff;
+  color: #000000;
   font-size: 18px;
 }
+
 b-navbar {
   background-color: #4e1d04;
 }
 
 div {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #000000;
-  background-image: linear-gradient(
-      115deg,
-      rgba(0, 0, 0, 0.9),
-      rgba(0, 0, 0, 0.9),
-      rgba(43, 16, 7, 0.8)
-    ),
-    url(../assets/library-bkg.jpg);
-
+ /*   background: #f0dbce;*/
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
 section {
+  color: #d9b086;
   font-family: "Lato", sans-serif;
   height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
 }
-.hours {
-  position: absolute;
-  top: 15%;
-  bottom: 12%;
-  right: 1%;
-  left: 52%;
-  background-color: #1e3535;
-  color: white;
-  padding-left: 40px;
-  padding-right: 40px;
-  opacity: 0.7;
-  text-align: left;
-}
+
 a.normal {
   font-weight: 400;
 }
-h2 {
+h1, h2 {
+ 
+  color: black;
+  font-size: 40px;
   font-weight: normal;
-}
-a.thick {
-  font-weight: bold;
-}
-a.light {
-  font-weight: 100;
+
 }
 ul {
   list-style-type: none;
   padding: 0;
 }
-.nav-left {
-  display: flex;
-}
-.nav-right {
-  display: flex;
-}
 
 li {
   display: inline-block;
-  cursor: pointer;
-  margin: 0px;
-}
-li.nav-item:hover {
-  color: #8c5440;
+  margin: 0 10px;
 }
 
 a {
-  color: #ffffff;
-  font-size: 70px;
+  color: #42b983;
 }
 b {
   font: "Lato", sans-serif;
@@ -218,69 +180,45 @@ b-nav-item {
   color: #efecf2;
   font-size: 18px;
 }
-b-nav-item:hover {
-  color: #8c5440;
+.nav-left {
+  display: flex;
 }
-#container {
-  width: 65%;
-  margin: 0 auto;
-}
-smallButton {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 16px 32px;
-  background-color: #a85f32;
-  border-radius: 10px;
-  font-size: 12px;
-  color: #000;
-  background: #a85f32;
-  border: 0;
-  font-weight: 200;
-}
-button {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  /* padding: 16px 32px; */
-  /* background-color: a85f32; */
-  /* border-radius: 10px; */
-  /* font-size: 15px; */
-  color: #000;
-  /* background: a85f32; */
-  /* border: 0; */
-  /* font-weight: 200; */
-}
-/*Search Bar */
-.search {
-  width: 100%;
-  position: relative;
+.nav-right {
   display: flex;
 }
 
-.searchTerm {
-  width: 100%;
-  border: 2px solid #ffffff;
-  border-right: none;
-  padding: 15px;
-  height: 20px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #ffffff;
-  background: none;
+#container{
+    width: 65%;
+    margin: 0 auto;
+}
+.button {
+  display: inline-block;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 16px 32px;
+  background-color: a85f32;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #000;
+  background: a85f32;
+  /* border: 0; */
+  font-weight: 500;
 }
 
-.searchTerm:focus {
-  color: #ffffff;
+
+.button:hover {
+    cursor: pointer;
+    background-color: #ffd24d;
 }
 
-.searchButton {
-  width: 40px;
-  height: 34px;
-  border: 2px solid #ffffff;
-  border-left-style: hidden;
-  background: none;
-  text-align: center;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
-  vertical-align: text-top;
+.booking-title {
+  color:#a85f32;
+  font: "Times";
+  font-size: 30px;
+  font-weight: 100;
+}
+
+.booking-input {
+    float: right;
 }
 
 /*Resize the wrap to see the search bar change!*/
@@ -296,13 +234,5 @@ input,
   font-family: "Lato", sans-serif;
   font-size: 18px;
   font-weight: 600;
-  color: #ffffff;
-}
-
-/* Footer */
-footer {
-  height: 40px;
-  font-weight: 200;
-  text-align: center;
 }
 </style>

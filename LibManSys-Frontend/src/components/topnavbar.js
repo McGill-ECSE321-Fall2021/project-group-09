@@ -84,6 +84,18 @@ export default {
                 name: "SearchLibItems"
             })
         }
+    },
+        goToHomePage: function () {
+            Router.push({
+              path: "/",
+              name: "Home",
+            });
     }
-  }
+  },
+  goToSearchPage: function () {
+    Router.push({
+      path: "/SearchResults",
+      name: "SearchResults",
+    });
+  },
 }
