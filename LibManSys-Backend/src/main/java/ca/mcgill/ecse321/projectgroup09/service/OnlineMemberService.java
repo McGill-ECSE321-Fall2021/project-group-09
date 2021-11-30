@@ -23,6 +23,8 @@ public class OnlineMemberService extends MemberService {
 	
 	@Autowired
 	private LoanRepository loanRepository;
+	
+	public static OnlineMember currentOMAccount = null;
 
 	@Transactional
 	public OnlineMember createOnlineMember(String fullName, String address, String phoneNumber, String memberEmail, String memberPassword, String memberUsername) {
@@ -83,6 +85,7 @@ public class OnlineMemberService extends MemberService {
 		onlineMember.setMemberEmail(memberEmail);
 		onlineMember.setMemberPassword(memberPassword);
 		onlineMember.setMemberUsername(memberUsername);
+		currentOMAccount = onlineMember;
         onlineMemberRepository.save(onlineMember);
         return onlineMember;
 	}
@@ -535,4 +538,53 @@ public class OnlineMemberService extends MemberService {
 		}
 		return om;
 	}
+
+
+@Transactional
+public OnlineMember loginAsOM(String username, String password) {
+       if (username == null || username.trim().length() == 0) {
+           throw new IllegalArgumentException("Please enter a valid username or email");
+       }
+       if (password == null || password.trim().length() == 0) {
+           throw new IllegalArgumentException("Please enter a valid Password");
+       }
+
+       List<OnlineMember> onlinemembers = getAllOnlineMembers();
+       
+       OnlineMember foundOM = null;
+
+       for (OnlineMember om : onlinemembers) {
+
+           if ((om.getMemberUsername().equals(username) || om.getMemberEmail().equals(username)) && om.getMemberPassword().equals(password)) {
+          
+               currentOMAccount = om;
+               foundOM = om;
+               break;
+           }
+       }
+       if (foundOM == null) {
+           throw new IllegalArgumentException("Account does not exist, please register a new account or try again.");
+       }
+
+       return foundOM;
+
+   }
+
+
+@Transactional
+   public OnlineMember getLoggedOMAccount() {
+	
+	if (currentOMAccount == null) {
+		throw new IllegalArgumentException("No account is logged into at the moment. Please log in.");
+	}
+	else {
+       return currentOMAccount;
+   }
+}
+
+   @Transactional
+   public void logout() {
+       currentOMAccount = null;
+   }
+
 }

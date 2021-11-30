@@ -76,7 +76,7 @@
 
 <b-row>
     <b-col sm="2" > 
-      <label for="username" >Phone Number:</label>
+      <label for="username" >Username:</label>
     </b-col>
 </b-row>
    
