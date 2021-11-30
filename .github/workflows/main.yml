@@ -69,11 +69,13 @@ jobs:
         if: steps.build_gradle.outputs.exit_code == 0
         # {{ secrets.CC_HEROKU_API_KEU }}
         # heroku git:remote --app libmansys-g09a --remote backend-heroku 
+        
+        #git pull --ff-only heroku master
         run: |
           echo "Successful build, pushing to heroku"
           heroku git:remote --app libmansys-g09a
           git remote -v
-          git pull --ff-only heroku master
+          
           git push heroku master
         
       - name: Build frontend with node
@@ -87,10 +89,12 @@ jobs:
       - name: Push successful front end build to heroku
         if: steps.build_node.outputs.exit_code == 0
         # heroku git:remote --app libmansys-frontend-g09a --remote frontend-heroku
+        
+        #git pull --ff-only heroku master
         run: |
           echo "Successful build, pushing to heroku"
           heroku git:remote --app libmansys-frontend-g09a
-          git pull --ff-only heroku master
+          
           git push heroku master
 
       - name: Stop Gradle Daemon
