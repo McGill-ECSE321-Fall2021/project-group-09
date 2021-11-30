@@ -50,7 +50,7 @@ jobs:
         
       # if successful build, push to heroku
       - name: Push Successful Build to Heroku
-        if: steps.build_gradle.outputs.exit_code == true
+        if: steps.build_gradle.outputs.exit_code == True
         run: echo "Successful build, pushing to heroku"
         working-directory: LibManSys-Backend
 
