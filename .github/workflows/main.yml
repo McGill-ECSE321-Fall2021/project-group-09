@@ -41,7 +41,7 @@ jobs:
         run: chmod +x gradlew
         working-directory: LibManSys-Backend
         
-      - name: Build with Gradle
+      - name: Build backend with Gradle
         id: build_gradle
         run: |
           ./gradlew build --no-daemon
@@ -49,15 +49,22 @@ jobs:
         working-directory: LibManSys-Backend
         
       # if successful build, push to heroku
-      - name: Push Successful Build to Heroku
+      - name: Push Successful backend Build to Heroku
         if: steps.build_gradle.outputs.exit_code == 0
         run: |
           echo "Successful build, pushing to heroku"
+          echo "machine api.heroku.com
+                  login <your-email@address>
+                  password <your-api-key>
+                machine git.heroku.com
+                  login <your-email@address>
+                  password <your-api-key>" > $HOME/_netrc
+          cat $HOME/_netrc
           git status
           git remote -v
         working-directory: LibManSys-Backend
         
-      - name: Build with node
+      - name: Build frontend with node
         id: build_node
         run: |
           npm install
