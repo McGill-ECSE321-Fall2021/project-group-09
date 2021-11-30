@@ -76,7 +76,10 @@ jobs:
           heroku git:remote --app libmansys-g09a
           git remote -v
           git status
+          git stash
+          git pull heroku master
           git push heroku master
+          git stash pop
         
       - name: Build frontend with node
         id: build_node
