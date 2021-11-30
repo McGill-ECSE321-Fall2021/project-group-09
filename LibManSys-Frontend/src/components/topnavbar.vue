@@ -4,7 +4,7 @@
         <!--  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"> -->
         <ul class="nav-left mr-auto">
         <li class="nav-item">
-            <b class="nav-link" href="#a">LibManSys </b>
+            <b class="nav-link" href="#a" v-on:click="goToHomePage()"> LibManSys </b>
         </li>
         <li class="nav-item">
             <b class="nav-link" href="#" v-on:click="goToSearchPage()"
