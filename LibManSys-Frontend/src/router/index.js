@@ -15,7 +15,7 @@ import Register from '@/components/Register'
 import SearchLibItems from '@/components/SearchLibItems'
 import ItemPage from '@/components/ItemPage'
 import Reserve from '@/components/Reserve'
-import CreateLibItem from '@/components/CreateLibItem'
+import CreateLibItem from '@/components/CreateLibItem.vue'
 import SearchResults from '@/components/SearchResults.vue'
 
 
