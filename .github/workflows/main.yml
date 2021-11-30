@@ -52,7 +52,7 @@ jobs:
       - name: Push Successful backend Build to Heroku
         if: steps.build_gradle.outputs.exit_code == 0
         # {{ secrets.CC_HEROKU_API_KEU }}
-        
+        # heroku git:remote --app libmansys-g09a --remote backend-heroku
         run: |
           echo "Successful build, pushing to heroku"
           echo "machine api.heroku.com
@@ -62,7 +62,7 @@ jobs:
             password 6d011963-a494-4236-ae6c-1a7b6726fdef" > $HOME/_netrc          
           echo "test"
           cat $HOME/_netrc
-          heroku git:remote --app libmansys-g09a --remote backend-heroku
+          git push https://git.heroku.com/libmansys-g09a.git
           git remote -v
           git push backend-heroku master
         working-directory: LibManSys-Backend
@@ -77,6 +77,7 @@ jobs:
         
       - name: Push successful front end build to heroku
         if: steps.build_node.outputs.exit_code == 0
+        # heroku git:remote --app libmansys-frontend-g09a --remote frontend-heroku
         run: |
           echo "Successful build, pushing to heroku"
           echo "machine api.heroku.com
@@ -86,9 +87,9 @@ jobs:
             password 6d011963-a494-4236-ae6c-1a7b6726fdef" > $HOME/_netrc          
           echo "test"
           cat $HOME/_netrc
-          heroku git:remote --app libmansys-frontend-g09a --remote frontend-heroku
+          
           git remote -v
-          git push frontend-heroku master
+          git push https://git.heroku.com/libmansys-frontend-g09a.git
         working-directory: LibManSys-Frontend
 
       - name: Stop Gradle Daemon
