@@ -49,39 +49,6 @@ jobs:
           echo ::set-output name=exit_code::$?
         working-directory: LibManSys-Backend
         
-      - name: Heroku login credentials
-        if: steps.build_node.outputs.exit_code == 0
-        run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-            machine git.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-          EOF
-        env:
-          HEROKU_API_KEY: 6d011963-a494-4236-ae6c-1a7b6726fdef #${{ secrets.HEROKU_API_KEY }}
-          HEROKU_EMAIL: christoscunn@gmail.com #${{ secrets.HEROKU_EMAIL }}
-      
-      # if successful build, push to heroku
-      - name: Push Successful backend Build to Heroku
-        if: steps.build_gradle.outputs.exit_code == 0
-        # {{ secrets.CC_HEROKU_API_KEU }}
-        # heroku git:remote --app libmansys-g09a --remote backend-heroku 
-        
-        #git pull --ff-only heroku master
-        run: |
-          echo "Successful build, pushing to heroku"
-          heroku git:remote --app libmansys-g09a
-          git remote -v
-          git status
-          git stash
-          git status
-          git pull heroku master
-          git push heroku master
-          git stash pop
-        
       - name: Build frontend with node
         id: build_node
         run: |
@@ -89,17 +56,6 @@ jobs:
           npm run build
           echo ::set-output name=exit_code::$?
         working-directory: LibManSys-Frontend
-      
-      - name: Push successful front end build to heroku
-        if: steps.build_node.outputs.exit_code == 0
-        # heroku git:remote --app libmansys-frontend-g09a --remote frontend-heroku
         
-        #git pull --ff-only heroku master
-        run: |
-          echo "Successful build, pushing to heroku"
-          heroku git:remote --app libmansys-frontend-g09a
-          
-          git push heroku master
-
       - name: Stop Gradle Daemon
         run: ./gradlew --stop

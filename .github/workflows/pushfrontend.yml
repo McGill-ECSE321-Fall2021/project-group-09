@@ -1,0 +1,20 @@
+name: pushfrontend
+
+# only run when main workflow succeeds
+on:
+  workflow_run:
+    workflows: ["Java CI with Gradle"]
+    types:
+      - completed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: 6d011963-a494-4236-ae6c-1a7b6726fdef #${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: libmansys-frontend-g09a #Must be unique in Heroku
+          heroku_email: christoscunn@gmail.com
