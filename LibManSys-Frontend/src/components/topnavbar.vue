@@ -84,22 +84,22 @@ export default {
 }
 
 .bg-custom-3 {
-  background: rgba(255, 255, 255, 1);
+  background: firebrick;
 }
 
 nav.navbar {
   height: 60px;
 }
 b.nav-link {
-  color: #000000;
+  color: whitesmoke;
   font-size: 18px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 450;
 }
 
 .nav-item {
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 10px;
+    background-color: black;
+    border-radius: 100px;
 }
 .nav-item:hover {
   /*background-color: #8c5440;*/

@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
       <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-        <b> blah blah blah some copyright bs </b> 
+        <b> Copyright libManSys-g09a </b> 
       </footer>
     </div>
 </template>
@@ -13,12 +13,13 @@
 <style scoped>
 
 .bg-custom-1 {
-  background-color: #000000;
+  background-color: firebrick;;
 }
 b {
-  font: "Lato", sans-serif;
+  font: "American Typewriter", serif;
   font-weight: 100;
-  color: #c2c2c2;
+  color: whitesmoke;
   font-size: 18px;
+
 }
 </style>
