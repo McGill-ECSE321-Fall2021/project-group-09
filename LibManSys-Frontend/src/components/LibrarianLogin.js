@@ -1,10 +1,11 @@
 import Router from "../router/index";
+//import { eventBus } from '../eventBus';
 
 import axios from 'axios'
 var config = require('../../config')
 
-var frontendUrl =   'https://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'https://' + config.dev.backendHost + ':' + config.dev.backendPort
+var frontendUrl =   'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
 
 var AXIOS = axios.create({
   baseURL: backendUrl,
@@ -33,8 +34,13 @@ export default {
             .then(response => {
                 this.errorLogin = ''
 
+                var newLoggedInUser = response.data.employeeIDNumber
                 // set cookie for logged in user
-                $cookies.set("loggedInUser", response.data.employeeIDNumber)
+                $cookies.set("loggedInUser", newLoggedInUser)
+                $cookies.set("loggedInType", "librarian")
+
+                // publish event
+                EventBus.$emit('loggedInUserSet', newLoggedInUser)
 
                 // send to dashboard
                 Router.push({

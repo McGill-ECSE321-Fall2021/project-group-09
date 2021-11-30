@@ -86,7 +86,7 @@
       <b-col class="myColumn">
     
                 <td>
-                    <b-button v-row justify="center" v-on:click="goToLoansPage()">Loans</b-button>
+                    <b-button justify="center" v-on:click="goToLoansPage()">Loans</b-button>
                 </td>
     
             </b-col>

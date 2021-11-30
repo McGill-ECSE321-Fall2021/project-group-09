@@ -12,54 +12,42 @@
             </b>
         </li>
         </ul>
+
+        <!-- right navbar -->
         <ul class="nav-right ml-auto">
-        <li class="nav-item">
-            <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
-        </li>
-        <li class="nav-item">
-            <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
-            >Sign Up
-            </b>
-                
-        </li>
+
+          <!-- Show if user not logged in -->
+          <div v-if="!loggedInUser">
+
+            <li class="nav-item">
+                <b class="nav-link" href="#" v-on:click="goToLoginPage()">Login </b>
+            </li>
+            <li class="nav-item">
+                <b class="nav-link" href="#" v-on:click="goToRegisterPage()"
+                >Sign Up
+                </b>
+            </li>
+
+          </div>
+
+          <!-- Else show this if user IS logged in -->
+          <div v-else>
+            <li class="nav-item">
+                <b class="nav-link" href="#" v-on:click="goToUserDashboard()">Currently logged in as a {{loggedInType}} with {{IDtype}}: {{loggedInUser}} </b>
+            </li>
+            <li class="nav-item">
+                <b class="nav-link" href="#" v-on:click="signOut()"
+                >Sign Out
+                </b>
+            </li>
+          </div>
         
         </ul>
     </nav>
 
 </template>
 
-<script>
-import Router from "../router/index";
-
-export default {
-  name: "topvarbar",
-  data() {
-    return {
-      msg: "Welcome to the Library"
-    };
-  },
-  methods: {
-    goToRegisterPage: function (){
-        Router.push({
-            path: "/Register",
-            name: "Register"
-        })
-    },
-    goToLoginPage: function (){
-        Router.push({
-            path: "/MemberLogin",
-            name: "MemberLogin"
-        })
-    },
-    goToSearchPage: function() {
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        }
-  }
-}
-</script>
+<script src='./topnavbar.js'></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
