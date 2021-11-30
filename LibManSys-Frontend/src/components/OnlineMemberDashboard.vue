@@ -20,7 +20,15 @@
     </b-col>
   </b-row>
 
-  
+ <b-row>
+    <b-col sm="2" > 
+      <label for="libCardNumber" >Library Card Number: </label>
+    </b-col>
+    <b-col sm="2"> 
+      <label for="libCardNumber" >TBD</label>
+    </b-col>
+</b-row>
+
 <b-row>
     <b-col sm="2" > 
       <label for="address">Address:</label>
@@ -32,28 +40,6 @@
       <label for="phoneNumber">Phone Number:</label>
     </b-col>
      </b-row>
-
-
-<b-row>
-    <b-col sm="2" > 
-      <label for="emailAddress" >Email Address:</label>
-    </b-col>
-</b-row>
-
-<b-row>
-    <b-col sm="2" > 
-      <label for="username" >Phone Number:</label>
-    </b-col>
-</b-row>
-   
-<b-row>
-    <b-col sm="2" > 
-      <label for="libCardNumber" >Library Card Number: </label>
-    </b-col>
-    <b-col sm="2"> 
-      <label for="libCardNumber" >TBD</label>
-    </b-col>
-</b-row>
 
 <b-row>
     <b-col sm="2" > 
@@ -81,7 +67,20 @@
       <label for="isVerifiedResident" >Verified? </label>
     </b-col>
   </b-row>
-  
+
+<b-row>
+    <b-col sm="2" > 
+      <label for="emailAddress" >Email Address:</label>
+    </b-col>
+</b-row>
+
+<b-row>
+    <b-col sm="2" > 
+      <label for="username" >Phone Number:</label>
+    </b-col>
+</b-row>
+   
+ 
 </b-container>
       <b-col class="myColumn">
     
@@ -97,46 +96,8 @@
 </template>
 
 
-<script>
+<script src='./DashboardHandling.js'>
 
-
-import Router from "../router/index";
-
-export default {
-  name: 'hello',
-  data () {
-   return {
-        types: [
-        ]
-      }
-  },
-   methods: {
-       goToSubmitPage: function (){
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
-        goToRegisterPage: function (){
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-         goToSearchPage: function (){
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        },
-        goToLoansPage: function (){
-            Router.push({
-                path: "/MemberLoans",
-                name: "MemberLoans"
-            })
-        }
-   }
-}
 </script>
 
 
