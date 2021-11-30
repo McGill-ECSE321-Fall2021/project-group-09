@@ -75,7 +75,6 @@ jobs:
           git remote -v
           git pull heroku master
           git push heroku master
-        working-directory: LibManSys-Backend
         
       - name: Build frontend with node
         id: build_node
@@ -93,7 +92,6 @@ jobs:
           heroku git:remote --app libmansys-frontend-g09a
           git pull heroku master
           git push heroku master
-        working-directory: LibManSys-Frontend
 
       - name: Stop Gradle Daemon
         run: ./gradlew --stop
