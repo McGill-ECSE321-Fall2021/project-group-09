@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,6 +60,22 @@ public class LibrarianController {
 			return httpFailureMessage(e.getMessage());
 		}
 	}
+	
+	/**
+	 * 
+	 * @param employeeIDNUmber
+	 * @return
+	 */
+	@GetMapping(value = {BASE_URL + "/{id}", BASE_URL + "/{id}/"})
+	public ResponseEntity<?> getLibrarianByEmployeeIDNumber(@PathVariable("id") Long employeeIDNumber) {
+		try {
+			LibrarianDto ldto = LibrarianDto.convertToDto(librarianService.getLibrarianByEmployeeIDNumber(employeeIDNumber));
+			return httpSuccess(ldto);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+	}
+	
 	
 	/**
 	 * Login a librarian. Given matching username and password, return

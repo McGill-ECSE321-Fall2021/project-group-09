@@ -42,6 +42,18 @@ public class LibrarianService {
 	}
 	
 	@Transactional
+	public Librarian getLibrarianByEmployeeIDNumber(Long employeeIDNumber) {
+		if (employeeIDNumber == null) {
+			throw new IllegalArgumentException("Argument cannot be null.");
+		}
+		Librarian l = librarianRepository.findLibrarianByEmployeeIDNumber(employeeIDNumber);
+		if (l == null) {
+			throw new IllegalStateException("Librarian with employee ID number: " + employeeIDNumber + " does not exist.");
+		}
+		return l;
+	}
+	
+	@Transactional
 	public List<Librarian> getAll() {
 		return librarianRepository.findAll();
 	}
