@@ -1,12 +1,8 @@
 <template>
 
   <div class="OnlineMemberDashboard">
-
-
-    
-
-
-    <section>
+  
+  <section>
       <br />
       <br />
            <br />
@@ -14,7 +10,7 @@
      
 <b-container fluid>
  
- <h2>  Profile Info </h2>
+ <h2>  PROFILE INFORMATION  </h2>
 
 
 
@@ -179,7 +175,7 @@ div {
     /*  background: #f0dbce;*/
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: firebrick;
-  background-color: lightsalmon;
+  background-color: #fffeee;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -212,7 +208,8 @@ a.normal {
   font-weight: 400;
 }
 h1, h2 {
-  color: coral;
+  color: whitesmoke;
+  font: 'American TypeWriter', serif;
   font-size: 40px;
   font-weight: normal;
   background-color: firebrick;
@@ -277,8 +274,8 @@ b-nav-item {
 button {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     padding: 16px 32px;
-    background-color: coral;
-    color: firebrick;
+    background-color: firebrick;
+    color: whitesmoke;
 }
 
 
