@@ -162,7 +162,7 @@ public class TestScheduleService {
 		//Librarian l = lRepo.findLibrarianByEmployeeIDNum(L1_ID);
 		Schedule s = null;
 		try {
-			s = sService.createSchedule(openingTime, closingTime, day, L1_ID);
+			s = sService.createScheduleForLibrarian(openingTime, closingTime, day, L1_ID);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -182,7 +182,7 @@ public class TestScheduleService {
 		DayOfWeek day = null;
 		Schedule s = null;
 		try {
-			s = sService.createSchedule(openingTime, closingTime, day, L1_ID);
+			s = sService.createScheduleForLibrarian(openingTime, closingTime, day, L1_ID);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
@@ -202,7 +202,7 @@ public class TestScheduleService {
 		Schedule s = null;
 		String error = null;
 		try {
-			s = sService.createSchedule(openingTime, closingTime, day, L1_ID);
+			s = sService.createScheduleForLibrarian(openingTime, closingTime, day, L1_ID);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}

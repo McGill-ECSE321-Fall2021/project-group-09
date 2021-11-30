@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -513,5 +512,23 @@ public class OnlineMemberService extends MemberService {
 			resultList.add(t);
 		}
 		return resultList;
+	}
+	
+	@Transactional
+	public OnlineMember loginOnlineMember(String username, String password) {
+		if (username == null || username.isBlank()) {
+			throw new IllegalArgumentException("Please provide a username.");
+		}
+		if (password == null || password.isBlank()) {
+			throw new IllegalArgumentException("Please provide a password.");
+		}
+		OnlineMember om = onlineMemberRepository.findOnlineMemberByMemberUsername(username);
+		if (om == null) {
+			throw new IllegalStateException("Could not find online member with that username.");
+		}
+		if (!om.getMemberPassword().equals(password)) {
+			throw new IllegalStateException("Password does not match username.");
+		}
+		return om;
 	}
 }

@@ -18,6 +18,9 @@ Vue.$cookies.config('7d')
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
+// event bus
+window.EventBus = new Vue();
+
 //use Sweetalert
 Vue.use(VueSweetalert2);
 

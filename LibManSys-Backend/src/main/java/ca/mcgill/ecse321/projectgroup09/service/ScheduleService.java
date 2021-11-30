@@ -34,6 +34,7 @@ public class ScheduleService {
 	
 	/**
 	 * Create a new schedule object and save it to schedule repository.
+	 * Associates it with the given librarian.
 	 * @param aOpeningTime
 	 * @param aClosingTime
 	 * @param aDayOfWeek
@@ -41,7 +42,7 @@ public class ScheduleService {
 	 * @return
 	 */
 	@Transactional
-	public Schedule createSchedule(Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek, Long librarianId) {
+	public Schedule createScheduleForLibrarian(Time aOpeningTime, Time aClosingTime, DayOfWeek aDayOfWeek, Long librarianId) {
 		// make sure input parameters not null
 		if (aOpeningTime == null || aClosingTime == null || aDayOfWeek == null || librarianId == null) {
 			throw new IllegalArgumentException("Arguments must not be null.");
@@ -65,7 +66,13 @@ public class ScheduleService {
 		s.setDayofWeek(aDayOfWeek);
 		s.setLibrarian(aLibrarian);
 		// save and return new object
-		scheduleRepo.save(s);
+		s = scheduleRepo.save(s);
+		
+		// update librarian associations
+		aLibrarian.getSchedules().add(s);
+		
+		lRepo.save(aLibrarian);
+		
 		return s;
 	}
 	
@@ -80,6 +87,9 @@ public class ScheduleService {
 			throw new IllegalArgumentException("Id must not be null.");
 		}
 		Schedule s = scheduleRepo.findScheduleByScheduleID(scheduleId);
+		if (s == null) {
+			throw new IllegalStateException("Schedule with id " + scheduleId + " does not exist.");
+		}
 		return s;
 	}
 	

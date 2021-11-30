@@ -120,7 +120,7 @@ public class Member extends Account {
 		this.loans = aLoan;
 	}
 
-	@OneToMany(cascade = {CascadeType.ALL})
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "member")
 	public List<Booking> getBookings() {
 		return this.bookings;
 	}

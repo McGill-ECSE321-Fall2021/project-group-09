@@ -43,17 +43,17 @@ public class OnlineMemberController {
 		return OnlineMemberDtos;
 	}
 
-	@GetMapping(value = { BASE_URL + "/{libCardNumber}", BASE_URL + "/{libCardNumber}/" })
+	@GetMapping(value = { BASE_URL + "/get-by-libcardnumber/{libCardNumber}", BASE_URL + "/get-by-libcardnumber/{libCardNumber}/" })
 	public OnlineMemberDto getOnlineMemberById(@PathVariable("libCardNumber") Long libCardNumber) throws IllegalArgumentException {
 		return OnlineMemberDto.convertToDto(onlineMemberService.getOnlineMemberByLibCardNumber(libCardNumber));
 	}
 	
-	@GetMapping(value = {"/OnlineMember/{fullName}", "/OnlineMember/{fullName}/"})
+	@GetMapping(value = {"/OnlineMember/get-by-fullname/{fullName}", "/OnlineMember/get-by-fullname/{fullName}/"})
 	public List<OnlineMemberDto> getOnlineMemberByFullName(@PathVariable("fullName") String fullName) {
 		return onlineMemberService.getOnlineMemberByFullName(fullName).stream().map(onlineMember -> OnlineMemberDto.convertToDto(onlineMember)).collect(Collectors.toList());
 	}
 	
-	@GetMapping(value = {"/OnlineMember/{isVerifiedResident}", "/OnlineMember/{isVerifiedResident}/"})
+	@GetMapping(value = {"/OnlineMember/get-by-verification-status/{isVerifiedResident}", "/OnlineMember/{isVerifiedResident}/"})
 	public List<OnlineMemberDto> getOnlineMembersByVerificationStatus(@PathVariable("isVerifiedResident") boolean isVerifiedResident) {
 		return onlineMemberService.getOnlineMembersByVerificationStatus(isVerifiedResident).stream().map(onlineMember -> OnlineMemberDto.convertToDto(onlineMember)).collect(Collectors.toList());
 	}
@@ -70,16 +70,19 @@ public class OnlineMemberController {
 	
 	 
 	@PostMapping(value = { "/OnlineMember/create/{fullName}", "/OnlineMember/create/{fullName}/" })
-	public OnlineMemberDto createOnlineMember(@PathVariable("fullName") String fullName,
+	public ResponseEntity<?> createOnlineMember(@PathVariable("fullName") String fullName,
 				@RequestParam(name = "address") String OnlineMemberAddress,
 				@RequestParam(name = "phoneNumber") String OnlineMemberPhoneNumber,
 				@RequestParam(name = "emailAddress") String memberEmail,
 				@RequestParam(name = "password") String memberPassword,
 				@RequestParam(name = "username") String memberUsername
-				)
-				throws IllegalArgumentException {
-			OnlineMember OnlineMember = onlineMemberService.createOnlineMember(fullName, OnlineMemberAddress, OnlineMemberPhoneNumber, memberEmail, memberPassword, memberUsername);
-			return OnlineMemberDto.convertToDto(OnlineMember);
+				) throws IllegalArgumentException {
+			try {
+				OnlineMember OnlineMember = onlineMemberService.createOnlineMember(fullName, OnlineMemberAddress, OnlineMemberPhoneNumber, memberEmail, memberPassword, memberUsername);
+				return httpSuccess(OnlineMemberDto.convertToDto(OnlineMember));
+			} catch (Exception e) {
+				return httpFailureMessage(e.getMessage());
+			}
 		}
 	
 	@PostMapping(value = { "/OnlineMember/fullName/update/{libCardNumber}", "/OnlineMember/fullName/update/{libCardNumber}/" })
@@ -175,8 +178,8 @@ public class OnlineMemberController {
 	public ResponseEntity<?> loginOnlineMember(@RequestParam("username") String username,
 			@RequestParam("password") String password) {
 		try {
-			// onlineMemberService.login(username, password)
-			return httpSuccess("logged in");
+			OnlineMemberDto omdto = OnlineMemberDto.convertToDto(onlineMemberService.loginOnlineMember(username, password));
+			return httpSuccess(omdto);
 		} catch (Exception e) {
 			return httpFailureMessage(e.getMessage());
 		}

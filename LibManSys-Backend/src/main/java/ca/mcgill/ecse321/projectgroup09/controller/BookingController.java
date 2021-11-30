@@ -45,7 +45,7 @@ public class BookingController {
 	}
 
 	@GetMapping(value = {"/bookings/getID/{bookingID}", "/bookings/getID/{bookingID}/"})
-	public BookingDto getBookingById(@PathVariable("Id") Long Id) {
+	public BookingDto getBookingById(@PathVariable("bookingID") Long Id) {
 		return BookingDto.convertToDto(bookingService.getBookingById(Id));
 	}
 

@@ -28,7 +28,7 @@ public class BookingService { // service class for booking out the library for e
 
 
 	/**
-	 * 
+	 * Associaties librarian and member with new booking.
 	 * @param startTime
 	 * @param endTime
 	 * @param bookingID
@@ -99,7 +99,15 @@ public class BookingService { // service class for booking out the library for e
 		booking.setMember(member);
 		booking.setLibrarian(librarian);
 
-		bookingRepository.save(booking);
+		booking = bookingRepository.save(booking);
+		
+		member.getBookings().add(booking);
+		librarian.getBookings().add(booking);
+		
+		// save associations
+		librarianRepository.save(librarian);
+		memberRepository.save(member);
+		
 		return booking;
 
 	}

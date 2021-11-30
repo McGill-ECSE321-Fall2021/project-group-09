@@ -117,7 +117,7 @@ public class Librarian extends Account {
 //		return this.schedule;
 //	}
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "librarian")
 	public List<Schedule> getSchedules() {
 		return this.schedules;
 	}
@@ -136,7 +136,7 @@ public class Librarian extends Account {
 	}
 
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "librarian")
 	public List<Booking> getBookings() {
 		return this.bookings;
 	}
