@@ -39,7 +39,7 @@ public class BookingService { // service class for booking out the library for e
 	 * @throws IllegalArgumentException 
 	 */
 	@Transactional
-	public Booking createBooking (String startTime, String endTime, Long bookingID, String bookingDate, Long memberID, Long librarianID) throws IllegalArgumentException {
+	public Booking createBooking (Time startTime, Time endTime, Long bookingID, Date bookingDate, Long memberID, Long librarianID) throws IllegalArgumentException {
 
 		Member member = memberRepository.findMemberByLibCardNumber(memberID);
 		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNumber(librarianID);
@@ -59,11 +59,14 @@ public class BookingService { // service class for booking out the library for e
 		if (endTime == null) {
 			throw new IllegalArgumentException("Please enter an end time for your event.");
 		}
+//
+//		Time sTime = java.sql.Time.valueOf(startTime);
+//		Time eTime = java.sql.Time.valueOf(endTime);
+//		Date date = java.sql.Date.valueOf(bookingDate);
 
-		Time sTime = java.sql.Time.valueOf(startTime);
-		Time eTime = java.sql.Time.valueOf(endTime);
-		Date date = java.sql.Date.valueOf(bookingDate);
-
+		Time sTime = startTime;
+		Time eTime = endTime;
+		Date date = bookingDate;
 
 		if (sTime.toLocalTime().isAfter(eTime.toLocalTime())) {
 			throw new IllegalArgumentException("Start time cannot be later than end time");
@@ -120,7 +123,7 @@ public class BookingService { // service class for booking out the library for e
 	}
 
 	@Transactional
-	public Booking updateBooking (Long id, String startTime, String endTime, String bookingDate) {
+	public Booking updateBooking (Long id, Time startTime, Time endTime, Date bookingDate) {
 
 		Time sTime = null;
 		Time eTime = null;
@@ -134,21 +137,21 @@ public class BookingService { // service class for booking out the library for e
 			sTime = booking.getBookingStartTime();
 		}
 		else {
-			sTime = java.sql.Time.valueOf(startTime);
+			sTime = startTime;
 		}
 
 		if (endTime == null ) { 
 			eTime = booking.getBookingEndTime();
 		}
 		else {
-			eTime = java.sql.Time.valueOf(endTime);
+			eTime = endTime;
 		}
 
 		if (bookingDate == null) {
 			date = booking.getBookingDate();
 		}
 		else {
-			date = java.sql.Date.valueOf(bookingDate);
+			date = bookingDate;
 		}
 
 		//Errors 
@@ -165,15 +168,15 @@ public class BookingService { // service class for booking out the library for e
 		}
 
 		//Check to ensure that new booking hours are within library opening hours 
-		Schedule libHours = scheduleRepository.findScheduleByScheduleID(getDayOfWeekForScheduleID(date));
-
-		if (sTime.toLocalTime().isBefore(libHours.getOpeningTime().toLocalTime())) {
-			throw new IllegalArgumentException("The library opens at " + libHours.getOpeningTime().toString() + ", please choose a later time..");
-		}
-
-		if (eTime.toLocalTime().isAfter(libHours.getClosingTime().toLocalTime())) {
-			throw new IllegalArgumentException("The library closes at " + libHours.getClosingTime().toString() + ", please choose an earlier time.");
-		}
+//		Schedule libHours = scheduleRepository.findScheduleByScheduleID(getDayOfWeekForScheduleID(date));
+//
+//		if (sTime.toLocalTime().isBefore(libHours.getOpeningTime().toLocalTime())) {
+//			throw new IllegalArgumentException("The library opens at " + libHours.getOpeningTime().toString() + ", please choose a later time..");
+//		}
+//
+//		if (eTime.toLocalTime().isAfter(libHours.getClosingTime().toLocalTime())) {
+//			throw new IllegalArgumentException("The library closes at " + libHours.getClosingTime().toString() + ", please choose an earlier time.");
+//		}
 
 		booking.setBookingStartTime(sTime);
 		booking.setBookingDate(date);

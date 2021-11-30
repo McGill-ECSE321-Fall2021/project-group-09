@@ -327,6 +327,9 @@ public class OnlineMemberService extends MemberService {
         onlineMemberRepository.save(onlineMember);
 		return onlineMember;
 	}
+	
+	
+	
 	/**@Transactional
 	@Override
 	 public OnlineMember getMemberByLibCardNumber(Long libCardNumber) {
@@ -339,6 +342,11 @@ public class OnlineMemberService extends MemberService {
 		return (OnlineMember)super.getMemberByBookingID(bookingID);
 	}
 	
+	@Transactional
+    public List<OnlineMember> getAllOnlineMembers() {
+		return toList(onlineMemberRepository.findAll());
+    }
+    
 	@Transactional
 	@Override
 	public OnlineMember getMemberByLoanID(Long loanID) {
@@ -356,11 +364,7 @@ public class OnlineMemberService extends MemberService {
 	public List<Member> getMembersByVerificationStatus(boolean isVerifiedResident) {
 		return super.getMembersByVerificationStatus(isVerifiedResident);
 	}
-	
-	@Transactional
-    public List<OnlineMember> getAllOnlineMembers() {
-		return toList(onlineMemberRepository.findAll());
-    }
+
 	
 	@Transactional
 	@Override

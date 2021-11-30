@@ -17,6 +17,18 @@ import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
 import MemberLoans from "../components/MemberLoans";
 
+function OnlineMemberDto(fullName, libCardNumber, address, phoneNumber, amountOwed, activeLoans, isVerifiedResident,   
+			emailAddress, username) {
+  this.fullName = fullName
+  this.libCardNumber = libCardNumber
+  this.address = address
+  this.phoneNumber = phoneNumber
+  this.amountOwed = amountOwed
+  this.activeLoans = activeLoans
+  this.isVerifiedResident = isVerifiedResident
+  this.emailAddress = emailAddress
+  this.username = username
+}
 
 export default {
   name: 'hello',
