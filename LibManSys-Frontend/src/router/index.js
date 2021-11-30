@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Home from '@/components/Home'
 import Bookings from '@/components/Bookings.vue'
 import Checkout from '@/components/Checkout.vue'
 import LibrarianDashboard from '@/components/LibrarianDashboard.vue'
@@ -42,7 +42,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Hello
+      component: Home
     },
     {
       path: '/Bookings',

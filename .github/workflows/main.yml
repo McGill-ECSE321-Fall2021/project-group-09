@@ -43,6 +43,12 @@ jobs:
         
       - name: Build with Gradle
         run: ./gradlew build --no-daemon
+        id: build_gradle
+        working-directory: LibManSys-Backend
+        
+      # if successful build, push to heroku
+      - name: print
+        run: echo $?
         working-directory: LibManSys-Backend
 
       - name: Stop Gradle Daemon
