@@ -17,6 +17,8 @@ import ItemPage from '@/components/ItemPage'
 import Reserve from '@/components/Reserve'
 import CreateLibItem from '@/components/CreateLibItem.vue'
 import SearchResults from '@/components/SearchResults.vue'
+import HireLibrarian from '@/components/HireLibrarian.vue'
+import FireLibrarian from '@/components/FireLibrarian.vue'
 
 
 import ContactUs from '@/components/ContactUs'
@@ -137,6 +139,14 @@ export default new Router({
       path: '/ContactUs',
       name: 'ContactUs',
       component: ContactUs
+    },{
+      path: '/HireLibrarian',
+      name: 'HireLibrarian',
+      component: HireLibrarian
+    },{
+      path: '/FireLibrarian',
+      name: 'FireLibrarian',
+      component: FireLibrarian
     }
   ]
 })

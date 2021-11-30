@@ -1,6 +1,6 @@
 
 <template>
-    <div class="checkout-body">
+    <div class="reserve-body">
     
         <section>
             <br />
@@ -8,32 +8,32 @@
             <br />
     
             <b-container fluid>
-                <h2> Return Library Item </h2>
+                <h2> Hire Librarian </h2>
     <br>
                 <b-row class="my-1" color="#00000">
                     <b-col sm="2" color="#00000">
-                        <label for="input-default" color="#00000">Librarian ID:</label>
+                        <label for="input-default" color="#00000">Name:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-default" color="#FFFFF" type="text" v-model="employeeId" placeholder="Enter Librarian ID"></b-form-input>
+                        <b-form-input id="input-default" color="#FFFFF" placeholder="Enter the Librarian's Name"></b-form-input>
                     </b-col>
                 </b-row>
     
                 <b-row class="my-1">
                     <b-col sm="2">
-                        <label for="input-large">Member Id:</label>
+                        <label for="input-large">Address:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-large" type="text" v-model="libCardNumber" placeholder="Enter Member Id"></b-form-input>
+                        <b-form-input id="input-large" placeholder="Enter the Librarian's Address"></b-form-input>
                     </b-col>
                 </b-row>
     
                 <b-row class="my-1">
                     <b-col sm="2">
-                        <label for="name">Library Item ID:</label>
+                        <label for="name">Phone Number:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="name" type="text" v-model="libraryItemId" placeholder="Enter Library Item ID"></b-form-input>
+                        <b-form-input id="name" placeholder="Enter the Librarian's PhoneNumber"></b-form-input>
                     </b-col>
                 </b-row>
     
@@ -41,47 +41,29 @@
             </b-container>
     
          <br>
-         
-         <span v-if="errorCheckout" style="color:red">{{errorCheckout}} </span>
-         
-         <br>
-         <br>
-         
-         <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="checkoutItem(employeeId, libCardNumber, libraryItemId)">Return Item</b-button>
-         <b-button b-row justify="center" v-on:click="goToSubmitPage()">Library Managment</b-button>
+                  <b-button v-row justify="center" v-on:click="goToReservePage()">Hire Librarian</b-button>
+         <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
 
     
         </section>
-    
     </div>
 </template>
 
-<script src="./Return.js"></script>
+
+<script src="./HireLibrarian.js"></script>
+
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/*
-.bg-custom-1 {
-  background: linear-gradient(
-    200deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-}
--->
-.bg-custom-2 {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-} */
 
 b.nav-link {
     color: #000000;
     font-size: 18px;
+}
+
+b-navbar {
+    background-color: #4e1d04;
 }
 
 div {
