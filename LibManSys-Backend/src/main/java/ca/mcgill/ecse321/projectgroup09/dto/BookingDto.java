@@ -2,9 +2,12 @@ package ca.mcgill.ecse321.projectgroup09.dto;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
+import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 public class BookingDto {
@@ -63,6 +66,10 @@ public class BookingDto {
 
 	public Date getBookingDate() {
 		return bookingDate;
+	}
+	
+	public static List<BookingDto> convertToDto(List<? extends Booking> bookings) {
+		return bookings.stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
 	}
 
 	public static BookingDto convertToDto(Booking booking) {

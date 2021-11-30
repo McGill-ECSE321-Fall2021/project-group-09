@@ -1,11 +1,11 @@
 package ca.mcgill.ecse321.projectgroup09.controller;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailure;
@@ -20,55 +20,121 @@ import ca.mcgill.ecse321.projectgroup09.service.BookingService;
 @RestController
 public class BookingController {
 
-	
+
 	@Autowired 
 	private BookingService bookingService;  
 
 	@PostMapping(value = {"/bookings/new", "/bookings/new/"})
-	public BookingDto createBooking (@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime, @RequestParam("bookingID") Long bookingID,
+	public ResponseEntity<?> createBooking (@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime, @RequestParam("bookingID") Long bookingID,
 			@RequestParam("bookingDate") String bookingDate, @RequestParam("memberID") long memberID, @RequestParam("librarianID") long librarianID) throws IllegalArgumentException {
-		Booking booking = bookingService.createBooking(startTime, endTime, bookingID, bookingDate, memberID, librarianID);
-		return BookingDto.convertToDto(booking);
+
+		// Time parameters
+		Time sTime = null;
+		try {
+		 sTime =java.sql.Time.valueOf(startTime);
+		}
+		catch (Exception e) {
+			httpFailureMessage(e.getMessage());
+		}	
+		Time eTime = null;
+		try {
+		 eTime =java.sql.Time.valueOf(endTime);
+		}
+		catch (Exception e) {
+			httpFailureMessage(e.getMessage());
+		}
+		
+		Date date = null;
+		try {
+			 date = java.sql.Date.valueOf(bookingDate);
+			}
+			catch (Exception e) {
+				httpFailureMessage(e.getMessage());
+			}
+		
+		try {	
+			Booking booking = bookingService.createBooking(sTime, eTime, bookingID, date, memberID, librarianID);
+			return httpSuccess(BookingDto.convertToDto(booking));
+		} catch (Exception e) {
+			httpFailureMessage(e.getMessage());
+			return httpFailure("Error: " + e.getMessage());
+		}
+
 	}
-	
+
 	@GetMapping(value = {"/bookings/view-all", "/bookings/view-all/"})
-	public List<BookingDto> getAllBookings() {
-		return bookingService.getAllBookings().stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
+	public ResponseEntity<?> getAllBookings() {
+		List<BookingDto> bookings = BookingDto.convertToDto(bookingService.getAllBookings());
+		return httpSuccess(bookings);
 	}
-	
+
 
 	@PutMapping(value = {"/bookings/update", "bookings/update/"})
-	public BookingDto updateBooking (@RequestParam("id") Long id, @RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime,
-			@RequestParam("bookingDate") String bookingDate) {
-		Booking booking = bookingService.updateBooking(id, startTime, endTime, bookingDate);
-		return BookingDto.convertToDto(booking);
+	public ResponseEntity<?> updateBooking (@RequestParam(value = "id", required = true) Long id, @RequestParam(value = "startTime", required = false) String startTime, @RequestParam(value = "endTime", required = false) String endTime,
+			@RequestParam(value = "bookingDate", required = false) String bookingDate) {
+		
+		Time sTime = null;
+		try {
+		 sTime =java.sql.Time.valueOf(startTime);
+		}
+		catch (Exception e) {
+			httpFailureMessage(e.getMessage());
+		}	
+		Time eTime = null;
+		try {
+		 eTime =java.sql.Time.valueOf(endTime);
+		}
+		catch (Exception e) {
+			httpFailureMessage(e.getMessage());
+		}
+		
+		Date date = null;
+		try {
+			 date = java.sql.Date.valueOf(bookingDate);
+			}
+			catch (Exception e) {
+				httpFailureMessage(e.getMessage());
+			}
+		
+		try {
+			Booking booking = bookingService.updateBooking(id, sTime, eTime, date);
+			return httpSuccess(BookingDto.convertToDto(booking));
+		}
+		catch (Exception e) {
+			httpFailureMessage(e.getMessage());
+			return httpFailure("Error: " + e.getMessage());
+		}
 	}
 
 	@GetMapping(value = {"/bookings/getID/{bookingID}", "/bookings/getID/{bookingID}/"})
-	public BookingDto getBookingById(@PathVariable("Id") Long Id) {
-		return BookingDto.convertToDto(bookingService.getBookingById(Id));
+	public ResponseEntity<?> getBookingById(@PathVariable("Id") Long Id) {
+		BookingDto booking = BookingDto.convertToDto(bookingService.getBookingById(Id));
+		return httpSuccess(booking);
 	}
 
 	@GetMapping(value = {"/bookings/member/{memberID}", "/bookings/member/{memberID}/"})
-	public List<BookingDto> getBookingsByMember(@PathVariable("memberID") long memberID) {
-		return bookingService.getBookingsByMember(memberID).stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
+	public ResponseEntity<?> getBookingsByMember(@PathVariable("memberID") long memberID) {
+		List<BookingDto> bookings = BookingDto.convertToDto(bookingService.getBookingsByMember(memberID));
+		return httpSuccess(bookings);
 	}
 
 	@GetMapping(value = {"/bookings/librarian/{librarianID}", "/bookings/librarian/{librarianID}/"})
-	public List<BookingDto> getBookingsByLibrarian(@PathVariable("employeeID") long employeeID) {
-		return bookingService.getBookingsByLibrarian(employeeID).stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
+	public ResponseEntity<?> getBookingsByLibrarian(@PathVariable("employeeID") long employeeID) {
+		List<BookingDto> bookings = BookingDto.convertToDto(bookingService.getBookingsByLibrarian(employeeID));
+		return httpSuccess(bookings);
 	}
 
 	@GetMapping(value = {"/bookings/get/{date}", "/bookings/get/{date}/"})
-	public List<BookingDto> getBookingsByDate(@PathVariable("date") Date date) {
-		return bookingService.getBookingsByDate(date).stream().map(booking -> BookingDto.convertToDto(booking)).collect(Collectors.toList());
-	}
-	
-	@DeleteMapping(value = {"/bookings/delete/{bookingID}/", "/bookings/delete/{bookingID}/"})
-	public BookingDto deleteBooking(@PathVariable("Id") long Id) {
-		Booking booking = bookingService.deleteBooking(Id);
-		return BookingDto.convertToDto(booking);
+	public ResponseEntity<?> getBookingsByDate(@PathVariable("date") Date date) {
+		List<BookingDto> bookings = BookingDto.convertToDto(bookingService.getBookingsByDate(date));
+		return httpSuccess(bookings);
 	}
 
-	
+	@DeleteMapping(value = {"/bookings/delete/{Id}", "/bookings/delete/{Id}/"})
+	public ResponseEntity<?> deleteBooking(@PathVariable("Id") Long Id) {
+		bookingService.deleteBooking(Id);
+		return httpSuccess("Booking successfully deleted");
+	}
+
+
 }
