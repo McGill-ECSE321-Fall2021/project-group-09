@@ -72,6 +72,7 @@ jobs:
           echo "Successful build, pushing to heroku"
           heroku git:remote --app libmansys-g09a
           git remote -v
+          git pull heroku master
           git push heroku master
         working-directory: LibManSys-Backend
         
@@ -89,6 +90,7 @@ jobs:
         run: |
           echo "Successful build, pushing to heroku"
           heroku git:remote --app libmansys-frontend-g09a
+          git pull heroku master
           git remote -v
           git push heroku master
         working-directory: LibManSys-Frontend
