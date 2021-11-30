@@ -49,7 +49,7 @@
             </b-container>
     
          <br>
-                  <b-button v-row justify="center" v-on:click="goToReservePage()">Hire Librarian</b-button>
+                  <b-button v-row justify="center" v-on:click="goToReservePage()">Fire Librarian</b-button>
          <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
 
     
