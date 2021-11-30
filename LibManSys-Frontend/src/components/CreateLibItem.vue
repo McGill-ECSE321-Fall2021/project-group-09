@@ -56,7 +56,7 @@
                             <label for="name">Title:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="name" placeholder="Enter the Title"></b-form-input>
+                            <b-form-input id="name" v-model="title" placeholder="Enter the Title"></b-form-input>
                         </b-col>
                     </b-row>
     
@@ -66,7 +66,7 @@
                             <label for="input-large"> Published Year:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Published Year"></b-form-input>
+                            <b-form-input id="input-large" v-model="publishedYear" placeholder="Enter the Published Year"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -74,63 +74,38 @@
                  <b-row class="my-1">
     
                         <b-col sm="2">
-                            <label for="input-large"> Other Archive:</label>
+                            <label for="input-large"> Institution :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Other"></b-form-input>
+                            <b-form-input id="input-large"v-model="institution"  placeholder="Enter the Institution"></b-form-input>
                         </b-col>
     
                     </b-row>
+                                <b-button b-row justify="center"  v-on:click="createArchive(title,publishedYear,institution)">Create Archive</b-button>
+
                 </div>
 
-
-                <!-- BOOK FIELDS -->
+                 <!-- Book FIELDS -->
                 <div v-show="form.claimType === 'Book'">
     
-                    <b-row class="my-1">
-                        <b-col sm="2">
-                            <label for="name">Title:</label>
-                        </b-col>
-                        <b-col sm="10">
-                            <b-form-input id="name" placeholder="Enter the Title"></b-form-input>
-                        </b-col>
-                    </b-row>
-                    <b-row class="my-1">
-    
-                        <b-col sm="2">
-                            <label for="input-large"> ISBN:</label>
-                        </b-col>
-                        <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the ISBN"></b-form-input>
-                        </b-col>
-    
-                    </b-row>
-
-                     <b-row class="my-1">
-    
-                        <b-col sm="2">
-                            <label for="input-large"> Author:</label>
-                        </b-col>
-                        <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Author"></b-form-input>
-                        </b-col>
-    
-                    </b-row>
-    
-    
-                </div>
-
-                 <!-- CD FIELDS -->
-                <div v-show="form.claimType === 'CD'">
-    
     
                     <b-row class="my-1">
                         <b-col sm="2">
                             <label for="name">Title:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="name" placeholder="Enter the Title"></b-form-input>
+                            <b-form-input id="name" v-model="title" placeholder="Enter the Title"></b-form-input>
                         </b-col>
+                    </b-row>
+                    <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Author :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large" v-model="author" placeholder="Enter the Author"></b-form-input>
+                        </b-col>
+    
                     </b-row>
     
                     <b-row class="my-1">
@@ -139,7 +114,7 @@
                             <label for="input-large"> Published Year:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Published Year"></b-form-input>
+                            <b-form-input id="input-large" v-model="publishedYear" placeholder="Enter the Published Year"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -150,10 +125,34 @@
                             <label for="input-large"> Length :</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Length"></b-form-input>
+                            <b-form-input id="input-large" v-model="numPages" placeholder="Enter the Number of Pages"></b-form-input>
                         </b-col>
     
                     </b-row>
+
+                     <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> ISBN :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large" v-model="ISBN" placeholder="Enter the ISBN"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+
+                     <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Publisher :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large" v-model="publisher" placeholder="Enter the Publisher"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+                        <b-button b-row justify="center"  v-on:click="createBook(title,publishedYear,author,publisher,ISBN,numPages)">Create Book</b-button>
+
                 </div>
                  <!-- MOVIE FIELDS -->
                 <div v-show="form.claimType === 'Movie'">
@@ -213,10 +212,81 @@
                         </b-col>
     
                     </b-row>
+            <b-button b-row justify="center"  v-on:click="createMovie(title,publishedYear,director,runtime,genre)">Create Movie</b-button>
 
                      </b-row>
 
                      
+                </div>
+
+                <!-- MusicAlbum FIELDS -->
+                <div v-show="form.claimType === 'MusicAlbum'">
+    
+    
+                    <b-row class="my-1">
+                        <b-col sm="2">
+                            <label for="name">Title:</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="name" v-model="title" placeholder="Enter the Title"></b-form-input>
+                        </b-col>
+                    </b-row>
+    
+                    <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Published Year:</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large" v-model="publishedYear" placeholder="Enter the Published Year"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+
+                 <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Genre :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large"v-model="genre"  placeholder="Enter the Genre"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+                    <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Artist :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large"v-model="artist"  placeholder="Enter the Artist"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+                     <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Number of Songs :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large"v-model="numSongs"  placeholder="Enter the Number of Songs"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+
+                      <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Length :</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large"v-model="albumLengthInMinutes"  placeholder="Enter the Length of the Album in Minutes"></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+
+                                <b-button b-row justify="center"  v-on:click="createMusicAlbum(title,publishedYear,genre,artist,numSongs,albumLengthInMinutes)">Create Music Album</b-button>
+
                 </div>
 
                  <!-- NEWSPAPER FIELDS -->
@@ -228,7 +298,7 @@
                             <label for="name">Title:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="name" placeholder="Enter the Title"></b-form-input>
+                            <b-form-input id="name" v-model="title" placeholder="Enter the Title"></b-form-input>
                         </b-col>
                     </b-row>
     
@@ -238,7 +308,7 @@
                             <label for="input-large"> Published Year:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Published Year"></b-form-input>
+                            <b-form-input id="input-large" v-model="publishedYear" placeholder="Enter the Published Year"></b-form-input>
                         </b-col>
     
                     </b-row>
@@ -246,13 +316,35 @@
                      <b-row class="my-1">
     
                         <b-col sm="2">
-                            <label for="input-large"> Other Newspaper:</label>
+                            <label for="input-large"> Journal Name:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" placeholder="Enter the Other"></b-form-input>
+                            <b-form-input id="input-large" v-model="journalName" placeholder="Enter the Journal Name"></b-form-input>
                         </b-col>
     
                     </b-row>
+                     <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Edition:</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large" v-model="edition" placeholder="Enter the Edition "></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+                     <b-row class="my-1">
+    
+                        <b-col sm="2">
+                            <label for="input-large"> Chief Editor:</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-large" v-model="chiefEditior" placeholder="Enter the Chief Editor "></b-form-input>
+                        </b-col>
+    
+                    </b-row>
+                                <b-button b-row justify="center"  v-on:click="createNewspaper(title,publishedYear,journalName,edition,chiefEditior)">Create NewsPaper</b-button>
+
                 </div>
 
                 
@@ -261,9 +353,9 @@
              <span v-if="errorResult" style="color:red">{{errorResult}} </span>
 
             <br>
-            <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="createMovie(title,publishedYear,director,runtime,genre)">Create Item</b-button>
 
-            <b-button v-row justify="center" v-on:click="goToSubmitPage()">Create Item</b-button>
+
+    <br> <br>            <b-button v-row justify="center" v-on:click="goToSubmitPage()">Go Back to Managment </b-button> 
     
     
         </section>

@@ -33,11 +33,22 @@ export default {
 			results: [],
 			newResult: '',
 			errorResult:'',
+			genre:'',
+			journalName: '',
+			chiefEditor:'',
+			edition:'',
+			runtime:'',
+			director:'',
 			title:'',
 			publishedYear:'',
-			director: '',
-			runtime:'',
-			genre: '',
+			author: '',
+			publisher:'',
+			artist: '',
+			numSongs: '',
+			albumLengthInMinutes: '',
+			ISBN: '',
+			numPages: '',
+			institution:'',
 			response: [],
 			form: {
                 claimType: ""
@@ -47,7 +58,7 @@ export default {
                 { text: "Book", value: "Book" },
                 { text: "NewsPaper", value: "NewsPaper" },
                 { text: "Movie", value: "Movie" },
-                { text: "CD", value: "CD" }
+                { text: "MusicAlbum", value: "MusicAlbum" }
             ]
         
 			
@@ -63,7 +74,7 @@ export default {
 	computed: {
         // Return true if any inputs are missing
         isInputMissing() {
-            return !this.director ;
+            return !this.director || !this.author  ;
         }
     },
 	methods:{
@@ -74,7 +85,97 @@ export default {
             // reset the name field for new loans
             this.newLoan = ''
         },
-		 createMovie: function (title, publishedYear, director,runtime,genre) {
+		 createBook: function (title,publishedYear,author,publisher,ISBN,numPages) {
+            //console.log("eid: " + employeeId)
+            AXIOS.post('/book/create/', {}, { 
+                 params: {
+                     title: title,
+                     publishedYear: publishedYear,
+                    author: author,
+                     publisher: publisher,
+                    ISBN: ISBN,
+                    numPages:numPages
+
+                 }
+            })
+            .then(response => {
+                this.results.push(response.data)
+                this.errorResult = ''
+                this.title = ''
+                 this.publishedYear = ''
+                this.author = ''
+                this.publisher = ''
+                this.ISBN = ''
+                this.numPages = ''
+
+            })
+            .catch(error => {
+                var errorMsg = error
+                if ( error.response ) {
+                    errorMsg = error.response.data
+                }
+                console.log(errorMsg)
+                this.errorResult = errorMsg
+            })
+        },
+        createArchive: function (title,publishedYear,institution) {
+            //console.log("eid: " + employeeId)
+            AXIOS.post('/archive/create/', {}, { 
+                 params: {
+                     title: title,
+                     publishedYear: publishedYear,
+                    institution: institution
+
+                 }
+            })
+            .then(response => {
+                this.results.push(response.data)
+                this.errorResult = ''
+                this.title = ''
+                 this.publishedYear = ''
+                this.institution = ''
+
+            })
+            .catch(error => {
+                var errorMsg = error
+                if ( error.response ) {
+                    errorMsg = error.response.data
+                }
+                console.log(errorMsg)
+                this.errorResult = errorMsg
+            })
+        },
+        createNewspaper: function (title,publishedYear,journalName,edition,chiefEditor) {
+            //console.log("eid: " + employeeId)
+            AXIOS.post('/newspaper/create/', {}, { 
+                 params: {
+                     title: title,
+                     publishedYear: publishedYear,
+                    journalName: journalName,
+                    edition: edition,
+                   chiefEditor: chiefEditor 
+                 }
+            })
+            .then(response => {
+                this.results.push(response.data)
+                this.errorResult = ''
+                this.title = ''
+                 this.publishedYear = ''
+                this.journalName = ''
+                this.edition = ''
+                this.chiefEditor = ''
+
+            })
+            .catch(error => {
+                var errorMsg = error
+                if ( error.response ) {
+                    errorMsg = error.response.data
+                }
+                console.log(errorMsg)
+                this.errorResult = errorMsg
+            })
+        },
+        createMovie: function (title, publishedYear, director,runtime,genre) {
             //console.log("eid: " + employeeId)
             AXIOS.post('/movie/create/', {}, { 
                  params: {
@@ -105,6 +206,42 @@ export default {
                 this.errorResult = errorMsg
             })
         },
+        createMusicAlbum: function (title,publishedYear,genre,artist,numSongs,albumLengthInMinutes) {
+            //console.log("eid: " + employeeId)
+            AXIOS.post('/musicAlbum/create/', {}, { 
+                 params: {
+                     title: title,
+                     publishedYear: publishedYear,
+                    genre: genre,
+                     artist: artist,
+                    numSongs: numSongs,
+                     albumLengthInMinutes: albumLengthInMinutes
+                    
+
+                 }
+            })
+            .then(response => {
+                this.results.push(response.data)
+                this.errorResult = ''
+                this.title = ''
+                 this.genre = ''
+                this.artist = ''
+                this.numSongs = ''
+                                this.publishedYear = ''
+
+                this.albumLengthInMinutes = ''
+
+            })
+            .catch(error => {
+                var errorMsg = error
+                if ( error.response ) {
+                    errorMsg = error.response.data
+                }
+                console.log(errorMsg)
+                this.errorResult = errorMsg
+            })
+        }
+        ,
 		 goToSubmitPage: function() {
             Router.push({
                 path: "/LibraryManagementDashboard",

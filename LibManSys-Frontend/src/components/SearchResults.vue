@@ -60,11 +60,35 @@
     </b-col>
   </b-row> -->
   
+    <myText3>All Archives </myText3>
+    <div>
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Institution   |</myText2> </td>
+      </tr>
+      <tr v-for="result in archives">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                    <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td>
+             <myText2> {{result.institution}} </myText2> </td>
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
 
      <myText3>All Books</myText3>
-    <div  v-if="
-          880707   == 880707  
-          "> 
+    <div > 
     <v-data-table  class="elevation-1" >
       <tr><b-col class="myColumn">
           <td><myText2>|  ID  |</myText2> </td> </b-col>
@@ -106,9 +130,7 @@
 
 
  <myText3>All Movies</myText3>
-    <div  v-if="
-          880707   == 880707  
-          "> 
+    <div>
     <v-data-table  class="elevation-1" >
       <tr><b-col class="myColumn">
           <td><myText2>|  ID  |</myText2> </td> </b-col>
@@ -147,13 +169,78 @@
    
     </div>
 
+    <myText3>All Music Albums</myText3>
+    <div>
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Genre   |</myText2> </td>
+                    <td><myText2>|  Artist  |</myText2> </td>
+                    <td><myText2>|  Number of Songs  |</myText2> </td>
+                    <td><myText2>| Length(min)   |</myText2></td>
+      </tr>
+      <tr v-for="result in musicAlbums">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                    <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td>
+             <myText2> {{result.genre}} </myText2> </td>  
+              <td>
+             <myText2> {{result.artist}} </myText2> </td>               
+             <myText2> {{result.numSongs}} </myText2> </td>               
+
+                <td>
+            <myText2>  {{result.albumLengthInMinutes}}</myText2> </td> 
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+
+    <myText3>All NewsPaper</myText3>
+    <div>
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Journal Name  |</myText2> </td>
+                    <td><myText2>|  Edition  |</myText2> </td>
+                    <td><myText2>| Chief Editor  |</myText2></td>
+      </tr>
+      <tr v-for="result in newspapers">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                    <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td>
+             <myText2> {{result.journalName}} </myText2> </td>  
+              <td>
+             <myText2> {{result.edition}} </myText2> </td>               
+             <myText2> {{result.chiefEditior}} </myText2> </td>         
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+
 </b-container>
 
     </section>
-     <footer class="navbar navbar-dark bg-custom-1 center-collapsed">
-      <b> blah blah blah some copyright bs </b>
-      
-    </footer>
+    
 
    
   </div>
