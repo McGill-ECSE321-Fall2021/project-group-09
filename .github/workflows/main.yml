@@ -53,7 +53,12 @@ jobs:
         if: steps.build_gradle.outputs.exit_code == 0
         run: |
           echo "Successful build, pushing to heroku"
-          echo "machine api.heroku.com\n  login <your-email@address>\n  password <your-api-key>\nmachine git.heroku.com\n  login <your-email@address>\n  password <your-api-key>" > $HOME/_netrc
+          echo "machine api.heroku.com
+            login <your-email@address>
+            password <your-api-key>
+          machine git.heroku.com\
+            login <your-email@address>
+            password <your-api-key>" > $HOME/_netrc
           echo "test"
           cat $HOME/_netrc
           git status
