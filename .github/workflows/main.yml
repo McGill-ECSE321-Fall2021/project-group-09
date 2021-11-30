@@ -75,7 +75,7 @@ jobs:
           echo "Successful build, pushing to heroku"
           heroku git:remote --app libmansys-g09a
           git remote -v
-          
+          git status
           git push heroku master
         
       - name: Build frontend with node
