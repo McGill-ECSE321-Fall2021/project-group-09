@@ -1,5 +1,4 @@
 import Router from "../router/index";
-//import { eventBus } from '../eventBus';
 
 export default {
   name: "topvarbar",

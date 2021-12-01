@@ -1,13 +1,22 @@
 import axios from 'axios'
 var config = require('../../config')
+var frontendUrl
+var backendUrl
+if (process.env.NODE_ENV === "production") {
+  console.log("prod env")
+  frontendUrl = 'https://' + config.build.host + ':' + config.build.port
+  backendUrl = 'https://' + config.build.backendHost + ':' + config.build.backendPort
 
-var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-
+} else if (process.env.NODE_ENV === "development") {
+  console.log("dev env")
+  frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+  backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+}
 var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+    baseURL: backendUrl,
+    headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
+
 function LoanDto(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian) {
 	this.name = loanId;
 	this.borrowedDate = borrowedDate;
@@ -18,12 +27,8 @@ function LoanDto(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryIt
 	this.member = member;
 	this.librarian = librarian;
 }
-import MemberLogin from "../components/MemberLogin";
-import SearchLibItems from "../components/SearchLibItems";
-import OnlineMemberDashboard from "../components/OnlineMemberDashboard";
 
 import Router from "../router/index";
-import Register from "../components/Register";
 export default {
 	name: 'loan',
 	data() {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Bookings from '@/components/Bookings.vue'
+import Bookings from '@/components/CreateBookings.vue'
 import Checkout from '@/components/Checkout.vue'
 import LibrarianDashboard from '@/components/LibrarianDashboard.vue'
 import LibrarianLogin from '@/components/LibrarianLogin.vue'
@@ -19,6 +19,10 @@ import CreateLibItem from '@/components/CreateLibItem.vue'
 import SearchResults from '@/components/SearchResults.vue'
 import HireLibrarian from '@/components/HireLibrarian.vue'
 import FireLibrarian from '@/components/FireLibrarian.vue'
+import UpdateBookings from '@/components/UpdateBookings.vue'
+import ViewBookings from '@/components/ViewBookings.vue'
+import DeleteBookings from '@/components/DeleteBookings.vue'
+
 
 
 import ContactUs from '@/components/ContactUs'
@@ -47,8 +51,8 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Bookings',
-      name: 'Bookings',
+      path: '/CreateBookings',
+      name: 'CreateBookings',
       component: Bookings
     },
     {
@@ -147,6 +151,18 @@ export default new Router({
       path: '/FireLibrarian',
       name: 'FireLibrarian',
       component: FireLibrarian
-    }
+    },{
+      path: '/UpdateBookings',
+      name: 'UpdateBookings',
+      component: UpdateBookings
+    },{
+      path: '/ViewBookings',
+      name: 'ViewBookings',
+      component: ViewBookings
+    },{
+      path: '/DeleteBookings',
+      name: 'DeleteBookings',
+      component: DeleteBookings
+    },
   ]
 })

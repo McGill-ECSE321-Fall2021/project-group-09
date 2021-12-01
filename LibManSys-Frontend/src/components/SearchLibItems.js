@@ -1,3 +1,5 @@
+import Register from "../components/Register";
+import Router from "../router/index";
 import axios from 'axios'
 var config = require('../../config')
 var frontendUrl
@@ -16,23 +18,22 @@ var AXIOS = axios.create({
     baseURL: backendUrl,
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
-function LoanDto(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian) {
-	this.name = loanId;
-	this.borrowedDate = borrowedDate;
-	this.returnedDate = returnedDate;
-	this.lateFees = lateFees;
-	this.loanStatus = loanStatus;
-	this.libraryItem = libraryItem;
-	this.member = member;
-	this.librarian = librarian;
-}
 
-import Router from "../router/index";
+
 export default {
-	name: 'result',
-	data() {
-		return {
-			results: [],
+  name: "hello",
+  data() {
+    return {
+      hover: false,
+      msg: "Welcome to the Library",
+      selected: '',
+    selected2: '',
+    bookHidden: true,
+    movieHidden: true,
+    cdHidden: true,
+    archiveHidden: true,
+    newspaperHidden: true,
+    results: [],
 			books:[],
 			movies:[],
 		newspapers:[],
@@ -41,9 +42,10 @@ export default {
 			newResult: '',
 			errorResult:'',
 			response: []
-		}
-	},
-	created: function () {
+     
+    };
+  },
+  	created: function () {
     // Initializing persons from backend
     AXIOS.get('/book/') //change for logged in member
     .then(response => {
@@ -91,32 +93,58 @@ export default {
       this.errorResult = e
     })
     
-  }
-,
-	methods: {
-	createLibItems: function(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian){
-		var p = new LibItems(borrowedDate,returnedDate,lateFees, loanStatus,loanId,libraryItem, member, librarian);
-		this.results.push(p);
-		this.newResult = '';
+  },
+
+  components: {
+    Register
+  },
+
+   methods: {
+	goToBook: function(){
+		bookHidden= false
+		
 	},
-	 goToSubmitPage: function (){
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
         goToRegisterPage: function (){
             Router.push({
                 path: "/Register",
                 name: "Register"
             })
-        }, goToSearchPage: function (){
+        },
+        goToLoginPage: function (){
             Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
+                path: "/MemberLogin",
+                name: "MemberLogin"
+            })
+        },
+        goToSearchPage: function (){
+            Router.push({
+                path: "/SearchResults",
+                name: "SearchResults"
+            })
+        },
+        goToLibManagmentPage: function (){
+            Router.push({
+                path: "/LibraryManagementDashboard",
+                name: "LibraryManagementDashboard"
+            })
+        },
+        goToUserPage: function (){
+            Router.push({
+                path: "/OnlineMemberDashboard",
+                name: "OnlineMemberDashboard"
+            })
+        },
+        goToLibrarianPage: function (){
+            Router.push({
+                path: "/LibrarianDashboard",
+                name: "LibrarianDashboard"
+            })
+        },
+        goToItemPage: function (){
+            Router.push({
+                path: "/ItemPage",
+                name: "ItemPage"
             })
         }
-	}
-	
-	
+        }
 }

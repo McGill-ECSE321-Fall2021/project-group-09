@@ -40,10 +40,9 @@ export default {
             response: [],
             startTime: '',
             endTime: '',
-            bookingID: '',
+            id: '',
             bookingDate: '',
-            memberID: '',
-            librarianID: ''
+            
 
         }
 
@@ -61,41 +60,10 @@ export default {
     },
 
     methods: {
-        createBooking: function (startTime, endTime, bookingID, bookingDate, memberID, librarianID) {
-            AXIOS.post('bookings/new/', {}, {
-                params: {
-                    startTime: startTime,
-                    endTime: endTime,
-                    bookingID: bookingID,
-                    bookingDate: bookingDate,
-                    memberID: memberID,
-                    librarianID: librarianID //should be logged in librarian
-
-                }
-            })
-                .then(response => {
-                    this.bookings.push(response.data)
-                    this.errorResult = ''
-                    this.startTime = ''
-                    this.endTime = ''
-                    this.bookingID = ''
-                    this.memberID = ''
-                    this.librarianID = ''
-                    this.bookingDate = ''
-                })
-                .catch(error => {
-                    var errorMsg = error
-                    if (error.response) {
-                        errorMsg = error.response.data
-                    }
-                    console.log(errorMsg)
-                    this.errorBooking = errorMsg
-                })
-        },
         updateBooking: function (bookingID, startTime, endTime, bookingDate) {
-            AXIOS.post('bookings/update/', {}, {
+            AXIOS.put('bookings/update/', {}, {
                 params: {
-                    bookingID: bookingID,
+                    id: bookingID,
                     startTime: startTime,
                     endTime: endTime,
                     bookingDate: bookingDate,
@@ -107,7 +75,7 @@ export default {
                 this.errorResult = ''
                 this.startTime = ''
                 this.endTime = ''
-                this.bookingID = ''
+                this.id = ''
                 this.bookingDate = ''
             })
             .catch(error => {
@@ -122,6 +90,7 @@ export default {
             
 
         },
+        
 
     }
 

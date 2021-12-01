@@ -5,123 +5,397 @@
 
     <section>
       <br />
-      <br />
-      <img src="../assets/logo-placeholder.png" height="15%" />
-      <br />
-      <a class="light"> Welcome to </a>
-      <a class="thick"> Group 9's Public Library</a>
-      <br />
-      <br />
+      <h2> Search Page </h2>
+     
       <searchbar class="wrap">
+        
         <searchbar class="search" color="#ffffff">
+         <!--  <select v-model="selected">
+  <option v-for="option in options" v-bind:value="option.value">
+    {{ option.text }}
+  </option>
+</select> -->
+
+<select v-model="selected">
+  <option disabled value=""> Select Item Type</option>
+  <option value="all">All</option>
+  <option value = 'archive'>Archive</option>
+  <option value ='book'>Book</option>
+  <option value ='movie'>Movie</option>
+  <option value ='newspaper'>NewsPaper</option>
+  <option value ='musicalbum'>MusicAlbum</option>
+</select>
+<div v-show="selected === 'archive'">
+<select v-model="selected2">
+  <option disabled value="">Select Filter</option>
+    <option value = 'all'>All</option>
+
+  <option value = 'institution'>Institution</option>
+    <option  value = 'publishedYear'>Published Year</option>
+  <option value = 'title'>Title</option>
+</select>
+</div>
+<div v-show="selected === 'book'">
+<select v-model="selected2">
+  <option disabled value="">Select Filter</option>
+    <option value = 'all'>All</option>
+  <option value = 'author'>Author</option>
+  <option value = 'isbn'>ISBN</option>
+    <option value = 'publishedYear'>Published Year</option>
+  <option>Title</option>
+</select>
+</div>
+<div v-show="selected === 'movie'">
+<select v-model="selected2">
+  <option disabled value="">Select Filter</option>
+      <option value = 'all'>All</option>
+  <option value = 'director'>Director</option>
+      <option value = 'genre'>Genre</option>
+      <option value = 'publishedYear'>Published Year</option>
+  <option value = 'title'>Title</option>
+</select>
+</div>
+<div v-show="selected === 'newspaper'">
+<select v-model="selected2">
+  <option disabled value="">Select Filter</option>
+        <option value = 'all'>All</option>
+  <option value = 'chiefeditor'>Chief Editor</option>
+    <option value = 'edition'>Edition </option>
+    <option value = 'journalName'>Journal Name</option>
+    <option value = 'publishedYear'>Published Year</option>
+  <option  value = 'title'>Title</option>
+</select>
+</div>
+<div v-show="selected === 'musicalbum'">
+<select v-model="selected2">
+  <option disabled value="">Select Filter</option>
+        <option value = 'all'>All</option>
+  <option value = 'artist'>Artist </option>
+    <option value = 'genre'>Genre </option>
+    <option value = 'publishedyear'>Published Year</option>
+  <option  value = 'title'>Title</option>
+</select>
+</div>
           <input
             type="text"
             class="searchTerm"
             placeholder="What are you looking for?"
           />
+
+           <!-- General Search Button-->
+      <div v-show="selected !== 'all' && selected !== 'book' && selected !== 'movie' && selected !== 'archive' && selected !== 'musicalbum' && selected !== 'newspaper'    " >
           <findbutton
             type="submit"
             class="searchButton"
             v-on:click="goToSearchPage()"
-          >
+          > 
             <img src="../assets/search.png" align="top" />
-          </findbutton>
+          </findbutton> </div>
+
+
+           <!-- All Button-->
+          <div v-show="selected === 'all'" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="goToSearchPage()"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+ <!-- Movie Buttons-->
+            <div v-show="selected  === 'movie' && selected2!=='director'&& selected2!=='title'&& selected2!=='publishedYear'&& selected2!=='genre'" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="movieHidden = false, bookHidden = true, cdHidden = true, archiveHidden=true, newspaperHidden= true"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+            <div v-show="selected  === 'movie' && (selected2==='director'|| selected2==='title'|| selected2==='publishedYear'|| selected2==='genre')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click=""
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+ <!-- Cd Buttons-->
+            <div v-show="selected  === 'musicalbum' && (selected2!=='title'&&selected2!=='artist'&& selected2!=='genre'&& selected2!=='publishedYear')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="cdHidden = false, movieHidden = true, bookHidden = true, archiveHidden=true, newspaperHidden= true"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+            <div v-show="selected  === 'musicalbum' && (selected2==='title'||selected2==='artist'|| selected2==='publishedYear'|| selected2==='genre')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click=""
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+ <!-- Archive Buttons-->
+  <div v-show="selected === 'archive' && selected2!=='institution'&& selected2!=='title'&& selected2!=='publishedYear'" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="archiveHidden = false, bookHidden = true, movieHidden = true, cdHidden = true, newspaperHidden= true"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+            <div v-show="selected === 'archive' && (selected2==='institution'|| selected2==='title'|| selected2==='publishedYear')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click=""
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+ <!-- Newspaper Buttons-->
+  <div v-show="selected === 'newspaper' && selected2!=='chiefeditor'&& selected2!=='edition'&& selected2!=='publishedYear'&& selected2!=='journalName' && selected2!=='title'" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="newspaperHidden = false, archiveHidden = true, bookHidden = true, movieHidden = true, cdHidden = true"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+            <div v-show="selected === 'newspaper' && (selected2==='chiefeditor' || selected2==='edition'|| selected2==='journalName'|| selected2==='publishedYear'|| selected2==='title')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click=""
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+ <!-- Book Buttons-->
+            <div v-show="selected === 'book' && selected2!=='author'&& selected2!=='title'&& selected2!=='publishedYear'&& selected2!=='isbn'" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="bookHidden = false, movieHidden = true, cdHidden = true, archiveHidden=true, newspaperHidden= true"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+            <div v-show="selected === 'book' && (selected2==='author'|| selected2==='title'|| selected2==='publishedYear'|| selected2==='isbn')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click=""
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
         </searchbar>
       </searchbar>
-     
+
+      <br>
+      <br>
+      <br>
+ <!-- BOOK -->
+
+     <div  v-if="!bookHidden && movieHidden &&cdHidden &&archiveHidden &&newspaperHidden"> 
+     <myText3>All Books</myText3>
+         <br>
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Author  |</myText2> </td>
+                              <td><myText2>|  Pages  |</myText2> </td>
+
+                    <td><myText2>|  Published Year  |</myText2> </td>
+                    <td><myText2>|  ISBN  |</myText2> </td>
+
+
+                    <td><myText2>|  Loanable Period  |</myText2></td>
+                    <td><myText2>|  Status  |</myText2></td>
+      </tr>
+      <tr v-for="result in results" :key="result">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                  <td>  <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.author}}</myText2></td> 
+                   <td>
+             <myText2> {{result.numPages}} </myText2> </td>  
+              <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                      <td> <myText2> {{result.isbn}}</myText2></td> 
+                                 
+
+                <td>
+            <myText2>  {{result.loanablePeriod}}</myText2> </td> 
+              
+              <td>
+             <myText2> {{result.itemStatus}} </myText2> </td> 
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+ <!-- Movie -->
+     <div v-if="!movieHidden && bookHidden &&cdHidden &&archiveHidden &&newspaperHidden">
+
+     <myText3>All Movies</myText3>
+     <br>
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Genre  |</myText2> </td>
+                    <td><myText2>|  Runtime  |</myText2> </td>
+                    <td><myText2>|  Director  |</myText2> </td>
+
+
+                    <td><myText2>|  Loanable Period  |</myText2></td>
+                    <td><myText2>|  Status  |</myText2></td>
+      </tr>
+      <tr v-for="result in movies" :key="result">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                 <td>   <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td>
+             <myText2> {{result.genre}} </myText2> </td>  
+              <td>
+             <myText2> {{result.runtime}} </myText2> </td>               
+           <td>  <myText2> {{result.director}} </myText2> </td>               
+
+                <td>
+            <myText2>  {{result.loanablePeriod}}</myText2> </td> 
+              
+              <td>
+             <myText2> {{result.itemStatus}} </myText2> </td> 
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+    
+ <!-- CD -->
+
+      <div v-if="!cdHidden && movieHidden && bookHidden && archiveHidden &&newspaperHidden">
+
+<myText3>All Music Albums</myText3>
+     <br>
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Genre   |</myText2> </td>
+                    <td><myText2>|  Artist  |</myText2> </td>
+                    <td><myText2>|  Number of Songs  |</myText2> </td>
+                    <td><myText2>| Length(min)   |</myText2></td>
+      </tr>
+      <tr v-for="result in musicAlbums" :key="result">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                  <td>  <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td>
+             <myText2> {{result.genre}} </myText2> </td>  
+              <td>  <myText2> {{result.artist}} </myText2> </td>               
+            <td> <myText2> {{result.numSongs}} </myText2> </td>               
+
+                <td>
+            <myText2>  {{result.albumLengthInMinutes}}</myText2> </td> 
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+
+     <!-- archive -->
+<div v-if="!archiveHidden && movieHidden && bookHidden && cdHidden &&newspaperHidden">
+<myText3>All Archives </myText3>
+<br>
+ 
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td>  </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Institution   |</myText2> </td>
+      </tr>
+      <tr v-for="result in archives" :key="result">
+          <td >   <myText2> {{result.libraryItemID}}</myText2></td> 
+                  <td>  <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td> <myText2> {{result.institution}} </myText2> </td>
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+
+ <!-- newspaper -->
+<div v-if="!newspaperHidden && movieHidden && bookHidden && cdHidden &&archiveHidden">
+
+<myText3>All NewsPaper</myText3>
+
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+                  <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Journal Name  |</myText2> </td>
+                    <td><myText2>|  Edition  |</myText2> </td>
+                    <td><myText2>| Chief Editor  |</myText2></td>
+      </tr>
+      <tr v-for="result in newspapers" :key="result">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+              <td>  <myText2> {{result.title}}</myText2></td> 
+              <td> <myText2> {{result.publishedYear}}</myText2></td> 
+              <td>  <myText2> {{result.journalName}} </myText2> </td>  
+              <td> <myText2> {{result.edition}} </myText2> </td>               
+              <td>  <myText2> {{result.chiefEditior}} </myText2> </td>         
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+
     </section>
-  <td>   <button v-on:click="goToUserPage()">User Page</button>   </td> <!--! On user loged in = member -->
-    <td>   <button v-on:click="goToLibrarianPage()">Librarian Page</button>   </td> <!--! On user loged in = librarian -->
-     <td>   <button v-on:click="goToItemPage()">Test Item Page</button>   </td> 
 
   </div>
 </template>
 
-<script>
-import Register from "../components/Register";
-import Router from "../router/index";
-
-export default {
-  name: "hello",
-  data() {
-    return {
-      hover: false,
-      msg: "Welcome to the Library",
-    };
-  },
-
-  components: {
-    Register
-  },
-
-   methods: {
-        goToRegisterPage: function (){
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-        goToLoginPage: function (){
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
-        goToSearchPage: function (){
-            Router.push({
-                path: "/SearchResults",
-                name: "SearchResults"
-            })
-        },
-        goToLibManagmentPage: function (){
-            Router.push({
-                path: "/LibraryManagementDashboard",
-                name: "LibraryManagementDashboard"
-            })
-        },
-        goToUserPage: function (){
-            Router.push({
-                path: "/OnlineMemberDashboard",
-                name: "OnlineMemberDashboard"
-            })
-        },
-        goToLibrarianPage: function (){
-            Router.push({
-                path: "/LibrarianDashboard",
-                name: "LibrarianDashboard"
-            })
-        },
-        goToItemPage: function (){
-            Router.push({
-                path: "/ItemPage",
-                name: "ItemPage"
-            })
-        }
-        }
-}
-</script>
+<script src="./SearchLibItems.js"></script> 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 
-.bg-custom-1 {
-  background: linear-gradient(
-    200deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-}
 
-.bg-custom-2 {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 1),
-    rgba(0, 0, 0, 0.8),
-    rgba(0, 0, 0, 0)
-  );
-}
 
 b.nav-link {
   color: #ffffff;
@@ -134,13 +408,7 @@ b-navbar {
 div {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #000000;
-  background-image: linear-gradient(
-      115deg,
-      rgba(0, 0, 0, 0.9),
-      rgba(0, 0, 0, 0.9),
-      rgba(43, 16, 7, 0.8)
-    ),
-    url(../assets/library-bkg.jpg);
+  
 
   background-size: contain;
   background-repeat: no-repeat;
@@ -206,13 +474,13 @@ li.nav-item:hover {
 }
 
 a {
-  color: #ffffff;
+  color: #000000;
   font-size: 70px;
 }
 b {
   font: "Lato", sans-serif;
   font-weight: 100;
-  color: #ffffff;
+  color: #000000;
   font-size: 18px;
 }
 b-nav-item {
@@ -257,24 +525,24 @@ button {
 
 .searchTerm {
   width: 100%;
-  border: 2px solid #ffffff;
+  border: 2px solid #000000;
   border-right: none;
   padding: 15px;
-  height: 20px;
+  height: 30px;
   border-radius: 5px 0 0 5px;
   outline: none;
-  color: #ffffff;
+  color: #000000;
   background: none;
 }
 
 .searchTerm:focus {
-  color: #ffffff;
+  color: #000000;
 }
 
 .searchButton {
   width: 40px;
   height: 34px;
-  border: 2px solid #ffffff;
+  border: 2px solid #000000;
   border-left-style: hidden;
   background: none;
   text-align: center;
@@ -286,9 +554,9 @@ button {
 
 /*Resize the wrap to see the search bar change!*/
 .wrap {
-  width: 40%;
+  width: 60%;
   position: absolute;
-  top: 60%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -297,7 +565,7 @@ input,
   font-family: "Lato", sans-serif;
   font-size: 18px;
   font-weight: 600;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Footer */
