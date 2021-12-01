@@ -3,36 +3,72 @@
   <div id="view-booking-body">
     <section>
       <b-container fluid>
-      <br>
-      <br>
+        <hr />
+        ​
+        <h2>Events</h2>
+        ​
+        <table>
+          ​
+          <tr>
+            ​
+            <th>Date</th>
+            ​
+            <th>Start</th>
+            ​
+            <th>End</th>
+            ​<!--<th>Edit</th>-->
+            ​
+          </tr>
+          ​
+          <tr v-for="booking in bookings" v-bind:key=booking>
+            ​
+            <td>{{ booking.bookingDate }}</td>
+            ​
+            <td>{{ booking.bookingStartTime }}</td>
+            ​
+            <td>{{ booking.bookingEndTime }}</td>
+       
+            ​<!--<td>
+       ​<button v-on:click="updateEvent(event.name)">Edit</button>
+     ​</td>-->
+            ​
+          </tr>
+          ​
+        </table> </b-container
+      >>
+      <!-- <b-container fluid>
+        <br />
+        <br />
 
-  
-    <myText3>All Bookings </myText3>
-    <div>
-    <v-data-table  class="elevation-1" >
-      <tr>
-        <b-col class="myColumn">
-          <td><myText2>|  Booking Date |</myText2> </td>  
-          </b-col>
-          <td><myText2>|  Start Time  |</myText2> </td>
-          <td><myText2>|  End Time |</myText2> </td>
-          <!-- <td><myText2>|  Institution   |</myText2> </td> -->
-      </tr>
-      <tr v-for="booking in bookings" :key="booking">
-                <b-col class="myColumn">
-          <td >   <myText2> {{booking.bookingDate}}</myText2></td> </b-col>
-          <td>  <myText2> {{booking.bookingStartTime}}</myText2></td> 
-          <td> <myText2> {{booking.bookingEndTime}}</myText2></td> 
-          <!-- <td> <myText2> {{b}} </myText2> </td> -->
-              
-             
-             
-      </tr>
-      
-    </v-data-table> 
-   
-    </div>
-    </b-container>
+        <myText3>All Bookings </myText3>
+        <div>
+          <v-data-table class="elevation-1">
+            <tr>
+              <b-col class="myColumn">
+                <td><myText2>| Booking Date |</myText2></td>
+              </b-col>
+              <td><myText2>| Start Time |</myText2></td>
+              <td><myText2>| End Time |</myText2></td>
+           
+            </tr>
+            
+            <tr v-for="booking in bookings" :key="booking">
+              <b-col class="myColumn">
+                <td>
+                  <myText2> {{ booking.bookingDate }}</myText2>
+                </td>
+              </b-col>
+              <td>
+                <myText2> {{ booking.bookingStartTime }}</myText2>
+              </td>
+              <td>
+                <myText2> {{ booking.bookingEndTime }}</myText2>
+              </td>
+            
+            </tr>
+          </v-data-table>
+        </div>
+      </b-container> -->
     </section>
   </div>
 </template>
@@ -157,6 +193,19 @@ b-nav-item {
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+myText {
+  color: black;
+  font: "Times";
+  font-size: 35px;
+  font-weight: 100;
+}
+
+myText3 {
+  color: #a85f32;
+  font: "Times";
+  font-size: 25px;
+  font-weight: 100;
 }
 input,
 ::placeholder {
