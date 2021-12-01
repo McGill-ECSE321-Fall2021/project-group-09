@@ -177,9 +177,9 @@ public class OnlineMemberService extends MemberService {
             throw new IllegalArgumentException("No Online Member with the library card number exists.");
         }
         
-        if (onlineMember.getFullName() != old_fullName) {
-        	throw new IllegalArgumentException("The library Card Number and the Online Member name does not match");
-        }
+       // if (onlineMember.getFullName() != old_fullName) {
+       // 	throw new IllegalArgumentException("The library Card Number and the Online Member name does not match");
+        //}
         
         onlineMember.setFullName(new_fullName);
         onlineMemberRepository.save(onlineMember);
@@ -206,9 +206,9 @@ public class OnlineMemberService extends MemberService {
             throw new IllegalArgumentException("No member with the library card number exists.");
         }
         
-        if (onlineMember.getAddress() != old_address) {
-        	throw new IllegalArgumentException("The library Card Number and the member address does not match");
-        }
+      //  if (onlineMember.getAddress() != old_address) {
+        //	throw new IllegalArgumentException("The library Card Number and the member address does not match");
+        //}
         
         onlineMember.setAddress(new_address);
         onlineMemberRepository.save(onlineMember);
@@ -235,11 +235,11 @@ public class OnlineMemberService extends MemberService {
             throw new IllegalArgumentException("No member with the library card number exists.");
         }
         
-        if (onlineMember.getPhoneNumber() != old_PhoneNumber) {
-        	throw new IllegalArgumentException("The library Card Number and the member phone number does not match");
-        }
+       // if (onlineMember.getPhoneNumber() != old_PhoneNumber) {
+        //	throw new IllegalArgumentException("The library Card Number and the member phone number does not match");
+        //}
         
-        onlineMember.setAddress(new_PhoneNumber);
+        onlineMember.setPhoneNumber(new_PhoneNumber);
         onlineMemberRepository.save(onlineMember);
 		return onlineMember;
 	}
@@ -260,9 +260,9 @@ public class OnlineMemberService extends MemberService {
             throw new IllegalArgumentException("No member with the library card number exists.");
         }
         
-        if (onlineMember.getFullName() != fullName) {
-        	throw new IllegalArgumentException("The library Card Number and the member name does not match");
-        }
+     //   if (onlineMember.getFullName() != fullName) {
+       // 	throw new IllegalArgumentException("The library Card Number and the member name does not match");
+        //}
         
         onlineMember.setIsVerifiedResident(isVerifiedResident);
         onlineMemberRepository.save(onlineMember);
@@ -289,9 +289,9 @@ public class OnlineMemberService extends MemberService {
             throw new IllegalArgumentException("No member with the library card number exists.");
         }
         
-        if (onlineMember.getFullName() != fullName) {
-        	throw new IllegalArgumentException("The library Card Number and the member name does not match");
-        }
+    //    if (onlineMember.getFullName() != fullName) {
+      //  	throw new IllegalArgumentException("The library Card Number and the member name does not match");
+        //}
         
         double oldAmountOwed = onlineMember.getAmountOwed();
         double newAmountOwed = (oldAmountOwed + changeInAmount);
@@ -320,9 +320,9 @@ public class OnlineMemberService extends MemberService {
             throw new IllegalArgumentException("No member with the library card number exists.");
         }
         
-        if (onlineMember.getFullName() != fullName) {
-        	throw new IllegalArgumentException("The library Card Number and the member name does not match");
-        }
+    //    if (onlineMember.getFullName() != fullName) {
+      //  	throw new IllegalArgumentException("The library Card Number and the member name does not match");
+        //}
         
         int oldActiveLoans = onlineMember.getActiveLoans();
         int newActiveLoans = (oldActiveLoans + changeInActiveLoans);
