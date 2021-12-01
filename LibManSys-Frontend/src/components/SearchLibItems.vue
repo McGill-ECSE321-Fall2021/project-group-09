@@ -28,9 +28,11 @@
 <div v-show="selected === 'archive'">
 <select v-model="selected2">
   <option disabled value="">Select Filter</option>
-  <option>Institution</option>
-    <option>Published Year</option>
-  <option>Title</option>
+    <option value = 'all'>All</option>
+
+  <option value = 'institution'>Institution</option>
+    <option  value = 'publishedYear'>Published Year</option>
+  <option value = 'title'>Title</option>
 </select>
 </div>
 <div v-show="selected === 'book'">
@@ -56,20 +58,22 @@
 <div v-show="selected === 'newspaper'">
 <select v-model="selected2">
   <option disabled value="">Select Filter</option>
-  <option>Chief Editor</option>
-    <option>Edition </option>
-    <option>Journal Name</option>
-    <option>Published Year</option>
-  <option>Title</option>
+        <option value = 'all'>All</option>
+  <option value = 'chiefeditor'>Chief Editor</option>
+    <option value = 'edition'>Edition </option>
+    <option value = 'journalName'>Journal Name</option>
+    <option value = 'publishedYear'>Published Year</option>
+  <option  value = 'title'>Title</option>
 </select>
 </div>
 <div v-show="selected === 'musicalbum'">
 <select v-model="selected2">
   <option disabled value="">Select Filter</option>
-  <option>Artist </option>
-    <option>Genre </option>
-    <option>Published Year</option>
-  <option>Title</option>
+        <option value = 'all'>All</option>
+  <option value = 'artist'>Artist </option>
+    <option value = 'genre'>Genre </option>
+    <option value = 'publishedyear'>Published Year</option>
+  <option  value = 'title'>Title</option>
 </select>
 </div>
           <input
@@ -103,7 +107,7 @@
           <findbutton
             type="submit"
             class="searchButton"
-            v-on:click="movieHidden = false, bookHidden = true"
+            v-on:click="movieHidden = false, bookHidden = true, cdHidden = true, archiveHidden=true, newspaperHidden= true"
           > 
             <img src="../assets/search.png" align="top" />
           </findbutton> </div>
@@ -116,12 +120,67 @@
             <img src="../assets/search.png" align="top" />
           </findbutton> </div>
 
+ <!-- Cd Buttons-->
+            <div v-show="selected  === 'musicalbum' && (selected2!=='title'&&selected2!=='artist'&& selected2!=='genre'&& selected2!=='publishedYear')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="cdHidden = false, movieHidden = true, bookHidden = true, archiveHidden=true, newspaperHidden= true"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+            <div v-show="selected  === 'musicalbum' && (selected2==='title'||selected2==='artist'|| selected2==='publishedYear'|| selected2==='genre')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click=""
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+ <!-- Archive Buttons-->
+  <div v-show="selected === 'archive' && selected2!=='institution'&& selected2!=='title'&& selected2!=='publishedYear'" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="archiveHidden = false, bookHidden = true, movieHidden = true, cdHidden = true, newspaperHidden= true"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+            <div v-show="selected === 'archive' && (selected2==='institution'|| selected2==='title'|| selected2==='publishedYear')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click=""
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+ <!-- Newspaper Buttons-->
+  <div v-show="selected === 'newspaper' && selected2!=='chiefeditor'&& selected2!=='edition'&& selected2!=='publishedYear'&& selected2!=='journalName' && selected2!=='title'" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click="newspaperHidden = false, archiveHidden = true, bookHidden = true, movieHidden = true, cdHidden = true"
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
+
+            <div v-show="selected === 'newspaper' && (selected2==='chiefeditor' || selected2==='edition'|| selected2==='journalName'|| selected2==='publishedYear'|| selected2==='title')" >
+          <findbutton
+            type="submit"
+            class="searchButton"
+            v-on:click=""
+          > 
+            <img src="../assets/search.png" align="top" />
+          </findbutton> </div>
  <!-- Book Buttons-->
             <div v-show="selected === 'book' && selected2!=='author'&& selected2!=='title'&& selected2!=='publishedYear'&& selected2!=='isbn'" >
           <findbutton
             type="submit"
             class="searchButton"
-            v-on:click="bookHidden = false, movieHidden = true"
+            v-on:click="bookHidden = false, movieHidden = true, cdHidden = true, archiveHidden=true, newspaperHidden= true"
           > 
             <img src="../assets/search.png" align="top" />
           </findbutton> </div>
@@ -136,14 +195,15 @@
           </findbutton> </div>
         </searchbar>
       </searchbar>
+
+      <br>
+      <br>
+      <br>
  <!-- BOOK -->
- <br>
- <br>
- <br>
- <br>
-     <div  v-if="!bookHidden && movieHidden"> 
+
+     <div  v-if="!bookHidden && movieHidden &&cdHidden &&archiveHidden &&newspaperHidden"> 
      <myText3>All Books</myText3>
-    
+         <br>
     <v-data-table  class="elevation-1" >
       <tr><b-col class="myColumn">
           <td><myText2>|  ID  |</myText2> </td> </b-col>
@@ -182,10 +242,11 @@
     </v-data-table> 
    
     </div>
- <!-- -->
-     <div v-if="!movieHidden && bookHidden">
+ <!-- Movie -->
+     <div v-if="!movieHidden && bookHidden &&cdHidden &&archiveHidden &&newspaperHidden">
 
      <myText3>All Movies</myText3>
+     <br>
     <v-data-table  class="elevation-1" >
       <tr><b-col class="myColumn">
           <td><myText2>|  ID  |</myText2> </td> </b-col>
@@ -224,9 +285,104 @@
    
     </div>
     
- <!-- -->
+ <!-- CD -->
 
+      <div v-if="!cdHidden && movieHidden && bookHidden && archiveHidden &&newspaperHidden">
 
+<myText3>All Music Albums</myText3>
+     <br>
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Genre   |</myText2> </td>
+                    <td><myText2>|  Artist  |</myText2> </td>
+                    <td><myText2>|  Number of Songs  |</myText2> </td>
+                    <td><myText2>| Length(min)   |</myText2></td>
+      </tr>
+      <tr v-for="result in musicAlbums" :key="result">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+                  <td>  <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td>
+             <myText2> {{result.genre}} </myText2> </td>  
+              <td>  <myText2> {{result.artist}} </myText2> </td>               
+            <td> <myText2> {{result.numSongs}} </myText2> </td>               
+
+                <td>
+            <myText2>  {{result.albumLengthInMinutes}}</myText2> </td> 
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+
+     <!-- archive -->
+<div v-if="!archiveHidden && movieHidden && bookHidden && cdHidden &&newspaperHidden">
+<myText3>All Archives </myText3>
+<br>
+ 
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td>  </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+          <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Institution   |</myText2> </td>
+      </tr>
+      <tr v-for="result in archives" :key="result">
+          <td >   <myText2> {{result.libraryItemID}}</myText2></td> 
+                  <td>  <myText2> {{result.title}}</myText2></td> 
+
+                     <td> <myText2> {{result.publishedYear}}</myText2></td> 
+                   <td> <myText2> {{result.institution}} </myText2> </td>
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+
+ <!-- newspaper -->
+<div v-if="!newspaperHidden && movieHidden && bookHidden && cdHidden &&archiveHidden">
+
+<myText3>All NewsPaper</myText3>
+
+    <v-data-table  class="elevation-1" >
+      <tr><b-col class="myColumn">
+          <td><myText2>|  ID  |</myText2> </td> </b-col>
+                    <td><myText2>|  Title  |</myText2> </td>
+
+                  <td><myText2>|  Published Year |</myText2> </td>
+                    <td><myText2>|  Journal Name  |</myText2> </td>
+                    <td><myText2>|  Edition  |</myText2> </td>
+                    <td><myText2>| Chief Editor  |</myText2></td>
+      </tr>
+      <tr v-for="result in newspapers" :key="result">
+          <td >  
+          <myText2> {{result.libraryItemID}}</myText2></td> 
+              <td>  <myText2> {{result.title}}</myText2></td> 
+              <td> <myText2> {{result.publishedYear}}</myText2></td> 
+              <td>  <myText2> {{result.journalName}} </myText2> </td>  
+              <td> <myText2> {{result.edition}} </myText2> </td>               
+              <td>  <myText2> {{result.chiefEditior}} </myText2> </td>         
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
 
     </section>
 
