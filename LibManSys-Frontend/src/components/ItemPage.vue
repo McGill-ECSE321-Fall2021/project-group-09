@@ -43,7 +43,6 @@
 
 
 <script>
-
 import Router from "../router/index";
 export default {
   name: 'hello',

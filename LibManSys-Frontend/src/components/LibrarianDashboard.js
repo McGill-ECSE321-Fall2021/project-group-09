@@ -1,15 +1,10 @@
 import Router from "../router/index";
 
 import axios from 'axios'
-var config = require('../../config')
-
-/* http vs https*/
-var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
 
 var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+    baseURL: this.backendUrl,
+    headers: { 'Access-Control-Allow-Origin': this.frontendUrl }
 })
 
 function getSchedules(schedules) {
@@ -83,6 +78,8 @@ export default {
         }
     },
     created: function () {
+        console.log("test: "+ this.frontendUrl)
+
         // check if cookie is set for current user
         var userLoggedIn = $cookies.isKey("loggedInUser")
         if (userLoggedIn == true) {
