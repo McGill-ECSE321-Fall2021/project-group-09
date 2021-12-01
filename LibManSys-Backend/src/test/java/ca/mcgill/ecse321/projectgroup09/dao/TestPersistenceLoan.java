@@ -170,7 +170,7 @@ public class TestPersistenceLoan {
 		
 		member = memberRepository.findMemberByLibCardNumber(LibCardNumber);
 		loan = loanRepository.findLoanByLoanID(loanID);
-		book = bookRepository.findBookByISBN(ISBN);
+		book = bookRepository.findBookBylibraryItemID(libraryItemID);
 		assertNotNull(member);
 		assertNotNull(loan);
 		assertNotNull(book);

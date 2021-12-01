@@ -113,6 +113,58 @@ public class BookService {
 		return books;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Book> getBooksByTitle(String title) {
+		try {
+			List<Book> books = bookRepo.findBooksByTitle(title);
+			return books;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public List<Book> getBooksByPublishedYear(int pubYear) {
+		try {
+			List<Book> books = bookRepo.findBooksByPublishedYear(pubYear);
+			return books;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public List<Book> getBooksByAuthor(String author) {
+		try {
+			List<Book> books = bookRepo.findBooksByAuthor(author);
+			return books;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	public List<Book> getBooksByPublisher(String publisher) {
+		return bookRepo.findBooksByPublisher(publisher);
+	}
+	
+	public List<Book> getBooksByISBN(String ISBN) {
+		try {
+			List<Book> books = bookRepo.findBooksByISBN(ISBN);
+			return books;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	public List<Book> getBooksByNumPages(int numPages) {
+		try {
+			List<Book> books = bookRepo.findBooksByNumPages(numPages);
+			return books;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 	
 	/**
 	 * NOTE: this method is not really need, because library items should be final.
@@ -284,5 +336,6 @@ public class BookService {
 		bookRepo.save((Book)book);
 		memberRepo.save(rm);
 	}
+
 	
 }

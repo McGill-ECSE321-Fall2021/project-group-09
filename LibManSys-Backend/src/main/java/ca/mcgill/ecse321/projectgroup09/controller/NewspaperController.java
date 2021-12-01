@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.projectgroup09.controller;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,10 @@ public class NewspaperController {
 	 * Create new music album.
 	 * @param title
 	 * @param publishedYear
-	 * @param genre
+	 * @param journalName
 	 * @param artist
-	 * @param numSongs
-	 * @param albumLengthInMinutes
+	 * @param edition
+	 * @param chiefEditorInMinutes
 	 * @return
 	 */
 	@PostMapping(value = { BASE_URL + "/create", BASE_URL + "/create/"})
@@ -138,4 +139,51 @@ public class NewspaperController {
 		return httpFailureMessage("Failed to delete newspaper with id " + newspaperId + " because it does not exist.");
 	}
 	
+		// getters
+		@GetMapping(value = {BASE_URL + "/by-title/{title}", BASE_URL + "/by-title/{title}/" })
+		public ResponseEntity<?> getNewspapersbyTitle(@PathVariable("title") String title)  {
+			List <NewspaperDto> newspaperDto = new ArrayList<NewspaperDto>();
+			for(Newspaper m : newspaperService.getNewspapersByTitle(title)) {
+				newspaperDto.add(NewspaperDto.convertToDto(m));
+			}
+			return httpSuccess(newspaperDto);
+		}
+		
+		@GetMapping(value = {BASE_URL + "/by-published-year/{year}", BASE_URL + "/by-published-year/{year}/" })
+		public ResponseEntity<?> getNewspapersbyPublishedYear(@PathVariable("year") Integer year)  {
+			List <NewspaperDto> newspaperDto = new ArrayList<NewspaperDto>();
+			for(Newspaper newspaper : newspaperService.getNewspapersByPublishedYear(year)) {
+				newspaperDto.add(NewspaperDto.convertToDto(newspaper));
+			}
+			return httpSuccess(newspaperDto);
+		}
+		
+		@GetMapping(value = { BASE_URL + "/by-journal-name/{journalName}", BASE_URL + "/by-journal-name/{journalName}/" })
+		public ResponseEntity<?> getNewspapersbyJournalName(@PathVariable("journalName") String journalName)  {
+			List <NewspaperDto> newspaperDto = new ArrayList<NewspaperDto>();
+			for(Newspaper newspaper : newspaperService.getNewspapersbyJournalName(journalName)) {
+				newspaperDto.add(NewspaperDto.convertToDto(newspaper));
+			}
+
+			return httpSuccess(newspaperDto);
+		}
+
+		@GetMapping(value = { BASE_URL + "/by-edition/{edition}", BASE_URL + "/by-edition/{edition}/" })
+		public ResponseEntity<?> getNewspapersbyRuntime(@PathVariable("edition") String edition)  {
+			List <NewspaperDto> newspaperDto = new ArrayList<NewspaperDto>();
+			for(Newspaper newspaper : newspaperService.getNewspapersbyEdition(edition)) {
+				newspaperDto.add(NewspaperDto.convertToDto(newspaper));
+			}
+			return httpSuccess(newspaperDto);
+		}
+		
+		@GetMapping(value = { BASE_URL + "/by-chief-editor/{chiefEditor}", BASE_URL + "/by-chief-editor/{chiefEditor}/" })
+		public ResponseEntity<?> getNewspapersbyChiefEditor(@PathVariable("chiefEditor") String chiefEditor)  {
+			List <NewspaperDto> newspaperDto = new ArrayList<NewspaperDto>();
+			for(Newspaper newspaper : newspaperService.getNewspapersByChiefEditor(chiefEditor)) {
+				newspaperDto.add(NewspaperDto.convertToDto(newspaper));
+			}
+			return httpSuccess(newspaperDto);
+		}
+	  
 }

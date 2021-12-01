@@ -18,7 +18,8 @@ public interface LibraryItemRepository extends CrudRepository<LibraryItem, Long>
 	LibraryItem findLibraryItemByLibraryItemID(Long libraryItemID);
 	LibraryItem findLibraryItemByLoans(Loan loan);
 	List<LibraryItem> findLibraryItemByItemStatus(ItemStatus itemstatus);
-	List<LibraryItem> findLibraryItemByTitle(String title);
 	List<LibraryItem> findLibraryItemByMember(Member member);
 	List<LibraryItem> findAll();
+	List<LibraryItem> findLibraryItemByTitle(String title);
+	List<LibraryItem> findLibraryItemByPublishedYear(int publishedYear);
 }

@@ -69,7 +69,8 @@ public class TestPersistenceBooking {
 		booking.setBookingID(bookingID);
 		booking.setLibrarian(librarian);
 		
-		bookingRepository.save(booking);
+		booking = bookingRepository.save(booking);
+		bookingID = booking.getBookingID();
 		
 		booking = null;
 		

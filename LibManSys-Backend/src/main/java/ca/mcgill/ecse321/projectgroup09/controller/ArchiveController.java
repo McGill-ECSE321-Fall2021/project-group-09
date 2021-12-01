@@ -42,6 +42,38 @@ public class ArchiveController {
 		List<LibraryItemDto> archives = LibraryItemDto.convertToDto(archiveService.getAllArchives());
 		return httpSuccess(archives);
 	}
+
+	@GetMapping(value = {BASE_URL + "/by-title/{title}", BASE_URL + "/by-title/{title}/"})
+	public ResponseEntity<?> getArchivesByTitle(@PathVariable String title) {
+		try {
+			List<LibraryItemDto> archives = LibraryItemDto.convertToDto(archiveService.getArchivesByTitle(title));
+			return httpSuccess(archives);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		
+	}
+	
+	@GetMapping(value = {BASE_URL + "/by-published-year/{pubYear}", BASE_URL + "/by-published-year/{pubYear}/"})
+	public ResponseEntity<?> getArchivesByPubYear(@PathVariable int pubYear) {
+		try {
+			List<LibraryItemDto> as = LibraryItemDto.convertToDto(archiveService.getArchivesByPublishedYear(pubYear));
+			return httpSuccess(as);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		
+	}
+	
+	@GetMapping(value = {BASE_URL + "/by-institution/{institution}", BASE_URL + "/by-institution/{institution}/"})
+	public ResponseEntity<?> getArchivesByInstitution(@PathVariable String institution) {
+		try {
+			List<LibraryItemDto> archives = LibraryItemDto.convertToDto(archiveService.getArchivesByInstitution(institution));
+			return httpSuccess(archives);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+	}
 	
 	/**
 	 * Create new archive.	
@@ -75,7 +107,7 @@ public class ArchiveController {
 	 * @param archiveId
 	 * @return
 	 */
-	@GetMapping(value = { BASE_URL + "/{id}", BASE_URL + "" })
+	@GetMapping(value = { BASE_URL + "/{id}", BASE_URL + "/{id}/" })
 	public ResponseEntity<?> getArchiveById(@PathVariable("id") Long archiveId) {
 		try {
 			ArchiveDto adto = ArchiveDto.convertToDto(archiveService.getArchiveById(archiveId));

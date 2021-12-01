@@ -60,8 +60,23 @@ public class ArchiveService {
 		List<Archive> archives = (List<Archive>) archiveRepo.findAll();
 		return archives;
 	}
-	@Transactional
 	
+	@Transactional
+	public List<Archive> getArchivesByTitle(String title) {
+		return archiveRepo.findArchiveByTitle(title);
+	}
+	
+	@Transactional
+	public List<Archive> getArchivesByPublishedYear(int py) {
+		return archiveRepo.findArchiveByPublishedYear(py);
+	}
+	
+	@Transactional
+	public List<Archive> getArchivesByInstitution(String institution) {
+		return archiveRepo.findArchiveByInstitution(institution);
+	}
+	
+	@Transactional
 	public Archive updateArchive(Long libraryItemId, String title, Integer publishedYear, Integer loanablePeriod, Double dailyOverdueFee, 
 			ItemStatus itemStatus, String institution) {
 	

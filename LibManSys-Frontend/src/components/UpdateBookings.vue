@@ -135,7 +135,6 @@ div {
 section {
   color: #d9b086;
   font-family: "Lato", sans-serif;
-  height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 /**
  * Used to catch exceptions for all controllers.
@@ -25,5 +26,10 @@ public class GlobalControllerExceptionHandler {
 	    String type = ex.getParameterType();
 	    String errorMessage = "Required request parameter '" + missingParamName + "' for method parameter type <" + type + "> is not present";
 	    return httpFailureMessage(errorMessage);
+	}
+	
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<?> handleWrongParamType(MethodArgumentTypeMismatchException ex) {
+		return httpFailureMessage(ex.getMessage());
 	}
 }

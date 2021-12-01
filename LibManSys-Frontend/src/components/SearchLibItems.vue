@@ -5,13 +5,14 @@
 
     <section>
       <br />
-      <h2> Search Page </h2>
+      <h2 class="search-title"> Search Page </h2>
 
-      <br />
-      <br />
+      <b-container v-if="error" style="margin-bottom: 1em">
+        <span class="error-msg">{{error}}</span>
+      </b-container>
     
       <b-container>
-        <searchbar class="search" color="#ffffff">
+        <div class="search" color="#ffffff">
 
           <select v-model="selected">
             <option disabled value=""> Select Item Type</option>
@@ -19,223 +20,215 @@
             <option value = 'archive'>Archive</option>
             <option value ='book'>Book</option>
             <option value ='movie'>Movie</option>
-            <option value ='newspaper'>Newspaper</option>
             <option value ='musicalbum'>Music Album</option>
+            <option value ='newspaper'>Newspaper</option>
           </select>
 
           <!-- Archive filters -->
           <select v-model="selected2" v-show="selected === 'archive'">
             <option disabled value="">Select Filter</option>
             <option value = 'all'>All</option>
-            <option value = 'institution'>Institution</option>
-            <option  value = 'publishedYear'>Published Year</option>
             <option value = 'title'>Title</option>
+            <option value = 'published-year'>Published Year</option>
+            <option value = 'institution'>Institution</option>
           </select>
 
           <!-- book filters -->
           <select v-model="selected2" v-show="selected === 'book'">
             <option disabled value="">Select Filter</option>
             <option value = 'all'>All</option>
+            <option value = 'title'>Title</option>
+            <option value = 'published-year'>Published Year</option>
             <option value = 'author'>Author</option>
+            <option value = 'publisher'>Publisher</option>
             <option value = 'isbn'>ISBN</option>
-            <option value = 'publishedYear'>Published Year</option>
-            <option>Title</option>
+            <option value = 'num-pages'>Number of Pages</option>
           </select>
 
           <!-- movie filters -->
           <select v-model="selected2" v-show="selected === 'movie'">
             <option disabled value="">Select Filter</option>
             <option value = 'all'>All</option>
+            <option value = 'title'>Title</option>
+            <option value = 'published-year'>Published Year</option>
             <option value = 'director'>Director</option>
             <option value = 'genre'>Genre</option>
-            <option value = 'publishedYear'>Published Year</option>
-            <option value = 'title'>Title</option>
-          </select>
-
-          <!-- newspaper filters -->
-          <select v-model="selected2" v-show="selected === 'newspaper'">
-            <option disabled value="">Select Filter</option>
-            <option value = 'all'>All</option>
-            <option value = 'chiefeditor'>Chief Editor</option>
-            <option value = 'edition'>Edition </option>
-            <option value = 'journalName'>Journal Name</option>
-            <option value = 'publishedYear'>Published Year</option>
-            <option  value = 'title'>Title</option>
           </select>
 
           <!-- music album filters -->
           <select v-model="selected2" v-show="selected === 'musicalbum'">
             <option disabled value="">Select Filter</option>
             <option value = 'all'>All</option>
+            <option  value = 'title'>Title</option>
+            <option value = 'published-year'>Published Year</option>
             <option value = 'artist'>Artist </option>
             <option value = 'genre'>Genre </option>
-            <option value = 'publishedyear'>Published Year</option>
+            <option  value = 'album-length'>Album Length in Minutes</option>
+          </select>
+
+          <!-- newspaper filters -->
+          <select v-model="selected2" v-show="selected === 'newspaper'">
+            <option disabled value="">Select Filter</option>
+            <option value = 'all'>All</option>
             <option  value = 'title'>Title</option>
+            <option value = 'published-year'>Published Year</option>
+            <option value = 'journal-name'>Journal Name</option>
+            <option value = 'edition'>Edition </option>
+            <option value = 'chief-editor'>Chief Editor</option>
           </select>
 
           <!-- search bar input -->
           <input
             v-model ="message"
-              type="text"
-              class="searchTerm"
-              placeholder="What are you looking for?"
+            type="text"
+            id="search-box"
+            placeholder="What are you looking for?"
           />
 
-          <!-- display search term for debugging -->
-          <!--   
-          <p>Message is: {{ message }}</p>  
-          -->
-
-          <!-- General Search Button-->
+          <!-- Search Button-->
           <div>
             <b-button type="submit" class="searchButton" v-on:click="search(message)"> 
               <img src="../assets/search.png" class="searchImage" />
             </b-button> 
           </div>
 
-        </searchbar>
+        </div>
       </b-container>
 
-      <br>
-      <br>
-      <br>
-       <br>
-      <br>
-      <br>
     <!-- Display Results -->
+    <br />
 
- <!-- BOOK -->
-
-    <div  v-if="bookResults.length"> 
-      <myText3>Book Results</myText3>
-      <br>
-      <v-data-table  class="elevation-1" >
-        <tr><b-col class="myColumn">
-          <td><myText2>|  ID  |</myText2> </td> </b-col>
-          <td><myText2>|  Title  |</myText2> </td>
-          <td><myText2>|  Author  |</myText2> </td>
-          <td><myText2>|  Pages  |</myText2> </td>
-          <td><myText2>|  Published Year  |</myText2> </td>
-          <td><myText2>|  ISBN  |</myText2> </td>
-          <td><myText2>|  Loanable Period  |</myText2></td>
-          <td><myText2>|  Status  |</myText2></td>
-        </tr>
-        <tr v-for="result in bookResults" :key="result">
-          <td><myText2> {{result.libraryItemID}}</myText2></td> 
-          <td><myText2> {{result.title}}</myText2></td> 
-          <td><myText2> {{result.author}}</myText2></td> 
-          <td><myText2> {{result.numPages}} </myText2> </td>  
-          <td><myText2> {{result.publishedYear}}</myText2></td> 
-          <td><myText2> {{result.isbn}}</myText2></td> 
-          <td><myText2>  {{result.loanablePeriod}}</myText2> </td>       
-          <td><myText2> {{result.itemStatus}} </myText2> </td>
-        </tr>
-      
-      </v-data-table> 
-    </div>
-
-    <!-- Movie -->
-    <div v-if="movieResults.length">
-      <myText3>Movie Results</myText3>
-      <br>
-      <v-data-table  class="elevation-1" >
-        <tr><b-col class="myColumn">
-          <td><myText2>|  ID  |</myText2> </td> </b-col>
-          <td><myText2>|  Title  |</myText2> </td>
-          <td><myText2>|  Published Year |</myText2> </td>
-          <td><myText2>|  Genre  |</myText2> </td>
-          <td><myText2>|  Runtime  |</myText2> </td>
-          <td><myText2>|  Director  |</myText2> </td>
-          <td><myText2>|  Loanable Period  |</myText2></td>
-          <td><myText2>|  Status  |</myText2></td>
-        </tr>
-        <tr v-for="result in movieResults" :key="result">
-          <td><myText2> {{result.libraryItemID}}</myText2></td> 
-          <td><myText2> {{result.title}}</myText2></td> 
-          <td><myText2> {{result.publishedYear}}</myText2></td> 
-          <td><myText2> {{result.genre}} </myText2> </td>  
-          <td><myText2> {{result.runtime}} </myText2> </td>               
-          <td><myText2> {{result.director}} </myText2> </td>               
-          <td><myText2>  {{result.loanablePeriod}}</myText2> </td> 
-          <td><myText2> {{result.itemStatus}} </myText2> </td> 
-              
-        </tr>
-      </v-data-table> 
-    </div>
-    
-    <!-- CD -->
-    <div v-if="musicAlbumResults.length">
-      <myText3>Music Album Results</myText3>
-      <br>
-      <v-data-table  class="elevation-1" >
-        <tr><b-col class="myColumn">
-          <td><myText2>|  ID  |</myText2> </td> </b-col>
-          <td><myText2>|  Title  |</myText2> </td>
-          <td><myText2>|  Published Year |</myText2> </td>
-          <td><myText2>|  Genre   |</myText2> </td>
-          <td><myText2>|  Artist  |</myText2> </td>
-          <td><myText2>|  Number of Songs  |</myText2> </td>
-          <td><myText2>| Length(min)   |</myText2></td>
-        </tr>
-        <tr v-for="result in musicAlbumResults" :key="result">
-            <td><myText2> {{result.libraryItemID}}</myText2></td> 
-            <td><myText2> {{result.title}}</myText2></td> 
-            <td><myText2> {{result.publishedYear}}</myText2></td> 
-            <td><myText2> {{result.genre}} </myText2> </td>  
-            <td><myText2> {{result.artist}} </myText2> </td>               
-            <td><myText2> {{result.numSongs}} </myText2> </td>               
-            <td><myText2>  {{result.albumLengthInMinutes}}</myText2> </td>   
-        </tr>
-      </v-data-table> 
+    <div v-if="noResults()">
+      No Results to Display
     </div>
 
     <!-- archive -->
     <div v-if="archiveResults.length">
-      <myText3>Archive Results</myText3>
-      <br>
-
-      <v-data-table  class="elevation-1" >
-        <tr><b-col class="myColumn">
-          <td><myText2>|  ID  |</myText2> </td>  </b-col>
-          <td><myText2>|  Title  |</myText2> </td>
-          <td><myText2>|  Published Year |</myText2> </td>
-          <td><myText2>|  Institution   |</myText2> </td>
+      <h4>Archive Results</h4>
+      <table  class="center" >
+        <tr>
+          <td>|  ID  | </td>
+          <td>|  Title  | </td>
+          <td>|  Published Year | </td>
+          <td>|  Institution   | </td>
         </tr>
-        <tr v-for="result in archiveResults" :key="result">
-          <td ><myText2> {{result.libraryItemID}}</myText2></td> 
-          <td>  <myText2> {{result.title}}</myText2></td> 
-          <td> <myText2> {{result.publishedYear}}</myText2></td> 
-          <td> <myText2> {{result.institution}} </myText2> </td>
+        <tr v-for="result in archiveResults" :key="result.libraryItemID">
+          <td > {{result.libraryItemID}}</td> 
+          <td>   {{result.title}}</td> 
+          <td>  {{result.publishedYear}}</td> 
+          <td>  {{result.institution}}  </td>
         </tr>      
-      </v-data-table> 
+      </table> 
+    </div>
+
+    <!-- BOOK -->
+    <b-container  v-if="bookResults.length"> 
+      <h4>Book Results</h4>
+      <table  class="center" >
+        <tr>
+          <td>|  ID  | </td> 
+          <td>|  Title  | </td>
+          <td>|  Author  | </td>
+          <td>|  Pages  | </td>
+          <td>|  Published Year  | </td>
+          <td>|  ISBN  | </td>
+          <td>|  Loanable Period  |</td>
+          <td>|  Status  |</td>
+        </tr>
+        <tr v-for="result in bookResults" :key="result.libraryItemID">
+          <td> {{result.libraryItemID}}</td> 
+          <td> {{result.title}}</td> 
+          <td> {{result.author}}</td> 
+          <td> {{result.numPages}}  </td>  
+          <td> {{result.publishedYear}}</td> 
+          <td> {{result.isbn}}</td> 
+          <td>  {{result.loanablePeriod}} </td>       
+          <td> {{result.itemStatus}}  </td>
+        </tr>
+      
+      </table> 
+    </b-container>
+
+    <!-- Movie -->
+    <div v-if="movieResults.length">
+      <h4>Movie Results</h4>
+      <table  class="center" >
+        <tr>
+          <td>|  ID  | </td> 
+          <td>|  Title  | </td>
+          <td>|  Published Year | </td>
+          <td>|  Genre  | </td>
+          <td>|  Runtime  | </td>
+          <td>|  Director  | </td>
+          <td>|  Loanable Period  |</td>
+          <td>|  Status  |</td>
+        </tr>
+        <tr v-for="result in movieResults" :key="result.libraryItemID">
+          <td> {{result.libraryItemID}}</td> 
+          <td> {{result.title}}</td> 
+          <td> {{result.publishedYear}}</td> 
+          <td> {{result.genre}}  </td>  
+          <td> {{result.runtime}}  </td>               
+          <td> {{result.director}}  </td>               
+          <td>  {{result.loanablePeriod}} </td> 
+          <td> {{result.itemStatus}}  </td> 
+              
+        </tr>
+      </table> 
+    </div>
+    
+    <!-- CD -->
+    <div v-if="musicAlbumResults.length">
+      <h4>Music Album Results</h4>
+      <table  class="center" >
+        <tr>
+          <td>|  ID  | </td> 
+          <td>|  Title  | </td>
+          <td>|  Published Year | </td>
+          <td>|  Genre   | </td>
+          <td>|  Artist  | </td>
+          <td>|  Number of Songs  | </td>
+          <td>| Length(min)   |</td>
+        </tr>
+        <tr v-for="result in musicAlbumResults" :key="result.libraryItemID">
+            <td> {{result.libraryItemID}}</td> 
+            <td> {{result.title}}</td> 
+            <td> {{result.publishedYear}}</td> 
+            <td> {{result.genre}}  </td>  
+            <td> {{result.artist}}  </td>               
+            <td> {{result.numSongs}}  </td>               
+            <td>  {{result.albumLengthInMinutes}} </td>   
+        </tr>
+      </table> 
     </div>
 
     <!-- newspaper -->
     <div v-if="newspaperResults.length">
-      <myText3>Newspaper Results</myText3>
-
-      <v-data-table  class="elevation-1" >
-        <tr><b-col class="myColumn">
-          <td><myText2>|  ID  |</myText2> </td> </b-col>
-          <td><myText2>|  Title  |</myText2> </td>
-          <td><myText2>|  Published Year |</myText2> </td>
-          <td><myText2>|  Journal Name  |</myText2> </td>
-          <td><myText2>|  Edition  |</myText2> </td>
-          <td><myText2>| Chief Editor  |</myText2></td>
+      <h4>Newspaper Results</h4>
+      <table  class="center" >
+        <tr>
+          <td>|  ID  | </td>
+          <td>|  Title  | </td>
+          <td>|  Published Year | </td>
+          <td>|  Journal Name  | </td>
+          <td>|  Edition  | </td>
+          <td>| Chief Editor  |</td>
         </tr>
-        <tr v-for="result in newspaperResults" :key="result">
-          <td><myText2> {{result.libraryItemID}}</myText2></td> 
-          <td>  <myText2> {{result.title}}</myText2></td> 
-          <td> <myText2> {{result.publishedYear}}</myText2></td> 
-          <td>  <myText2> {{result.journalName}} </myText2> </td>  
-          <td> <myText2> {{result.edition}} </myText2> </td>               
-          <td>  <myText2> {{result.chiefEditior}} </myText2> </td>         
+        <tr v-for="result in newspaperResults" :key="result.libraryItemID">
+          <td> {{result.libraryItemID}}</td> 
+          <td>   {{result.title}}</td> 
+          <td>  {{result.publishedYear}}</td> 
+          <td>   {{result.journalName}}  </td>  
+          <td>  {{result.edition}}  </td>               
+          <td>   {{result.chiefEditior}}  </td>         
         </tr>
       
-      </v-data-table> 
+      </table> 
     </div>
 
     </section>
+
+    <br />
 
   </div>
 </template>
@@ -246,14 +239,22 @@
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 
-
-
-b.nav-link {
-  color: #ffffff;
-  font-size: 18px;
+.center {
+  margin-left: auto;
+  margin-right: auto;
 }
-b-navbar {
-  background-color: #4e1d04;
+
+.search-title {
+  font-weight: 1000;
+}
+
+.error-msg {
+  font-weight: 300;
+  color: red;
+}
+
+.search-lib-items-body {
+  height: 100%;
 }
 
 div {
@@ -274,87 +275,14 @@ div {
 }
 section {
   font-family: "Lato", sans-serif;
-  height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
 }
-.hours {
-  position: absolute;
-  top: 15%;
-  bottom: 12%;
-  right: 1%;
-  left: 52%;
-  background-color: #1e3535;
-  color: white;
-  padding-left: 40px;
-  padding-right: 40px;
-  opacity: 0.7;
-  text-align: left;
-}
-a.normal {
-  font-weight: 400;
-}
-h2 {
-  font-weight: normal;
-}
-a.thick {
-  font-weight: bold;
-}
-a.light {
-  font-weight: 100;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-.nav-left {
-  display: flex;
-}
-.nav-right {
-  display: flex;
-}
 
-li {
-  display: inline-block;
-  cursor: pointer;
-  margin: 0px;
-}
-li.nav-item:hover {
-  color: #8c5440;
-}
-
-a {
-  color: #000000;
-  font-size: 70px;
-}
-b {
-  font: "Lato", sans-serif;
-  font-weight: 100;
-  color: #000000;
-  font-size: 18px;
-}
-b-nav-item {
-  color: #efecf2;
-  font-size: 18px;
-}
-b-nav-item:hover {
-  color: #8c5440;
-}
 #container {
   width: 65%;
   margin: 0 auto;
-}
-smallButton {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 16px 32px;
-  background-color: #a85f32;
-  border-radius: 10px;
-  font-size: 12px;
-  color: #000;
-  background: #a85f32;
-  border: 0;
-  font-weight: 200;
 }
 button {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -374,7 +302,7 @@ button {
   display: flex;
 }
 
-.searchTerm {
+#search-box {
   width: 100%;
   border: 2px solid #000000;
   border-right: none;
@@ -386,7 +314,7 @@ button {
   background: none;
 }
 
-.searchTerm:focus {
+#search-box:focus {
   color: #000000;
 }
 
@@ -421,10 +349,4 @@ input,
   color: #000000;
 }
 
-/* Footer */
-footer {
-  height: 40px;
-  font-weight: 200;
-  text-align: center;
-}
 </style>

@@ -29,8 +29,7 @@ public class NewspaperService {
 	 * @return
 	 */
 	@Transactional
-	public Newspaper createNewspaper(String title, int publishedYear, 
-			String journalName, String edition, String chiefEditor) {
+	public Newspaper createNewspaper(String title, int publishedYear, String journalName, String edition, String chiefEditor) {
 		if (title == null || journalName == null || edition==null || chiefEditor==null) {
 			throw new IllegalArgumentException("Parameters to create a new newspaper must not be null.");
 		}
@@ -38,19 +37,19 @@ public class NewspaperService {
 			throw new IllegalArgumentException("Published Year must be positive.");
 		}
 		
-	Newspaper newNewspaper= new Newspaper ();
-	newNewspaper.setTitle(title);
-	newNewspaper.setPublishedYear(publishedYear);
-	newNewspaper.setJournalName(journalName);
-	newNewspaper.setEdition(edition);
-	newNewspaper.setChiefEditor(chiefEditor);
+		Newspaper newNewspaper= new Newspaper();
+		newNewspaper.setTitle(title);
+		newNewspaper.setPublishedYear(publishedYear);
+		newNewspaper.setJournalName(journalName);
+		newNewspaper.setEdition(edition);
+		newNewspaper.setChiefEditor(chiefEditor);
+		
+		
+		Newspaper savedNewspaper = NewspaperRepo.save(newNewspaper);
+		
+		return savedNewspaper;
 	
-	
-	Newspaper savedNewspaper = NewspaperRepo.save(newNewspaper);
-	
-	return savedNewspaper;
-	
-		}
+	}
 	
 	@Transactional
 	public Newspaper getNewspaperById(Long libraryItemId) {
@@ -58,17 +57,44 @@ public class NewspaperService {
 			throw new IllegalArgumentException("Id must not be null.");
 		}
 		Newspaper newspaper = NewspaperRepo.findNewspaperBylibraryItemID(libraryItemId);
+		if (newspaper == null) {
+			throw new IllegalArgumentException("Newspaper with id " + libraryItemId + " does not exist.");
+		}
 		return newspaper;
 	}
 	
 	@Transactional
 	public List<Newspaper> getAllNewspapers() {
-		List<Newspaper> newspapers = (List<Newspaper>) NewspaperRepo.findAll();
+		List<Newspaper> newspapers = NewspaperRepo.findAll();
 		return newspapers;
 	}
 	
-@Transactional
+	@Transactional
+	public List<Newspaper> getNewspapersByTitle(String title) {
+		return NewspaperRepo.findNewspapersByTitle(title);
+	}
 	
+	@Transactional
+	public List<Newspaper> getNewspapersByPublishedYear(int year) {
+		return NewspaperRepo.findNewspapersByPublishedYear(year);
+	}
+	
+	@Transactional
+	public List<Newspaper> getNewspapersbyJournalName(String journalName) {
+		return NewspaperRepo.findNewspapersByJournalName(journalName);
+	}
+	
+	@Transactional
+	public List<Newspaper> getNewspapersbyEdition(String edition) {
+		return NewspaperRepo.findNewspapersByEdition(edition);
+	}
+	
+	@Transactional
+	public List<Newspaper> getNewspapersByChiefEditor(String chief) {
+		return NewspaperRepo.findNewspapersByChiefEditor(chief);
+	}
+	
+@Transactional
 	public Newspaper updateNewspaper(Long libraryItemId, String title, Integer publishedYear, Integer loanablePeriod, Double dailyOverdueFee, 
 			ItemStatus itemStatus, String journalName, String edition, String chiefEditor) {
 	

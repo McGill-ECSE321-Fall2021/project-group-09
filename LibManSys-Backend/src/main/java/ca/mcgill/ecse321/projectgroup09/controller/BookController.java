@@ -46,11 +46,86 @@ public class BookController {
 	 * Base endpoint of /books
 	 * @return
 	 */
-	@GetMapping(value = {BASE_URL + "", BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/"})
+	@GetMapping(value = {BASE_URL + "", BASE_URL + "/"})
 	public ResponseEntity<?> getAllBooks() {
 		// Create list of all books, converted to Dto's
 		List<LibraryItemDto> books = LibraryItemDto.convertToDto(bookService.getAllBooks());
 		return httpSuccess(books);
+	}
+	
+	@GetMapping(value = {BASE_URL + "/by-title/{title}", BASE_URL + "/by-title/{title}/"})
+	public ResponseEntity<?> getBooksByTitle(@PathVariable String title) {
+		try {
+			List<LibraryItemDto> books = LibraryItemDto.convertToDto(bookService.getBooksByTitle(title));
+			return httpSuccess(books);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		
+	}
+	
+	@GetMapping(value = {BASE_URL + "/by-published-year/{pubYear}", BASE_URL + "/by-published-year/{pubYear}/"})
+	public ResponseEntity<?> getBooksByPubYear(@PathVariable int pubYear) {
+		try {
+			List<LibraryItemDto> books = LibraryItemDto.convertToDto(bookService.getBooksByPublishedYear(pubYear));
+			return httpSuccess(books);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		
+	}
+	
+	@GetMapping(value = {BASE_URL + "/by-author/{author}", BASE_URL + "/by-author/{author}/"})
+	public ResponseEntity<?> getBooksByAuthor(@PathVariable String author) {
+		try {
+			List<LibraryItemDto> books = LibraryItemDto.convertToDto(bookService.getBooksByAuthor(author));
+			return httpSuccess(books);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * publisher
+	 * @return
+	 */
+	@GetMapping(value = {BASE_URL + "/by-publisher/{publisher}", BASE_URL + "/by-publisher/{publisher}/"})
+	public ResponseEntity<?> getBooksByPublisher(@PathVariable String publisher) {
+		try {
+			List<LibraryItemDto> books = LibraryItemDto.convertToDto(bookService.getBooksByPublisher(publisher));
+			return httpSuccess(books);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * @param isbn
+	 * @return
+	 */
+	@GetMapping(value = {BASE_URL + "/by-isbn/{isbn}", BASE_URL + "/by-isbn/{isbn}/"})
+	public ResponseEntity<?> getBooksByISBN(@PathVariable String isbn) {
+		try {
+			List<LibraryItemDto> books = LibraryItemDto.convertToDto(bookService.getBooksByISBN(isbn));
+			return httpSuccess(books);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 
+	 * @param numPages
+	 * @return
+	 */
+	@GetMapping(value = {BASE_URL + "/by-num-pages/{numPages}", BASE_URL + "/by-num-pages/{numPages}/"})
+	public ResponseEntity<?> getBooksByNumPages(@PathVariable int numPages) {
+		try {
+			List<LibraryItemDto> books = LibraryItemDto.convertToDto(bookService.getBooksByNumPages(numPages));
+			return httpSuccess(books);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
 	}
 	
 	/**

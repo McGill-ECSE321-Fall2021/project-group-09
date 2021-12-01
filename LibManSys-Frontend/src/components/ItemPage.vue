@@ -114,7 +114,6 @@ div {
 }
 section {
   /*font-family: "Lato", sans-serif;*/
-  height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;

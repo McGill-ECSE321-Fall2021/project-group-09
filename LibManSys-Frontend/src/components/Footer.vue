@@ -11,7 +11,6 @@
 </script>
 
 <style scoped>
-
 .bg-custom-1 {
   background-color: firebrick;;
 }

@@ -127,6 +127,15 @@ public class MovieController {
 	
 	// Other getters
 	
+	@GetMapping(value = {BASE_URL + "/by-title/{title}", BASE_URL + "/by-title/{title}/" })
+	public ResponseEntity<?> getMoviesbyTitle(@PathVariable("title") String title)  {
+		List <MovieDto> movieDto = new ArrayList<MovieDto>();
+		for(Movie movie : movieService.getMoviesByTitle(title)) {
+			movieDto.add(MovieDto.convertToDto(movie));
+		}
+		return httpSuccess(movieDto);
+	}
+	
 	@GetMapping(value = {BASE_URL + "/by-published-year/{year}", BASE_URL + "/by-published-year/{year}/" })
 	public ResponseEntity<?> getMoviesbyPublishedYear(@PathVariable("year") Integer year)  {
 		List <MovieDto> movieDto = new ArrayList<MovieDto>();
@@ -136,7 +145,7 @@ public class MovieController {
 		return httpSuccess(movieDto);
 	}
 	
-	@PostMapping(value = { BASE_URL + "/by-genre/{genre}", BASE_URL + "/by-genre/{genre}/" })
+	@GetMapping(value = { BASE_URL + "/by-genre/{genre}", BASE_URL + "/by-genre/{genre}/" })
 	public ResponseEntity<?> getMoviesbyGenre(@PathVariable("genre") String genre)  {
 		List <MovieDto> movieDto = new ArrayList<MovieDto>();
 		for(Movie movie : movieService.getMoviesbyGenre(genre)) {
@@ -146,14 +155,22 @@ public class MovieController {
 		return httpSuccess(movieDto);
 	}
 	
-	@PostMapping(value = { BASE_URL + "/by-director/{director}", BASE_URL + "/by-director/{director}/" })
+	@GetMapping(value = { BASE_URL + "/by-director/{director}", BASE_URL + "/by-director/{director}/" })
 	public ResponseEntity<?> getMoviesbyDirector(@PathVariable("director") String director)  {
 		List <MovieDto> movieDto = new ArrayList<MovieDto>();
-		for(Movie movie : movieService.getMoviesbyGenre(director)) {
+		for(Movie movie : movieService.getMoviesbyDirector(director)) {
 			movieDto.add(MovieDto.convertToDto(movie));
 		}
-
 		return httpSuccess(movieDto);
 	}
 
+	@GetMapping(value = { BASE_URL + "/by-runtime/{runtime}", BASE_URL + "/by-runtime/{runtime}/" })
+	public ResponseEntity<?> getMoviesbyRuntime(@PathVariable("runtime") int runtime)  {
+		List <MovieDto> movieDto = new ArrayList<MovieDto>();
+		for(Movie movie : movieService.getMoviesByRuntime(runtime)) {
+			movieDto.add(MovieDto.convertToDto(movie));
+		}
+		return httpSuccess(movieDto);
+	}
+	
 }

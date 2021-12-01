@@ -11,6 +11,10 @@ import java.util.List;
 public interface MusicAlbumRepository extends CrudRepository<MusicAlbum, Long> {
 	
 	MusicAlbum findMusicAlbumBylibraryItemID(Long libraryItemID);
+	List<MusicAlbum> findMusicAlbumByTitle(String title);
+	List<MusicAlbum> findMusicAlbumByPublishedYear(int publishedYear);
 	List<MusicAlbum> findMusicAlbumByGenre(String genre);
 	List<MusicAlbum> findMusicAlbumByArtist(String artist);
+	List<MusicAlbum> findMusicAlbumByAlbumLengthInMinutes(int albumLengthInMinutes);
+	List<MusicAlbum> findMusicAlbumByNumSongs(int numSongs);
 }

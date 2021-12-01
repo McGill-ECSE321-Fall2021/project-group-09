@@ -57,12 +57,11 @@ public class TestPersistenceBook {
 		book.setISBN(ISBN);
 		book.setNumPages(numPages);
 		
-		bookRepository.save(book);
+		book = bookRepository.save(book);
+
+		libraryItemID = book.getlibraryItemID();
 		
 		book = null; 
-		book = bookRepository.findBookByISBN(ISBN);
-		libraryItemID = book.getlibraryItemID();
-		assertNotNull(book);
 		
 		book = bookRepository.findBookBylibraryItemID(libraryItemID);
 		

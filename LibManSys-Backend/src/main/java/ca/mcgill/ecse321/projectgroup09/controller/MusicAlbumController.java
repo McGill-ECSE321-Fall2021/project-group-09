@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.projectgroup09.controller;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,4 +142,59 @@ public class MusicAlbumController {
 		return httpFailureMessage("Failed to delete Music Album with id " + musicAlbumId + " because it does not exist.");
 	}
 	
+	// getters
+	@GetMapping(value = {BASE_URL + "/by-title/{title}", BASE_URL + "/by-title/{title}/" })
+	public ResponseEntity<?> getMusicAlbumsbyTitle(@PathVariable("title") String title)  {
+		List <MusicAlbumDto> musicAlbumDto = new ArrayList<MusicAlbumDto>();
+		for(MusicAlbum m : musicAlbumService.getMusicAlbumsByTitle(title)) {
+			musicAlbumDto.add(MusicAlbumDto.convertToDto(m));
+		}
+		return httpSuccess(musicAlbumDto);
+	}
+	
+	@GetMapping(value = {BASE_URL + "/by-published-year/{year}", BASE_URL + "/by-published-year/{year}/" })
+	public ResponseEntity<?> getMusicAlbumsbyPublishedYear(@PathVariable("year") Integer year)  {
+		List <MusicAlbumDto> musicAlbumDto = new ArrayList<MusicAlbumDto>();
+		for(MusicAlbum musicAlbum : musicAlbumService.getMusicAlbumsByPublishedYear(year)) {
+			musicAlbumDto.add(MusicAlbumDto.convertToDto(musicAlbum));
+		}
+		return httpSuccess(musicAlbumDto);
+	}
+	
+	@GetMapping(value = { BASE_URL + "/by-genre/{genre}", BASE_URL + "/by-genre/{genre}/" })
+	public ResponseEntity<?> getMusicAlbumsbyGenre(@PathVariable("genre") String genre)  {
+		List <MusicAlbumDto> musicAlbumDto = new ArrayList<MusicAlbumDto>();
+		for(MusicAlbum musicAlbum : musicAlbumService.getMusicAlbumsbyGenre(genre)) {
+			musicAlbumDto.add(MusicAlbumDto.convertToDto(musicAlbum));
+		}
+
+		return httpSuccess(musicAlbumDto);
+	}
+	
+	@GetMapping(value = { BASE_URL + "/by-artist/{artist}", BASE_URL + "/by-artist/{artist}/" })
+	public ResponseEntity<?> getMusicAlbumsbyArtist(@PathVariable("artist") String artist)  {
+		List <MusicAlbumDto> musicAlbumDto = new ArrayList<MusicAlbumDto>();
+		for(MusicAlbum musicAlbum : musicAlbumService.getMusicAlbumsbyArtist(artist)) {
+			musicAlbumDto.add(MusicAlbumDto.convertToDto(musicAlbum));
+		}
+		return httpSuccess(musicAlbumDto);
+	}
+
+	@GetMapping(value = { BASE_URL + "/by-num-songs/{numSongs}", BASE_URL + "/by-num-songs/{numSongs}/" })
+	public ResponseEntity<?> getMusicAlbumsbyNumSongs(@PathVariable("numSongs") int numSongs)  {
+		List <MusicAlbumDto> musicAlbumDto = new ArrayList<MusicAlbumDto>();
+		for(MusicAlbum musicAlbum : musicAlbumService.getMusicAlbumByNumSongs(numSongs)) {
+			musicAlbumDto.add(MusicAlbumDto.convertToDto(musicAlbum));
+		}
+		return httpSuccess(musicAlbumDto);
+	}
+	
+	@GetMapping(value = { BASE_URL + "/by-album-length/{albumLength}", BASE_URL + "/by-album-length/{albumLength}/" })
+	public ResponseEntity<?> getMusicAlbumsbyAlbumLength(@PathVariable("albumLength") int albumLength)  {
+		List <MusicAlbumDto> musicAlbumDto = new ArrayList<MusicAlbumDto>();
+		for(MusicAlbum musicAlbum : musicAlbumService.getMusicAlbumByAlbumLength(albumLength)) {
+			musicAlbumDto.add(MusicAlbumDto.convertToDto(musicAlbum));
+		}
+		return httpSuccess(musicAlbumDto);
+	}
 }

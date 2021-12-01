@@ -64,23 +64,6 @@ public class MovieService {
 	}
 	
 	/**
-	 * 
-	 * @param libraryItemId
-	 * @return
-	 */
-	@Transactional
-	public Movie getMovieById(Long libraryItemId) {
-		if (libraryItemId == null) {
-			throw new IllegalArgumentException("Argument cannot be null.");
-		}
-		Movie m = movieRepository.findMovieBylibraryItemID(libraryItemId);
-		if (m == null) {
-			throw new IllegalArgumentException("Cannot find movie with id = " + libraryItemId);
-		}
-		return m;
-	}
-	
-	/**
 	 * Fields left null will not be updated.
 	 * @param libraryItemId
 	 * @param title
@@ -157,18 +140,22 @@ public class MovieService {
 	 * @return
 	 */
 	@Transactional
-		public Movie readMovie(Long libraryItemId) {
+		public Movie getMovieById(Long libraryItemId) {
 		 Movie movie = movieRepository.findMovieBylibraryItemID(libraryItemId);
 	    return movie;
 		}
 	
 					//BUSINESS METHODS//	
 
-		
+		@Transactional
 		public List<Movie> getAllMovies(){
 			return toList(movieRepository.findAll());
 		}
 		
+		@Transactional
+		public List<Movie> getMoviesByTitle(String title) {
+			return movieRepository.findMoviesByTitle(title);
+		}
 		
 		@Transactional
 		public List<Movie> getMoviesbyPublishedYear(Integer year) {
@@ -187,6 +174,10 @@ public class MovieService {
 			return toList(movieRepository.findMoviesByDirector(director));
 		}
 		
+		@Transactional
+		public List<Movie> getMoviesByRuntime(int runtime) {
+			return movieRepository.findMoviesByRuntime(runtime);
+		}
 		
 					//HELPER METHODS//	
 	

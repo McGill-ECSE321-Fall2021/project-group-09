@@ -142,7 +142,7 @@ public class TestPersistenceOnlineMember {
 		om = onlineMemberRepository.findOnlineMemberByLibCardNumber(1000101002L);
 
 		book = null;
-		book = bookRepository.findBookByISBN(ISBN);
+		book = bookRepository.findBookBylibraryItemID(libraryItemID);
 
 		librarian = null; 
 		librarian = librarianRepository.findLibrarianByEmployeeIDNumber(employeeIDNum);

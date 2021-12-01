@@ -57,6 +57,41 @@ public class MusicAlbumService {
 		}
 		
 		@Transactional
+		public List<MusicAlbum> getMusicAlbumsByTitle(String title) {
+			return musicAlbumRepo.findMusicAlbumByTitle(title);
+		}
+		
+		@Transactional
+		public List<MusicAlbum> getMusicAlbumsByPublishedYear(int year) {
+			return musicAlbumRepo.findMusicAlbumByPublishedYear(year);
+		}
+		
+		@Transactional
+		public List<MusicAlbum> getMusicAlbumsbyGenre(String genre) {
+			return musicAlbumRepo.findMusicAlbumByGenre(genre);
+		}
+		
+		@Transactional
+		public List<MusicAlbum> getMusicAlbumsbyArtist(String genre) {
+			return musicAlbumRepo.findMusicAlbumByArtist(genre);
+		}
+		
+		@Transactional
+		public List<MusicAlbum> getMusicAlbumsbyDirector(String artist) {
+			return musicAlbumRepo.findMusicAlbumByArtist(artist);
+		}
+		
+		@Transactional
+		public List<MusicAlbum> getMusicAlbumByAlbumLength(int albumLength) {
+			return musicAlbumRepo.findMusicAlbumByAlbumLengthInMinutes(albumLength);
+		}
+		
+		@Transactional
+		public List<MusicAlbum> getMusicAlbumByNumSongs(int numSongs) {
+			return musicAlbumRepo.findMusicAlbumByNumSongs(numSongs);
+		}
+		
+		@Transactional
 		public MusicAlbum updateMusicAlbum(Long libraryItemId, String title, Integer publishedYear, 
 				Integer loanablePeriod, Double dailyOverdueFee, ItemStatus itemStatus,
 				String genre, String artist, Integer numSongs, Integer albumLengthInMinutes) {
