@@ -25,7 +25,7 @@ public class BookingController {
 	private BookingService bookingService;  
 
 	@PostMapping(value = {"/bookings/new", "/bookings/new/"})
-	public ResponseEntity<?> createBooking (@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime, @RequestParam("bookingID") Long bookingID,
+	public ResponseEntity<?> createBooking (@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime, 
 			@RequestParam("bookingDate") String bookingDate, @RequestParam("memberID") long memberID, @RequestParam("librarianID") long librarianID) throws IllegalArgumentException {
 
 		// Time parameters
@@ -53,7 +53,7 @@ public class BookingController {
 			}
 		
 		try {	
-			Booking booking = bookingService.createBooking(sTime, eTime, bookingID, date, memberID, librarianID);
+			Booking booking = bookingService.createBooking(sTime, eTime, date, memberID, librarianID);
 			return httpSuccess(BookingDto.convertToDto(booking));
 		} catch (Exception e) {
 			httpFailureMessage(e.getMessage());

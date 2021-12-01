@@ -6,7 +6,7 @@
     <section>
       <br />
       <h2> Search Page </h2>
-     
+    
       <searchbar class="wrap">
         
         <searchbar class="search" color="#ffffff">
@@ -90,16 +90,14 @@
         <!-- search bar input -->
         <input
           v-model ="message"
-          type="text"
-          class="searchTerm"
-          placeholder="What are you looking for?"
-        />
-        
-        
-        <p>Message is: {{ message }}</p>
+            type="text"
+            class="searchTerm"
+            placeholder="What are you looking for?"
+          />
+      <!--   <p>Message is: {{ message }}</p>  -->
 
-        <!-- General Search Button-->
-        <div v-show="selected !== 'all' && selected !== 'book' && selected !== 'movie' && selected !== 'archive' && selected !== 'musicalbum' && selected !== 'newspaper'" >
+           <!-- General Search Button-->
+      <div v-show="selected !== 'all' && selected !== 'book' && selected !== 'movie' && selected !== 'archive' && selected !== 'musicalbum' && selected !== 'newspaper'    " >
           <findbutton
             type="submit"
             class="searchButton"
@@ -215,6 +213,9 @@
       </searchbar>
 
       <br>
+      <br>
+      <br>
+       <br>
       <br>
       <br>
  <!-- BOOK -->
@@ -574,7 +575,7 @@ button {
 .wrap {
   width: 60%;
   position: absolute;
-  top: 20%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

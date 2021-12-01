@@ -232,12 +232,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
 OnlineMemberDashboard {
   color: firebrick;
 }
-
 .bg-custom-1 {
   background: linear-gradient(
     200deg,
@@ -246,7 +243,6 @@ OnlineMemberDashboard {
     rgba(0, 0, 0, 0)
   );
 }
-
 b.nav-link {
   color: firebrick;
   font-size: 18px;
@@ -260,7 +256,6 @@ b-navbar {
     height: calc(10%);
     justify-content: space-around;
 }
-
 div {
     /*  background: #f0dbce;*/
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -280,9 +275,7 @@ div {
     ),
     url(../assets/library-bkg.jpg);*/
     
-
 }
-
 ::-webkit-scrollbar {
   display: none;
 }
@@ -293,7 +286,6 @@ section {
   background-repeat: no-repeat;
   background-size: 100%;
 }
-
 a.normal {
   font-weight: 400;
 }
@@ -310,12 +302,10 @@ ul {
   list-style-type: none;
   padding: 0;
 }
-
 li {
   display: inline-block;
   margin: 0 10px;
 }
-
 a {
   color: firebrick;
 }
@@ -324,7 +314,6 @@ myText{
   font: "Times";
   font-size: 30px;
   font-weight: 100;
-
 }
 b {
   font: "Lato", sans-serif;
@@ -342,7 +331,6 @@ b-nav-item {
 .nav-right {
   display: flex;
 }
-
 #container{
     width: 65%;
     margin: 0 auto;
@@ -367,8 +355,6 @@ button {
     background-color: firebrick;
     color: whitesmoke;
 }
-
-
 /*Resize the wrap to see the search bar change!*/
 .wrap {
   width: 40%;

@@ -91,7 +91,12 @@ export default {
 
         },
         
-
+        goToPreviousPage: function() {
+            Router.push({
+                path: "/LibraryManagementDashboard",
+                name: "LibraryManagementDashboard"
+            })
+        },
     }
 
 
