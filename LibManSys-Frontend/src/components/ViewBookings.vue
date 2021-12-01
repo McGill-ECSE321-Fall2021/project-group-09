@@ -19,7 +19,8 @@
           <!-- <td><myText2>|  Institution   |</myText2> </td> -->
       </tr>
       <tr v-for="booking in bookings" :key="booking">
-          <td >   <myText2> {{booking.bookingDate}}</myText2></td> 
+                <b-col class="myColumn">
+          <td >   <myText2> {{booking.bookingDate}}</myText2></td> </b-col>
           <td>  <myText2> {{booking.bookingStartTime}}</myText2></td> 
           <td> <myText2> {{booking.bookingEndTime}}</myText2></td> 
           <!-- <td> <myText2> {{b}} </myText2> </td> -->
