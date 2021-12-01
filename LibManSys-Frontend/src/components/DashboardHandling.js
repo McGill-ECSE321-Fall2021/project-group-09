@@ -130,6 +130,12 @@ export default {
               name: "MemberLogin"
           })
       },
+       goToEditPage: function (){
+          Router.push({
+              path: "/EditProfile",
+              name: "EditProfile"
+          })
+      },
       goToRegisterPage: function (){
           Router.push({
               path: "/Register",

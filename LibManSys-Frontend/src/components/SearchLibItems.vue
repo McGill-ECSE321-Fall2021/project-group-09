@@ -375,7 +375,7 @@
 <div v-if="!newspaperHidden && movieHidden && bookHidden && cdHidden &&archiveHidden">
 
 <myText3>All NewsPaper</myText3>
-
+<br>
     <v-data-table  class="elevation-1" >
       <tr><b-col class="myColumn">
           <td><myText2>|  ID  |</myText2> </td> </b-col>

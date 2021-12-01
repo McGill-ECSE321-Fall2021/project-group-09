@@ -47,7 +47,7 @@
          <br>
          <br>
          
-         <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="checkoutItem(employeeId, libCardNumber, libraryItemId)">Return Item</b-button>
+         <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="">Return Item</b-button>
          <b-button b-row justify="center" v-on:click="goToSubmitPage()">Library Managment</b-button>
 
     
