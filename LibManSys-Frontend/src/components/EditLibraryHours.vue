@@ -8,41 +8,139 @@
             <br />
     
             <b-container fluid>
-                <h2> Hire Librarian </h2>
+                <h2> Edit Library Hours </h2>
     <br>
                 <b-row class="my-1" color="#00000">
                     <b-col sm="2" color="#00000">
-                        <label for="input-default" color="#00000">Name:</label>
+                        <label for="input-default" color="#00000">Monday Start:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-default" color="#FFFFF" placeholder="Enter the Librarian's Name"></b-form-input>
+                        <b-form-input id="input-default" color="#FFFFF" ></b-form-input>
                     </b-col>
                 </b-row>
     
                 <b-row class="my-1">
                     <b-col sm="2">
-                        <label for="input-large">Address:</label>
+                        <label for="input-large">Monday End:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-large" placeholder="Enter the Librarian's Address"></b-form-input>
+                        <b-form-input id="input-default" ></b-form-input>
+                    </b-col>
+                </b-row>
+
+                <b-row class="my-1" color="#00000">
+                    <b-col sm="2" color="#00000">
+                        <label for="input-default" color="#00000">Tuesday Start:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" color="#FFFFF" ></b-form-input>
                     </b-col>
                 </b-row>
     
                 <b-row class="my-1">
                     <b-col sm="2">
-                        <label for="name">Phone Number:</label>
+                        <label for="input-large">Tuesday End:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="name" placeholder="Enter the Librarian's PhoneNumber"></b-form-input>
+                        <b-form-input id="input-default" ></b-form-input>
+                    </b-col>
+                </b-row>
+
+                <b-row class="my-1" color="#00000">
+                    <b-col sm="2" color="#00000">
+                        <label for="input-default" color="#00000">Wednesday Start:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" color="#FFFFF" ></b-form-input>
                     </b-col>
                 </b-row>
     
+                <b-row class="my-1">
+                    <b-col sm="2">
+                        <label for="input-large">Wednesday End:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" ></b-form-input>
+                    </b-col>
+                </b-row>
+
+                <b-row class="my-1" color="#00000">
+                    <b-col sm="2" color="#00000">
+                        <label for="input-default" color="#00000">Thursday Start:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" color="#FFFFF" ></b-form-input>
+                    </b-col>
+                </b-row>
     
+                <b-row class="my-1">
+                    <b-col sm="2">
+                        <label for="input-large">Thursday End:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" ></b-form-input>
+                    </b-col>
+                </b-row>
+
+                <b-row class="my-1" color="#00000">
+                    <b-col sm="2" color="#00000">
+                        <label for="input-default" color="#00000">Friday Start:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" color="#FFFFF" ></b-form-input>
+                    </b-col>
+                </b-row>
+    
+                <b-row class="my-1">
+                    <b-col sm="2">
+                        <label for="input-large">Friday End:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" ></b-form-input>
+                    </b-col>
+                </b-row>
+
+                <b-row class="my-1" color="#00000">
+                    <b-col sm="2" color="#00000">
+                        <label for="input-default" color="#00000">Saturday Start:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" color="#FFFFF" ></b-form-input>
+                    </b-col>
+                </b-row>
+    
+                <b-row class="my-1">
+                    <b-col sm="2">
+                        <label for="input-large">Saturday End:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" ></b-form-input>
+                    </b-col>
+                </b-row>
+
+                <b-row class="my-1" color="#00000">
+                    <b-col sm="2" color="#00000">
+                        <label for="input-default" color="#00000">Sunday Start:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" color="#FFFFF" ></b-form-input>
+                    </b-col>
+                </b-row>
+    
+                <b-row class="my-1">
+                    <b-col sm="2">
+                        <label for="input-large">Sunday End:</label>
+                    </b-col>
+                    <b-col sm="10">
+                        <b-form-input id="input-default" ></b-form-input>
+                    </b-col>
+                </b-row>
+
             </b-container>
     
          <br>
-                  <b-button v-row justify="center" v-on:click="goToReservePage()">Hire Librarian</b-button>
-         <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
+            <b-button v-row justify="center">Set Schedule</b-button>
+
 
     
         </section>

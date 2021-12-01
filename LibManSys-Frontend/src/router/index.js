@@ -22,6 +22,9 @@ import FireLibrarian from '@/components/FireLibrarian.vue'
 import UpdateBookings from '@/components/UpdateBookings.vue'
 import ViewBookings from '@/components/ViewBookings.vue'
 import DeleteBookings from '@/components/DeleteBookings.vue'
+import EditLibraryHours from '@/components/EditLibraryHours.vue'
+import CreateLibrarianSchedule from '@/components/CreateLibrarianSchedule.vue'
+
 
 
 
@@ -73,10 +76,22 @@ export default new Router({
       component: LibrarianLogin
     }
      ,
-    {
+     {
       path: '/LibraryInfo',
       name: 'LibraryInfo',
       component: LibraryInfo
+    }
+    ,
+    {
+      path: '/CreateLibrarianSchedule',
+      name: 'CreateLibrarianSchedule',
+      component: CreateLibrarianSchedule
+    }
+    ,
+    {
+      path: '/EditLibraryHours',
+      name: 'EditLibraryHours',
+      component: EditLibraryHours
     }
     ,
     {

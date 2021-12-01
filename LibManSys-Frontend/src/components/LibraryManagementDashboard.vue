@@ -207,7 +207,7 @@ export default {
         path: "/CreateLibrarianSchedule",
         name: "CreateLibrarianSchedule",
       });
-    }
+    },
     goToCreateBookingsPage: function () {
       Router.push({
         path: "/CreateBookings",
