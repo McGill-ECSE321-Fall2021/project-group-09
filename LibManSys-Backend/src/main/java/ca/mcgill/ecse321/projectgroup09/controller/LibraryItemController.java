@@ -82,7 +82,7 @@ public class LibraryItemController {
 	 * @param title
 	 * @return
 	 */
-	@GetMapping(value = {BASE_URL + "/{title}", BASE_URL + "/{title}/"})
+	@GetMapping(value = {BASE_URL + "/get-by-title/{title}", BASE_URL + "/get-by-title/{title}/"})
 	public ResponseEntity<?> getLibraryItemsByTitle(@PathVariable("title") String title) {
 		List<LibraryItem> lis = null;
 		try {
@@ -99,7 +99,7 @@ public class LibraryItemController {
 	 * @param statusString String corresponding to one of LibraryItem.ItemStatus enum elements.
 	 * @return
 	 */
-	@GetMapping(value = {BASE_URL + "/{status}", BASE_URL + "/{status}/"})
+	@GetMapping(value = {BASE_URL + "/get-by-status/{status}", BASE_URL + "/get-by-status/{status}/"})
 	public ResponseEntity<?> getLibraryItemsByStatus(@PathVariable("status") String statusString) {
 		// parse statusString into ItemStatus enum
 		ItemStatus itemStatus = null;
@@ -111,6 +111,23 @@ public class LibraryItemController {
 		List<LibraryItemDto> lidtos = null;
 		try {
 			List<LibraryItem> lis = libraryItemService.getLibraryItemsByStatus(itemStatus);
+			lidtos = LibraryItemDto.convertToDto(lis);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(lidtos);
+	}
+	
+	/**
+	 * 
+	 * @param memberLibCardNumber
+	 * @return
+	 */
+	@GetMapping(value = {BASE_URL + "/get-by-reserving-member/{id}", BASE_URL + "/get-by-reserving-member/{id}/"})
+	public ResponseEntity<?> getLibraryItemsByReservingMember(@PathVariable("id") Long memberLibCardNumber) {
+		List<LibraryItemDto> lidtos = null;
+		try {
+			List<LibraryItem> lis = libraryItemService.getLibraryItemsByReservingMember(memberLibCardNumber);
 			lidtos = LibraryItemDto.convertToDto(lis);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());

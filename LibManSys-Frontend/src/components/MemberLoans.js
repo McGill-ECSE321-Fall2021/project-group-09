@@ -34,14 +34,19 @@ export default {
 	data() {
 		return {
 			loans: [],
+			            loggedInUser: '',
+
 			newLoan: '',
 			errorLoan:'',
 			response: []
 		}
 	},
 	created: function () {
+        var userLoggedIn = $cookies.isKey("loggedInUser")
+        if (userLoggedIn == true) {
+            this.loggedInUser = $cookies.get("loggedInUser")
     // Initializing persons from backend
-    AXIOS.get('/loan/get-by-member/3968') //change for logged in member
+    AXIOS.get('/loan/get-by-member/'+ this.loggedInUser) //change for logged in member
     .then(response => {
       // JSON responses are automatically parsed.
       this.loans = response.data;
@@ -49,7 +54,7 @@ export default {
     })
     .catch(e => {
       this.errorLoan = e
-    })
+    })}
     
   }
 ,
