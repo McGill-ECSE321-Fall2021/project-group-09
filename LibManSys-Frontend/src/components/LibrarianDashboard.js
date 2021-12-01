@@ -79,6 +79,7 @@ export default {
     },
     created: function () {
         console.log("test: "+ this.frontendUrl)
+        console.log("backend: " + this.backendUrl)
 
         // check if cookie is set for current user
         var userLoggedIn = $cookies.isKey("loggedInUser")
