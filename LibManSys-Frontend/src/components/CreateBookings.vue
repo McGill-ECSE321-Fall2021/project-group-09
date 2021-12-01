@@ -56,20 +56,6 @@
 
         <b-row class="my-1">
           <b-col sm="4">
-            <label class="booking-input" for="input-large">Booking ID:</label>
-          </b-col>
-          <b-col sm="5">
-            <b-form-input
-              id="input-default"
-              v-model="bookingID"
-              placeholder="Please enter the booking ID"
-            ></b-form-input>
-          </b-col>
-          <b-col sm="3" color="#00000"> </b-col>
-        </b-row>
-
-        <b-row class="my-1">
-          <b-col sm="4">
             <label class="booking-input" for="input-large"
               >Library Card No:</label
             >
@@ -112,7 +98,6 @@
               createBooking(
                 startTime,
                 endTime,
-                bookingID,
                 bookingDate,
                 memberID,
                 librarianID

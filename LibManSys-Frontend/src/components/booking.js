@@ -40,7 +40,6 @@ export default {
             response: [],
             startTime: '',
             endTime: '',
-            bookingID: '',
             bookingDate: '',
             memberID: '',
             librarianID: ''
@@ -61,12 +60,11 @@ export default {
     },
 
     methods: {
-        createBooking: function (startTime, endTime, bookingID, bookingDate, memberID, librarianID) {
+        createBooking: function (startTime, endTime, bookingDate, memberID, librarianID) {
             AXIOS.post('bookings/new/', {}, {
                 params: {
                     startTime: startTime,
                     endTime: endTime,
-                    bookingID: bookingID,
                     bookingDate: bookingDate,
                     memberID: memberID,
                     librarianID: librarianID //should be logged in librarian

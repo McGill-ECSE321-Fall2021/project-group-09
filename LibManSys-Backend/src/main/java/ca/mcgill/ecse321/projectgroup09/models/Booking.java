@@ -1,6 +1,8 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.sql.Time;
@@ -47,6 +49,7 @@ public class Booking {
 	}
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getBookingID() {
 		return this.bookingID;
 	}

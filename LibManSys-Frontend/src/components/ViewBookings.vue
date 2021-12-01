@@ -5,70 +5,30 @@
       <b-container fluid>
         <hr />
         ​
-        <h2>Events</h2>
+        <h2>All Bookings</h2>
         ​
         <table>
           ​
           <tr>
             ​
-            <th>Date</th>
-            ​
-            <th>Start</th>
-            ​
-            <th>End</th>
-            ​<!--<th>Edit</th>-->
-            ​
+            <th>Booking ID</th>
+            <th>Booking Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
           </tr>
           ​
-          <tr v-for="booking in bookings" v-bind:key=booking>
+          <tr v-for="booking in bookings" v-bind:key="booking">
             ​
+            <td>{{ booking.bookingID }}</td>
             <td>{{ booking.bookingDate }}</td>
-            ​
             <td>{{ booking.bookingStartTime }}</td>
-            ​
             <td>{{ booking.bookingEndTime }}</td>
-       
-            ​<!--<td>
-       ​<button v-on:click="updateEvent(event.name)">Edit</button>
-     ​</td>-->
-            ​
           </tr>
           ​
-        </table> </b-container
-      >>
-      <!-- <b-container fluid>
-        <br />
-        <br />
+        </table>
+      </b-container>
 
-        <myText3>All Bookings </myText3>
-        <div>
-          <v-data-table class="elevation-1">
-            <tr>
-              <b-col class="myColumn">
-                <td><myText2>| Booking Date |</myText2></td>
-              </b-col>
-              <td><myText2>| Start Time |</myText2></td>
-              <td><myText2>| End Time |</myText2></td>
-           
-            </tr>
-            
-            <tr v-for="booking in bookings" :key="booking">
-              <b-col class="myColumn">
-                <td>
-                  <myText2> {{ booking.bookingDate }}</myText2>
-                </td>
-              </b-col>
-              <td>
-                <myText2> {{ booking.bookingStartTime }}</myText2>
-              </td>
-              <td>
-                <myText2> {{ booking.bookingEndTime }}</myText2>
-              </td>
-            
-            </tr>
-          </v-data-table>
-        </div>
-      </b-container> -->
+      <b class="button" href="#" v-on:click="goToPreviousPage()">Back</b>
     </section>
   </div>
 </template>
@@ -206,6 +166,13 @@ myText3 {
   font: "Times";
   font-size: 25px;
   font-weight: 100;
+}
+
+table {
+  table-layout: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 input,
 ::placeholder {

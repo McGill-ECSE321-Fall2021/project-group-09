@@ -54,5 +54,11 @@ export default {
                 name: "LibraryManagementDashboard"
             })
         },
-    }
+    },
+    goToPreviousPage: function() {
+        Router.push({
+            path: "/LibraryManagementDashboard",
+            name: "LibraryManagementDashboard"
+        })
+    },
 }
