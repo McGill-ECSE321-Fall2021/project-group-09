@@ -104,6 +104,24 @@ public class LibraryItemService {
 	}
 	
 	/**
+	 * 
+	 * @param libCardNumber
+	 * @return
+	 */
+	@Transactional
+	public List<LibraryItem> getLibraryItemsByReservingMember(Long libCardNumber) {
+		if (libCardNumber == null) {
+			throw new IllegalArgumentException("Argument must not be null.");
+		}
+		Member m = memberRepo.findMemberByLibCardNumber(libCardNumber);
+		if (m == null) {
+			throw new IllegalArgumentException("Could not find member with libCardNumber = " + libCardNumber + ".");
+		}
+		List<LibraryItem> lis = libraryItemRepo.findLibraryItemByMember(m);
+		return lis;
+	}
+	
+	/**
 	 * Get all library items in library item repository.
 	 * @return list of all library items in library management system.
 	 */

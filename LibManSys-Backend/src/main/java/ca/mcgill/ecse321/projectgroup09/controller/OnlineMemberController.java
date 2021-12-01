@@ -74,7 +74,7 @@ public class OnlineMemberController {
 	}
 	
 	 
-	@PostMapping(value = { "/OnlineMember/create/{fullName}", "/OnlineMember/create/{fullName}/" })
+	/*@PostMapping(value = { "/OnlineMember/create/{fullName}", "/OnlineMember/create/{fullName}/" })
 	public ResponseEntity<?> createOnlineMember(@PathVariable("fullName") String fullName,
 				@RequestParam(name = "address") String OnlineMemberAddress,
 				@RequestParam(name = "phoneNumber") String OnlineMemberPhoneNumber,
@@ -88,6 +88,19 @@ public class OnlineMemberController {
 			} catch (Exception e) {
 				return httpFailureMessage(e.getMessage());
 			}
+		}*/
+	
+	@PostMapping(value = { "/OnlineMember/create/{fullName}", "/OnlineMember/create/{fullName}/" })
+	public OnlineMemberDto createOnlineMember(@PathVariable("fullName") String fullName,
+				@RequestParam(name = "address") String OnlineMemberAddress,
+				@RequestParam(name = "phoneNumber") String OnlineMemberPhoneNumber,
+				@RequestParam(name = "emailAddress") String memberEmail,
+				@RequestParam(name = "password") String memberPassword,
+				@RequestParam(name = "username") String memberUsername
+				) throws IllegalArgumentException {
+		
+				OnlineMember OnlineMember = onlineMemberService.createOnlineMember(fullName, OnlineMemberAddress, OnlineMemberPhoneNumber, memberEmail, memberPassword, memberUsername);
+				return (OnlineMemberDto.convertToDto(OnlineMember));
 		}
 	
 	@PostMapping(value = { "/OnlineMember/fullName/update/{libCardNumber}", "/OnlineMember/fullName/update/{libCardNumber}/" })
@@ -179,15 +192,18 @@ public class OnlineMemberController {
 	 * @param password
 	 * @return
 	 */
-	@PostMapping(value = { BASE_URL + "/login", BASE_URL + "/login/"})
-	public ResponseEntity<?> loginOnlineMember(@RequestParam("username") String username,
-			@RequestParam("password") String password) {
+	@PostMapping(value = {BASE_URL + "/login", BASE_URL + "/login/"})
+	public ResponseEntity<?> loginOnlineMember(
+			@RequestParam("username") String username,
+			@RequestParam("password") String password) 
+	{
 		try {
 			OnlineMemberDto omdto = OnlineMemberDto.convertToDto(onlineMemberService.loginAsOM(username, password));
-			return httpSuccess(omdto);
-		} catch (Exception e) {
-			return httpFailureMessage(e.getMessage());
+			} 
+		catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PostMapping(value = { "/logout", "/logout/" })

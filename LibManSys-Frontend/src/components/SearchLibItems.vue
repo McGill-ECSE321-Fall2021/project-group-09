@@ -77,10 +77,12 @@
 </select>
 </div>
           <input
+          v-model ="message"
             type="text"
             class="searchTerm"
             placeholder="What are you looking for?"
           />
+          <p>Message is: {{ message }}</p>
 
            <!-- General Search Button-->
       <div v-show="selected !== 'all' && selected !== 'book' && selected !== 'movie' && selected !== 'archive' && selected !== 'musicalbum' && selected !== 'newspaper'    " >

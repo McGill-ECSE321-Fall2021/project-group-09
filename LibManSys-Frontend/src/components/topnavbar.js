@@ -10,6 +10,8 @@ export default {
     };
   },
   mounted: function () {
+    console.log("mounted nav bar " + $cookies.get("loggedInUser"))
+
     EventBus.$on('loggedInUserSet', (loggedInUser) => {
         console.log('event logged in suser set');
         this.loggedInUser = loggedInUser;
@@ -21,6 +23,13 @@ export default {
             this.IDtype = ''
         }
     })
+
+
+    if ($cookies.isKey("loggedInUser") == true) {
+        this.loggedInUser = $cookies.get("loggedInUser")
+        this.loggedInType = $cookies.get("loggedInType")
+    }
+    console.log("nmvar bar: " + this.loggedInUser)
   },
   beforeDestroy: function () {
     EventBus.$off('loggedInUserSet')

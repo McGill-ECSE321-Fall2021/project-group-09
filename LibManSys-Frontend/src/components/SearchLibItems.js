@@ -33,6 +33,7 @@ export default {
     cdHidden: true,
     archiveHidden: true,
     newspaperHidden: true,
+    message: '',
     results: [],
 			books:[],
 			movies:[],

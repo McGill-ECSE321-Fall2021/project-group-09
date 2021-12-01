@@ -40,7 +40,6 @@ export default {
             response: [],
             startTime: '',
             endTime: '',
-            bookingID: '',
             bookingDate: '',
             memberID: '',
             librarianID: ''
@@ -61,12 +60,11 @@ export default {
     },
 
     methods: {
-        createBooking: function (startTime, endTime, bookingID, bookingDate, memberID, librarianID) {
+        createBooking: function (startTime, endTime, bookingDate, memberID, librarianID) {
             AXIOS.post('bookings/new/', {}, {
                 params: {
                     startTime: startTime,
                     endTime: endTime,
-                    bookingID: bookingID,
                     bookingDate: bookingDate,
                     memberID: memberID,
                     librarianID: librarianID //should be logged in librarian
@@ -92,33 +90,13 @@ export default {
                     this.errorBooking = errorMsg
                 })
         },
-        updateBooking: function (bookingID, startTime, endTime, bookingDate) {
-            AXIOS.post('bookings/update/', {}, {
-                params: {
-                    bookingID: bookingID,
-                    startTime: startTime,
-                    endTime: endTime,
-                    bookingDate: bookingDate,
-
-                }
+       
+        goToPreviousPage: function() {
+            Router.push({
+                path: "/LibraryManagementDashboard",
+                name: "LibraryManagementDashboard"
             })
-            .then (response => {
-                this.bookings.push(response.data)
-                this.errorResult = ''
-                this.startTime = ''
-                this.endTime = ''
-                this.bookingID = ''
-                this.bookingDate = ''
-            })
-            .catch(error => {
-                var errorMsg = error
-                if (error.response) {
-                    errorMsg = error.response.data
-                }
-                console.log(errorMsg)
-                this.errorBooking = errorMsg
-            })
-
+        },
             
 
         },
@@ -127,5 +105,4 @@ export default {
 
 
 
-}
 

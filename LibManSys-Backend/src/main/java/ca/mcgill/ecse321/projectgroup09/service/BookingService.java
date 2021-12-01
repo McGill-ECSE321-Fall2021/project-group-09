@@ -39,7 +39,7 @@ public class BookingService { // service class for booking out the library for e
 	 * @throws IllegalArgumentException 
 	 */
 	@Transactional
-	public Booking createBooking (Time startTime, Time endTime, Long bookingID, Date bookingDate, Long memberID, Long librarianID) throws IllegalArgumentException {
+	public Booking createBooking (Time startTime, Time endTime, Date bookingDate, Long memberID, Long librarianID) throws IllegalArgumentException {
 
 		Member member = memberRepository.findMemberByLibCardNumber(memberID);
 		Librarian librarian = librarianRepository.findLibrarianByEmployeeIDNumber(librarianID);
@@ -48,6 +48,18 @@ public class BookingService { // service class for booking out the library for e
 		}
 		if (librarian == null) {
 			throw new IllegalArgumentException("Librarian does not exist.");
+		}
+		
+		if (startTime == null) {
+			throw new IllegalArgumentException("Please enter a start time.");
+		}
+		
+		if (endTime == null) {
+			throw new IllegalArgumentException("Please enter an end time.");
+		}
+		
+		if (bookingDate == null) {
+			throw new IllegalArgumentException("Please enter a date.");
 		}
 		
 //		if (member == null) {
@@ -104,7 +116,6 @@ public class BookingService { // service class for booking out the library for e
 		booking.setBookingDate(date);
 		booking.setBookingStartTime(sTime);
 		booking.setBookingEndTime(eTime);
-		booking.setBookingID(bookingID);
 		booking.setMember(member);
 		booking.setLibrarian(librarian);
 

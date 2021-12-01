@@ -20,9 +20,7 @@ Head Librarian:
                 <myText> Member Loans </myText>
               
             
-  <div  v-if="
-          880707   == 880707  
-          "> 
+  <div  > 
     <v-data-table  class="elevation-1" >
       <tr><b-col class="myColumn">
           <td><myText2>|  LoanId  |</myText2> </td> </b-col>
@@ -39,11 +37,11 @@ Head Librarian:
           <myText2> {{loan.loanId}}</myText2></td>
 
                      <td> <myText2> {{loan.borrowedDate}}</myText2></td> 
-                                   <td> <myText2> {{loan.member.libCardNumber
+                                   <td> <myText2> {{loan.memberLibCardNumber
 }}</myText2></td> 
 
                 <td>
-            <myText2>  {{loan.libraryItem.libraryItemID}}</myText2> </td> 
+            <myText2>  {{loan.libraryItemID}}</myText2> </td> 
               <td>
              <myText2> {{loan.loanStatus}}</myText2> </td> 
               <td>
