@@ -58,7 +58,7 @@
 </template>
 
 
-<script src="./HireLibrarian.js"></script>
+<script src="./FireLibrarian.js"></script>
 
 
 
