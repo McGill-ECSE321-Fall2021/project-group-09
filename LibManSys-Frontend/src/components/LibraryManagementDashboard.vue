@@ -56,8 +56,8 @@
               <b-button
                 v-row
                 justify="center"
-                v-on:click="goToCreateSchedulePage()"
-                >Create Library Schedule</b-button
+                v-on:click="goToCreateLibrarianSchedulePage()"
+                >Create Librarian Schedule</b-button
               >
             </td>
           </b-col>
@@ -197,7 +197,17 @@ export default {
         path: "/FireLibrarian",
         name: "FireLibrarian",
       });
-    },
+    },goToEditHoursPage: function () {
+      Router.push({
+        path: "/EditLibraryHours",
+        name: "EditLibraryHours",
+      });
+    },goToCreateLibrarianSchedulePage: function () {
+      Router.push({
+        path: "/CreateLibrarianSchedule",
+        name: "CreateLibrarianSchedule",
+      });
+    }
     goToCreateBookingsPage: function () {
       Router.push({
         path: "/CreateBookings",
