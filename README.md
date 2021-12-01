@@ -44,9 +44,9 @@ Classes were split up between all six members and each member was responsible fo
 | Member            | Tasks                                         | Effort (Hours) |
 |-------------------|-----------------------------------------------|----------------|
 |Abdullah Arafat    |  |         30 |   
-|Christos Cunning   |Work on controller methods and other Backend methods from previous Sprint; Heroku Deployement; Create backend linking for Checkout Page; Change DTOs Methods |         60    |   
+|Christos Cunning   |Work on controller methods and other Backend methods from previous Sprint; Heroku Deployement; Create backend linking for Checkout Page; Change DTOs Methods; Online Member Dashboard; Librarian Dashboard; Librarian Log in with Linking |         60    |   
 |Omar Abdelaziz     |Create Success Spectrum; Create Presentations and Assign Roles;Change DTOs Methods| 35|   
-|Rajaa Boukhelif    |Set up UI; Create Landing Page; Create UI for Pages; Meeting Minutes; Heroku Deployement; View Searches from Database; Create Item Pages and Database Linking; Create/Update Wiki Pages for Sprint 3; Edit Profile|         60|   
-|Sneha Singh        |Set up UI; Create Landing and Contact Page; Create Navigation Bar; Heroku Deployement; Create Issues for Sprint 3; Create backend  linking for Booking Page |         55  |   
+|Rajaa Boukhelif    |Set up UI; Create Landing Page; Create UI for Pages; Meeting Minutes; Heroku Deployement; View Searches from Database; Create Item Pages and Database Linking; Create/Update Wiki Pages for Sprint 3; Edit Profile; Loans per member linked and viewable|         60|   
+|Sneha Singh        |Set up UI; Create Landing and Contact Page; Create Navigation Bar; Heroku Deployement; Create Issues for Sprint 3; Create backend linking for Booking Page; Hire Librarian with Linking |         55  |   
 |Zarif Ashraf Zidane|Improve UI; create backend linking for Online Member Registration, login and dashboard with UI Updates  |       46       |   
 
