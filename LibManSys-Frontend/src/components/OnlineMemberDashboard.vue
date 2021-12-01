@@ -76,19 +76,29 @@
 
 <b-row>
     <b-col sm="2" > 
-      <label for="username" >Phone Number:</label>
+      <label for="username" >Username:</label>
     </b-col>
 </b-row>
    
  
 </b-container>
-      <b-col class="myColumn">
+      <b-col>
     
                 <td>
-                    <b-button justify="center" v-on:click="goToLoansPage()">Loans</b-button>
+                    <b-button v-on:click="goToLoansPage()">Loans</b-button>
                 </td>
     
-            </b-col>
+      </b-col>
+
+       <button
+            @click="Logout()"
+            type="Logoutbutton"
+            style="background-color: whitesmoke;"
+            class="btn btn-primary"
+          >
+            <font size="3"><b>Logout</b></font>
+
+      </button>
      
     </section>   
 
