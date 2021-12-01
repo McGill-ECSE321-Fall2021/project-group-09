@@ -62,7 +62,7 @@
             <b-form-input
               id="input-default"
               v-model="bookingDate"
-              placeholder="yyy-mm-dd"
+              placeholder="yyyy-mm-dd"
             ></b-form-input>
           </b-col>
           <b-col sm="3" color="#00000"> </b-col>

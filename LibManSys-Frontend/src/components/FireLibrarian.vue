@@ -18,39 +18,14 @@
                         <b-form-input id="input-default" color="#FFFFF" placeholder="Enter the Librarian's ID"></b-form-input>
                     </b-col>
                 </b-row>
-                <b-row class="my-1" color="#00000">
-                    <b-col sm="2" color="#00000">
-                        <label for="input-default" color="#00000">Name:</label>
-                    </b-col>
-                    <b-col sm="10">
-                        <b-form-input id="input-default" color="#FFFFF" placeholder="Enter the Librarian's Name"></b-form-input>
-                    </b-col>
-                </b-row>
-    
-                <b-row class="my-1">
-                    <b-col sm="2">
-                        <label for="input-large">Address:</label>
-                    </b-col>
-                    <b-col sm="10">
-                        <b-form-input id="input-large" placeholder="Enter the Librarian's Address"></b-form-input>
-                    </b-col>
-                </b-row>
-    
-                <b-row class="my-1">
-                    <b-col sm="2">
-                        <label for="name">Phone Number:</label>
-                    </b-col>
-                    <b-col sm="10">
-                        <b-form-input id="name" placeholder="Enter the Librarian's PhoneNumber"></b-form-input>
-                    </b-col>
-                </b-row>
+               
     
     
             </b-container>
     
          <br>
                   <b-button v-row justify="center" v-on:click="goToReservePage()">Fire Librarian</b-button>
-         <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
+         <b-button v-row justify="center" v-on:click="goToPreviousPage()">Library Management</b-button>
 
     
         </section>

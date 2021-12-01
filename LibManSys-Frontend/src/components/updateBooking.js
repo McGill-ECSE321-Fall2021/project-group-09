@@ -72,7 +72,7 @@ export default {
             })
             .then (response => {
                 this.bookings.push(response.data)
-                this.errorResult = ''
+                this.errorBooking = ''
                 this.startTime = ''
                 this.endTime = ''
                 this.id = ''
