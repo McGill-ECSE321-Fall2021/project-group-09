@@ -29,7 +29,7 @@
                     <label class="login-input" for="input-default" >Password:</label>
                 </b-col>
                 <b-col sm="5">
-                    <b-form-input id="input-large"  type="text" v-model="password" placeholder="Enter your password"></b-form-input>
+                    <b-form-input id="input-large" type="password" v-model="password" placeholder="Enter your password"></b-form-input>
                 </b-col>
                 <b-col sm="3" color="#00000">
                     

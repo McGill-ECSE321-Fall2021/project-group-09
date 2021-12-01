@@ -107,7 +107,7 @@
  <!-- BOOK -->
 
     <div  v-if="bookResults.length"> 
-      <myText3>All Books</myText3>
+      <myText3>Book Results</myText3>
       <br>
       <v-data-table  class="elevation-1" >
         <tr><b-col class="myColumn">
@@ -136,7 +136,7 @@
 
     <!-- Movie -->
     <div v-if="movieResults.length">
-      <myText3>All Movies</myText3>
+      <myText3>Movie Results</myText3>
       <br>
       <v-data-table  class="elevation-1" >
         <tr><b-col class="myColumn">
@@ -165,7 +165,7 @@
     
     <!-- CD -->
     <div v-if="musicAlbumResults.length">
-      <myText3>All Music Albums</myText3>
+      <myText3>Music Album Results</myText3>
       <br>
       <v-data-table  class="elevation-1" >
         <tr><b-col class="myColumn">
@@ -191,7 +191,7 @@
 
     <!-- archive -->
     <div v-if="archiveResults.length">
-      <myText3>All Archives </myText3>
+      <myText3>Archive Results</myText3>
       <br>
 
       <v-data-table  class="elevation-1" >
@@ -212,7 +212,7 @@
 
     <!-- newspaper -->
     <div v-if="newspaperResults.length">
-      <myText3>All NewsPaper</myText3>
+      <myText3>Newspaper Results</myText3>
 
       <v-data-table  class="elevation-1" >
         <tr><b-col class="myColumn">
