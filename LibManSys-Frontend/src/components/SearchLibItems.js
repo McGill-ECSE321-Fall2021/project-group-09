@@ -21,28 +21,33 @@ var AXIOS = axios.create({
 
 
 export default {
-  name: "hello",
+  name: "SearchLibItems",
   data() {
     return {
-      hover: false,
       msg: "Welcome to the Library",
       selected: '',
-    selected2: '',
-    bookHidden: true,
-    movieHidden: true,
-    cdHidden: true,
-    archiveHidden: true,
-    newspaperHidden: true,
-    message: '',
-    results: [],
+      selected2: '',
+      bookHidden: true,
+      movieHidden: true,
+      cdHidden: true,
+      archiveHidden: true,
+      newspaperHidden: true,
+      message: '',
+      results: [],
 			books:[],
 			movies:[],
-		newspapers:[],
+		  newspapers:[],
 			archives:[],
 			musicAlbums:[],
 			newResult: '',
 			errorResult:'',
-			response: []
+			response: [],
+
+      archiveResults: [],
+      bookResults: [],
+      movieResults: [],
+      musicAlbumResults: [],
+      newspaperResults: []
      
     };
   },
@@ -95,57 +100,75 @@ export default {
     })
     
   },
+  methods: {
+    search: function(query) {
+      console.log("sel1: '" + this.selected + "' sel2: '" + this.selected2 + "'")
 
-  components: {
-    Register
-  },
+      var itemFilter = this.selected
+      var attrFilter = this.selected2
 
-   methods: {
-	goToBook: function(){
-		bookHidden= false
-		
-	},
-        goToRegisterPage: function (){
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
-        },
-        goToLoginPage: function (){
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        },
-        goToSearchPage: function (){
-            Router.push({
-                path: "/SearchResults",
-                name: "SearchResults"
-            })
-        },
-        goToLibManagmentPage: function (){
-            Router.push({
-                path: "/LibraryManagementDashboard",
-                name: "LibraryManagementDashboard"
-            })
-        },
-        goToUserPage: function (){
-            Router.push({
-                path: "/OnlineMemberDashboard",
-                name: "OnlineMemberDashboard"
-            })
-        },
-        goToLibrarianPage: function (){
-            Router.push({
-                path: "/LibrarianDashboard",
-                name: "LibrarianDashboard"
-            })
-        },
-        goToItemPage: function (){
-            Router.push({
-                path: "/ItemPage",
-                name: "ItemPage"
-            })
+      if (!itemFilter || itemFilter === "all") {
+        console.log("serach all items")
+      } else if (itemFilter === "archive") {
+        if (!attrFilter || attrFilter === "all" ) {
+          console.log("s archive")
+        } else if (attrFilter === "title") {
+          console.log("s archive title")
+        } else if (attrFilter === "publishedYear") {
+          console.log("s archive published year")
+        } else if (attrFilter === "institution") {
+          console.log("s archives insitiution")
         }
+      } else if (itemFilter === "book") {
+        console.log(" s book")
+        if (!attrFilter || attrFilter === "all" ) {
+          
+        } else if (attrFilter === "title") {
+          console.log("s book title")
+        } else if (attrFilter === "publishedYear") {
+          console.log("s book published year")
+        } else if (attrFilter === "author") {
+          console.log("book author")
+        } else if (attrFilter === "isbn") {
+          console.log("book isbn")
         }
+      } else if (itemFilter === "movie") {
+        if (!attrFilter || attrFilter === "all" ) {
+          console.log("s movie")
+        } else if (attrFilter === "title") {
+          console.log("s movie title")
+        } else if (attrFilter === "publishedYear") {
+          console.log("s movie published year")
+        } else if (attrFilter === "genre") {
+          console.log("genre")
+        } else if (attrFilter === "director") {
+          console.log("director")
+        }
+      } else if (itemFilter === "musicalbum") {
+        console.log("s ma")
+        if (!attrFilter || attrFilter === "all" ) {
+          // TODO TODO TODO TODO TODO 
+        } else if (attrFilter === "title") {
+          console.log("s msuci albim title")
+        } else if (attrFilter === "publishedYear") {
+          console.log("s msuic album published year")
+        }
+      } else if (itemFilter === "newspaper") {
+        console.log("s new")
+        if (!attrFilter || attrFilter === "all" ) {
+          
+        } else if (attrFilter === "title") {
+          console.log("s newspaper title")
+        } else if (attrFilter === "publishedYear") {
+          console.log("s newspaper published year")
+        }
+      }
+    },
+    goToSearchPage: function (){
+        Router.push({
+            path: "/SearchResults",
+            name: "SearchResults"
+        })
+    }
+  }
 }
