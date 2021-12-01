@@ -175,9 +175,12 @@
       </b-container>
 
       <b-container>
-          <b-col>
+
               <b-button v-on:click="goToLoansPage()">Loans</b-button>
-          </b-col>
+        
+          
+              <b-button v-on:click="goToEditPage()">Edit Profile</b-button>
+          
       </b-container>
 
       <br />

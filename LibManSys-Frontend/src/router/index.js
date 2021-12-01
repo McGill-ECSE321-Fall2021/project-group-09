@@ -22,6 +22,7 @@ import FireLibrarian from '@/components/FireLibrarian.vue'
 import UpdateBookings from '@/components/UpdateBookings.vue'
 import ViewBookings from '@/components/ViewBookings.vue'
 import DeleteBookings from '@/components/DeleteBookings.vue'
+import EditProfile from '@/components/EditProfile.vue'
 
 
 
@@ -163,6 +164,10 @@ export default new Router({
       path: '/DeleteBookings',
       name: 'DeleteBookings',
       component: DeleteBookings
+    },{
+      path: '/EditProfile',
+      name: 'EditProfile',
+      component: EditProfile
     },
   ]
 })
