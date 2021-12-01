@@ -1,4 +1,4 @@
-<--! Same as Hello, might be better to use this-->
+<!-- Same as Hello, might be better to use this-->
 
 <template>
   <div class="search-lib-items-body">
@@ -16,95 +16,111 @@
   </option>
 </select> -->
 
-<select v-model="selected">
-  <option disabled value=""> Select Item Type</option>
-  <option value="all">All</option>
-  <option value = 'archive'>Archive</option>
-  <option value ='book'>Book</option>
-  <option value ='movie'>Movie</option>
-  <option value ='newspaper'>NewsPaper</option>
-  <option value ='musicalbum'>MusicAlbum</option>
-</select>
-<div v-show="selected === 'archive'">
-<select v-model="selected2">
-  <option disabled value="">Select Filter</option>
-    <option value = 'all'>All</option>
+        <select v-model="selected">
+          <option disabled value=""> Select Item Type</option>
+          <option value="all">All</option>
+          <option value = 'archive'>Archive</option>
+          <option value ='book'>Book</option>
+          <option value ='movie'>Movie</option>
+          <option value ='newspaper'>NewsPaper</option>
+          <option value ='musicalbum'>MusicAlbum</option>
+        </select>
 
-  <option value = 'institution'>Institution</option>
-    <option  value = 'publishedYear'>Published Year</option>
-  <option value = 'title'>Title</option>
-</select>
-</div>
-<div v-show="selected === 'book'">
-<select v-model="selected2">
-  <option disabled value="">Select Filter</option>
-    <option value = 'all'>All</option>
-  <option value = 'author'>Author</option>
-  <option value = 'isbn'>ISBN</option>
-    <option value = 'publishedYear'>Published Year</option>
-  <option>Title</option>
-</select>
-</div>
-<div v-show="selected === 'movie'">
-<select v-model="selected2">
-  <option disabled value="">Select Filter</option>
-      <option value = 'all'>All</option>
-  <option value = 'director'>Director</option>
-      <option value = 'genre'>Genre</option>
-      <option value = 'publishedYear'>Published Year</option>
-  <option value = 'title'>Title</option>
-</select>
-</div>
-<div v-show="selected === 'newspaper'">
-<select v-model="selected2">
-  <option disabled value="">Select Filter</option>
-        <option value = 'all'>All</option>
-  <option value = 'chiefeditor'>Chief Editor</option>
-    <option value = 'edition'>Edition </option>
-    <option value = 'journalName'>Journal Name</option>
-    <option value = 'publishedYear'>Published Year</option>
-  <option  value = 'title'>Title</option>
-</select>
-</div>
-<div v-show="selected === 'musicalbum'">
-<select v-model="selected2">
-  <option disabled value="">Select Filter</option>
-        <option value = 'all'>All</option>
-  <option value = 'artist'>Artist </option>
-    <option value = 'genre'>Genre </option>
-    <option value = 'publishedyear'>Published Year</option>
-  <option  value = 'title'>Title</option>
-</select>
-</div>
-          <input
+        <!-- Archive filters -->
+        <div v-show="selected === 'archive'">
+          <select v-model="selected2">
+            <option disabled value="">Select Filter</option>
+              <option value = 'all'>All</option>
+
+            <option value = 'institution'>Institution</option>
+              <option  value = 'publishedYear'>Published Year</option>
+            <option value = 'title'>Title</option>
+          </select>
+        </div>
+
+        <!-- book filters -->
+        <div v-show="selected === 'book'">
+          <select v-model="selected2">
+            <option disabled value="">Select Filter</option>
+              <option value = 'all'>All</option>
+            <option value = 'author'>Author</option>
+            <option value = 'isbn'>ISBN</option>
+              <option value = 'publishedYear'>Published Year</option>
+            <option>Title</option>
+          </select>
+        </div>
+
+        <!-- movie filters -->
+        <div v-show="selected === 'movie'">
+          <select v-model="selected2">
+            <option disabled value="">Select Filter</option>
+                <option value = 'all'>All</option>
+            <option value = 'director'>Director</option>
+                <option value = 'genre'>Genre</option>
+                <option value = 'publishedYear'>Published Year</option>
+            <option value = 'title'>Title</option>
+          </select>
+        </div>
+
+        <!-- newspaper filters -->
+        <div v-show="selected === 'newspaper'">
+          <select v-model="selected2">
+            <option disabled value="">Select Filter</option>
+                  <option value = 'all'>All</option>
+            <option value = 'chiefeditor'>Chief Editor</option>
+              <option value = 'edition'>Edition </option>
+              <option value = 'journalName'>Journal Name</option>
+              <option value = 'publishedYear'>Published Year</option>
+            <option  value = 'title'>Title</option>
+          </select>
+        </div>
+
+        <!-- music album filters -->
+        <div v-show="selected === 'musicalbum'">
+          <select v-model="selected2">
+            <option disabled value="">Select Filter</option>
+                  <option value = 'all'>All</option>
+            <option value = 'artist'>Artist </option>
+              <option value = 'genre'>Genre </option>
+              <option value = 'publishedyear'>Published Year</option>
+            <option  value = 'title'>Title</option>
+          </select>
+        </div>
+
+        <!-- search bar input -->
+        <input
           v-model ="message"
-            type="text"
-            class="searchTerm"
-            placeholder="What are you looking for?"
-          />
-          <p>Message is: {{ message }}</p>
+          type="text"
+          class="searchTerm"
+          placeholder="What are you looking for?"
+        />
+        
+        
+        <p>Message is: {{ message }}</p>
 
-           <!-- General Search Button-->
-      <div v-show="selected !== 'all' && selected !== 'book' && selected !== 'movie' && selected !== 'archive' && selected !== 'musicalbum' && selected !== 'newspaper'    " >
+        <!-- General Search Button-->
+        <div v-show="selected !== 'all' && selected !== 'book' && selected !== 'movie' && selected !== 'archive' && selected !== 'musicalbum' && selected !== 'newspaper'" >
           <findbutton
             type="submit"
             class="searchButton"
             v-on:click="goToSearchPage()"
           > 
             <img src="../assets/search.png" align="top" />
-          </findbutton> </div>
+          </findbutton> 
+        </div>
 
 
-           <!-- All Button-->
-          <div v-show="selected === 'all'" >
-          <findbutton
-            type="submit"
-            class="searchButton"
-            v-on:click="goToSearchPage()"
-          > 
-            <img src="../assets/search.png" align="top" />
-          </findbutton> </div>
- <!-- Movie Buttons-->
+          <!-- All Button-->
+        <div v-show="selected === 'all'" >
+        <findbutton
+          type="submit"
+          class="searchButton"
+          v-on:click="goToSearchPage()"
+        > 
+          <img src="../assets/search.png" align="top" />
+        </findbutton> </div>
+
+        <!-- Movie Buttons-->
             <div v-show="selected  === 'movie' && selected2!=='director'&& selected2!=='title'&& selected2!=='publishedYear'&& selected2!=='genre'" >
           <findbutton
             type="submit"

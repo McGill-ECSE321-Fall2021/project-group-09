@@ -18,73 +18,64 @@ var AXIOS = axios.create({
 })
 
 import Router from "../router/index";
-import MemberLoans from "../components/MemberLoans";
 
 
 export default {
     data() {
         return {
-            
-            memberAccounts: [],
-            
-            newMemberAccount: {
-				fullName: '',
-				address: '',
-				phoneNumber: '',
-				emailAddress: '',
-				password: '',
-				username: '',
-            },
-
-            selectedMemberAccount: {
-				fullName: '',
-				address: '',
-				phoneNumber: '',
-				emailAddress: '',
-				password: '',
-				username: '',
-            },
+            fullName: '',
+            address: '',
+            phoneNumber: '',
+            emailAddress: '',
+            password: '',
+            username: '',
 			
-			errorMemberAccount: '',
-            response: [],
-
+			error: '',
         }
 
 	},
 	
-	methods: 
-	{	createMemberAccount: function (fullName, address, phoneNumber, emailAddress, password, username) {
-                
-                AXIOS.post('/OnlineMember/create/' + fullName + '?address=' + address + '&phoneNumber=' + phoneNumber +
-				'&emailAddress=' + emailAddress + '&password=' + password + '&username=' +username
-				)
-				
+	methods:  {	
+        createMemberAccount: function (fullName, address, phoneNumber, emailAddress, password, username) {
+                if (fullName === '') {
+                    this.error = "Please provide a name."
+                    return
+                }
+                AXIOS.post('/OnlineMember/create/' + fullName, {}, {
+                    params: {
+                        address: address,
+                        phoneNumber: phoneNumber,
+                        emailAddress: emailAddress,
+                        password: password,
+                        username: username
+                    }
+                })
 				.then(response => {
-                   //this.MemberAccounts.push(response.data)
-                    /*fullName = this.fullName,
-                    address = this.address,
-                    phoneNumber = this.phoneNumber,
-                    emailAddress = this.emailAddress,
-                    password = this.password, 
-                    username = this.username;*/
-                    this.newMemberAccount.fullName = ''
-                    this.newMemberAccount.address = ''
-					this.newMemberAccount.phoneNumber = ''
-					this.newMemberAccount.emailAddress = ''
-					this.newMemberAccount.password = ''
-					this.newMemberAccount.username = ''
-                    this.errorMemberAccount = ''
-                    /*swal("Success", "Registration Successful", "success")*/
+                    // if successful, login user and send to online member dashboard
+                    this.error = ''
+                    
+                    var newLoggedInUser = response.data.libCardNumber
+                    // set cookie for logged in user
+                    $cookies.set("loggedInUser", newLoggedInUser)
+                    $cookies.set("loggedInType", "onlineMember")
+                    
+                    // published event
+                    EventBus.$emit('loggedInUserSet', newLoggedInUser)
+
+                    // send to dashboard
+                    Router.push({
+                        path: "/OnlineMemberDashboard",
+                        name: "OnlineMemberDashboard"
+                    })
                 })
-                .then(okay =>{
-                    this.$router.push("/OnlineMemberDashboard")
-                })
-                    .catch(e => {
-                        var errorMsg = e
-                        console.log(errorMsg)
-                        this.errorProfile = errorMsg
-                        //swal("Error", e.response.data, "error")
-					});
+                .catch(error => {
+                    var errorMsg = error
+                    if ( error.response ) {
+                        errorMsg = error.response.data
+                    }
+                    console.log(errorMsg)
+                    this.error = errorMsg
+                });
         },
 	
 		getAllMemberAccounts: function () {

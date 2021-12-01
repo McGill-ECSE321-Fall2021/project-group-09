@@ -60,13 +60,13 @@ function getBookings(bookings) {
 }
 
 function getReservedLibraryItems(reservedLibraryItems) {
-  var bookingList = []
-  for (const bid of reservedLibraryItems) {
-      AXIOS.get("/bookings/getID/" + bid)
+  var reservedLibraryItemsList = []
+  for (const rid of reservedLibraryItems) {
+      AXIOS.get("/library-item/get-by-reserving-member/" + rid)
       .then(response => {
-          var booking = response.data
-          console.log(booking)
-          bookingList.push(booking)
+          var item = response.data
+          console.log(item)
+          reservedLibraryItemsList.push(item)
       })
       .catch(error => {
           var errorMsg = error
@@ -76,7 +76,7 @@ function getReservedLibraryItems(reservedLibraryItems) {
           console.log(errorMsg)
       })
   }
-  return bookingList
+  return reservedLibraryItemsList
 }
 
 export default {
@@ -108,6 +108,7 @@ export default {
             this.reservedLibraryItems = getReservedLibraryItems(response.data.reservedLibraryItems)
         
             console.log(this.onlineMember)
+            console.log(this.bookings)
         })
         .catch(error => {
             var errorMsg = error

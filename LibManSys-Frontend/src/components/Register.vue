@@ -66,6 +66,11 @@
           </b-col>
         </b-form-text>
 
+        <br />
+        <span v-if="error" style="color:red">{{error}} </span>
+        <br v-if="error" />
+        <br v-if="error" />
+
         <button
             @click="createMemberAccount(fullName, address, phoneNumber, emailAddress, password, username)"
             type="Registerbutton"
@@ -74,9 +79,12 @@
           >
             <font size="3"><b>Create Account</b></font>
 
-      </button>
+        </button>
 
-      </b-form>
+        <br />
+        <br />
+
+         </b-form>
         
         </b-container>
 
@@ -158,7 +166,6 @@ div {
   display: none;
 }
 section {
-  height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;

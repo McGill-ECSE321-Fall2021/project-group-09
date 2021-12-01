@@ -106,11 +106,14 @@ public class BookingController {
 		}
 	}
 
-	@GetMapping(value = {"/bookings/getID/{bookingID}", "/bookings/getID/{bookingID}/"})
-
-	public ResponseEntity<?> getBookingById(@PathVariable("Id") Long Id) {
-		BookingDto booking = BookingDto.convertToDto(bookingService.getBookingById(Id));
-		return httpSuccess(booking);
+	@GetMapping(value = {"/bookings/getID/{id}", "/bookings/getID/{id}/"})
+	public ResponseEntity<?> getBookingById(@PathVariable("id") Long Id) {
+		try {
+			BookingDto booking = BookingDto.convertToDto(bookingService.getBookingById(Id));
+			return httpSuccess(booking);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
 	}
 
 	@GetMapping(value = {"/bookings/member/{memberID}", "/bookings/member/{memberID}/"})
