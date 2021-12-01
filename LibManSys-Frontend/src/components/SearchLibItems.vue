@@ -82,7 +82,7 @@
             class="searchTerm"
             placeholder="What are you looking for?"
           />
-        <!--  <p>Message is: {{ message }}</p> -->
+      <!--   <p>Message is: {{ message }}</p>  -->
 
            <!-- General Search Button-->
       <div v-show="selected !== 'all' && selected !== 'book' && selected !== 'movie' && selected !== 'archive' && selected !== 'musicalbum' && selected !== 'newspaper'    " >
@@ -199,6 +199,9 @@
       </searchbar>
 
       <br>
+      <br>
+      <br>
+       <br>
       <br>
       <br>
  <!-- BOOK -->
