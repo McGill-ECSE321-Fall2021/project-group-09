@@ -31,7 +31,7 @@ public class AccountService {
 	@Autowired 
 	private LibrarianRepository librarianRepo;
 	
-	public static OnlineMember currentOMAccount = null;
+	
 	
 	/**
 	 * Returns the account object associated with the specified account id if 

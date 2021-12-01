@@ -239,7 +239,7 @@ public class TestBookingService {
 	
 	@Test 
 	public void createBooking() { 
-		long bookingID = 12345678;
+	
 		Time startTime = java.sql.Time.valueOf("8:00:00");
 		Time endTime = java.sql.Time.valueOf("16:00:00");
 		Date bookingDate = java.sql.Date.valueOf("2023-11-30");
@@ -250,14 +250,13 @@ public class TestBookingService {
 		Booking booking = null; 
 		
 		try { 
-			booking = bookingService.createBooking(startTime, endTime, bookingID, bookingDate, memberID, librarianID);
+			booking = bookingService.createBooking(startTime, endTime, bookingDate, memberID, librarianID);
 		}
 		catch (IllegalArgumentException e) {
 			fail(e.getMessage());		
 		}
 
 		assertNotNull(booking);
-		assertEquals(bookingID, booking.getBookingID());
 		assertEquals(booking.getMember().getFullName(), FULL_NAME);
 	}
 	
@@ -275,7 +274,7 @@ public class TestBookingService {
 		Booking booking = null; 
 		
 		try { 
-			booking = bookingService.createBooking(null, endTime, bookingID, bookingDate, memberID, librarianID);
+			booking = bookingService.createBooking(null, endTime, bookingDate, memberID, librarianID);
 		}
 		catch (IllegalArgumentException e) {
 			error = e.getMessage();
@@ -284,7 +283,7 @@ public class TestBookingService {
 
 		assertNotNull(error);
 		assertNull(booking);
-		assertEquals(error, "Please enter a start time for your event.");
+		assertEquals(error, "Please enter a start time.");
 	}
 	
 	

@@ -25,7 +25,7 @@ public class BookingController {
 	private BookingService bookingService;  
 
 	@PostMapping(value = {"/bookings/new", "/bookings/new/"})
-	public ResponseEntity<?> createBooking (@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime, @RequestParam("bookingID") Long bookingID,
+	public ResponseEntity<?> createBooking (@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime, 
 			@RequestParam("bookingDate") String bookingDate, @RequestParam("memberID") long memberID, @RequestParam("librarianID") long librarianID) throws IllegalArgumentException {
 
 		// Time parameters
@@ -53,7 +53,7 @@ public class BookingController {
 			}
 		
 		try {	
-			Booking booking = bookingService.createBooking(sTime, eTime, bookingID, date, memberID, librarianID);
+			Booking booking = bookingService.createBooking(sTime, eTime, date, memberID, librarianID);
 			return httpSuccess(BookingDto.convertToDto(booking));
 		} catch (Exception e) {
 			httpFailureMessage(e.getMessage());
@@ -106,11 +106,14 @@ public class BookingController {
 		}
 	}
 
-	@GetMapping(value = {"/bookings/getID/{bookingID}", "/bookings/getID/{bookingID}/"})
-
-	public ResponseEntity<?> getBookingById(@PathVariable("Id") Long Id) {
-		BookingDto booking = BookingDto.convertToDto(bookingService.getBookingById(Id));
-		return httpSuccess(booking);
+	@GetMapping(value = {"/bookings/getID/{id}", "/bookings/getID/{id}/"})
+	public ResponseEntity<?> getBookingById(@PathVariable("id") Long Id) {
+		try {
+			BookingDto booking = BookingDto.convertToDto(bookingService.getBookingById(Id));
+			return httpSuccess(booking);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
 	}
 
 	@GetMapping(value = {"/bookings/member/{memberID}", "/bookings/member/{memberID}/"})

@@ -180,6 +180,8 @@ public class MovieService {
 			return toList(movieRepository.findMoviesByGenre(genre));
 		}
 		
+		
+		
 		@Transactional
 		public List<Movie> getMoviesbyDirector(String director) {
 			return toList(movieRepository.findMoviesByDirector(director));

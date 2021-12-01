@@ -1,4 +1,3 @@
-
 import Router from "../router/index";
 
 
@@ -38,48 +37,23 @@ export default {
             newBooking: '',
             errorBooking: '',
             response: [],
-            startTime: '',
-            endTime: '',
-            bookingDate: '',
-            memberID: '',
-            librarianID: ''
+            bookingID: ''
 
         }
 
     },
     created: function () {
 
-    //     AXIOS.get('/bookings/view-all') //change for logged in member
-    //         .then(response => {
-    //             this.bookings = response.data;
-    //             console.log(response.data);
-    //         })
-    //         .catch(e => {
-    //             this.errorResult = e
-    //         })
     },
 
     methods: {
-        createBooking: function (startTime, endTime, bookingDate, memberID, librarianID) {
-            AXIOS.post('bookings/new/', {}, {
-                params: {
-                    startTime: startTime,
-                    endTime: endTime,
-                    bookingDate: bookingDate,
-                    memberID: memberID,
-                    librarianID: librarianID //should be logged in librarian
-
-                }
-            })
+        deleteBooking: function (bookingID) {
+            AXIOS.delete('bookings/delete/' + bookingID) 
+            
                 .then(response => {
-                    this.bookings.push(response.data)
-                    this.errorResult = ''
-                    this.startTime = ''
-                    this.endTime = ''
+                    this.bookings.pop(response.data)
                     this.bookingID = ''
-                    this.memberID = ''
-                    this.librarianID = ''
-                    this.bookingDate = ''
+                  
                 })
                 .catch(error => {
                     var errorMsg = error
@@ -102,7 +76,3 @@ export default {
         },
 
     }
-
-
-
-

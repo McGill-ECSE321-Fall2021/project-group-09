@@ -1,12 +1,40 @@
 
 <template>
   <div id="view-booking-body">
-    
+    <section>
+      <b-container fluid>
+        <hr />
+        ​
+        <h2>All Bookings</h2>
+        ​
+        <table>
+          ​
+          <tr>
+            ​
+            <th>Booking ID</th>
+            <th>Booking Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+          </tr>
+          ​
+          <tr v-for="booking in bookings" v-bind:key="booking">
+            ​
+            <td>{{ booking.bookingID }}</td>
+            <td>{{ booking.bookingDate }}</td>
+            <td>{{ booking.bookingStartTime }}</td>
+            <td>{{ booking.bookingEndTime }}</td>
+          </tr>
+          ​
+        </table>
+      </b-container>
+
+      <b class="button" href="#" v-on:click="goToPreviousPage()">Back</b>
+    </section>
   </div>
 </template>
 
 
-<script></script>
+<script src = './viewBookings.js'></script>
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -125,6 +153,26 @@ b-nav-item {
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+myText {
+  color: black;
+  font: "Times";
+  font-size: 35px;
+  font-weight: 100;
+}
+
+myText3 {
+  color: #a85f32;
+  font: "Times";
+  font-size: 25px;
+  font-weight: 100;
+}
+
+table {
+  table-layout: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 input,
 ::placeholder {

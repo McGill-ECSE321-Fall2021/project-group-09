@@ -8,13 +8,13 @@
                 <br />
 
       <b-container fluid>
-            <h2>  ONLINE MEMBER REGISTRATION </h2>
+            <h2>  EDIT MEMBER PROFILE </h2>
 
       <b-form>
 
         <b-form-text>
-          <b-col sm="2" > 
-            <label for="fullName" >Full Name:</label>
+          <b-col sm="1" > 
+            <label for="fullName" >FullName:</label>
           </b-col>
           <b-col sm="5">
             <b-form-input id="fullName" v-model="fullName" placeholder="Enter your Full Name"></b-form-input>
@@ -31,8 +31,8 @@
         </b-form-text>
 
         <b-form-text>
-          <b-col sm="2" > 
-            <label for="phoneNumber">Phone Number:</label>
+          <b-col sm="1" > 
+            <label for="phoneNumber" >PhoneNumber:</label>
           </b-col>
           <b-col sm="5">
             <b-form-input id="phoneNumber" v-model="phoneNumber" placeholder="Enter your phone number"></b-form-input>
@@ -41,7 +41,7 @@
 
         <b-form-text>
           <b-col sm="1">
-            <label for="emailAddress">Email:</label>
+            <label for="emailAddress">MemberEmail:</label>
           </b-col>
           <b-col sm="5" >
             <b-form-input id="emailAddress" v-model="emailAddress" placeholder="Enter your Email"></b-form-input>
@@ -53,7 +53,7 @@
             <label for="password">Password:</label>
           </b-col>
           <b-col sm="5">
-            <b-form-input id="password" type="password" v-model="password" placeholder="Enter your Password"></b-form-input>
+            <b-form-input id="password" v-model="password" placeholder="Enter your Password"></b-form-input>
           </b-col>
         </b-form-text>
 
@@ -66,25 +66,17 @@
           </b-col>
         </b-form-text>
 
-        <br />
-        <span v-if="error" style="color:red">{{error}} </span>
-        <br v-if="error" />
-        <br v-if="error" />
-
         <button
             @click="createMemberAccount(fullName, address, phoneNumber, emailAddress, password, username)"
             type="Registerbutton"
             style="background-color: firebrick; color: coral"
             class="btn btn-primary"
           >
-            <font size="3"><b>Create Account</b></font>
+            <font size="3"><b>Edit Account</b></font>
 
-        </button>
+      </button>
 
-        <br />
-        <br />
-
-         </b-form>
+      </b-form>
         
         </b-container>
 
@@ -166,6 +158,7 @@ div {
   display: none;
 }
 section {
+  height: 100vh;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;

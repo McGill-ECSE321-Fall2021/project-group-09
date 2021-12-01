@@ -8,13 +8,13 @@ import LibrarianLogin from '@/components/LibrarianLogin.vue'
 import LibraryInfo from '@/components/LibraryInfo'
 import LibraryManagementDashboard from '@/components/LibraryManagementDashboard'
 import MemberLogin from '@/components/MemberLogin.vue'
-import MemberLoans from '@/components/MemberLoans'
+import MemberLoans from '@/components/MemberLoans.vue'
 import OnlineMemberDashboard from '@/components/OnlineMemberDashboard'
-import Return from '@/components/Return'
+import Return from '@/components/Return.vue'
 import Register from '@/components/Register'
-import SearchLibItems from '@/components/SearchLibItems'
+import SearchLibItems from '@/components/SearchLibItems.vue'
 import ItemPage from '@/components/ItemPage'
-import Reserve from '@/components/Reserve'
+import Reserve from '@/components/Reserve.vue'
 import CreateLibItem from '@/components/CreateLibItem.vue'
 import SearchResults from '@/components/SearchResults.vue'
 import HireLibrarian from '@/components/HireLibrarian.vue'
@@ -25,6 +25,7 @@ import DeleteBookings from '@/components/DeleteBookings.vue'
 import EditLibraryHours from '@/components/EditLibraryHours.vue'
 import CreateLibrarianSchedule from '@/components/CreateLibrarianSchedule.vue'
 
+import EditProfile from '@/components/EditProfile.vue'
 
 
 
@@ -178,6 +179,10 @@ export default new Router({
       path: '/DeleteBookings',
       name: 'DeleteBookings',
       component: DeleteBookings
+    },{
+      path: '/EditProfile',
+      name: 'EditProfile',
+      component: EditProfile
     },
   ]
 })

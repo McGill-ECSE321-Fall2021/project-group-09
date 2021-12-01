@@ -90,7 +90,7 @@
           <b
             class="button"
             href="#"
-            v-on:click="goToSubmitPage()"
+            v-on:click="goToPreviousPage()"
             >Back</b
           >
         </b-row>

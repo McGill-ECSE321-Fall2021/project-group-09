@@ -12,13 +12,10 @@
       <br />
      
     </section>
-    <td><button v-on:click="goToUserPage()">User Page</button></td>
 
-    <!--! On user loged in = member -->
     <td><button v-on:click="goToLibrarianPage()">Librarian Page</button></td>
     <!--! On user loged in = librarian -->
-    <td><button v-on:click="goToItemPage()">Test Item Page</button></td>
-    <td><button v-on:click="goToBookingsPage()">Bookings</button></td>
+  
 
     <!--
             <td>   <button v-on:click="goToRegisterPage()">Register</button>   </td>
