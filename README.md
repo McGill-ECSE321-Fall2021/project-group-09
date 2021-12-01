@@ -43,7 +43,7 @@ Classes were split up between all six members and each member was responsible fo
 # Deliverable 3:
 | Member            | Tasks                                         | Effort (Hours) |
 |-------------------|-----------------------------------------------|----------------|
-|Abdullah Arafat    |  |         35 |   
+|Abdullah Arafat    |  |         30 |   
 |Christos Cunning   |Work on controller methods and other Backend methods from previous Sprint; Heroku Deployement; Create backend linking for Checkout Page; Change DTOs Methods |         60    |   
 |Omar Abdelaziz     |Create Success Spectrum; Create Presentations and Assign Roles;Change DTOs Methods| 35|   
 |Rajaa Boukhelif    |Set up UI; Create Landing Page; Create UI for Pages; Meeting Minutes; Heroku Deployement; View Searches from Database; Create Item Pages and Database Linking; Create/Update Wiki Pages for Sprint 3|         60|   
