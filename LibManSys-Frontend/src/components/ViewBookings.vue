@@ -1,12 +1,43 @@
 
 <template>
   <div id="view-booking-body">
-    
+    <section>
+      <b-container fluid>
+      <br>
+      <br>
+
+  
+    <myText3>All Bookings </myText3>
+    <div>
+    <v-data-table  class="elevation-1" >
+      <tr>
+        <b-col class="myColumn">
+          <td><myText2>|  Booking Date |</myText2> </td>  
+          </b-col>
+          <td><myText2>|  Start Time  |</myText2> </td>
+          <td><myText2>|  End Time |</myText2> </td>
+          <!-- <td><myText2>|  Institution   |</myText2> </td> -->
+      </tr>
+      <tr v-for="booking in bookings" :key="booking">
+          <td >   <myText2> {{booking.bookingDate}}</myText2></td> 
+          <td>  <myText2> {{booking.bookingStartTime}}</myText2></td> 
+          <td> <myText2> {{booking.bookingEndTime}}</myText2></td> 
+          <!-- <td> <myText2> {{b}} </myText2> </td> -->
+              
+             
+             
+      </tr>
+      
+    </v-data-table> 
+   
+    </div>
+    </b-container>
+    </section>
   </div>
 </template>
 
 
-<script></script>
+<script src = './viewBookings.js'></script>
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

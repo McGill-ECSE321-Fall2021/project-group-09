@@ -84,33 +84,13 @@ export default {
                     this.errorBooking = errorMsg
                 })
         },
-        updateBooking: function (bookingID, startTime, endTime, bookingDate) {
-            AXIOS.post('bookings/update/', {}, {
-                params: {
-                    bookingID: bookingID,
-                    startTime: startTime,
-                    endTime: endTime,
-                    bookingDate: bookingDate,
-
-                }
+       
+        goToPreviousPage: function() {
+            Router.push({
+                path: "/LibraryManagementDashboard",
+                name: "LibraryManagementDashboard"
             })
-            .then (response => {
-                this.bookings.push(response.data)
-                this.errorResult = ''
-                this.startTime = ''
-                this.endTime = ''
-                this.bookingID = ''
-                this.bookingDate = ''
-            })
-            .catch(error => {
-                var errorMsg = error
-                if (error.response) {
-                    errorMsg = error.response.data
-                }
-                console.log(errorMsg)
-                this.errorBooking = errorMsg
-            })
-
+        },
             
 
         },
@@ -119,5 +99,4 @@ export default {
 
 
 
-}
 
