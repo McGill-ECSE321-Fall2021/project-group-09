@@ -14,13 +14,13 @@
 
         <b-row class="my-1" color="#00000">
           <b-col sm="4" color="#00000">
-            <label class="booking-input" for="input-default">Date:</label>
+            <label class="booking-input" for="input-default">Full Name:</label>
           </b-col>
           <b-col sm="5">
             <b-form-input
               id="input-default"
               v-model="fullName"
-              placeholder="Enter full name."
+              placeholder="First Last"
             ></b-form-input>
           </b-col>
           <b-col sm="3" color="#00000"> </b-col>
@@ -28,7 +28,7 @@
 
         <b-row class="my-1">
           <b-col sm="4">
-            <label class="booking-input" for="input-large">Start Time</label>
+            <label class="booking-input" for="input-large">Email:</label>
           </b-col>
           <b-col sm="5">
             <b-form-input
@@ -42,7 +42,7 @@
 
         <b-row class="my-1" color="#00000">
           <b-col sm="4" color="#00000">
-            <label class="booking-input" for="input-default">End Time:</label>
+            <label class="booking-input" for="input-default">Password:</label>
           </b-col>
           <b-col sm="5">
             <b-form-input
@@ -57,7 +57,7 @@
         <b-row class="my-1">
           <b-col sm="4">
             <label class="booking-input" for="input-large"
-              >Library Card No:</label
+              >Username:</label
             >
           </b-col>
           <b-col sm="5">

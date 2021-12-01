@@ -157,7 +157,7 @@
 </template>
 
 
-<script src="./hireLib.js"></script>
+<script></script>
 
 
 

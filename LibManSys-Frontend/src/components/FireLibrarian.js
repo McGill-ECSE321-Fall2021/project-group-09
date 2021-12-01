@@ -1,4 +1,6 @@
 import Router from "../router/index";
+
+
 import axios from 'axios'
 var config = require('../../config')
 var frontendUrl
@@ -18,37 +20,59 @@ var AXIOS = axios.create({
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
+function BookingDto(startTime, endTime, bookingID, bookingDate, memberID, librarianID) {
+    this.startTime = startTime
+    this.endTime = endTime
+    this.bookingDate = bookingDate
+    this.bookingID = bookingID
+    this.memberID = memberID
+    this.librarianID = librarianID
+}
+
 export default {
+    name: 'librarian',
     data() {
         return {
-            types: []
+            librarians: [],
+            newBooking: '',
+            errorBooking: '',
+            response: [],
+            bookingID: ''
+
         }
+
     },
+    created: function () {
+
+    },
+
     methods: {
-        goToSubmitPage: function() {
+        deleteBooking: function (bookingID) {
+            AXIOS.delete('bookings/delete/' + bookingID) 
+            
+                .then(response => {
+                    this.bookings.pop(response.data)
+                    this.bookingID = ''
+                  
+                })
+                .catch(error => {
+                    var errorMsg = error
+                    if (error.response) {
+                        errorMsg = error.response.data
+                    }
+                    console.log(errorMsg)
+                    this.errorBooking = errorMsg
+                })
+        },
+       
+        goToPreviousPage: function() {
             Router.push({
                 path: "/LibraryManagementDashboard",
                 name: "LibraryManagementDashboard"
             })
         },
-        goToSearchPage: function() {
-            Router.push({
-                path: "/SearchLibItems",
-                name: "SearchLibItems"
-            })
-        },
-        goToRegisterPage: function() {
-            Router.push({
-                path: "/Register",
-                name: "Register"
-            })
+            
+
         },
 
-        goToLoginPage: function() {
-            Router.push({
-                path: "/MemberLogin",
-                name: "MemberLogin"
-            })
-        }
     }
-}
