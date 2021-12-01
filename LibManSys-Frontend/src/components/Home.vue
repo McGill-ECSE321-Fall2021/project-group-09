@@ -10,22 +10,7 @@
       <a class="thick"> Group 9's Public Library</a>
       <br />
       <br />
-      <searchbar class="wrap">
-        <searchbar class="search" color="#ffffff">
-          <input
-            type="text"
-            class="searchTerm"
-            placeholder="What are you looking for?"
-          />
-          <findbutton
-            type="submit"
-            class="searchButton"
-            v-on:click="goToSearchPage()"
-          >
-            <img src="../assets/search.png" align="top" />
-          </findbutton>
-        </searchbar>
-      </searchbar>
+     
     </section>
     <td><button v-on:click="goToUserPage()">User Page</button></td>
 
