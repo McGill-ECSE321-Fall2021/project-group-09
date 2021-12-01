@@ -26,8 +26,10 @@ function OnlineMemberDto(fullName, libCardNumber, address, phoneNumber, amountOw
 
 export default {
   name: 'DashboardHandling',
+  props: ['currentMember'],
   data () {
    return {
+	   profile: {
 		fullName : '',
 		libCardNumber: '',
 		address : '',
@@ -36,8 +38,9 @@ export default {
 		activeLoans: '',
 		isVerifiedResident: '',
 		emailAddress: '',
-		username: '',
-		errorAccount: '',
+		username: ''
+	   },
+		errorProfile: '',
 		response: []
 	}
   },
@@ -51,9 +54,9 @@ export default {
 	.catch(e => { this.errorUser = e })
 	  
 	.finally(() => {
-        AXIOS.get('/OnlineMember' + this.libCardNumber)
-		
-		.then(response => {
+        AXIOS.get('/OnlineMember/' + this.libCardNumer)
+        .then(response => {
+          // JSON responses are automatically parsed.
           this.profile = response.data
           this.profileId = this.profile.profileId
         })
@@ -63,22 +66,22 @@ export default {
       })
     
   },
-   methods: {
+   
+  methods: {
 
-	 logout: function () {
+	 Logout: function () {
       AXIOS.post('/logout', {}, {})
         .then(response => {
           this.errorProfile = ""
           this.profile = response.data
-          swal("Success", "You have been logged out successfully", "success").then(okay => {
-            this.$router.push('/')
+		}) 
+		  .then(okay => {
+            this.$router.push('/MemberLogin')
           })
-        })
         .catch(e => {
           var errorMsg = e
           console.log(errorMsg)
           this.errorProfile = errorMsg
-          swal("ERROR", e.response.data, "error")
         })
     },
        goToSubmitPage: function (){

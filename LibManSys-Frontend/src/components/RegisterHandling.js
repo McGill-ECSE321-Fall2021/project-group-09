@@ -24,8 +24,9 @@ export default {
 				address: '',
 				phoneNumber: '',
 				emailAddress: '',
-				password: '',
-				username: '',
+                username: '',
+                activeLoans: '',
+                amountOwed: ''
             },
 
             selectedMemberAccount: {
@@ -59,12 +60,13 @@ export default {
                     emailAddress = this.emailAddress,
                     password = this.password, 
                     username = this.username;*/
-                    this.newMemberAccount.fullName = ''
-                    this.newMemberAccount.address = ''
-					this.newMemberAccount.phoneNumber = ''
-					this.newMemberAccount.emailAddress = ''
-					this.newMemberAccount.password = ''
-					this.newMemberAccount.username = ''
+                    this.newMemberAccount.fullName = fullName
+                    this.newMemberAccount.address = address
+					this.newMemberAccount.phoneNumber = phoneNumber
+                    this.newMemberAccount.emailAddress = emailAddress
+                    this.newMemberAccount.amountOwed = 0
+                    this.newMemberAccount.activeLoans = 0
+					this.newMemberAccount.username = username
                     this.errorMemberAccount = ''
                     /*swal("Success", "Registration Successful", "success")*/
                 })

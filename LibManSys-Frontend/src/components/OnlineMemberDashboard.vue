@@ -12,95 +12,88 @@
  
  <h2>  PROFILE INFORMATION  </h2>
 
+<table class="paddingBetweenCols">
 
+ <tr>
+    <td>Full Name: </td>
+        <td>{{profile.fullName}}</td>
+</tr>
 
-<b-row>
-    <b-col sm="2" > 
-      <label for="fullName" >Full Name:</label>
-    </b-col>
-  </b-row>
+ <tr>
+    <td>Library Card Number: </label>
+      <td>{{profile.libCardNum}}</td>
+</tr>
 
- <b-row>
-    <b-col sm="2" > 
-      <label for="libCardNumber" >Library Card Number: </label>
-    </b-col>
-    <b-col sm="2"> 
-      <label for="libCardNumber" >TBD</label>
-    </b-col>
-</b-row>
+ <tr>
+    <td>Address: </label>
+      <td>{{profile.address}}</td>
+</tr>
 
-<b-row>
-    <b-col sm="2" > 
-      <label for="address">Address:</label>
-    </b-col>
-  </b-row>
+ <tr>
+    <td>Phone Number: </label>
+      <td>{{profile.phoneNumber}}</td>
+</tr>
 
-<b-row>
-    <b-col sm="2">
-      <label for="phoneNumber">Phone Number:</label>
-    </b-col>
-     </b-row>
+ <tr>
+    <td>Fees Owed: </label>
+      <td>{{profile.amountOwed}}</td>
+</tr>
 
-<b-row>
-    <b-col sm="2" > 
-      <label for="amountOwed" >Amount Owed: </label>
-    </b-col>
-    <b-col sm="2"> 
-      <label for="amountOwed" >TBD</label>
-    </b-col>
-</b-row>
-
-<b-row>
-    <b-col sm="2" > 
-      <label for="activeLoans" >Number of Active Loans: </label>
-    </b-col>
-    <b-col sm="2"> 
-      <label for="activeLoans" >TBD</label>
-    </b-col>
-</b-row>
+ <tr>
+    <td>Active Loans: </label>
+      <td>{{profile.activeLoans}}</td>
+</tr>
   
-<b-row>
-    <b-col sm="2" > 
-      <label for="isVerifiedResident" >Residency Verification Status: </label>
-    </b-col>
-    <b-col sm="2" > 
-      <label for="isVerifiedResident" >Verified? </label>
-    </b-col>
-  </b-row>
+ <tr>
+    <td>Residency Verification status: </label>
+      <td>{{profile.isVerifiedResident}}</td>
+</tr>
 
-<b-row>
-    <b-col sm="2" > 
-      <label for="emailAddress" >Email Address:</label>
-    </b-col>
-</b-row>
+ <tr>
+    <td>Email Address: </label>
+      <td>{{profile.emailAddress}}</td>
+</tr>
 
-<b-row>
-    <b-col sm="2" > 
-      <label for="username" >Username:</label>
-    </b-col>
-</b-row>
+ <tr>
+    <td>Username: </label>
+      <td>{{0}}</td>
+</tr>
    
  
-</b-container>
-      <b-col>
-    
-                <td>
-                    <b-button v-on:click="goToLoansPage()">Loans</b-button>
-                </td>
-    
-      </b-col>
+ </table>
 
-       <button
+</b-container>
+  
+<b-container>
+    <b-button v-on:click="goToLoansPage()">Loans</b-button>
+    
+    <button 
+        
+        @click()="EditMemberInformation()"
+        type="EditMemberbutton"
+        class="btn btn-primary"
+        >
+          <font size="3"><b>Edit Profile</b></font>
+
+        </button>
+
+
+    <button
             @click="Logout()"
             type="Logoutbutton"
-            style="background-color: whitesmoke;"
             class="btn btn-primary"
           >
+            
             <font size="3"><b>Logout</b></font>
 
       </button>
+
+    
      
-    </section>   
+</b-container>
+    
+
+</section>   
 
   </div>
 </template>
@@ -210,7 +203,6 @@ myText{
 b {
   font: "Lato", sans-serif;
   font-weight: 100;
-  color: firebrick;
   font-size: 18px;
 }
 b-nav-item {
@@ -242,6 +234,7 @@ b-nav-item {
     ),
     url(../assets/library-bkg.jpg);*/
 }
+
 button {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     padding: 16px 32px;
