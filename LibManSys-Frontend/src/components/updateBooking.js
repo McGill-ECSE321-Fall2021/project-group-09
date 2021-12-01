@@ -3,11 +3,15 @@ import Router from "../router/index";
 
 
 import axios from 'axios'
+var config = require('../../config')
+
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
 
 var AXIOS = axios.create({
-    baseURL: this.backendUrl,
-    headers: { 'Access-Control-Allow-Origin': this.frontendUrl }
-  })
+    baseURL: backendUrl,
+    headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
 
 function BookingDto(startTime, endTime, bookingID, bookingDate, memberID, librarianID) {
     this.startTime = startTime
@@ -28,10 +32,9 @@ export default {
             response: [],
             startTime: '',
             endTime: '',
-            bookingID: '',
+            id: '',
             bookingDate: '',
-            memberID: '',
-            librarianID: ''
+            
 
         }
 
@@ -49,41 +52,10 @@ export default {
     },
 
     methods: {
-        createBooking: function (startTime, endTime, bookingID, bookingDate, memberID, librarianID) {
-            AXIOS.post('bookings/new/', {}, {
-                params: {
-                    startTime: startTime,
-                    endTime: endTime,
-                    bookingID: bookingID,
-                    bookingDate: bookingDate,
-                    memberID: memberID,
-                    librarianID: librarianID //should be logged in librarian
-
-                }
-            })
-                .then(response => {
-                    this.bookings.push(response.data)
-                    this.errorResult = ''
-                    this.startTime = ''
-                    this.endTime = ''
-                    this.bookingID = ''
-                    this.memberID = ''
-                    this.librarianID = ''
-                    this.bookingDate = ''
-                })
-                .catch(error => {
-                    var errorMsg = error
-                    if (error.response) {
-                        errorMsg = error.response.data
-                    }
-                    console.log(errorMsg)
-                    this.errorBooking = errorMsg
-                })
-        },
         updateBooking: function (bookingID, startTime, endTime, bookingDate) {
-            AXIOS.post('bookings/update/', {}, {
+            AXIOS.put('bookings/update/', {}, {
                 params: {
-                    bookingID: bookingID,
+                    id: bookingID,
                     startTime: startTime,
                     endTime: endTime,
                     bookingDate: bookingDate,
@@ -95,7 +67,7 @@ export default {
                 this.errorResult = ''
                 this.startTime = ''
                 this.endTime = ''
-                this.bookingID = ''
+                this.id = ''
                 this.bookingDate = ''
             })
             .catch(error => {
@@ -110,6 +82,7 @@ export default {
             
 
         },
+        
 
     }
 

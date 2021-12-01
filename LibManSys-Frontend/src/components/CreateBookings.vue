@@ -112,8 +112,8 @@
               createBooking(
                 startTime,
                 endTime,
-                bookingDate,
                 bookingID,
+                bookingDate,
                 memberID,
                 librarianID
               )
@@ -123,8 +123,8 @@
           <b
             class="button"
             href="#"
-            v-on:click="document.getElementById('input-default').input = ''"
-            >Clear</b
+            v-on:click="goToSubmitPage()"
+            >Back</b
           >
         </b-row>
       </b-container>
