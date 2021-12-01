@@ -129,6 +129,12 @@ export default {
                 path: "/LibraryManagementDashboard",
                 name: "LibraryManagementDashboard"
             })
+        },
+        goToViewBookingsPage: function() {
+            Router.push({
+                path: "/ViewBookings",
+                name: "ViewBookings"
+            })
         }
     }
 }
