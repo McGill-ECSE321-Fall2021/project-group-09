@@ -102,44 +102,6 @@
                     <p>{{onlineMember.verifiedResident}}</p>
                 </b-col>
             </b-row>
-            <!-- Associations -->
-            <b-row class="my-1">
-                <b-container>
-                    <b-row class="my-2">
-                        <b-col>
-                            <label for="input-large">Loans:</label>
-                        </b-col>
-                    </b-row>
-                    
-                    <b-row class="my-2">
-                        <b-col>
-                            <v-data-table  class="elevation-1" >
-                                <tr>
-                                      <td class="table-text">|  Loan ID  |</td>
-                                      <td class="table-text">|  Borrowed Date |</td>
-                                      <td class="table-text">|  Returned Date |</td>
-                                      <td class="table-text">|  Late Fees  |</td>
-                                      <td class="table-text">|  Loan Status  |</td>
-                                      <td class="table-text">|  Library Item ID  |</td>
-                                      <td class="table-text">|  Member Library Card Number  |</td>
-                                      <td class="table-text">|  Librarian Employee ID  |</td>
-                                </tr>
-                                <tr v-for="loan in loans" :key="loan.loanId">
-                                    <td class="table-text">{{loan.loanId}}</td>
-                                    <td class="table-text">{{loan.borrowedDate}}</td> 
-                                    <td class="table-text">{{loan.returnDate}}</td> 
-                                    <td class="table-text">{{loan.lateFees}} </td> 
-                                    <td class="table-text">{{loan.loanStatus}} </td> 
-                                    <td class="table-text">{{loan.libraryItemID}} </td>  
-                                    <td class="table-text">{{loan.memberLibCardNumber}} </td>
-                                    <td class="table-text">{{loan.librarianEmployeeID}} </td> 
-                                </tr>
-                                
-                            </v-data-table> 
-                        </b-col>
-                    </b-row>
-                </b-container>
-            </b-row>
             <b-row class="my-1">
                 <b-container>
                     <b-row class="my-2">
