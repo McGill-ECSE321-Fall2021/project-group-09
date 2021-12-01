@@ -1,6 +1,3 @@
-import Register from "../components/Register";
-import LibraryManagementDashboard from "../components/LibraryManagementDashboard";
-import MemberLogin from "../components/MemberLogin";
 import Router from "../router/index";
 
 export default {

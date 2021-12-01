@@ -8,12 +8,25 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+// get config
+var config = require('../config')
+
 // Setup Vue cookies
 Vue.use(require('vue-cookies'))
 // set default config
 Vue.$cookies.config('7d')
-// set global cookie
-//Vue.$cookies.set('theme','default');
+
+// set global cookie for urls depending of NODE_ENV
+if (process.env.NODE_ENV === "production") {
+  console.log("prod env")
+  Vue.frontendUrl = Vue.prototype.frontendUrl = 'https://' + config.build.host + ':' + config.build.port
+  Vue.backendUrl = Vue.prototype.backendUrl = 'https://' + config.build.backendHost + ':' + config.build.backendPort
+
+} else if (process.env.NODE_ENV === "development") {
+  console.log("dev env")
+  Vue.frontendUrl = Vue.prototype.frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+  Vue.backendUrl = Vue.prototype.backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+}
 
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false

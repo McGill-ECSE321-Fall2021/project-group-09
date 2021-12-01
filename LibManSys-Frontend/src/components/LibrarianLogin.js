@@ -2,19 +2,9 @@ import Router from "../router/index";
 //import { eventBus } from '../eventBus';
 
 import axios from 'axios'
-var config = require('../../config')
-
-if (process.env == 'dev') {
-    var frontendUrl =   'http://' + config.dev.host + ':' + config.dev.port
-    var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-} else {
-    var frontendUrl =   'https://' + config.build.host + ':' + config.build.port
-    var backendUrl = 'https://' + config.build.backendHost + ':' + config.build.backendPort
-}
-
 var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+    baseURL: this.backendUrl,
+    headers: { 'Access-Control-Allow-Origin': this.frontendUrl }
 })
 
 export default {

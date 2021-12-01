@@ -1,4 +1,10 @@
 import Router from "../router/index";
+import axios from 'axios'
+
+var AXIOS = axios.create({
+    baseURL: this.backendUrl,
+    headers: { 'Access-Control-Allow-Origin': this.frontendUrl }
+})
 
 export default {
     data() {
