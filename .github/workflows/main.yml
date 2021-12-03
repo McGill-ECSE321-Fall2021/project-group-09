@@ -1,0 +1,61 @@
+# Basic workflow to gradle build backend on push / pull_request
+name: Java CI with Gradle
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: Windows-latest
+
+    # Set environmental variable for Database Url
+    env:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://ec2-52-205-45-219.compute-1.amazonaws.com:5432/d9rbiiev8fcrdd?password=27cb9ac25f97dfd6248253c3f77a805431283ff439ebb3a715cc6861b11115af&sslmode=require&user=szthuftvzilkhm
+
+
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: gradle
+          fetch-depth: 0
+      
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+        
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        working-directory: LibManSys-Backend
+        
+      - name: Build backend with Gradle
+        id: build_gradle
+        run: |
+          ./gradlew build --no-daemon
+          echo ::set-output name=exit_code::$?
+        working-directory: LibManSys-Backend
+        
+      - name: Build frontend with node
+        id: build_node
+        run: |
+          npm install
+          npm run build
+          echo ::set-output name=exit_code::$?
+        working-directory: LibManSys-Frontend
+        
+      - name: Stop Gradle Daemon
+        run: ./gradlew --stop
