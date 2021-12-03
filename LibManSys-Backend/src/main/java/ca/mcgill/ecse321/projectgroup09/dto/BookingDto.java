@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import ca.mcgill.ecse321.projectgroup09.models.Booking;
 import ca.mcgill.ecse321.projectgroup09.models.Librarian;
-import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 
 public class BookingDto {

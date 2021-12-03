@@ -71,10 +71,10 @@ public class TestLibraryService {
 
 	//Initializing Head Librarian Attributes for Mock 
 	private static final long EMPLOYEE_ID = 123456789; //librarian ID
-	private static final String LIBRARIAN_EMAIL = "librarian@email.com";
-	private static final String LIBRARIAN_PASSWORD = "ASDF12343";
-	private static final String LIBRARIAN_USERNAME = "username";
-	private static final String LIBRARIAN_FULLNAME = "Test Librarian";
+	//private static final String LIBRARIAN_EMAIL = "librarian@email.com";
+	//private static final String LIBRARIAN_PASSWORD = "ASDF12343";
+	//private static final String LIBRARIAN_USERNAME = "username";
+	//private static final String LIBRARIAN_FULLNAME = "Test Librarian";
 	private static final long HLIBRARIAN_ID = EMPLOYEE_ID;
 
 
@@ -342,7 +342,6 @@ public class TestLibraryService {
 		String libName = "Test Library";
 		String newPhoneNo = null;
 		String error = null;
-		Library library = null; 
 		
 		try {
 			libraryService.updateLibraryPhoneNo(libName, newPhoneNo);

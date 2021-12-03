@@ -77,7 +77,8 @@ export default {
         })
     },
     goToUserDashboard: function () {
-        if (this.loggedInType === 'librarian') {
+        if (this.loggedInType === 'librarian'
+        || this.loggedInType === "headLibrarian") {
             if (this.$route.name !== "LibrarianDashboard") {
                 Router.push({
                     path: "/LibrarianDashboard",

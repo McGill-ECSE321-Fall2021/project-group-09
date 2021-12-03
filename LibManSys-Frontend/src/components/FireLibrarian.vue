@@ -9,13 +9,13 @@
     
             <b-container fluid>
                 <h2> Fire Librarian </h2>
-    <br>
-     <b-row class="my-1" color="#00000">
+                <br>
+                <b-row class="my-1" color="#00000">
                     <b-col sm="2" color="#00000">
-                        <label for="input-default" color="#00000">Librarian ID:</label>
+                        <label for="input-default" color="#00000">Librarian Employee ID:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-default" color="#FFFFF" placeholder="Enter the Librarian's ID"></b-form-input>
+                        <b-form-input v-model="employeeIDNumber" id="input-default" color="#FFFFF" placeholder="Enter the Librarian's Employee ID"></b-form-input>
                     </b-col>
                 </b-row>
                
@@ -23,9 +23,24 @@
     
             </b-container>
     
-         <br>
-                  <b-button v-row justify="center" v-on:click="goToReservePage()">Fire Librarian</b-button>
-         <b-button v-row justify="center" v-on:click="goToPreviousPage()">Library Management</b-button>
+            <div v-if="firedLibrarian">
+                <br />
+                <p>
+                    Fired librarian with employee ID number: {{firedLibrarian.employeeIDNumber}}
+                </p>
+                <br />
+            </div>
+
+            
+            <div v-if="error">
+                <br />
+                <span  style="color: red">{{ error }} </span>
+                <br />
+            </div>
+
+            <br>
+            <b-button v-row justify="center" v-on:click="fireLibrarian(employeeIDNumber)">Fire Librarian</b-button>
+            <b-button v-row justify="center" v-on:click="goToPreviousPage()">Library Management</b-button>
 
     
         </section>

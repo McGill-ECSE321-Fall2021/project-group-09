@@ -26,10 +26,10 @@
       <overlayH> 
         <h1blank>Contact Us</h1blank>
         <h2> 10:00 a.m. - 5:00 p.m. </h2> 
-<h2> 10:00 a.m. - 5:00 p.m. </h2> 
-<h2> 10:00 a.m. - 5:00 p.m. </h2>
-<h2> 10:00 a.m. - 5:00 p.m. </h2>
-<h2> 10:00 a.m. - 5:00 p.m. </h2>
+        <h2> 10:00 a.m. - 5:00 p.m. </h2> 
+        <h2> 10:00 a.m. - 5:00 p.m. </h2>
+        <h2> 10:00 a.m. - 5:00 p.m. </h2>
+        <h2> 10:00 a.m. - 5:00 p.m. </h2>
         <h2> Closed </h2>
         <h2> Closed </h2>
       </overlayH>

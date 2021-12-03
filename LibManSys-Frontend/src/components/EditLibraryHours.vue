@@ -1,6 +1,6 @@
 
 <template>
-    <div class="reserve-body">
+    <div class="hours-body">
     
         <section>
             <br />

@@ -114,41 +114,49 @@
         <br />
 
         <!-- Head librarian options-->
+        <div v-if="loggedInType === 'headLibrarian'" >
 
-        <b-row v-if="loggedInType === 'headLibrarian'" class="text-center">
-          <h3> Head Librarian Management </h3>
-          <b-col class="myColumn">
-            <td>
-              <b-button  justify="center" v-on:click="goToEditHoursPage()"
-                >Edit Library Hours</b-button
-              >
-            </td>
-          </b-col>
-          <b-col class="myColumn">
-            <td>
-              <b-button
-                
-                justify="center"
-                v-on:click="goToCreateLibrarianSchedulePage()"
-                >Create Librarian Schedule</b-button
-              >
-            </td>
-          </b-col>
-          <b-col class="myColumn">
-            <td>
-              <b-button  justify="center" v-on:click="goToFirePage()"
-                >Fire Librarian</b-button
-              >
-            </td>
-          </b-col>
-          <b-col class="myColumn">
-            <td>
-              <b-button  justify="center" v-on:click="goToHirePage()">
-                Hire Librarian</b-button
-              >
-            </td>
-          </b-col>
-        </b-row>
+          <b-row class="text-center">
+            <h3 style="margin: auto"> Head Librarian Management </h3>
+          </b-row>
+
+          <br />
+
+          <b-row class="text-center">
+            
+            <b-col class="myColumn">
+              <td>
+                <b-button  justify="center" v-on:click="goToEditHoursPage()"
+                  >Edit Library Hours</b-button
+                >
+              </td>
+            </b-col>
+            <b-col class="myColumn">
+              <td>
+                <b-button
+                  
+                  justify="center"
+                  v-on:click="goToCreateLibrarianSchedulePage()"
+                  >Create Librarian Schedule</b-button
+                >
+              </td>
+            </b-col>
+            <b-col class="myColumn">
+              <td>
+                <b-button  justify="center" v-on:click="goToFirePage()"
+                  >Fire Librarian</b-button
+                >
+              </td>
+            </b-col>
+            <b-col class="myColumn">
+              <td>
+                <b-button  justify="center" v-on:click="goToHirePage()">
+                  Hire Librarian</b-button
+                >
+              </td>
+            </b-col>
+          </b-row>
+        </div>
         <br />
         <br />
         

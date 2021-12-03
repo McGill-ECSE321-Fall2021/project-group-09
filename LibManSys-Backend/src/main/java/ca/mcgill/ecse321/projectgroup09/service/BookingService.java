@@ -23,6 +23,7 @@ public class BookingService { // service class for booking out the library for e
 	@Autowired 
 	private LibrarianRepository librarianRepository;
 
+	@SuppressWarnings("unused")
 	@Autowired
 	private ScheduleRepository scheduleRepository;
 
@@ -60,22 +61,6 @@ public class BookingService { // service class for booking out the library for e
 		
 		if (bookingDate == null) {
 			throw new IllegalArgumentException("Please enter a date.");
-		}
-		
-//		if (member == null) {
-//			throw new IllegalArgumentException("Error: Member is null"); 
-//		}
-
-		if (bookingDate == null) {
-			throw new IllegalArgumentException("Please enter a date.");
-		}
-
-		if (startTime == null) {
-			throw new IllegalArgumentException("Please enter a start time for your event.");
-		}
-
-		if (endTime == null) {
-			throw new IllegalArgumentException("Please enter an end time for your event.");
 		}
 //
 //		Time sTime = java.sql.Time.valueOf(startTime);
@@ -132,6 +117,7 @@ public class BookingService { // service class for booking out the library for e
 
 	}
 
+	@SuppressWarnings("unused")
 	private long getDayOfWeekForScheduleID(Date date) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);

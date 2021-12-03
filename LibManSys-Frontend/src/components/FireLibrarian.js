@@ -21,50 +21,44 @@ var AXIOS = axios.create({
 })
 
 
-
-
 export default {
-    name: 'librarian',
+    name: 'fire-librarian',
     data() {
         return {
-            librarians: [],
-           
-
+            firedLibrarian: undefined,
+            
+            loggedInType: '',
+            loggedInUser: '',
+            error: '',
+            employeeIDNumber: ''
         }
 
     },
     created: function () {
-
+        // check if cookie is set for current user
+        var userLoggedIn = $cookies.isKey("loggedInUser")
+        if (userLoggedIn == true) {
+            this.loggedInUser = $cookies.get("loggedInUser")
+            this.loggedInType = $cookies.get("loggedInType")
+        }
     },
-
     methods: {
-        // deleteBooking: function (bookingID) {
-        //     AXIOS.delete('bookings/delete/' + bookingID) 
-            
-        //         .then(response => {
-        //             this.bookings.pop(response.data)
-        //             this.bookingID = ''
-                  
-        //         })
-        //         .catch(error => {
-        //             var errorMsg = error
-        //             if (error.response) {
-        //                 errorMsg = error.response.data
-        //             }
-        //             console.log(errorMsg)
-        //             this.errorBooking = errorMsg
-        //         })
-        // },
-       
-        // goToPreviousPage: function() {
-        //     Router.push({
-        //         path: "/LibraryManagementDashboard",
-        //         name: "LibraryManagementDashboard"
-        //     })
-        // },
-            
-
-        // },
+        fireLibrarian: function(employeeIDNumber) {
+            this.firedLibrarian = undefined
+            AXIOS.post("/librarian/delete/" + employeeIDNumber, {}, {})
+            .then(response => {
+                this.error = ''
+                this.firedLibrarian = response.data
+            })
+            .catch(error => {
+                var errorMsg = error
+                if ( error.response ) {
+                    errorMsg = error.response.data
+                }
+                console.log(errorMsg)
+                this.error = errorMsg
+            })
+        },
         goToPreviousPage: function() {
             Router.push({
                 path: "/LibraryManagementDashboard",

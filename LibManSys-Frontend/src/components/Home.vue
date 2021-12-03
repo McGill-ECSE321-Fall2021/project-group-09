@@ -13,6 +13,13 @@
       <br />
       <br />
      
+      <b-button
+      justify="center"
+      style="font-size: 2em"
+      v-on:click="goToContactUsPage()">
+        Contact Us / Library Hours
+      </b-button>
+
     </section>
 
 <!--

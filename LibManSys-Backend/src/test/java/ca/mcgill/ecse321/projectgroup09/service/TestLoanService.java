@@ -423,6 +423,7 @@ public class TestLoanService {
 		assertNotNull(error);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAddLateFee() {
 		Loan newLoan = null;
@@ -440,6 +441,7 @@ public class TestLoanService {
 		assertNull(error);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAddLateFeeNotActive() {
 		Loan newLoan = null;
@@ -457,6 +459,7 @@ public class TestLoanService {
 		assertNotNull(error);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testChangeLateFee() {
 		Loan newLoan = null;

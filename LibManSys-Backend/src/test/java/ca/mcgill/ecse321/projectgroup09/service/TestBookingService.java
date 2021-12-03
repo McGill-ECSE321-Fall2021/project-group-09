@@ -81,10 +81,10 @@ public class TestBookingService {
 	private static final String LIBRARIAN_FULLNAME = "Test Librarian";
 
 
-	private static final String LIBRARY_NAME = "Test Library"; //library ID 
-	private static final String LIB_ADDRESS = "123 Lib Street"; 
-	private static final String LIB_PHONE = "905-999-9999";
-	private static final String LIB_EMAIL = "lib@email.ca";
+	//private static final String LIBRARY_NAME = "Test Library"; //library ID 
+	//private static final String LIB_ADDRESS = "123 Lib Street"; 
+	//private static final String LIB_PHONE = "905-999-9999";
+	//private static final String LIB_EMAIL = "lib@email.ca";
 	
 	
 	private static final long SCHED1 = 1; //Sunday (beginning of week)
@@ -264,7 +264,6 @@ public class TestBookingService {
 	@Test 
 	public void createBookingWithNullParameters() { 
 		String error = null;
-		long bookingID = 12345678;
 		Time endTime = java.sql.Time.valueOf("16:00:00");
 		Date bookingDate = java.sql.Date.valueOf("2023-11-30");
 		

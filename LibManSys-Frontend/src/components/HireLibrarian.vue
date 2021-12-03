@@ -71,10 +71,20 @@
         </b-row>
       </b-container>
        
+      <div v-if="newLibrarian">
+        <br />
+        
+        <p>Created new librarian with employee ID: {{newLibrarian.employeeIDNumber}}
+          and Username: {{newLibrarian.librarianUsername}}
+          and Password: {{newLibrarian.librarianPassword}}
+        </p>
+      </div>
 
-      <br />
-      <span v-if="errorLibrarian" style="color: red">{{ errorLibrarian }} </span>
-      <br />
+      <div v-if="errorLibrarian">
+        <br />
+        <span  style="color: red">{{ errorLibrarian }} </span>
+        <br />
+      </div>
 
       <b-container>
         <b-row class="my-1 text-center" align-h="center">

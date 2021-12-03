@@ -28,7 +28,8 @@ public class LibrarianService {
 	 */
 	@Transactional
 	public Librarian createLibrarian(String fullName, String email, String password, String username) {
-		if (fullName == null || email == null || password == null || username == null) {
+		if (fullName == null || email == null || password == null || username == null
+				|| fullName.isBlank() || email.isBlank() || password.isBlank() || username.isBlank()) {
 			throw new IllegalArgumentException("Arguments cannot be null when creating a new librarian.");
 		}
 		Librarian l = librarianRepository.findLibrarianByLibrarianUsername(username);

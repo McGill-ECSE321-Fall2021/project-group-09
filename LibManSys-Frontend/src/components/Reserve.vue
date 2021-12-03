@@ -47,14 +47,14 @@
                     <p>Reserved library item {{reservedItem.title}} with ID {{reservedItem.libraryItemID}} for member with library card number {{reservedItem.reservingMemberLibCardNumber}}</p>
                 </div>
 
-                
-         <br>
-          <span v-if="error" style="color:red">{{error}} </span>
-         <br>
+                        
+                <br>
+                <span v-if="error" style="color:red">{{error}} </span>
+                <br>
 
                 <br>
-                <b-button v-row justify="center" v-on:click="reserveItem(libCardNumber, libraryItemID)">Reserve Item</b-button>
-                <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
+                <b-button justify="center" v-on:click="reserveItem(libCardNumber, libraryItemID)">Reserve Item</b-button>
+                <b-button justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
 
 
         </div>
