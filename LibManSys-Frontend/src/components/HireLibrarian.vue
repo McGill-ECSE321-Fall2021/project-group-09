@@ -11,103 +11,112 @@
 
         <br />
         <br />
+        <div v-if="loggedInType === 'headLibrarian'">
 
-        <b-row class="my-1" color="#00000">
-          <b-col sm="4" color="#00000">
-            <label class="booking-input" for="input-default">Full Name:</label>
-          </b-col>
-          <b-col sm="5">
-            <b-form-input
-              id="input-default"
-              v-model="fullName"
-              placeholder="First Last"
-            ></b-form-input>
-          </b-col>
-          <b-col sm="3" color="#00000"> </b-col>
-        </b-row>
+          <b-container fluid>
+            <b-row class="my-1" color="#00000">
+              <b-col sm="4" color="#00000">
+                <label class="booking-input" for="input-default">Full Name:</label>
+              </b-col>
+              <b-col sm="5">
+                <b-form-input
+                  id="input-default"
+                  v-model="fullName"
+                  placeholder="First Last"
+                ></b-form-input>
+              </b-col>
+              <b-col sm="3" color="#00000"> </b-col>
+            </b-row>
 
-        <b-row class="my-1">
-          <b-col sm="4">
-            <label class="booking-input" for="input-large">Email:</label>
-          </b-col>
-          <b-col sm="5">
-            <b-form-input
-              id="input-default"
-              v-model="email"
-              placeholder="example@email.ca"
-            ></b-form-input>
-          </b-col>
-          <b-col sm="3" color="#00000"> </b-col>
-        </b-row>
+            <b-row class="my-1">
+              <b-col sm="4">
+                <label class="booking-input" for="input-large">Email:</label>
+              </b-col>
+              <b-col sm="5">
+                <b-form-input
+                  id="input-default"
+                  v-model="email"
+                  placeholder="example@email.ca"
+                ></b-form-input>
+              </b-col>
+              <b-col sm="3" color="#00000"> </b-col>
+            </b-row>
 
-        <b-row class="my-1" color="#00000">
-          <b-col sm="4" color="#00000">
-            <label class="booking-input" for="input-default">Password:</label>
-          </b-col>
-          <b-col sm="5">
-            <b-form-input
-              id="input-default"
-              v-model="password"
-              placeholder="Must be at least 6 characters."
-            ></b-form-input>
-          </b-col>
-          <b-col sm="3" color="#00000"> </b-col>
-        </b-row>
+            <b-row class="my-1" color="#00000">
+              <b-col sm="4" color="#00000">
+                <label class="booking-input" for="input-default">Password:</label>
+              </b-col>
+              <b-col sm="5">
+                <b-form-input
+                  id="input-default"
+                  v-model="password"
+                  placeholder="Must be at least 6 characters."
+                ></b-form-input>
+              </b-col>
+              <b-col sm="3" color="#00000"> </b-col>
+            </b-row>
 
-        <b-row class="my-1">
-          <b-col sm="4">
-            <label class="booking-input" for="input-large"
-              >Username:</label
-            >
-          </b-col>
-          <b-col sm="5">
-            <b-form-input
-              id="input-default"
-              v-model="username"
-              placeholder="Please enter a username."
-            ></b-form-input>
-          </b-col>
-          <b-col sm="3" color="#00000"> </b-col>
-        </b-row>
-      </b-container>
-       
-      <div v-if="newLibrarian">
-        <br />
+            <b-row class="my-1">
+              <b-col sm="4">
+                <label class="booking-input" for="input-large"
+                  >Username:</label
+                >
+              </b-col>
+              <b-col sm="5">
+                <b-form-input
+                  id="input-default"
+                  v-model="username"
+                  placeholder="Please enter a username."
+                ></b-form-input>
+              </b-col>
+              <b-col sm="3" color="#00000"> </b-col>
+            </b-row>
+          </b-container>
         
-        <p>Created new librarian with employee ID: {{newLibrarian.employeeIDNumber}}
-          and Username: {{newLibrarian.librarianUsername}}
-          and Password: {{newLibrarian.librarianPassword}}
-        </p>
-      </div>
+        <div v-if="newLibrarian">
+          <br />
+          
+          <p>Created new librarian with employee ID: {{newLibrarian.employeeIDNumber}}
+            and Username: {{newLibrarian.librarianUsername}}
+            and Password: {{newLibrarian.librarianPassword}}
+          </p>
+        </div>
 
-      <div v-if="errorLibrarian">
-        <br />
-        <span  style="color: red">{{ errorLibrarian }} </span>
-        <br />
-      </div>
+        <div v-if="errorLibrarian">
+          <br />
+          <span  style="color: red">{{ errorLibrarian }} </span>
+          <br />
+        </div>
 
-      <b-container>
-        <b-row class="my-1 text-center" align-h="center">
-          <b
-            class="button"
-            href="#"
-            v-on:click="
-              createLibrarian(
-                fullName,
-                email,
-                password,
-                username
-              )
-            "
-            >Create Account</b
-          >
-          <b
-            class="button"
-            href="#"
-            v-on:click="goToPreviousPage()"
-            >Back</b
-          >
-        </b-row>
+        <b-container>
+          <b-row class="my-1 text-center" align-h="center">
+            <b
+              class="button"
+              href="#"
+              v-on:click="
+                createLibrarian(
+                  fullName,
+                  email,
+                  password,
+                  username
+                )
+              "
+              >Create Account</b
+            >
+            <b
+              class="button"
+              href="#"
+              v-on:click="goToPreviousPage()"
+              >Back</b
+            >
+          </b-row>
+        </b-container>
+
+        </div>
+        <div v-else>
+          <h3>Login as a head librarian to hire librarians.</h3>
+        </div>
+
       </b-container>
     </section>
     <!-- End of body div -->

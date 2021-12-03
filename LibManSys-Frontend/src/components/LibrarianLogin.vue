@@ -39,7 +39,7 @@
         </b-container>
         
         <br />
-        <span v-if="errorLogin" style="color:red">{{errorLogin}} </span>
+        <span v-if="errorLogin" class="error-msg">{{errorLogin}} </span>
         <br />
 
         <b-container>
@@ -59,6 +59,12 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.error-msg {
+  font-weight: 500;
+  color: red;
+}
+
 .bg-custom-1 {
   background : #d9b086;
 }
@@ -89,7 +95,7 @@ div {
 }
 section {
   color : #d9b086;
-  font-family: "Lato", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;

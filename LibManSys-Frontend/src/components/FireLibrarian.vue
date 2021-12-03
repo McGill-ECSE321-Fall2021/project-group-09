@@ -4,43 +4,51 @@
     
         <section>
             <br />
+            <h2> Fire Librarian </h2>
             <br />
             <br />
     
-            <b-container fluid>
-                <h2> Fire Librarian </h2>
+            <div v-if="loggedInType === 'headLibrarian'">
+
+                <b-container fluid>
+                    
+                    <br>
+                    <b-row class="my-1" color="#00000">
+                        <b-col sm="2" color="#00000">
+                            <label for="input-default" color="#00000">Librarian Employee ID:</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input v-model="employeeIDNumber" id="input-default" color="#FFFFF" placeholder="Enter the Librarian's Employee ID"></b-form-input>
+                        </b-col>
+                    </b-row>
+                
+        
+        
+                </b-container>
+        
+                <div v-if="firedLibrarian">
+                    <br />
+                    <p>
+                        Fired librarian with employee ID number: {{firedLibrarian.employeeIDNumber}}
+                    </p>
+                    <br />
+                </div>
+
+                
+                <div v-if="error">
+                    <br />
+                    <span  style="color: red">{{ error }} </span>
+                    <br />
+                </div>
+
                 <br>
-                <b-row class="my-1" color="#00000">
-                    <b-col sm="2" color="#00000">
-                        <label for="input-default" color="#00000">Librarian Employee ID:</label>
-                    </b-col>
-                    <b-col sm="10">
-                        <b-form-input v-model="employeeIDNumber" id="input-default" color="#FFFFF" placeholder="Enter the Librarian's Employee ID"></b-form-input>
-                    </b-col>
-                </b-row>
-               
-    
-    
-            </b-container>
-    
-            <div v-if="firedLibrarian">
-                <br />
-                <p>
-                    Fired librarian with employee ID number: {{firedLibrarian.employeeIDNumber}}
-                </p>
-                <br />
-            </div>
+                <b-button v-row justify="center" v-on:click="fireLibrarian(employeeIDNumber)">Fire Librarian</b-button>
+                <b-button v-row justify="center" v-on:click="goToPreviousPage()">Library Management</b-button>
 
-            
-            <div v-if="error">
-                <br />
-                <span  style="color: red">{{ error }} </span>
-                <br />
             </div>
-
-            <br>
-            <b-button v-row justify="center" v-on:click="fireLibrarian(employeeIDNumber)">Fire Librarian</b-button>
-            <b-button v-row justify="center" v-on:click="goToPreviousPage()">Library Management</b-button>
+            <div v-else>
+                <h3>Login as a head librarian to fire librarians.</h3>
+            </div>
 
     
         </section>
