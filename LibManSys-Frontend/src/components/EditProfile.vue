@@ -1,6 +1,6 @@
 
 <template>
-  <div class="Register">
+  <div class="Edit Profile">
 
       <section>
             <br />
@@ -87,7 +87,7 @@
 </template>
 
 
-<script src='./RegisterHandling.js'>
+<script src='./EditProfile.js'>
 
 </script>
 

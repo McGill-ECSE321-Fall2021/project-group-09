@@ -26,7 +26,7 @@
           </b-col>
           <b-col class="myColumn">
             <td>
-              <b-button v-row justify="center" v-on:click="goToCheckoutPage()"
+              <b-button  justify="center" v-on:click="goToCheckoutPage()"
                 >Checkout a Library Item</b-button
               >
             </td>
@@ -34,55 +34,44 @@
           <!-- Starting from here are functions that have not been added to the methods-->
           <b-col class="myColumn">
             <td>
-              <b-button v-row justify="center" v-on:click="goToReservePage()"
+              <b-button  justify="center" v-on:click="goToReservePage()"
                 >Reserve a Library Item
               </b-button>
             </td>
           </b-col>
         </b-row>
+        
         <br />
-        <br />
-        <br />
-        <b-row class="text-center">
-          <b-col class="myRow">
+
+        <b-row class="text-center myRow" align-v="center">
+          <b-col class="myColumn">
             <td>
-              <b-button v-row justify="center" v-on:click="goToEditHoursPage()"
-                >Edit Library Hours</b-button
+              <b-button
+                justify="center"
+                v-on:click="goToRenewMemberLoanPage()"
+                >Renew Member Loan</b-button
               >
             </td>
           </b-col>
           <b-col class="myColumn">
             <td>
               <b-button
-                v-row
+                
                 justify="center"
-                v-on:click="goToCreateLibrarianSchedulePage()"
-                >Create Librarian Schedule</b-button
-              >
-            </td>
-          </b-col>
-          <b-col class="myColumn">
-            <td>
-              <b-button v-row justify="center" v-on:click="goToFirePage()"
-                >Fire Librarian</b-button
-              >
-            </td>
-          </b-col>
-          <b-col class="myColumn">
-            <td>
-              <b-button v-row justify="center" v-on:click="goToHirePage()">
-                Hire Librarian</b-button
+                v-on:click="goToCreateNewMemberPage()"
+                >Create New Member</b-button
               >
             </td>
           </b-col>
         </b-row>
+
         <br />
-        <br />
+
         <b-row class="text-center myRow" align-v="center">
           <b-col class="myRow">
             <td>
               <b-button
-                v-row
+                
                 justify="center"
                 v-on:click="goToCreateBookingsPage()"
                 >Create New Booking</b-button
@@ -92,7 +81,7 @@
           <b-col class="myColumn">
             <td>
               <b-button
-                v-row
+                
                 justify="center"
                 v-on:click="goToUpdateBookingsPage()"
                 >Update Booking</b-button
@@ -102,7 +91,7 @@
           <b-col class="myColumn">
             <td>
               <b-button
-                v-row
+                
                 justify="center"
                 v-on:click="goToViewBookingsPage()"
                 >View Bookings</b-button
@@ -112,7 +101,7 @@
           <b-col class="myColumn">
             <td>
               <b-button
-                v-row
+                
                 justify="center"
                 v-on:click="goToDeleteBookingsPage()"
               >
@@ -121,11 +110,52 @@
             </td>
           </b-col>
         </b-row>
+
+        <br />
+
+        <!-- Head librarian options-->
+
+        <b-row v-if="loggedInType === 'headLibrarian'" class="text-center">
+          <h3> Head Librarian Management </h3>
+          <b-col class="myColumn">
+            <td>
+              <b-button  justify="center" v-on:click="goToEditHoursPage()"
+                >Edit Library Hours</b-button
+              >
+            </td>
+          </b-col>
+          <b-col class="myColumn">
+            <td>
+              <b-button
+                
+                justify="center"
+                v-on:click="goToCreateLibrarianSchedulePage()"
+                >Create Librarian Schedule</b-button
+              >
+            </td>
+          </b-col>
+          <b-col class="myColumn">
+            <td>
+              <b-button  justify="center" v-on:click="goToFirePage()"
+                >Fire Librarian</b-button
+              >
+            </td>
+          </b-col>
+          <b-col class="myColumn">
+            <td>
+              <b-button  justify="center" v-on:click="goToHirePage()">
+                Hire Librarian</b-button
+              >
+            </td>
+          </b-col>
+        </b-row>
+        <br />
+        <br />
+        
       </b-container>
     </section>
   </div>
 </template>
-
 
 <script>
 import Router from "../router/index";
@@ -134,8 +164,17 @@ export default {
   name: "hello",
   data() {
     return {
-      types: [],
+      loggedInUser: '',
+      loggedInType: ''
     };
+  },
+  created: function() {
+    // check if cookie is set for current user
+    var userLoggedIn = $cookies.isKey("loggedInUser")
+    if (userLoggedIn == true) {
+        this.loggedInUser = $cookies.get("loggedInUser")
+        this.loggedInType = $cookies.get("loggedInType")
+    }
   },
   methods: {
     goToReturnPage: function () {
@@ -184,6 +223,18 @@ export default {
       Router.push({
         path: "/CreateLibItem",
         name: "CreateLibItem",
+      });
+    },
+    goToCreateNewMemberPage: function () {
+      Router.push({
+        path: "/CreateNewMember",
+        name: "CreateNewMember",
+      });
+    },
+    goToRenewMemberLoanPage: function () {
+      Router.push({
+        path: "/RenewMemberLoan",
+        name: "RenewMemberLoan",
       });
     },
     goToHirePage: function () {

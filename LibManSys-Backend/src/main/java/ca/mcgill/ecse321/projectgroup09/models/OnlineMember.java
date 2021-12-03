@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
@@ -107,7 +108,8 @@ public class OnlineMember extends Member{
 	  {
 	    return this.memberPassword;
 	  }
-
+	  
+	  @Column(unique = true)
 	  public String getMemberUsername()
 	  {
 	    return this.memberUsername;

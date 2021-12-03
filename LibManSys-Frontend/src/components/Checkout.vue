@@ -5,26 +5,26 @@
         <section>
             <br />
             <br />
-            <br />
-    
-            <b-container fluid>
                 <h2> Checkout Library Item </h2>
-    <br>
+            <br />
+            <br />
+        <div v-if="loggedInType === 'librarian' || loggedInType === 'headLibrarian'">
+            <b-container fluid>
                 <b-row class="my-1" color="#00000">
                     <b-col sm="2" color="#00000">
                         <label for="input-default" color="#00000">Librarian ID:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-default" color="#FFFFF" type="text" v-model="employeeId" placeholder="Enter Librarian ID"></b-form-input>
+                        <p>{{loggedInUser}}</p>    
                     </b-col>
                 </b-row>
     
                 <b-row class="my-1">
                     <b-col sm="2">
-                        <label for="input-large">Member Id:</label>
+                        <label for="input-large">Member Library Card Number:</label>
                     </b-col>
                     <b-col sm="10">
-                        <b-form-input id="input-large" type="text" v-model="libCardNumber" placeholder="Enter Member Id"></b-form-input>
+                        <b-form-input id="input-large" type="text" v-model="libCardNumber" placeholder="Enter Member Library Card Number"></b-form-input>
                     </b-col>
                 </b-row>
     
@@ -39,15 +39,44 @@
     
     
             </b-container>
+
+        </div>
+        <div v-else>
+            <h3>Please log in as a librarian to perform checkouts.</h3>
+        </div>
     
          <br>
+
+        <div v-if="loan"> 
+            <v-data-table  class="elevation-1" >
+                <tr><b-col class="myColumn">
+                    <td><myText2>|  LoanId  |</myText2> </td> </b-col>
+                    <td><myText2>|  Borrowed Date |</myText2> </td>
+                    <td><myText2>|  Libcard # |</myText2> </td>
+
+                    <td><myText2>|  Library Item  |</myText2></td>
+                    <td><myText2>|  Loan Status  |</myText2></td>
+                    <td><myText2>|  Late Fees  |</myText2></td>
+                </tr>
+                <tr>
+                    <td >  <myText2> {{loan.loanId}}</myText2></td>
+                    <td> <myText2> {{loan.borrowedDate}}</myText2></td> 
+                    <td> <myText2> {{loan.memberLibCardNumber }}</myText2></td> 
+                    <td><myText2>  {{loan.libraryItemID}}</myText2> </td> 
+                    <td><myText2> {{loan.loanStatus}}</myText2> </td> 
+                    <td> <myText2> {{loan.lateFees}} </myText2> </td> 
+                </tr>
+                
+            </v-data-table> 
+        </div>
          
-         <span v-if="errorCheckout" style="color:red">{{errorCheckout}} </span>
+        
          
          <br>
+          <span v-if="errorCheckout" style="color:red">{{errorCheckout}} </span>
          <br>
          
-         <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="checkoutItem(employeeId, libCardNumber, libraryItemId)">Checkout Item</b-button>
+         <b-button b-row justify="center" v-bind:disabled="isInputMissing" v-on:click="checkoutItem(libCardNumber, libraryItemId)">Checkout Item</b-button>
          <b-button b-row justify="center" v-on:click="goToSubmitPage()">Library Managment</b-button>
 
     

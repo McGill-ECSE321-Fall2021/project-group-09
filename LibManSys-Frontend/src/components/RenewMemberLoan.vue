@@ -2,7 +2,7 @@
 <template>
     <div class="reserve-body">
     
-        <h2> Reserve Library Item </h2>
+        <h2> Renew Member Loan </h2>
         <br>
         <section>
              <div v-if="loggedInType === 'librarian' || loggedInType === 'headLibrarian'">
@@ -43,8 +43,8 @@
 
                 <br />
 
-                <div v-if="reservedItem">
-                    <p>Reserved library item {{reservedItem.title}} with ID {{reservedItem.libraryItemID}} for member with library card number {{reservedItem.reservingMemberLibCardNumber}}</p>
+                <div v-if="loanItem">
+                    <p>Renew loan for library item {{loanItem.title}} with ID {{loanItem.libraryItemID}} for member with library card number {{loan.memberLibCardNumber}}</p>
                 </div>
 
                 
@@ -53,7 +53,7 @@
          <br>
 
                 <br>
-                <b-button v-row justify="center" v-on:click="reserveItem(libCardNumber, libraryItemID)">Reserve Item</b-button>
+                <b-button v-row justify="center" v-on:click="renewLoan(libCardNumber, libraryItemID)">Renew Loan</b-button>
                 <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
 
 
@@ -68,7 +68,7 @@
 </template>
 
 
-<script src="./Reserve.js"></script>
+<script src="./RenewMemberLoan.js"></script>
 
 
 

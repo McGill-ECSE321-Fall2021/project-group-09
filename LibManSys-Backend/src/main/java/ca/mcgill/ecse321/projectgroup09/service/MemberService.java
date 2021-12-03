@@ -8,7 +8,6 @@ package ca.mcgill.ecse321.projectgroup09.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,6 @@ import ca.mcgill.ecse321.projectgroup09.dao.LoanRepository;
 import ca.mcgill.ecse321.projectgroup09.dao.MemberRepository;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
-import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 
 @Service
 public class MemberService {
@@ -64,9 +62,7 @@ public class MemberService {
 		member.setAddress(address);
 		member.setPhoneNumber(phoneNumber);
         member.setLibCardNumber(libCardNumber);
-        member.setIsVerifiedResident(false);
-        member.setAmountOwed(0);
-        member.setActiveLoans(0);
+        
         memberRepository.save(member);
         return member;
 	}

@@ -2,7 +2,9 @@ package ca.mcgill.ecse321.projectgroup09.models;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -102,12 +104,12 @@ public class Librarian extends Account {
 		return this.librarianPassword;
 	}
 
+	@Column(unique = true)
 	public String getLibrarianUsername() {
 		return this.librarianUsername;
 	}
 	
-	// See accountId
-	//@Id
+	@Column(unique = true)
 	public Long getemployeeIDNumber() {
 		return this.employeeIDNumber;
 	}

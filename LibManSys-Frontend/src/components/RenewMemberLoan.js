@@ -1,6 +1,4 @@
-// Checkout js
-
-import Router from "../router/index"
+import Router from "../router/index";
 
 import axios from 'axios'
 var config = require('../../config')
@@ -21,36 +19,16 @@ var AXIOS = axios.create({
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function LoanDto(borrowedDate, returnDate, lateFees, loanStatus, loanId,
-	libraryItem, member, librarian) {
-        
-	this.borrowedDate = borrowedDate;
-	this.returnDate = returnDate;
-	this.lateFees = lateFees;
-	this.loanStatus = loanStatus;
-	this.loanId = loanId;
-	this.libraryItem = libraryItem;
-	this.member = member;
-	this.librarian = librarian;
-}
-
 export default {
     data() {
         return {
-            loans: [],
-            
-            newLoan: '',
-            errorCheckout: '',
-            employeeId: '',
-            libCardNumber: '',
-            libraryItemId: '',
-            response: [],
-
-            
-            loggedInUser: '',
             loggedInType: '',
-
-            loan: undefined
+            loggedInUser: '',
+            libCardNumber: '',
+            libraryItemID: '',
+            loanItem: undefined,
+            loan: undefined,
+            error: ''
         }
     },
     created: function() {
@@ -61,28 +39,34 @@ export default {
             this.loggedInType = $cookies.get("loggedInType")
         }
     },
-    computed: {
-        // Return true if any inputs are missing
-        isInputMissing() {
-            return !this.libCardNumber || !this.libraryItemId;
-        }
-    },
     methods: {
-        checkoutItem: function (libCardNumber, libraryItemId) {
-            console.log("eid: " + libCardNumber)
-            AXIOS.post('/library-item/checkout', {}, { 
-                 params: {
-                     employeeID: this.loggedInUser,
-                     libCardNumber: libCardNumber,
-                     libraryItemID: libraryItemId
-                 }
+        renewLoan(libCardNumber, libraryItemID) {
+            console.log("renew")
+            this.loan = undefined
+            this.loanItem = undefined
+            AXIOS.post("/library-item/renew", {}, {
+                params: {
+                    "libCardNumber": libCardNumber,
+                    "libraryItemID": libraryItemID
+                }
             })
             .then(response => {
-                this.errorCheckout = ''
-                this.employeeId = ''
+                this.error = ''
                 this.libCardNumber = ''
-                this.libraryItemId = ''
+                this.libraryItemID = ''
                 this.loan = response.data
+                AXIOS.get("/library-item/" + this.loan.libraryItemID, {})
+                .then(response => {
+                    this.loanItem = response.data
+                })
+                .catch(error => {
+                    var errorMsg = error
+                    if ( error.response ) {
+                        errorMsg = error.response.data
+                    }
+                    console.log(errorMsg)
+                    this.error = this.error + errorMsg
+                })
             })
             .catch(error => {
                 var errorMsg = error
@@ -90,12 +74,9 @@ export default {
                     errorMsg = error.response.data
                 }
                 console.log(errorMsg)
-                this.errorCheckout = errorMsg
+                this.error = this.error +  errorMsg
             })
         },
-        
-        
-        // navigation functions
         goToSubmitPage: function() {
             Router.push({
                 path: "/LibraryManagementDashboard",
@@ -114,6 +95,7 @@ export default {
                 name: "Register"
             })
         },
+
         goToLoginPage: function() {
             Router.push({
                 path: "/MemberLogin",

@@ -4,7 +4,9 @@
     <section>
       <br />
       <br />
+      <!--
       <img src="../assets/logo-placeholder.png" height="15%" />
+      -->
       <br />
       <a class="light"> Welcome to </a>
       <a class="thick"> Group 9's Public Library</a>
@@ -13,7 +15,10 @@
      
     </section>
 
+<!--
     <td><button v-on:click="goToLibrarianPage()">Librarian Page</button></td>
+-->
+
     <!--! On user loged in = librarian -->
   
 

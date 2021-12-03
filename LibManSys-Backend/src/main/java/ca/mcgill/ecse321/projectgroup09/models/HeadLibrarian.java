@@ -1,6 +1,10 @@
 package ca.mcgill.ecse321.projectgroup09.models;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -12,52 +16,35 @@ public class HeadLibrarian extends Librarian {
 
 	//HeadLibrarian Associations
 	private Library library;
-
-	@Override
-	public void setLibrarianEmail(String aLibrarianEmail) {
-		super.setLibrarianEmail(aLibrarianEmail);
-	}
-
-	@Override
-	public void setLibrarianPassword(String aLibrarianPassword) {
-		super.setLibrarianPassword(aLibrarianPassword);
-	}
-
-	@Override
-	public void setLibrarianUsername(String aLibrarianUsername) {
-		super.setLibrarianUsername(aLibrarianUsername);
-	}
-
-	@Override
-	public void setemployeeIDNumber(Long anEmployeeIDNum) {
-		super.setemployeeIDNumber(anEmployeeIDNum);
-	}
-
-	@Override
-	public String getLibrarianEmail() {
-		return super.getLibrarianEmail();
-	}
-
-	@Override
-	public String getLibrarianPassword() {
-		return super.getLibrarianPassword();
-	}
-
-	@Override
-	public String getLibrarianUsername() {
-		return super.getLibrarianUsername();
+	
+	public HeadLibrarian() {
+		
 	}
 	
-	@Override
-	public Long getemployeeIDNumber() {
-		return super.getemployeeIDNumber();
+	public HeadLibrarian (String aFullName, String aLibrarianEmail, String aLibrarianPassword,
+			String aLibrarianUsername, List<Schedule> aSchedules, List<Loan> aLoans, List<Booking> aBookings) {
+		super(aFullName, aLibrarianEmail, aLibrarianPassword, aLibrarianUsername, aSchedules, aLoans, aBookings);
+		if (this.getSchedules() == null) {
+			this.setSchedules(new ArrayList<Schedule>());
+		}
+		if (this.getLoans() == null) {
+			this.setLoans(new ArrayList<Loan>());
+		}
+		if (this.getBookings() == null) {
+			this.setBookings(new ArrayList<Booking>());
+		}
+		// generate employee id number
+		int max = 999999;
+	    int min = 1;
+	    int range = max - min + 1;
+	    this.managerIDNum = (long) ((Math.random() * range) + min);
 	}
 	
 	public void setmanagerIDNum(Long aManagerIDNum) {
 		this.managerIDNum = aManagerIDNum;
 	}
 	
-	//@Id
+	@Column(unique = true)
 	public Long getmanagerIDNum() {
 		return this.managerIDNum;
 	}

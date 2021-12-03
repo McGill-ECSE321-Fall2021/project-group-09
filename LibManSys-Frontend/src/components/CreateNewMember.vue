@@ -2,7 +2,8 @@
 <template>
     <div class="reserve-body">
     
-        <h2> Reserve Library Item </h2>
+        <h2>  Create a New Member </h2>
+        <p>Sign a new member up for the library services</p>
         <br>
         <section>
              <div v-if="loggedInType === 'librarian' || loggedInType === 'headLibrarian'">
@@ -13,7 +14,7 @@
                 <b-container fluid>
                     <b-row class="my-1" color="#00000">
                         <b-col sm="2" color="#00000">
-                            <label for="input-default" color="#00000">Librarian Employee ID Number:</label>
+                            <label for="input-default" color="#00000">Library Item Library Card Number:</label>
                         </b-col>
                         <b-col sm="10">
                             <p>{{loggedInUser}}</p>
@@ -22,29 +23,39 @@
 
                     <b-row class="my-1">
                         <b-col sm="2">
-                            <label for="input-large">Member Library Card Number:</label>
+                            <label for="input-large">Member Full Name:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="input-large" v-model="libCardNumber" placeholder="Member Lib Card Number"></b-form-input>
+                            <b-form-input id="input-large" v-model="fullName" placeholder="Enter member full name"></b-form-input>
                         </b-col>
                     </b-row>
 
                     <b-row class="my-1">
                         <b-col sm="2">
-                            <label for="name">Library Card ID:</label>
+                            <label for="name">Member Address:</label>
                         </b-col>
                         <b-col sm="10">
-                            <b-form-input id="name" v-model="libraryItemID" placeholder="Enter the Library Card ID"></b-form-input>
+                            <b-form-input id="name" v-model="address" placeholder="Enter member address"></b-form-input>
                         </b-col>
                     </b-row>
+
+                    <b-row class="my-1">
+                        <b-col sm="2">
+                            <label for="name">Member Phone Number:</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="name" v-model="phoneNumber" placeholder="Enter member phone number"></b-form-input>
+                        </b-col>
+                    </b-row>
+
 
 
                 </b-container>
 
                 <br />
 
-                <div v-if="reservedItem">
-                    <p>Reserved library item {{reservedItem.title}} with ID {{reservedItem.libraryItemID}} for member with library card number {{reservedItem.reservingMemberLibCardNumber}}</p>
+                <div v-if="newMember">
+                    <p>Created new Member account for {{newMember.fullName}} with library card number: {{newMember.libCardNumber}}</p>
                 </div>
 
                 
@@ -52,9 +63,9 @@
           <span v-if="error" style="color:red">{{error}} </span>
          <br>
 
-                <br>
-                <b-button v-row justify="center" v-on:click="reserveItem(libCardNumber, libraryItemID)">Reserve Item</b-button>
-                <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
+        <br>
+        <b-button v-row justify="center" v-on:click="createNewMember(fullName, address, phoneNumber)">Create new Member</b-button>
+        <b-button v-row justify="center" v-on:click="goToSubmitPage()">Library Management</b-button>
 
 
         </div>
@@ -68,7 +79,7 @@
 </template>
 
 
-<script src="./Reserve.js"></script>
+<script src="./CreateNewMember.js"></script>
 
 
 

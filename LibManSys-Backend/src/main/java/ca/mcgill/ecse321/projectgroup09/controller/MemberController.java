@@ -3,11 +3,16 @@
  */
 package ca.mcgill.ecse321.projectgroup09.controller;
 
+
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
+import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import ca.mcgill.ecse321.projectgroup09.dto.MemberDto;
 import ca.mcgill.ecse321.projectgroup09.models.Member;
 import ca.mcgill.ecse321.projectgroup09.service.MemberService;
@@ -64,13 +70,16 @@ public class MemberController {
 	
 	 
 	@PostMapping(value = { "/members/create/{fullName}", "/members/create/{fullName}/" })
-	public MemberDto createMember(@PathVariable("fullName") String fullName,
+	public ResponseEntity<?> createMember(@PathVariable("fullName") String fullName,
 				@RequestParam(name = "Address") String memberAddress,
-				@RequestParam(name = "Phone Number") String memberPhoneNumber)
-				throws IllegalArgumentException {
+				@RequestParam(name = "Phone Number") String memberPhoneNumber) {
+		try {
 			Member member = memberService.createMember(fullName, memberAddress, memberPhoneNumber);
-			return MemberDto.convertToDto(member);
+			return httpSuccess(MemberDto.convertToDto(member));
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
 		}
+	}
 	
 	@PostMapping(value = { "/member/fullName/update/{libCardNumber}", "/member/fullName/update/{libCardNumber}/" })
 	public MemberDto updateMemberFullName(@PathVariable("libCardNumber") Long libCardNumber,

@@ -91,4 +91,14 @@ public class LibrarianController {
 			return httpFailure("Error: " + e.getMessage());
 		}
 	}
+	
+	@PostMapping(value = { BASE_URL + "/delete/{id}", BASE_URL + "/delete/{id}/"})
+	public ResponseEntity<?> deletelibrarian(@PathVariable("id") Long employeeIDNum) {
+		try {
+			LibrarianDto l = LibrarianDto.convertToDto(librarianService.deleteLibrarian(employeeIDNum));
+			return httpSuccess(l);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+	}
 }

@@ -31,7 +31,10 @@ public class LibrarianService {
 		if (fullName == null || email == null || password == null || username == null) {
 			throw new IllegalArgumentException("Arguments cannot be null when creating a new librarian.");
 		}
-		// TODO check if email is a valid email
+		Librarian l = librarianRepository.findLibrarianByLibrarianUsername(username);
+		if (l != null) {
+			throw new IllegalStateException("Username is taken.");
+		}
 		
 		// create new librarian with input parameters and empty associations
 		Librarian librarian = new Librarian(fullName, email, password, username, null, null, null);

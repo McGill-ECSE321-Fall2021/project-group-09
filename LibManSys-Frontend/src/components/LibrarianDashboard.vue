@@ -174,9 +174,17 @@ Head Librarian:
                                     </v-data-table> 
                                 </b-col>
                             </b-row>
+
+
                         </b-container>
                     </b-row>
+                    <b-row class="my-1">
+                        <b-col class="myColumn">
+                            <b-button justify="center" v-on:click="goToLibraryManagmentPage()">Library Managment</b-button>
+                        </b-col>
+                    </b-row>
                 </div>
+                
                 <!-- if librarian is logged in, display above, else display below content -->
                 <div v-else>
                     <b> No user is currently logged in, so no librarian details to display.</b>
@@ -185,10 +193,6 @@ Head Librarian:
     
             <b-container>
                     
-                <b-col class="myColumn">
-                    <b-button justify="center" v-on:click="goToLibraryManagmentPage()">Library Managment</b-button>
-                </b-col>
-
             </b-container>
 
         </section>
@@ -241,50 +245,6 @@ section {
     background-size: contain;
     background-repeat: no-repeat;
     background-size: 100%;
-}
-
-a.normal {
-    font-weight: 400;
-}
-
-h1,
-h2 {
-    font-weight: normal;
-    color: black;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-a {
-    color: #42b983;
-}
-
-b {
-    font: "Lato", sans-serif;
-    font-weight: 100;
-    color: #ffffff;
-    font-size: 18px;
-}
-
-b-nav-item {
-    color: #efecf2;
-    font-size: 18px;
-}
-
-.nav-left {
-    display: flex;
-}
-
-.nav-right {
-    display: flex;
 }
 
 #container {

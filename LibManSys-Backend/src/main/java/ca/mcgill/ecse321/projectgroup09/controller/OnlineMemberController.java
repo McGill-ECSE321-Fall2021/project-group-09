@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.projectgroup09.dto.OnlineMemberDto;
 import ca.mcgill.ecse321.projectgroup09.models.OnlineMember;
 import ca.mcgill.ecse321.projectgroup09.service.OnlineMemberService;
-import ca.mcgill.ecse321.projectgroup09.service.AccountService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -36,8 +35,6 @@ public class OnlineMemberController {
 	@Autowired
 	private OnlineMemberService onlineMemberService;
 	
-	@Autowired
-	private AccountService accountService;
 	
 	@GetMapping(value = { BASE_URL, BASE_URL + "/"})
 	public List<OnlineMemberDto> getAllOnlineMembers() {
@@ -91,17 +88,20 @@ public class OnlineMemberController {
 		}*/
 	
 	@PostMapping(value = { "/OnlineMember/create/{fullName}", "/OnlineMember/create/{fullName}/" })
-	public OnlineMemberDto createOnlineMember(@PathVariable("fullName") String fullName,
+	public ResponseEntity<?> createOnlineMember(@PathVariable("fullName") String fullName,
 				@RequestParam(name = "address") String OnlineMemberAddress,
 				@RequestParam(name = "phoneNumber") String OnlineMemberPhoneNumber,
 				@RequestParam(name = "emailAddress") String memberEmail,
 				@RequestParam(name = "password") String memberPassword,
 				@RequestParam(name = "username") String memberUsername
-				) throws IllegalArgumentException {
-		
-				OnlineMember OnlineMember = onlineMemberService.createOnlineMember(fullName, OnlineMemberAddress, OnlineMemberPhoneNumber, memberEmail, memberPassword, memberUsername);
-				return (OnlineMemberDto.convertToDto(OnlineMember));
+				) {
+		try {
+			OnlineMember OnlineMember = onlineMemberService.createOnlineMember(fullName, OnlineMemberAddress, OnlineMemberPhoneNumber, memberEmail, memberPassword, memberUsername);
+			return httpSuccess(OnlineMemberDto.convertToDto(OnlineMember));
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
 		}
+	}
 	
 	@PostMapping(value = { "/OnlineMember/fullName/update/{libCardNumber}", "/OnlineMember/fullName/update/{libCardNumber}/" })
 	public OnlineMemberDto updateOnlineMemberFullName(@PathVariable("libCardNumber") Long libCardNumber,

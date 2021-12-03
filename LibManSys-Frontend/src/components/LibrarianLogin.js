@@ -31,6 +31,17 @@ export default {
   },
    methods: {
        loginLibrarian: function (username, password){
+            var headLibrarianEmployeeID = ''
+            // get head librarian employee ID
+            AXIOS.get("/head-librarian", {})
+            .then(response => {
+                headLibrarianEmployeeID = response.data.employeeIDNumber
+                console.log("hl id: " + headLibrarianEmployeeID)
+            })
+            .catch(error => {
+                // no head librarian
+            })
+
             console.log(username + ", " + password)
             // given username, password, get librarian employeeID
             AXIOS.post('/librarian/login', {}, {
@@ -45,7 +56,18 @@ export default {
                 var newLoggedInUser = response.data.employeeIDNumber
                 // set cookie for logged in user
                 $cookies.set("loggedInUser", newLoggedInUser)
-                $cookies.set("loggedInType", "librarian")
+                // check if head librarian
+                var librarianType = ''
+                
+                console.log("hl id 2: " + headLibrarianEmployeeID)
+                console.log("l id 3: " + newLoggedInUser)
+                if (headLibrarianEmployeeID != '' &&
+                newLoggedInUser == headLibrarianEmployeeID) {
+                    librarianType = "headLibrarian"
+                } else {
+                    librarianType = "librarian"
+                }
+                $cookies.set("loggedInType", librarianType)
 
                 // publish event
                 EventBus.$emit('loggedInUserSet', newLoggedInUser)

@@ -17,7 +17,18 @@ export default {
         this.loggedInUser = loggedInUser;
         if (this.loggedInUser) {
             this.loggedInType = $cookies.get('loggedInType')
-            this.IDtype = this.loggedInType === 'librarian' ? 'employee ID number' : 'library card number';
+            switch (this.loggedInType) {
+                case 'onlineMember':
+                    this.IDtype = 'library card number'
+                    break
+                case 'librarian':
+                    this.IDtype = 'employee ID number'
+                    break
+                case 'headLibrarian':
+                    this.IDtype = 'employee ID number'
+                    break
+                default:
+            }
         } else {
             this.loggedInType = ''
             this.IDtype = ''
@@ -28,6 +39,19 @@ export default {
     if ($cookies.isKey("loggedInUser") == true) {
         this.loggedInUser = $cookies.get("loggedInUser")
         this.loggedInType = $cookies.get("loggedInType")
+        switch (this.loggedInType) {
+            case 'onlineMember':
+                this.IDtype = 'library card number'
+                break
+            case 'librarian':
+                this.IDtype = 'employee ID number'
+                break
+            case 'headLibrarian':
+                this.IDtype = 'employee ID number'
+                break
+            default:
+                this.IDtype = ''
+        }
     }
     console.log("nmvar bar: " + this.loggedInUser)
   },

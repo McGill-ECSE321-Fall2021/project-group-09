@@ -24,6 +24,8 @@ import ViewBookings from '@/components/ViewBookings.vue'
 import DeleteBookings from '@/components/DeleteBookings.vue'
 import EditLibraryHours from '@/components/EditLibraryHours.vue'
 import CreateLibrarianSchedule from '@/components/CreateLibrarianSchedule.vue'
+import RenewMemberLoan from '@/components/RenewMemberLoan.vue'
+import CreateNewMember from '@/components/CreateNewMember.vue'
 
 import EditProfile from '@/components/EditProfile.vue'
 
@@ -183,6 +185,14 @@ export default new Router({
       path: '/EditProfile',
       name: 'EditProfile',
       component: EditProfile
+    },{
+      path: '/CreateNewMember',
+      name: 'CreateNewMember',
+      component: CreateNewMember
+    },{
+      path: '/RenewMemberLoan',
+      name: 'RenewMemberLoan',
+      component: RenewMemberLoan
     },
   ]
 })
