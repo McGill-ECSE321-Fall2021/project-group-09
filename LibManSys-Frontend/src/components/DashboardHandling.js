@@ -62,7 +62,7 @@ function getBookings(bookings) {
 function getReservedLibraryItems(reservedLibraryItems) {
   var reservedLibraryItemsList = []
   for (const rid of reservedLibraryItems) {
-      AXIOS.get("/library-item/get-by-reserving-member/" + rid)
+      AXIOS.get("/library-item/" + rid)
       .then(response => {
           var item = response.data
           console.log(item)
@@ -123,6 +123,21 @@ export default {
   },
   methods: {
 
+    cancelReserveItem(itemID) {
+        AXIOS.post("/library-item/cancel-reservation", {}, {
+            params: {
+                "libCardNumber": this.onlineMember.libCardNumber,
+                "libraryItemID": itemID
+            }
+        })
+        .then(response => {
+            this.error = ''
+            window.location.reload()
+        })
+        .catch(error => {
+            this.error = error
+        })
+    },
     // navigation
       goToSubmitPage: function (){
           Router.push({

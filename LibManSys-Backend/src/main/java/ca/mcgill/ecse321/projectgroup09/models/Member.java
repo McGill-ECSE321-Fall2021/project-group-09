@@ -129,7 +129,7 @@ public class Member extends Account {
 		this.bookings = aBooking;
 	}
 
-	@OneToMany(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "member")
 	public List<LibraryItem> getReserved() {
 		return this.reserved;
 	}

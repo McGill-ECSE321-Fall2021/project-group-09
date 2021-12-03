@@ -193,17 +193,27 @@ public class OnlineMemberController {
 	 * @return
 	 */
 	@PostMapping(value = {BASE_URL + "/login", BASE_URL + "/login/"})
-	public ResponseEntity<?> loginOnlineMember(
-			@RequestParam("username") String username,
-			@RequestParam("password") String password) 
-	{
+	public ResponseEntity<?> loginOnlineMember(@RequestParam("username") String username,
+			@RequestParam("password") String password) {
 		try {
 			OnlineMemberDto omdto = OnlineMemberDto.convertToDto(onlineMemberService.loginAsOM(username, password));
-			} 
-		catch (Exception e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return httpSuccess(omdto);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
 		}
-		return new ResponseEntity<>(HttpStatus.OK);
+		
+	}
+	
+	@PostMapping(value = {BASE_URL + "/login2", BASE_URL + "/login2/"})
+	public ResponseEntity<?> loginOnlineMember2(@RequestParam("username") String username,
+			@RequestParam("password") String password) {
+		try {
+			OnlineMemberDto omdto = OnlineMemberDto.convertToDto(onlineMemberService.loginOnlineMember(username, password));
+			return httpSuccess(omdto);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		
 	}
 	
 	@PostMapping(value = { "/logout", "/logout/" })

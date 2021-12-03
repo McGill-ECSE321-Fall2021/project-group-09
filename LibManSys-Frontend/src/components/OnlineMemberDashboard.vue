@@ -159,6 +159,9 @@
                                     <td class="table-text">{{item.publishedYear}}</td> 
                                     <td class="table-text">{{item.itemStatus}} </td> 
                                     <td class="table-text">{{item.type}}</td> 
+                                    <b-button type="submit" class="cancel-reserve-button" v-on:click="cancelReserveItem(item.libraryItemID)">
+                                        Cancel Reservation
+                                    </b-button>
                                 </tr>
                                 
                             </v-data-table> 
@@ -200,6 +203,13 @@
 OnlineMemberDashboard {
   color: firebrick;
 }
+
+.cancel-reserve-button {
+  padding: 0.25em 0.5em;
+  font-size: 0.8em;
+  background-color: #ed3d37;
+}
+
 .bg-custom-1 {
   background: linear-gradient(
     200deg,

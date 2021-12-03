@@ -47,6 +47,8 @@ export default {
             $cookies.set("loggedInUser", newLoggedInUser)
             $cookies.set("loggedInType", "onlineMember")
 
+            console.log("resposne: " + newLoggedInUser)
+
             // published event
             EventBus.$emit('loggedInUserSet', newLoggedInUser)
 

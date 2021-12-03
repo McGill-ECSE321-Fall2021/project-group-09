@@ -238,9 +238,30 @@ public class LibraryItemService {
 		if (li == null) {
 			throw new IllegalArgumentException("There does not exist a library item with that id.");
 		}
-		// TODO
-		return li;
+		// Make sure library item is not reserved already
+		if (!li.getItemStatus().equals(LibraryItem.ItemStatus.Reserved)) {
+			throw new IllegalStateException("Cannot cancel reservation for library item that is not reserved.");
+		}
+		// Make sure library item is reserved by this member
+		if (li.getMember() == null || !li.getMember().equals(m)) {
+			throw new IllegalStateException("Cannot cancel reservation for another member.");
+		}
+		if (!m.getReserved().contains(li)) {
+			throw new IllegalStateException("member resrved list does not contain library item");
+		}
+		// Add item to member's reserved list
+		m.getReserved().remove(li);
+		// add member to items association
+		li.setMember(null);
+		// Set book status to reserved
+		li.setItemStatus(LibraryItem.ItemStatus.Available);
 		
+		// Save member and library item to update information
+		libraryItemRepo.save(li);
+		memberRepo.save(m);
+		
+		return li;
+
 	}
 	
 	/**

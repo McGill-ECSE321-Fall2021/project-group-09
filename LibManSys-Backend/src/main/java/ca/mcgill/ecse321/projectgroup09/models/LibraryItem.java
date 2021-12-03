@@ -137,5 +137,18 @@ public abstract class LibraryItem {
 		this.member = aMember;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (! (o instanceof LibraryItem)) {
+			return false;
+		}
+		LibraryItem li = (LibraryItem) o;
+		// check if IDs NOT equal
+		if (!this.getlibraryItemID().equals(li.getlibraryItemID())) {
+			return false;
+		}
+		return true;
+	}
+	
 }
 

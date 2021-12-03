@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.projectgroup09.controller;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpFailureMessage;
 import static ca.mcgill.ecse321.projectgroup09.utils.HttpUtil.httpSuccess;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ca.mcgill.ecse321.projectgroup09.dao.BookRepository;
 import ca.mcgill.ecse321.projectgroup09.dto.LibraryItemDto;
 import ca.mcgill.ecse321.projectgroup09.dto.LoanDto;
-import ca.mcgill.ecse321.projectgroup09.models.Book;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem;
 import ca.mcgill.ecse321.projectgroup09.models.LibraryItem.ItemStatus;
 import ca.mcgill.ecse321.projectgroup09.models.Loan;
+import ca.mcgill.ecse321.projectgroup09.service.ArchiveService;
 import ca.mcgill.ecse321.projectgroup09.service.BookService;
 import ca.mcgill.ecse321.projectgroup09.service.LibraryItemService;
+import ca.mcgill.ecse321.projectgroup09.service.MovieService;
+import ca.mcgill.ecse321.projectgroup09.service.MusicAlbumService;
+import ca.mcgill.ecse321.projectgroup09.service.NewspaperService;
 
 // https://stackoverflow.com/questions/53501185/how-to-post-query-parameters-with-axios
 @CrossOrigin(origins = "*")
@@ -35,28 +38,53 @@ public class LibraryItemController {
 	@Autowired
 	private LibraryItemService libraryItemService;
 	
-	// testing only
+	@Autowired
+	private ArchiveService archiveService;
+	
 	@Autowired
 	private BookService bookService;
-	// testing only
+	
 	@Autowired
-	private BookRepository bookRepo;
+	private MovieService movieService;
+	 
+	@Autowired
+	private MusicAlbumService musicAlbumService;
+	
+	@Autowired
+	private NewspaperService newspaperService;
 	
 	/**
 	 * Testing endpoint
 	 * @return
 	 */
-	@PostMapping(value = {"BASE_URL + /test", BASE_URL + "/test/"})
-	public ResponseEntity<?> test() {
-		String message = "";
+	@PostMapping(value = {BASE_URL + "/create-example-library", BASE_URL + "/create-example-library/"})
+	public ResponseEntity<?> createExampleLibrary() {
+		try {
+			List<LibraryItemDto> lis = new ArrayList<LibraryItemDto>();
+			lis.add(LibraryItemDto.convertToDto(archiveService.createArchive("McGill Historic Archives", 1885, "McGill University")));
+			lis.add(LibraryItemDto.convertToDto(archiveService.createArchive("Majors of Montreal", 1954, "City of Montreal")));
+			lis.add(LibraryItemDto.convertToDto(archiveService.createArchive("History of Quebec", 1775, "Museum of Anthropology")));
+			lis.add(LibraryItemDto.convertToDto(bookService.createBook("To Kill a Mockingbird", 1960, "Harper Lee", "Penguin Publishers", "122-3344-333", 843)));
+			lis.add(LibraryItemDto.convertToDto(bookService.createBook("Nenteen Eighty-Four", 1949, "George Orwell", "pubbli", "234-442-44", 442)));
+			lis.add(LibraryItemDto.convertToDto(bookService.createBook("The Catcher in the Rye", 1951, "J. D. Salinger", "random house", "9823942234", 843)));
+			lis.add(LibraryItemDto.convertToDto(bookService.createBook("The Great Gatsby", 1925, "F. Scott Fitsgerald", "pubbli", "756634577845", 2009)));
+			lis.add(LibraryItemDto.convertToDto(bookService.createBook("Pride and Prejudice", 1813, "Jane Austen", "Penguin Publishers", "9754798586", 24)));
+			lis.add(LibraryItemDto.convertToDto(movieService.createMovie("The Lord Of The Rings: The Fellowship Of The Ring", 2001, "Peter Jackson", 120, "Fantasy")));
+			lis.add(LibraryItemDto.convertToDto(movieService.createMovie("Star Wars: The Empire Strikes Back", 1980, "George Lucas", 104, "Action")));
+			lis.add(LibraryItemDto.convertToDto(movieService.createMovie("The Godfather", 1976, "Stanley Kubrick", 95, "Drama")));
+			lis.add(LibraryItemDto.convertToDto(movieService.createMovie("The Dark Knight", 2009, "Christopher Nolan", 112, "Action")));
+			lis.add(LibraryItemDto.convertToDto(movieService.createMovie("The Shining", 1980, "Stanley Kubrick", 94, "Horror")));
+			lis.add(LibraryItemDto.convertToDto(musicAlbumService.createMusicAlbum("The Eminem Show", 2002, "Rap", "Eminem", 17, 125)));
+			lis.add(LibraryItemDto.convertToDto(musicAlbumService.createMusicAlbum("Montero", 2021, "Pop", "Lil Nas X", 13, 75)));
+			lis.add(LibraryItemDto.convertToDto(musicAlbumService.createMusicAlbum("30", 2021, "Pop", "Adele", 14, 85)));
+			lis.add(LibraryItemDto.convertToDto(musicAlbumService.createMusicAlbum("Astroworld", 2018, "Rap", "Travis Scott", 13, 105)));
+			lis.add(LibraryItemDto.convertToDto(newspaperService.createNewspaper("Sunday Paper", 2021, "La Delit", "2nd", "Ada")));
+			lis.add(LibraryItemDto.convertToDto(newspaperService.createNewspaper("Monday Paper", 2021, "The McGill Daily", "10th", "Bob")));
+			return httpSuccess(lis);
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
 		
-		Book book1 = bookService.createBook("titlk", 109, "asdf", "asdf", "asdf", 33);
-		
-		bookRepo.save(book1);
-		book1.setlibraryItemID(1111L);
-		
-		
-		return ResponseEntity.status(HttpStatus.OK).body(message);
 	}
 	
 	/**
@@ -182,7 +210,7 @@ public class LibraryItemController {
 	 */
 	@PostMapping(value = {BASE_URL + "/reserve", BASE_URL + "/reserve/"})
 	public ResponseEntity<?> reserveLibraryItemItem(@RequestParam("libCardNumber") Long libCardNumber, 
-			@RequestParam("libraryItemId") Long libraryItemId) {
+			@RequestParam("libraryItemID") Long libraryItemId) {
 		LibraryItem li = null;
 		try {
 			li = libraryItemService.reserveLibraryItem(libCardNumber, libraryItemId);
@@ -201,7 +229,7 @@ public class LibraryItemController {
 	 */
 	@PostMapping(value = {BASE_URL + "/cancel-reservation", BASE_URL + "/cancel-reservation/"})
 	public ResponseEntity<?> cancelReservation(@RequestParam("libCardNumber") Long libCardNumber, 
-			@RequestParam("libraryItemId") Long libraryItemId) {
+			@RequestParam("libraryItemID") Long libraryItemId) {
 		LibraryItem li = null;
 		try {
 			li = libraryItemService.cancelReservation(libCardNumber, libraryItemId);
@@ -220,9 +248,9 @@ public class LibraryItemController {
 	 * @return
 	 */
 	@PostMapping(value = {BASE_URL + "/checkout", BASE_URL + "/checkout/"})
-	public ResponseEntity<?> checkoutLibraryItem(@RequestParam("employeeId") Long employeeId,
+	public ResponseEntity<?> checkoutLibraryItem(@RequestParam("employeeID") Long employeeId,
 			@RequestParam("libCardNumber") Long libCardNumber, 
-			@RequestParam("libraryItemId") Long libraryItemId) {
+			@RequestParam("libraryItemID") Long libraryItemId) {
 		Loan l = null;
 		try {
 			l = libraryItemService.checkoutLibraryItem(employeeId, libCardNumber, libraryItemId);
@@ -241,7 +269,7 @@ public class LibraryItemController {
 	 */
 	@PostMapping(value = {BASE_URL + "/renew", BASE_URL + "/renew/"})
 	public ResponseEntity<?> renewLibraryItem(@RequestParam("libCardNumber") Long libCardNumber, 
-			@RequestParam("libraryItemId") Long libraryItemId) {
+			@RequestParam("libraryItemID") Long libraryItemId) {
 		Loan l = null;
 		try {
 			l = libraryItemService.renewLibraryItem(libCardNumber, libraryItemId);
@@ -261,7 +289,7 @@ public class LibraryItemController {
 	 */
 	@PostMapping(value = {BASE_URL + "/return", BASE_URL + "/return/"})
 	public ResponseEntity<?> returnLibraryItem(@RequestParam("libCardNumber") Long libCardNumber,
-			@RequestParam("libraryItemId") Long libraryItemId) {
+			@RequestParam("libraryItemID") Long libraryItemId) {
 		Loan l = null;
 		try {
 			l = libraryItemService.returnLibraryItem(libCardNumber, libraryItemId);

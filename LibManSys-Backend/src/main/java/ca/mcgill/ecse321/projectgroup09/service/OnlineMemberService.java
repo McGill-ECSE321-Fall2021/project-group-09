@@ -521,7 +521,7 @@ public class OnlineMemberService extends MemberService {
 		return resultList;
 	}
 	
-	/*@Transactional
+	@Transactional
 	public OnlineMember loginOnlineMember(String username, String password) {
 		if (username == null || username.isBlank()) {
 			throw new IllegalArgumentException("Please provide a username.");
@@ -537,11 +537,11 @@ public class OnlineMemberService extends MemberService {
 			throw new IllegalStateException("Password does not match username.");
 		}
 		return om;
-	}*/
+	}
 
 
-@Transactional
-public OnlineMember loginAsOM(String username, String password) {
+	@Transactional
+	public OnlineMember loginAsOM(String username, String password) {
        if (username == null || username.trim().length() == 0 || username.isBlank()) {
            throw new IllegalArgumentException("Please enter a valid username or email");
        }

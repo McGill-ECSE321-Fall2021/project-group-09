@@ -39,7 +39,7 @@
         </b-container>
         
         <br />
-        <span v-if="errorLogin" style="color:red">{{errorLogin}} </span>
+        <span v-if="errorLogin" class="error-msg">{{errorLogin}}</span>
         <br />
 
         <b-container>
@@ -63,18 +63,14 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+.error-msg {
+  font-weight: 500;
+  color: red;
+}
+
 
 .bg-custom-1 {
   background-color: #d9b086;
-}
-
-b.nav-link {
-  color: #000000;
-  font-size: 18px;
-}
-
-b-navbar {
-  background-color: #4e1d04;
 }
 
 div {
@@ -93,7 +89,7 @@ div {
 }
 section {
   color: #d9b086;
-  font-family: "Lato", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -109,36 +105,6 @@ h1, h2 {
   font-weight: normal;
 
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-b {
-  font: "Lato", sans-serif;
-  font-weight: 100;
-  color: #ffffff;
-  font-size: 18px;
-}
-b-nav-item {
-  color: #efecf2;
-  font-size: 18px;
-}
-.nav-left {
-  display: flex;
-}
-.nav-right {
-  display: flex;
-}
-
 #container{
     width: 65%;
     margin: 0 auto;

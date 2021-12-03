@@ -60,13 +60,39 @@ export default {
       bookResults: new Array(),
       movieResults: new Array(),
       musicAlbumResults: new Array(),
-      newspaperResults: new Array()
+      newspaperResults: new Array(),
+
+      loggedInUser: '',
+      loggedInType: ''
     };
   },
   created: function () {
-    
+    // check if logged in cookie is set
+    var isLoggedIn = $cookies.isKey("loggedInUser")
+    if (isLoggedIn) {
+      this.loggedInUser = $cookies.get("loggedInUser")
+      this.loggedInType = $cookies.get("loggedInType")
+    }
   },
   methods: {
+    doNothing() {
+
+    },
+    reserveItem(itemID) {
+      AXIOS.post("/library-item/reserve", {}, {
+        params: {
+          "libCardNumber": this.loggedInUser,
+          "libraryItemID": itemID
+        }
+      })
+      .then(response => {
+        this.error = ''
+        window.location.reload()
+      })
+      .catch(error => {
+        this.error = parseError(error)
+      })
+    },
     noResults () {
       var noResults = this.archiveResults.length === 0 && this.bookResults.length === 0 && this.movieResults.length === 0 && this.musicAlbumResults.length === 0 && this.newspaperResults.length === 0
       console.log("no results?: " + noResults)

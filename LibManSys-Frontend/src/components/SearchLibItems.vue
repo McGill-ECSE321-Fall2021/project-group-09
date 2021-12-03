@@ -5,7 +5,7 @@
 
     <section>
       <br />
-      <h2 class="search-title"> Search Page </h2>
+      <h2 class="search-title"> Search Library Catalogue </h2>
 
       <b-container v-if="error" style="margin-bottom: 1em">
         <span class="error-msg">{{error}}</span>
@@ -144,6 +144,18 @@
           <td> {{result.isbn}}</td> 
           <td>  {{result.loanablePeriod}} </td>       
           <td> {{result.itemStatus}}  </td>
+          <td v-if="loggedInUser && loggedInType === 'onlineMember'">
+            <div v-if="result.itemStatus === 'Available'">
+              <b-button type="submit" class="reserve-button" v-on:click="reserveItem(result.libraryItemID)">
+                Reserve Item
+              </b-button>
+            </div>
+            <div v-else>
+              <b-button type="submit" class="reserve-button-na" v-on:click="doNothing()">
+                Not Available
+              </b-button>
+            </div>
+          </td>
         </tr>
       
       </table> 
@@ -172,7 +184,18 @@
           <td> {{result.director}}  </td>               
           <td>  {{result.loanablePeriod}} </td> 
           <td> {{result.itemStatus}}  </td> 
-              
+          <td v-if="loggedInUser && loggedInType === 'onlineMember'">
+            <div v-if="result.itemStatus === 'Available'">
+              <b-button type="submit" class="reserve-button" v-on:click="reserveItem(result.libraryItemID)">
+                Reserve Item
+              </b-button>
+            </div>
+            <div v-else>
+              <b-button type="submit" class="reserve-button-na" v-on:click="doNothing()">
+                Not Available
+              </b-button>
+            </div>
+          </td> 
         </tr>
       </table> 
     </div>
@@ -197,7 +220,19 @@
             <td> {{result.genre}}  </td>  
             <td> {{result.artist}}  </td>               
             <td> {{result.numSongs}}  </td>               
-            <td>  {{result.albumLengthInMinutes}} </td>   
+            <td>  {{result.albumLengthInMinutes}} </td>  
+             <td v-if="loggedInUser && loggedInType === 'onlineMember'">
+            <div v-if="result.itemStatus === 'Available'">
+              <b-button type="submit" class="reserve-button" v-on:click="reserveItem(result.libraryItemID)">
+                Reserve Item
+              </b-button>
+            </div>
+            <div v-else>
+              <b-button type="submit" class="reserve-button-na" v-on:click="doNothing()">
+                Not Available
+              </b-button>
+            </div>
+          </td> 
         </tr>
       </table> 
     </div>
@@ -238,6 +273,22 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
+
+td {
+  padding: 0.25em 0.5em;
+}
+
+.reserve-button {
+  padding: 0.25em 0.5em;
+  font-size: 0.8em;
+  background-color: #41cc4b;
+}
+
+.reserve-button-na {
+  padding: 0.25em 0.5em;
+  font-size: 0.8em;
+  background-color: #ed3d37;
+}
 
 .center {
   margin-left: auto;
