@@ -50,3 +50,14 @@ Classes were split up between all six members and each member was responsible fo
 |Sneha Singh        |Set up UI; Create Landing and Contact Page; Create Navigation Bar; Heroku Deployement; Create Issues for Sprint 3; Create backend linking for Booking Page; Hire Librarian with Linking |         55  |   
 |Zarif Ashraf Zidane|Improve UI; create backend linking for Online Member Registration, login and dashboard with UI Updates  |       46       |   
 
+# Deliverable 4:
+| Member            | Tasks                                         | Effort (Hours) |
+|-------------------|-----------------------------------------------|----------------|
+|Abdullah Arafat    |  |         30 |   
+|Christos Cunning   ||         60    |   
+|Omar Abdelaziz     || 40|   
+|Rajaa Boukhelif    ||         60|   
+|Sneha Singh        ||         55  |   
+|Zarif Ashraf Zidane||       46       |   
+
+
