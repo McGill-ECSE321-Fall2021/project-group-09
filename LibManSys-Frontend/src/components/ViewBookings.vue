@@ -2,33 +2,43 @@
 <template>
   <div id="view-booking-body">
     <section>
-      <b-container fluid>
-        <hr />
-        ​
-        <h2>All Bookings</h2>
-        ​
-        <table>
+      
+      <div v-if="loggedInType === 'librarian' || loggedInType === 'headLibrarian'">
+        <b-container fluid>
           ​
-          <tr>
+          <h2>All Bookings</h2>
+          <table>
             ​
-            <th>Booking ID</th>
-            <th>Booking Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-          </tr>
-          ​
-          <tr v-for="booking in bookings" v-bind:key="booking">
+            <tr>
+              <td>Booking ID</td>
+              <td>Booking Date</td>
+              <td>Start Time</td>
+              <td>End Time</td>
+            </tr>
             ​
-            <td>{{ booking.bookingID }}</td>
-            <td>{{ booking.bookingDate }}</td>
-            <td>{{ booking.bookingStartTime }}</td>
-            <td>{{ booking.bookingEndTime }}</td>
-          </tr>
-          ​
-        </table>
-      </b-container>
+            <tr v-for="booking in bookings" v-bind:key="booking.bookingID">
+              ​
+              <td>{{ booking.bookingID }}</td>
+              <td>{{ booking.bookingDate }}</td>
+              <td>{{ booking.bookingStartTime }}</td>
+              <td>{{ booking.bookingEndTime }}</td>
+            </tr>
+            ​
+          </table>
+        </b-container>
 
-      <b class="button" href="#" v-on:click="goToPreviousPage()">Back</b>
+        <div v-if="error">
+            <br />
+            <span  style="color: red">{{ error }} </span>
+            <br />
+        </div>
+
+        <b class="button" href="#" v-on:click="goToPreviousPage()">Back</b>
+
+      </div>
+      <div v-else>
+        <h4>Login to view librarian things</h4>
+      </div>
     </section>
   </div>
 </template>

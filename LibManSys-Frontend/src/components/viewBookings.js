@@ -35,24 +35,35 @@ export default {
     data() {
         return {
             bookings: [],
-            response: [],
-            errorBooking: ''
 
-
+            loggedInType: '',
+            loggedInUser: '',
+            error: '',
         }
 
     },
     created: function () {
-        AXIOS.get('bookings/view-all/')
-
+        // check if cookie is set for current user
+        var userLoggedIn = $cookies.isKey("loggedInUser")
+        if (userLoggedIn == true) {
+            this.loggedInUser = $cookies.get("loggedInUser")
+            this.loggedInType = $cookies.get("loggedInType")
+            
+        
+            AXIOS.get('/bookings/view-all/')
             .then(response => {
                 this.bookings = response.data;
                 console.log(response.data);
-
             })
             .catch(error => {
-                this.errorBooking = error
+                var errorMsg = error
+                if ( error.response ) {
+                    errorMsg = error.response.data
+                }
+                console.log(errorMsg)
+                this.error = errorMsg
             })
+        }
     },
     methods: {
         
