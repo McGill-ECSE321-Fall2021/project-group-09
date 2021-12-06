@@ -53,11 +53,11 @@ Classes were split up between all six members and each member was responsible fo
 # Deliverable 4:
 | Member            | Tasks                                         | Effort (Hours) |
 |-------------------|-----------------------------------------------|----------------|
-|Abdullah Arafat    |  |         30 |   
-|Christos Cunning   ||         60    |   
-|Omar Abdelaziz     || 40|   
-|Rajaa Boukhelif    ||         60|   
-|Sneha Singh        ||         55  |   
-|Zarif Ashraf Zidane||       46       |   
+|Abdullah Arafat    | Set-up Android application; Change CSS style for Librarian to improve view on android application |         17 |   
+|Christos Cunning   |Improve search feature; Pre-record demo; Change CSS style for checkout to improve view on android application|         14    |   
+|Omar Abdelaziz     |Present the project and create the presentation; Change CSS style for Reservations to improve view on android application| 14|   
+|Rajaa Boukhelif    |Change CSS style for Loans to improve view on android application; Help with the demo|         15|   
+|Sneha Singh        |Change CSS style for Bookings to improve view on android application; Detail talking points for presentation;|         14  |   
+|Zarif Ashraf Zidane|Change CSS style for Members to improve view on android application; Help with slides|       12       |   
 
 
