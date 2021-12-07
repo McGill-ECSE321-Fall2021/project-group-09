@@ -114,7 +114,7 @@ b.nav-link {
 }
 
 div {
-        background: #f0dbce;
+        background: #ffffff;
     color: #000000;
     background-size: contain;
     background-repeat: no-repeat;
