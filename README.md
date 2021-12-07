@@ -60,6 +60,6 @@ Classes were split up between all six members and each member was responsible fo
 |Omar Abdelaziz     |Present the project and create the presentation; Change CSS style for Reservations to improve view on android application| 14|   
 |Rajaa Boukhelif    |Change CSS style for Loans to improve view on android application; Help with the demo|         15|   
 |Sneha Singh        |Change CSS style for Bookings to improve view on android application; Detail talking points for presentation;|         14  |   
-|Zarif Ashraf Zidane|Change CSS style for Members to improve view on android application; Help with slides|       12       |   
+|Zarif Ashraf Zidane|Change CSS style for Members to improve view on android application; Help with slides|       14       |   
 
 
