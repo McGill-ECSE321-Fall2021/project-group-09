@@ -10,28 +10,7 @@
    <b-container fluid>
       <myText>  Search Results </myText>
 <br>
-  <!--<b-row class="my-1" color="#00000">
-    <b-col sm="2" color="#00000">
-      <label for="input-default" color="#00000">Name:</label>
-    </b-col>
-   
-  </b-row>
-
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="input-large" >Item Name:</label>
-    </b-col>
-  </b-row>
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="input-large" >ISBN:</label>
-    </b-col>
-  </b-row>
-  <b-row class="my-1" >
-    <b-col sm="2" > 
-      <label for="input-large" >Published Year:</label>
-    </b-col>
-  </b-row> -->
+ 
   
     <myText3>All Archives </myText3>
     <div>
@@ -324,7 +303,6 @@ div {
   display: none;
 }
 section {
-  /*font-family: "Lato", sans-serif;*/
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;

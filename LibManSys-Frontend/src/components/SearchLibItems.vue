@@ -104,7 +104,7 @@
 
     <!-- archive -->
     <div v-if="archiveResults.length">
-      <h4>Archive Results</h4>
+      <myText>Archive Results</myText>
       <table  class="center" >
         <tr>
           <td>|  ID  | </td>
@@ -123,7 +123,7 @@
 
     <!-- BOOK -->
     <b-container  v-if="bookResults.length"> 
-      <h4>Book Results</h4>
+      <myText>Book Results</myText>
       <table  class="center" >
         <tr>
           <td>|  ID  | </td> 
@@ -163,7 +163,7 @@
 
     <!-- Movie -->
     <div v-if="movieResults.length">
-      <h4>Movie Results</h4>
+      <myText>Movie Results</myText>
       <table  class="center" >
         <tr>
           <td>|  ID  | </td> 
@@ -202,7 +202,7 @@
     
     <!-- CD -->
     <div v-if="musicAlbumResults.length">
-      <h4>Music Album Results</h4>
+      <myText>Music Album Results</myText>
       <table  class="center" >
         <tr>
           <td>|  ID  | </td> 
@@ -239,7 +239,7 @@
 
     <!-- newspaper -->
     <div v-if="newspaperResults.length">
-      <h4>Newspaper Results</h4>
+      <myText>Newspaper Results</myText>
       <table  class="center" >
         <tr>
           <td>|  ID  | </td>
@@ -329,6 +329,12 @@ section {
   background-size: contain;
   background-repeat: no-repeat;
   background-size: 100%;
+}
+
+myText {
+    color: #622A0F;
+    font-size: 28px;
+    font-weight: 100;
 }
 
 #container {

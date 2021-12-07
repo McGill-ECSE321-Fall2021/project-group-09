@@ -142,13 +142,13 @@ a {
     color: #42b983;
 }
 myText {
-    color: #a85f32;
+    color: #622A0F;
     font: "Times";
     font-size: 30px;
     font-weight: 100;
 }
 myText2 {
-    color: #a85f32;
+    color: #7E481C;
     font: "Times";
     font-size: 18px;
     font-weight: 100;
@@ -177,7 +177,7 @@ button {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     padding: 16px 32px;
     background-color: #0000;
-    color: #a85f32;
+    color: #7E481C;
 }
 /*Resize the wrap to see the search bar change!*/
 .wrap {
